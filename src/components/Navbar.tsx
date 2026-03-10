@@ -28,9 +28,9 @@ import logoDarkBrand from '../assets/logo-dark-brand.png';
 // --- Demo Role Profiles ---
 const DEMO_PROFILES: Record<string, { name: string; role: string; photo: string }> = {
     Dealer: {
-        name: 'Sara Chen',
-        role: 'Account Manager',
-        photo: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face',
+        name: 'James Mitchell',
+        role: 'Operations Director',
+        photo: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face',
     },
     Expert: {
         name: 'David Park',
@@ -44,7 +44,7 @@ const DEMO_PROFILES: Record<string, { name: string; role: string; photo: string 
     },
 };
 
-// Apps that belong to Expert Hub — everything else is Dealer Experience
+// Apps that belong to Expert Hub — everything else is Manufacturer Experience
 const EXPERT_HUB_APPS = ['expert-hub', 'ack-detail', 'transactions', 'mac', 'quote-detail'];
 
 function resolveProfileKey(role: string | undefined, app: string | undefined): string {
@@ -133,7 +133,7 @@ export default function Navbar({
 
                     {/* App Name + Company — always static for demo build */}
                     <div className="hidden lg:flex flex-col items-start text-left px-2 py-1.5">
-                        <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider leading-none">{appName || 'Dealer Experience'}</span>
+                        <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider leading-none">{appName || 'Manufacturer Experience'}</span>
                         <span className="text-sm font-bold text-foreground leading-tight">{companyName || 'Acme Corp'}</span>
                     </div>
                 </div>

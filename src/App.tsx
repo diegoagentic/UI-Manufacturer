@@ -91,7 +91,7 @@ function App() {
       : currentStep.app === 'catalog' ? 'Marketplace'
       : currentStep.app === 'service-now' ? 'ServiceNow'
       : isExpert ? 'Expert Hub'
-      : 'Dealer Experience';
+      : 'Manufacturer Experience';
     const resolvedCompany = isExpert ? 'Strata Services' : 'Acme Corp';
 
     switch (currentStep.app) {
