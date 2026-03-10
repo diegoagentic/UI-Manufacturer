@@ -6,7 +6,6 @@ import {
   ClipboardDocumentCheckIcon,
   ExclamationTriangleIcon,
   MagnifyingGlassIcon,
-  FunnelIcon,
   ListBulletIcon,
   Squares2X2Icon,
   CubeIcon,
@@ -17,12 +16,22 @@ import {
   CurrencyDollarIcon,
   ExclamationCircleIcon,
   CalendarIcon,
-  WrenchScrewdriverIcon,
   SparklesIcon,
+  PaperAirplaneIcon,
+  ArrowDownTrayIcon,
+  BoltIcon,
+  ArrowPathIcon,
+  ShieldCheckIcon,
+  EyeIcon,
+  ChatBubbleLeftRightIcon,
 } from '@heroicons/react/24/outline'
 import Breadcrumbs from './components/Breadcrumbs'
-import Select from './components/Select'
 import BatchAckModal from './components/BatchAckModal'
+import AIScanModal from './components/modals/AIScanModal'
+import CompareDeltasModal from './components/modals/CompareDeltasModal'
+import AIAutoResolveModal from './components/modals/AIAutoResolveModal'
+import ContactVendorsModal from './components/modals/ContactVendorsModal'
+import { useToast, ToastContainer } from './components/AuthToast'
 import { clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
@@ -70,43 +79,59 @@ const exceptionKpis = [
 // --- Mock Data ---
 const purchaseOrders = [
   { id: 'PO-2026-095', supplier: 'Acme Corp', items: 45, amount: '$124,500', status: 'Received', date: 'Jan 15, 2026',
-    confidence: 0, aiInsight: '', agentStage: 'intake' as const, flaggedFields: 0 },
+    confidence: 0, aiInsight: '', agentStage: 'intake' as const, flaggedFields: 0,
+    shipEta: 'Feb 12, 2026', priority: 'standard' as const, channel: 'EDI' },
   { id: 'PO-2026-094', supplier: 'TechDealer Solutions', items: 12, amount: '$62,500', status: 'AI Processing', date: 'Jan 14, 2026',
-    confidence: 87, aiInsight: '10 SKUs auto-mapped, 2 need expert review', agentStage: 'validator' as const, flaggedFields: 2 },
+    confidence: 87, aiInsight: '10 SKUs auto-mapped, 2 need expert review', agentStage: 'validator' as const, flaggedFields: 2,
+    shipEta: 'Feb 8, 2026', priority: 'rush' as const, channel: 'Portal' },
   { id: 'PO-2026-093', supplier: 'Urban Living Inc.', items: 28, amount: '$112,000', status: 'Under Review', date: 'Jan 13, 2026',
-    confidence: 94, aiInsight: 'All line items validated — freight zone flagged', agentStage: 'complete' as const, flaggedFields: 1 },
+    confidence: 94, aiInsight: 'All line items validated — freight zone flagged', agentStage: 'complete' as const, flaggedFields: 1,
+    shipEta: 'Feb 20, 2026', priority: 'standard' as const, channel: 'EDI' },
   { id: 'PO-2026-092', supplier: 'Global Logistics', items: 8, amount: '$45,000', status: 'ACK Sent', date: 'Jan 12, 2026',
-    confidence: 98, aiInsight: 'Clean match — auto-acknowledged', agentStage: 'complete' as const, flaggedFields: 0 },
+    confidence: 98, aiInsight: 'Clean match — auto-acknowledged', agentStage: 'complete' as const, flaggedFields: 0,
+    shipEta: 'Jan 28, 2026', priority: 'standard' as const, channel: 'Email' },
   { id: 'PO-2026-091', supplier: 'City Builders', items: 15, amount: '$89,000', status: 'ACK Draft', date: 'Jan 11, 2026',
-    confidence: 76, aiInsight: '3 pricing discrepancies detected, draft pending review', agentStage: 'complete' as const, flaggedFields: 3 },
+    confidence: 76, aiInsight: '3 pricing discrepancies detected, draft pending review', agentStage: 'complete' as const, flaggedFields: 3,
+    shipEta: 'Feb 5, 2026', priority: 'rush' as const, channel: 'Portal' },
   { id: 'PO-2026-090', supplier: 'Modern Homes', items: 32, amount: '$210,000', status: 'Completed', date: 'Jan 10, 2026',
-    confidence: 99, aiInsight: 'Fully processed — 0 exceptions', agentStage: 'complete' as const, flaggedFields: 0 },
+    confidence: 99, aiInsight: 'Fully processed — 0 exceptions', agentStage: 'complete' as const, flaggedFields: 0,
+    shipEta: 'Jan 25, 2026', priority: 'standard' as const, channel: 'EDI' },
 ]
 
 const acknowledgements = [
   { id: 'ACK-8843', relatedPo: 'PO-2026-094', vendor: 'TechDealer Solutions', status: 'Draft', lines: 12, date: 'Jan 14, 2026',
-    discrepancy: 'None', confidence: 0, aiInsight: '', matchedLines: 0, totalLines: 12, discrepancyCount: 0, autoResolved: 0 },
+    discrepancy: 'None', confidence: 0, aiInsight: '', matchedLines: 0, totalLines: 12, discrepancyCount: 0, autoResolved: 0,
+    amount: '$62,500', responseTime: '—', leadTime: '3.2w' },
   { id: 'ACK-8842', relatedPo: 'PO-2026-093', vendor: 'Urban Living Inc.', status: 'AI Validated', lines: 28, date: 'Jan 13, 2026',
-    discrepancy: '2 auto-corrected', confidence: 92, aiInsight: '26 lines matched, 2 auto-corrected (grommet config, ship date)', matchedLines: 26, totalLines: 28, discrepancyCount: 2, autoResolved: 2 },
+    discrepancy: '2 auto-corrected', confidence: 92, aiInsight: '26 lines matched, 2 auto-corrected (grommet config, ship date)', matchedLines: 26, totalLines: 28, discrepancyCount: 2, autoResolved: 2,
+    amount: '$112,000', responseTime: '4h', leadTime: '5.1w' },
   { id: 'ACK-8841', relatedPo: 'PO-2026-092', vendor: 'Global Logistics', status: 'Sent', lines: 8, date: 'Jan 12, 2026',
-    discrepancy: 'None', confidence: 99, aiInsight: 'Perfect match — all 8 lines confirmed', matchedLines: 8, totalLines: 8, discrepancyCount: 0, autoResolved: 0 },
+    discrepancy: 'None', confidence: 99, aiInsight: 'Perfect match — all 8 lines confirmed', matchedLines: 8, totalLines: 8, discrepancyCount: 0, autoResolved: 0,
+    amount: '$45,000', responseTime: '2h', leadTime: '2.4w' },
   { id: 'ACK-8840', relatedPo: 'PO-2026-091', vendor: 'City Builders', status: 'Revision Pending', lines: 15, date: 'Jan 11, 2026',
-    discrepancy: 'Price Mismatch ($500)', confidence: 68, aiInsight: 'Price mismatch on 3 lines — vendor revision requested', matchedLines: 12, totalLines: 15, discrepancyCount: 3, autoResolved: 0 },
+    discrepancy: 'Price Mismatch ($500)', confidence: 68, aiInsight: 'Price mismatch on 3 lines — vendor revision requested', matchedLines: 12, totalLines: 15, discrepancyCount: 3, autoResolved: 0,
+    amount: '$89,000', responseTime: '18h', leadTime: '3.8w' },
   { id: 'ACK-8839', relatedPo: 'PO-2026-090', vendor: 'Modern Homes', status: 'Confirmed', lines: 32, date: 'Jan 10, 2026',
-    discrepancy: 'None', confidence: 99, aiInsight: 'All 32 lines confirmed — zero discrepancies', matchedLines: 32, totalLines: 32, discrepancyCount: 0, autoResolved: 0 },
+    discrepancy: 'None', confidence: 99, aiInsight: 'All 32 lines confirmed — zero discrepancies', matchedLines: 32, totalLines: 32, discrepancyCount: 0, autoResolved: 0,
+    amount: '$210,000', responseTime: '1h', leadTime: '4.5w' },
 ]
 
 const exceptions = [
   { id: 'EXC-001', relatedPo: 'PO-2026-091', vendor: 'City Builders', problem: 'Qty Mismatch', severity: 'critical', status: 'New', lines: 3, date: 'Jan 15, 2026',
-    confidence: 0, aiInsight: '', rootCause: '', autoResolvable: false },
+    confidence: 0, aiInsight: '', rootCause: '', autoResolvable: false,
+    affectedAmount: '$12,400', slaHours: 4, elapsedHours: 2 },
   { id: 'EXC-002', relatedPo: 'PO-2026-088', vendor: 'Coastal Props', problem: 'Price Discrepancy', severity: 'high', status: 'AI Analyzing', lines: 1, date: 'Jan 14, 2026',
-    confidence: 82, aiInsight: 'Vendor applied outdated price list — suggesting correction', rootCause: 'Outdated vendor price list', autoResolvable: true },
+    confidence: 82, aiInsight: 'Vendor applied outdated price list — suggesting correction', rootCause: 'Outdated vendor price list', autoResolvable: true,
+    affectedAmount: '$3,200', slaHours: 8, elapsedHours: 5 },
   { id: 'EXC-003', relatedPo: 'PO-2026-085', vendor: 'Valley Homes', problem: 'Ship Date', severity: 'medium', status: 'Pending Review', lines: 5, date: 'Jan 13, 2026',
-    confidence: 91, aiInsight: 'Ship date shifted +7 days — within tolerance threshold', rootCause: 'Production delay at vendor', autoResolvable: false },
+    confidence: 91, aiInsight: 'Ship date shifted +7 days — within tolerance threshold', rootCause: 'Production delay at vendor', autoResolvable: false,
+    affectedAmount: '$28,500', slaHours: 24, elapsedHours: 14 },
   { id: 'EXC-004', relatedPo: 'PO-2026-082', vendor: 'Elite Builders', problem: 'Part # Mismatch', severity: 'high', status: 'In Progress', lines: 2, date: 'Jan 12, 2026',
-    confidence: 74, aiInsight: 'Vendor substituted part — checking compatibility', rootCause: 'Vendor substitution without approval', autoResolvable: false },
+    confidence: 74, aiInsight: 'Vendor substituted part — checking compatibility', rootCause: 'Vendor substitution without approval', autoResolvable: false,
+    affectedAmount: '$8,900', slaHours: 8, elapsedHours: 7 },
   { id: 'EXC-005', relatedPo: 'PO-2026-080', vendor: 'Apex Tech', problem: 'Spec Issue', severity: 'low', status: 'Resolved', lines: 1, date: 'Jan 10, 2026',
-    confidence: 97, aiInsight: 'Spec deviation within tolerance — auto-accepted', rootCause: 'Minor spec variation', autoResolvable: true },
+    confidence: 97, aiInsight: 'Spec deviation within tolerance — auto-accepted', rootCause: 'Minor spec variation', autoResolvable: true,
+    affectedAmount: '$1,100', slaHours: 48, elapsedHours: 3 },
 ]
 
 const kpiColorStyles: Record<string, string> = {
@@ -190,6 +215,21 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
   const [viewMode, setViewMode] = useState<'pipeline' | 'list'>('pipeline')
   const [searchQuery, setSearchQuery] = useState('')
   const [isBatchAckOpen, setIsBatchAckOpen] = useState(false)
+  const [isAIScanOpen, setIsAIScanOpen] = useState(false)
+  const [isCompareDeltasOpen, setIsCompareDeltasOpen] = useState(false)
+  const [isAutoResolveOpen, setIsAutoResolveOpen] = useState(false)
+  const [isContactVendorsOpen, setIsContactVendorsOpen] = useState(false)
+  const { toasts, addToast, dismissToast } = useToast()
+  const [processingAction, setProcessingAction] = useState<string | null>(null)
+
+  const handleQuickAction = (actionId: string, infoMsg: string, successMsg: string, delay = 1500) => {
+    setProcessingAction(actionId)
+    addToast('info', infoMsg)
+    setTimeout(() => {
+      setProcessingAction(null)
+      addToast('success', successMsg)
+    }, delay)
+  }
 
   // Demo step animation states
   const [aiProcessingPhase, setAiProcessingPhase] = useState<'idle' | 'scanning' | 'extracting' | 'validating' | 'complete'>('idle')
@@ -289,22 +329,6 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
           ))}
         </div>
 
-        {/* KPI Strip */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-          {currentKpis.map((kpi) => (
-            <div key={kpi.label} className="bg-white dark:bg-zinc-800 rounded-xl border border-border p-4 flex items-start gap-3">
-              <div className={cn("p-2 rounded-lg", kpiColorStyles[kpi.color])}>
-                <kpi.icon className="w-5 h-5" />
-              </div>
-              <div className="min-w-0">
-                <p className="text-2xl font-bold text-foreground">{kpi.value}</p>
-                <p className="text-xs font-medium text-foreground truncate">{kpi.label}</p>
-                <p className="text-[10px] text-muted-foreground">{kpi.sub}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
         {/* Status Tabs + View Mode + Search */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-1 bg-white/60 dark:bg-zinc-800/50 p-1 rounded-lg border border-zinc-200 dark:border-zinc-800 w-fit">
@@ -361,17 +385,111 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
               />
             </div>
 
-            {/* Batch ACK button (ACKs tab only) */}
-            {lifecycleTab === 'acknowledgements' && (
-              <button
-                onClick={() => setIsBatchAckOpen(true)}
-                className="px-3 py-2 text-sm font-medium bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
-              >
-                Batch Process
-              </button>
-            )}
           </div>
         </div>
+
+        {/* Quick Actions Bar — contextual per tab */}
+        {activeTab !== 'metrics' && (
+          <div className="flex items-center gap-2 flex-wrap">
+            {lifecycleTab === 'purchase-orders' && (<>
+              <button
+                onClick={() => setIsAIScanOpen(true)}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-white dark:bg-zinc-800 text-foreground hover:border-primary/30 hover:shadow-sm transition-all"
+              >
+                <BoltIcon className="w-3.5 h-3.5 text-indigo-500" />
+                Run AI Scan
+              </button>
+              <button
+                disabled={processingAction === 'po-reminders'}
+                onClick={() => handleQuickAction('po-reminders', 'Sending vendor reminders...', 'Reminders sent to 3 vendors with pending POs')}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-white dark:bg-zinc-800 text-foreground hover:border-primary/30 hover:shadow-sm transition-all disabled:opacity-60"
+              >
+                {processingAction === 'po-reminders' ? <ArrowPathIcon className="w-3.5 h-3.5 animate-spin text-blue-500" /> : <PaperAirplaneIcon className="w-3.5 h-3.5 text-blue-500" />}
+                Send Reminders
+              </button>
+              <button
+                disabled={processingAction === 'export-pos'}
+                onClick={() => handleQuickAction('export-pos', 'Preparing PO export...', '24 Purchase Orders exported successfully')}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-white dark:bg-zinc-800 text-foreground hover:border-primary/30 hover:shadow-sm transition-all disabled:opacity-60"
+              >
+                {processingAction === 'export-pos' ? <ArrowPathIcon className="w-3.5 h-3.5 animate-spin text-zinc-500" /> : <ArrowDownTrayIcon className="w-3.5 h-3.5 text-zinc-500" />}
+                Export POs
+              </button>
+              <button
+                disabled={processingAction === 'validate-pos'}
+                onClick={() => handleQuickAction('validate-pos', 'Running validation on pending POs...', '12 POs validated — 2 flagged for review')}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-white dark:bg-zinc-800 text-foreground hover:border-primary/30 hover:shadow-sm transition-all disabled:opacity-60"
+              >
+                {processingAction === 'validate-pos' ? <ArrowPathIcon className="w-3.5 h-3.5 animate-spin text-green-500" /> : <ShieldCheckIcon className="w-3.5 h-3.5 text-green-500" />}
+                Validate All Pending
+              </button>
+            </>)}
+            {lifecycleTab === 'acknowledgements' && (<>
+              <button
+                onClick={() => setIsBatchAckOpen(true)}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-sm"
+              >
+                <CheckCircleIcon className="w-3.5 h-3.5" />
+                Batch Approve
+              </button>
+              <button
+                disabled={processingAction === 'ack-reminders'}
+                onClick={() => handleQuickAction('ack-reminders', 'Sending ACK reminders...', 'Reminders sent to 4 vendors awaiting acknowledgement')}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-white dark:bg-zinc-800 text-foreground hover:border-primary/30 hover:shadow-sm transition-all disabled:opacity-60"
+              >
+                {processingAction === 'ack-reminders' ? <ArrowPathIcon className="w-3.5 h-3.5 animate-spin text-blue-500" /> : <PaperAirplaneIcon className="w-3.5 h-3.5 text-blue-500" />}
+                Send Reminders
+              </button>
+              <button
+                onClick={() => setIsCompareDeltasOpen(true)}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-white dark:bg-zinc-800 text-foreground hover:border-primary/30 hover:shadow-sm transition-all"
+              >
+                <EyeIcon className="w-3.5 h-3.5 text-indigo-500" />
+                Compare Deltas
+              </button>
+              <button
+                disabled={processingAction === 'export-acks'}
+                onClick={() => handleQuickAction('export-acks', 'Preparing ACK export...', '18 Acknowledgements exported successfully')}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-white dark:bg-zinc-800 text-foreground hover:border-primary/30 hover:shadow-sm transition-all disabled:opacity-60"
+              >
+                {processingAction === 'export-acks' ? <ArrowPathIcon className="w-3.5 h-3.5 animate-spin text-zinc-500" /> : <ArrowDownTrayIcon className="w-3.5 h-3.5 text-zinc-500" />}
+                Export ACKs
+              </button>
+            </>)}
+            {lifecycleTab === 'exceptions' && (<>
+              <button
+                onClick={() => setIsAutoResolveOpen(true)}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-sm"
+              >
+                <SparklesIcon className="w-3.5 h-3.5" />
+                AI Auto-Resolve ({exceptions.filter(e => e.autoResolvable).length})
+              </button>
+              <button
+                disabled={processingAction === 'escalate'}
+                onClick={() => handleQuickAction('escalate', 'Escalating critical exceptions...', '2 critical exceptions escalated to procurement manager')}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-white dark:bg-zinc-800 text-foreground hover:border-primary/30 hover:shadow-sm transition-all disabled:opacity-60"
+              >
+                {processingAction === 'escalate' ? <ArrowPathIcon className="w-3.5 h-3.5 animate-spin text-amber-500" /> : <ArrowPathIcon className="w-3.5 h-3.5 text-amber-500" />}
+                Escalate Critical
+              </button>
+              <button
+                onClick={() => setIsContactVendorsOpen(true)}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-white dark:bg-zinc-800 text-foreground hover:border-primary/30 hover:shadow-sm transition-all"
+              >
+                <ChatBubbleLeftRightIcon className="w-3.5 h-3.5 text-blue-500" />
+                Contact Vendors
+              </button>
+              <button
+                disabled={processingAction === 'export-report'}
+                onClick={() => handleQuickAction('export-report', 'Generating exception report...', 'Exception report exported — 15 items across 3 categories')}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-white dark:bg-zinc-800 text-foreground hover:border-primary/30 hover:shadow-sm transition-all disabled:opacity-60"
+              >
+                {processingAction === 'export-report' ? <ArrowPathIcon className="w-3.5 h-3.5 animate-spin text-zinc-500" /> : <ArrowDownTrayIcon className="w-3.5 h-3.5 text-zinc-500" />}
+                Export Report
+              </button>
+            </>)}
+          </div>
+        )}
 
         {/* Pipeline View */}
         {viewMode === 'pipeline' && activeTab !== 'metrics' && (
@@ -430,56 +548,102 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
                           {/* Supplier / Vendor */}
                           <p className="text-[10px] text-muted-foreground truncate">{item.supplier || item.vendor}</p>
 
-                          {/* Amount (POs) */}
-                          {item.amount && <p className="text-[10px] font-medium text-foreground mt-1">{item.amount}</p>}
-
-                          {/* Severity badge (Exceptions) */}
-                          {item.severity && (
-                            <span className={cn("text-[9px] uppercase font-bold px-1.5 py-0.5 rounded-full mt-1 inline-block", severityColors[item.severity])}>
-                              {item.problem}
-                            </span>
-                          )}
-
-                          {/* Root cause (Exceptions) */}
-                          {item.rootCause && (
-                            <p className="text-[9px] text-muted-foreground mt-1">
-                              Root cause: <span className="font-medium text-foreground">{item.rootCause}</span>
-                            </p>
-                          )}
-
-                          {/* Auto-resolvable indicator (Exceptions) */}
-                          {item.autoResolvable && (
-                            <div className="mt-1 flex items-center gap-1 text-[9px] text-green-600 dark:text-green-400">
-                              <SparklesIcon className="w-3 h-3" />
-                              <span className="font-medium">AI can auto-resolve</span>
+                          {/* --- PO-specific details --- */}
+                          {lifecycleTab === 'purchase-orders' && (<>
+                            <div className="mt-1.5 flex items-center justify-between">
+                              <span className="text-[11px] font-semibold text-foreground">{item.amount}</span>
+                              <span className="text-[9px] text-muted-foreground">{item.items} items</span>
                             </div>
-                          )}
-
-                          {/* Discrepancy summary (ACKs) */}
-                          {item.discrepancyCount > 0 && (
-                            <div className="mt-1.5 flex items-center gap-2 text-[9px]">
-                              <span className="text-amber-600 dark:text-amber-400 font-bold">
-                                {item.discrepancyCount} discrepancies
+                            <div className="mt-1 flex items-center gap-2 text-[9px] text-muted-foreground">
+                              <span className="flex items-center gap-0.5">
+                                <TruckIcon className="w-3 h-3" /> {item.shipEta}
                               </span>
-                              {item.autoResolved > 0 && (
-                                <span className="text-green-600 dark:text-green-400">
-                                  ({item.autoResolved} auto-fixed)
-                                </span>
+                              {item.priority === 'rush' && (
+                                <span className="px-1.5 py-0.5 rounded bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 font-bold uppercase text-[8px] border border-red-200 dark:border-red-500/20">Rush</span>
                               )}
                             </div>
-                          )}
+                            {item.flaggedFields > 0 && (
+                              <div className="mt-1 flex items-center gap-1 text-[9px] text-amber-600 dark:text-amber-400">
+                                <ExclamationTriangleIcon className="w-3 h-3" />
+                                <span className="font-medium">{item.flaggedFields} fields flagged</span>
+                              </div>
+                            )}
+                          </>)}
 
-                          {/* Matched lines progress (ACKs) */}
-                          {item.matchedLines !== undefined && item.totalLines > 0 && item.matchedLines > 0 && (
-                            <div className="mt-1.5">
-                              <div className="flex items-center justify-between text-[8px] text-muted-foreground mb-0.5">
-                                <span>{item.matchedLines}/{item.totalLines} lines matched</span>
-                              </div>
-                              <div className="h-1 bg-muted rounded-full overflow-hidden">
-                                <div className="h-full bg-green-500 dark:bg-green-400 rounded-full transition-all" style={{ width: `${(item.matchedLines / item.totalLines) * 100}%` }} />
-                              </div>
+                          {/* --- ACK-specific details --- */}
+                          {lifecycleTab === 'acknowledgements' && (<>
+                            <div className="mt-1.5 flex items-center justify-between text-[9px]">
+                              <span className="text-muted-foreground">{item.relatedPo}</span>
+                              <span className="font-medium text-foreground">{item.amount}</span>
                             </div>
-                          )}
+                            {/* Discrepancy summary */}
+                            {item.discrepancyCount > 0 && (
+                              <div className="mt-1 flex items-center gap-2 text-[9px]">
+                                <span className="text-amber-600 dark:text-amber-400 font-bold">
+                                  {item.discrepancyCount} discrepancies
+                                </span>
+                                {item.autoResolved > 0 && (
+                                  <span className="text-green-600 dark:text-green-400">
+                                    ({item.autoResolved} auto-fixed)
+                                  </span>
+                                )}
+                              </div>
+                            )}
+                            {/* Matched lines progress */}
+                            {item.matchedLines > 0 && (
+                              <div className="mt-1.5">
+                                <div className="flex items-center justify-between text-[8px] text-muted-foreground mb-0.5">
+                                  <span>{item.matchedLines}/{item.totalLines} matched</span>
+                                  <span>Lead: {item.leadTime}</span>
+                                </div>
+                                <div className="h-1 bg-muted rounded-full overflow-hidden">
+                                  <div className="h-full bg-green-500 dark:bg-green-400 rounded-full transition-all" style={{ width: `${(item.matchedLines / item.totalLines) * 100}%` }} />
+                                </div>
+                              </div>
+                            )}
+                          </>)}
+
+                          {/* --- Exception-specific details --- */}
+                          {lifecycleTab === 'exceptions' && (<>
+                            <span className={cn("text-[9px] uppercase font-bold px-1.5 py-0.5 rounded-full mt-1.5 inline-block", severityColors[item.severity])}>
+                              {item.problem}
+                            </span>
+                            <div className="mt-1 flex items-center justify-between text-[9px]">
+                              <span className="text-muted-foreground">{item.relatedPo}</span>
+                              <span className="font-medium text-foreground">{item.affectedAmount}</span>
+                            </div>
+                            {/* SLA timer */}
+                            {item.status !== 'Resolved' && (
+                              <div className="mt-1.5">
+                                <div className="flex items-center justify-between text-[8px] mb-0.5">
+                                  <span className="text-muted-foreground">SLA: {item.elapsedHours}h / {item.slaHours}h</span>
+                                  <span className={cn("font-bold",
+                                    item.elapsedHours / item.slaHours > 0.8 ? "text-red-600 dark:text-red-400" : "text-green-600 dark:text-green-400"
+                                  )}>
+                                    {Math.max(0, item.slaHours - item.elapsedHours)}h left
+                                  </span>
+                                </div>
+                                <div className="h-1 bg-muted rounded-full overflow-hidden">
+                                  <div className={cn("h-full rounded-full transition-all",
+                                    item.elapsedHours / item.slaHours > 0.8 ? "bg-red-500" : "bg-green-500"
+                                  )} style={{ width: `${Math.min(100, (item.elapsedHours / item.slaHours) * 100)}%` }} />
+                                </div>
+                              </div>
+                            )}
+                            {/* Root cause */}
+                            {item.rootCause && (
+                              <p className="text-[9px] text-muted-foreground mt-1">
+                                Root: <span className="font-medium text-foreground">{item.rootCause}</span>
+                              </p>
+                            )}
+                            {/* Auto-resolvable */}
+                            {item.autoResolvable && (
+                              <div className="mt-1 flex items-center gap-1 text-[9px] text-green-600 dark:text-green-400">
+                                <SparklesIcon className="w-3 h-3" />
+                                <span className="font-medium">AI can auto-resolve</span>
+                              </div>
+                            )}
+                          </>)}
 
                           {/* Mini Agent Pipeline */}
                           {showPipeline && (
@@ -532,30 +696,39 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
                 <tr className="border-b border-border bg-zinc-50/50 dark:bg-zinc-900/30">
                   <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase">ID</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase">
-                    {lifecycleTab === 'exceptions' ? 'Problem' : 'Supplier'}
+                    {lifecycleTab === 'exceptions' ? 'Vendor / Problem' : 'Supplier'}
                   </th>
                   <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase">Status</th>
-                  <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase">AI Status</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase">AI</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase">
-                    {lifecycleTab === 'purchase-orders' ? 'Items' : 'Lines'}
+                    {lifecycleTab === 'purchase-orders' ? 'Value' : lifecycleTab === 'exceptions' ? 'Impact' : 'Lines'}
                   </th>
                   <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase">Date</th>
+                  <th className="text-right px-4 py-3 text-xs font-semibold text-muted-foreground uppercase">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
                 {filteredData.map((item: any) => (
                   <tr
                     key={item.id}
-                    onClick={() => onNavigateToDetail(lifecycleTab === 'purchase-orders' ? 'order-detail' : 'ack-detail')}
-                    className="hover:bg-zinc-50/50 dark:hover:bg-zinc-900/30 cursor-pointer transition-colors"
+                    className="hover:bg-zinc-50/50 dark:hover:bg-zinc-900/30 cursor-pointer transition-colors group"
                   >
-                    <td className="px-4 py-3 font-medium text-foreground">{item.id}</td>
-                    <td className="px-4 py-3 text-muted-foreground">
-                      {item.problem || item.supplier || item.vendor}
-                      {item.severity && (
-                        <span className={cn("ml-2 text-[9px] uppercase font-bold px-1.5 py-0.5 rounded-full", severityColors[item.severity])}>
-                          {item.severity}
-                        </span>
+                    <td className="px-4 py-3">
+                      <span className="font-medium text-foreground">{item.id}</span>
+                      {item.relatedPo && <p className="text-[10px] text-muted-foreground">{item.relatedPo}</p>}
+                    </td>
+                    <td className="px-4 py-3">
+                      <span className="text-foreground">{item.supplier || item.vendor}</span>
+                      {item.problem && (
+                        <div className="flex items-center gap-1.5 mt-0.5">
+                          <span className={cn("text-[9px] uppercase font-bold px-1.5 py-0.5 rounded-full", severityColors[item.severity])}>
+                            {item.severity}
+                          </span>
+                          <span className="text-xs text-muted-foreground">{item.problem}</span>
+                        </div>
+                      )}
+                      {lifecycleTab === 'purchase-orders' && item.priority === 'rush' && (
+                        <span className="text-[8px] uppercase font-bold px-1.5 py-0.5 rounded bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-500/20 ml-1">Rush</span>
                       )}
                     </td>
                     <td className="px-4 py-3">
@@ -564,8 +737,8 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
                       </span>
                     </td>
                     <td className="px-4 py-3">
-                      <div className="flex items-center gap-2">
-                        {item.confidence > 0 && (
+                      <div className="flex items-center gap-1.5">
+                        {item.confidence > 0 ? (
                           <span className={cn(
                             "inline-flex items-center px-1.5 py-0.5 rounded-full border text-[9px] font-bold shrink-0",
                             item.confidence >= 90 ? "bg-green-50 text-green-700 border-green-200 dark:bg-green-900/20 dark:text-green-400 dark:border-green-800"
@@ -574,17 +747,36 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
                           )}>
                             {item.confidence}%
                           </span>
-                        )}
-                        {item.aiInsight && (
-                          <span className="text-[10px] text-muted-foreground truncate max-w-[180px]">{item.aiInsight}</span>
-                        )}
-                        {!item.confidence && !item.aiInsight && (
+                        ) : (
                           <span className="text-[10px] text-muted-foreground">—</span>
                         )}
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-muted-foreground">{item.items || item.lines}</td>
-                    <td className="px-4 py-3 text-muted-foreground">{item.date}</td>
+                    <td className="px-4 py-3 text-foreground font-medium text-xs">
+                      {lifecycleTab === 'purchase-orders' && (<>{item.amount}<span className="text-muted-foreground font-normal ml-1">({item.items})</span></>)}
+                      {lifecycleTab === 'acknowledgements' && (<>{item.matchedLines}/{item.totalLines}<span className="text-muted-foreground font-normal ml-1">lines</span></>)}
+                      {lifecycleTab === 'exceptions' && (<>{item.affectedAmount}<span className="text-muted-foreground font-normal ml-1">({item.lines} lines)</span></>)}
+                    </td>
+                    <td className="px-4 py-3 text-muted-foreground text-xs">{item.date}</td>
+                    <td className="px-4 py-3 text-right">
+                      <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        {lifecycleTab === 'purchase-orders' && (<>
+                          <button onClick={() => onNavigateToDetail('order-detail')} className="text-[10px] px-2 py-1 rounded bg-primary/10 text-primary font-medium hover:bg-primary/20 transition-colors">View</button>
+                          {item.status === 'Under Review' && <button className="text-[10px] px-2 py-1 rounded bg-green-500/10 text-green-700 dark:text-green-400 font-medium hover:bg-green-500/20 transition-colors">Approve</button>}
+                          {item.status === 'AI Processing' && <button className="text-[10px] px-2 py-1 rounded bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 font-medium hover:bg-indigo-500/20 transition-colors">Review AI</button>}
+                        </>)}
+                        {lifecycleTab === 'acknowledgements' && (<>
+                          <button onClick={() => onNavigateToDetail('ack-detail')} className="text-[10px] px-2 py-1 rounded bg-primary/10 text-primary font-medium hover:bg-primary/20 transition-colors">View</button>
+                          {item.status === 'AI Validated' && <button className="text-[10px] px-2 py-1 rounded bg-green-500/10 text-green-700 dark:text-green-400 font-medium hover:bg-green-500/20 transition-colors">Approve</button>}
+                          {item.status === 'Revision Pending' && <button className="text-[10px] px-2 py-1 rounded bg-amber-500/10 text-amber-700 dark:text-amber-400 font-medium hover:bg-amber-500/20 transition-colors">Follow Up</button>}
+                        </>)}
+                        {lifecycleTab === 'exceptions' && (<>
+                          <button onClick={() => onNavigateToDetail('order-detail')} className="text-[10px] px-2 py-1 rounded bg-primary/10 text-primary font-medium hover:bg-primary/20 transition-colors">View</button>
+                          {item.autoResolvable && <button className="text-[10px] px-2 py-1 rounded bg-green-500/10 text-green-700 dark:text-green-400 font-medium hover:bg-green-500/20 transition-colors">Auto-Fix</button>}
+                          {item.severity === 'critical' && <button className="text-[10px] px-2 py-1 rounded bg-red-500/10 text-red-700 dark:text-red-400 font-medium hover:bg-red-500/20 transition-colors">Escalate</button>}
+                        </>)}
+                      </div>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -594,30 +786,246 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
 
         {/* Metrics View */}
         {activeTab === 'metrics' && (
-          <div className="bg-white dark:bg-zinc-800 rounded-xl border border-border p-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[
-                { label: 'Total Volume', value: counts.all, sub: 'items in pipeline' },
-                { label: 'Active', value: counts.active, sub: 'in progress' },
-                { label: 'Completed', value: counts.completed, sub: 'resolved' },
-              ].map(m => (
-                <div key={m.label} className="text-center">
-                  <p className="text-3xl font-bold text-foreground">{m.value}</p>
-                  <p className="text-sm font-medium text-foreground">{m.label}</p>
-                  <p className="text-xs text-muted-foreground">{m.sub}</p>
+          <div className="space-y-4">
+            {/* KPI Strip */}
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+              {currentKpis.map((kpi) => (
+                <div key={kpi.label} className="bg-white dark:bg-zinc-800 rounded-xl border border-border p-4 flex items-start gap-3">
+                  <div className={cn("p-2 rounded-lg", kpiColorStyles[kpi.color])}>
+                    <kpi.icon className="w-5 h-5" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-2xl font-bold text-foreground">{kpi.value}</p>
+                    <p className="text-xs font-medium text-foreground truncate">{kpi.label}</p>
+                    <p className="text-[10px] text-muted-foreground">{kpi.sub}</p>
+                  </div>
                 </div>
               ))}
+            </div>
+
+            {/* Charts Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+              {/* Volume / Pipeline Summary */}
+              <div className="bg-white dark:bg-zinc-800 rounded-xl border border-border overflow-hidden">
+                <div className="px-5 py-3 border-b border-border flex items-center justify-between">
+                  <div>
+                    <h3 className="text-sm font-semibold text-foreground">Pipeline Summary</h3>
+                    <p className="text-[10px] text-muted-foreground">Items by status</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-lg font-bold text-foreground">{counts.all}</p>
+                    <p className="text-[10px] text-muted-foreground">total</p>
+                  </div>
+                </div>
+                <div className="h-44 px-5 py-4 flex flex-col justify-center gap-2.5">
+                  {currentPipelineStages.map(stage => {
+                    const count = currentData.filter(i => i.status === stage).length
+                    const pct = counts.all > 0 ? (count / counts.all) * 100 : 0
+                    return (
+                      <div key={stage} className="flex items-center gap-2">
+                        <span className="text-[9px] text-muted-foreground w-24 text-right shrink-0 truncate">{stage}</span>
+                        <div className="flex-1 h-3 bg-zinc-100 dark:bg-zinc-700 rounded-full overflow-hidden">
+                          <div className="h-full bg-indigo-400 dark:bg-indigo-500 rounded-full" style={{ width: `${pct}%` }} />
+                        </div>
+                        <span className="text-[9px] font-medium text-foreground w-5 shrink-0">{count}</span>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+
+              {/* PO tab charts */}
+              {lifecycleTab === 'purchase-orders' && (<>
+                <div className="bg-white dark:bg-zinc-800 rounded-xl border border-border overflow-hidden">
+                  <div className="px-5 py-3 border-b border-border flex items-center justify-between">
+                    <div>
+                      <h3 className="text-sm font-semibold text-foreground">PO Volume Trend</h3>
+                      <p className="text-[10px] text-muted-foreground">Weekly incoming POs</p>
+                    </div>
+                    <p className="text-[10px] text-green-600 dark:text-green-400 font-medium">+12% ↑</p>
+                  </div>
+                  <div className="h-44 px-5 pt-4 pb-2 flex flex-col">
+                    <svg viewBox="0 0 200 100" className="flex-1 w-full" preserveAspectRatio="none">
+                      <polygon points="0,82 25,70 50,74 75,55 100,60 125,40 150,45 175,30 200,24 200,100 0,100" fill="#6366f1" opacity="0.12" />
+                      <polyline points="0,82 25,70 50,74 75,55 100,60 125,40 150,45 175,30 200,24" fill="none" stroke="#6366f1" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <div className="flex justify-between text-[9px] text-muted-foreground pt-1">
+                      {['W1','W2','W3','W4','W5','W6','W7','W8','W9'].map(w => <span key={w}>{w}</span>)}
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-white dark:bg-zinc-800 rounded-xl border border-border overflow-hidden">
+                  <div className="px-5 py-3 border-b border-border flex items-center justify-between">
+                    <div>
+                      <h3 className="text-sm font-semibold text-foreground">Supplier Distribution</h3>
+                      <p className="text-[10px] text-muted-foreground">Active POs by supplier</p>
+                    </div>
+                  </div>
+                  <div className="h-44 px-5 py-4 flex flex-col justify-center gap-2.5">
+                    {[
+                      { name: 'Acme Corp', pct: 30 },
+                      { name: 'TechDealer', pct: 22 },
+                      { name: 'Urban Living', pct: 18 },
+                      { name: 'Modern Homes', pct: 17 },
+                      { name: 'Others', pct: 13 },
+                    ].map(s => (
+                      <div key={s.name} className="flex items-center gap-2">
+                        <span className="text-[9px] text-muted-foreground w-20 text-right shrink-0 truncate">{s.name}</span>
+                        <div className="flex-1 h-3 bg-zinc-100 dark:bg-zinc-700 rounded-full overflow-hidden">
+                          <div className="h-full bg-blue-400 dark:bg-blue-500 rounded-full" style={{ width: `${s.pct}%` }} />
+                        </div>
+                        <span className="text-[9px] font-medium text-foreground w-8 shrink-0">{s.pct}%</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </>)}
+
+              {/* ACK tab charts */}
+              {lifecycleTab === 'acknowledgements' && (<>
+                <div className="bg-white dark:bg-zinc-800 rounded-xl border border-border overflow-hidden">
+                  <div className="px-5 py-3 border-b border-border flex items-center justify-between">
+                    <div>
+                      <h3 className="text-sm font-semibold text-foreground">Response Time</h3>
+                      <p className="text-[10px] text-muted-foreground">Hours to acknowledge by day</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-lg font-bold text-foreground">1.2d</p>
+                      <p className="text-[10px] text-green-600 dark:text-green-400 font-medium">-8% ↓</p>
+                    </div>
+                  </div>
+                  <div className="h-44 px-5 pt-4 pb-2 flex flex-col">
+                    <div className="flex-1 flex items-end gap-2">
+                      {[
+                        { label: 'Mon', h: 65 },
+                        { label: 'Tue', h: 82 },
+                        { label: 'Wed', h: 45 },
+                        { label: 'Thu', h: 70 },
+                        { label: 'Fri', h: 38 },
+                        { label: 'Sat', h: 22 },
+                      ].map(bar => (
+                        <div key={bar.label} className="flex-1 flex flex-col items-center gap-1" style={{ height: '100%' }}>
+                          <div className="w-full flex-1" />
+                          <div className="w-full rounded-t bg-indigo-400 dark:bg-indigo-500 shrink-0" style={{ height: `${bar.h}%` }} />
+                          <span className="text-[9px] text-muted-foreground shrink-0">{bar.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-white dark:bg-zinc-800 rounded-xl border border-border overflow-hidden">
+                  <div className="px-5 py-3 border-b border-border flex items-center justify-between">
+                    <div>
+                      <h3 className="text-sm font-semibold text-foreground">Match Quality</h3>
+                      <p className="text-[10px] text-muted-foreground">Line-level match results</p>
+                    </div>
+                  </div>
+                  <div className="h-44 flex items-center justify-center gap-6 px-5">
+                    <div className="relative w-28 h-28">
+                      <div className="absolute inset-0 rounded-full" style={{ background: 'conic-gradient(from -90deg, #22c55e 0deg 302deg, #f59e0b 302deg 335deg, #ef4444 335deg 360deg)' }} />
+                      <div className="absolute inset-3 rounded-full bg-white dark:bg-zinc-800" />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="text-center">
+                          <p className="text-sm font-bold text-foreground">84%</p>
+                          <p className="text-[8px] text-muted-foreground">clean</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2">
+                        <div className="w-2.5 h-2.5 rounded-sm bg-green-500" />
+                        <div>
+                          <p className="text-[10px] font-medium text-foreground">84%</p>
+                          <p className="text-[8px] text-muted-foreground">Exact Match</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-2.5 h-2.5 rounded-sm bg-amber-500" />
+                        <div>
+                          <p className="text-[10px] font-medium text-foreground">9%</p>
+                          <p className="text-[8px] text-muted-foreground">Auto-Corrected</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-2.5 h-2.5 rounded-sm bg-red-500" />
+                        <div>
+                          <p className="text-[10px] font-medium text-foreground">7%</p>
+                          <p className="text-[8px] text-muted-foreground">Discrepancies</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>)}
+
+              {/* Exceptions tab charts */}
+              {lifecycleTab === 'exceptions' && (<>
+                <div className="bg-white dark:bg-zinc-800 rounded-xl border border-border overflow-hidden">
+                  <div className="px-5 py-3 border-b border-border flex items-center justify-between">
+                    <div>
+                      <h3 className="text-sm font-semibold text-foreground">Resolution Time</h3>
+                      <p className="text-[10px] text-muted-foreground">Avg hours by type</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-lg font-bold text-foreground">3.2h</p>
+                      <p className="text-[10px] text-amber-600 dark:text-amber-400 font-medium">+0.2h ↑</p>
+                    </div>
+                  </div>
+                  <div className="h-44 px-5 py-4 flex flex-col justify-center gap-3">
+                    {[
+                      { label: 'Qty Mismatch', value: 85, hours: '4.2h' },
+                      { label: 'Price Disc.', value: 70, hours: '3.5h' },
+                      { label: 'Ship Date', value: 45, hours: '2.2h' },
+                      { label: 'Part Mismatch', value: 60, hours: '3.0h' },
+                      { label: 'Spec Issue', value: 30, hours: '1.5h' },
+                    ].map(bar => (
+                      <div key={bar.label} className="flex items-center gap-2">
+                        <span className="text-[9px] text-muted-foreground w-20 text-right shrink-0">{bar.label}</span>
+                        <div className="flex-1 h-3 bg-zinc-100 dark:bg-zinc-700 rounded-full overflow-hidden">
+                          <div className="h-full bg-amber-400 dark:bg-amber-500 rounded-full" style={{ width: `${bar.value}%` }} />
+                        </div>
+                        <span className="text-[9px] font-medium text-foreground w-8 shrink-0">{bar.hours}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="bg-white dark:bg-zinc-800 rounded-xl border border-border overflow-hidden">
+                  <div className="px-5 py-3 border-b border-border flex items-center justify-between">
+                    <div>
+                      <h3 className="text-sm font-semibold text-foreground">Exception Trend</h3>
+                      <p className="text-[10px] text-muted-foreground">Weekly exception rate</p>
+                    </div>
+                    <p className="text-[10px] text-green-600 dark:text-green-400 font-medium">-1.8% ↓</p>
+                  </div>
+                  <div className="h-44 px-5 pt-4 pb-2 flex flex-col">
+                    <svg viewBox="0 0 200 100" className="flex-1 w-full" preserveAspectRatio="none">
+                      <line x1="0" y1="30" x2="200" y2="30" stroke="#94a3b8" strokeWidth="1" strokeDasharray="4 3" opacity="0.4" />
+                      <polyline points="0,20 28,35 57,28 85,42 114,35 142,48 171,42 200,55" fill="none" stroke="#f59e0b" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                      {[{x:0,y:20},{x:28,y:35},{x:57,y:28},{x:85,y:42},{x:114,y:35},{x:142,y:48},{x:171,y:42},{x:200,y:55}].map((p,i) => (
+                        <circle key={i} cx={p.x} cy={p.y} r="3" fill="#f59e0b" />
+                      ))}
+                    </svg>
+                    <div className="flex justify-between text-[9px] text-muted-foreground pt-1">
+                      {['W1','W2','W3','W4','W5','W6','W7','W8'].map(w => <span key={w}>{w}</span>)}
+                    </div>
+                  </div>
+                </div>
+              </>)}
+
             </div>
           </div>
         )}
 
       </div>
 
-      {/* Batch ACK Modal */}
-      <BatchAckModal
-        isOpen={isBatchAckOpen}
-        onClose={() => setIsBatchAckOpen(false)}
-      />
+      {/* Modals */}
+      <BatchAckModal isOpen={isBatchAckOpen} onClose={() => setIsBatchAckOpen(false)} />
+      <AIScanModal isOpen={isAIScanOpen} onClose={() => { setIsAIScanOpen(false); addToast('success', 'AI Scan complete — 3 anomalies detected, 2 auto-corrected') }} />
+      <CompareDeltasModal isOpen={isCompareDeltasOpen} onClose={() => setIsCompareDeltasOpen(false)} onAccept={() => { setIsCompareDeltasOpen(false); addToast('success', 'All matching fields accepted — 2 mismatches flagged for review') }} />
+      <AIAutoResolveModal isOpen={isAutoResolveOpen} onClose={() => setIsAutoResolveOpen(false)} onApply={() => { setIsAutoResolveOpen(false); addToast('success', '3 exceptions auto-resolved and applied successfully') }} />
+      <ContactVendorsModal isOpen={isContactVendorsOpen} onClose={() => setIsContactVendorsOpen(false)} onSend={() => { setIsContactVendorsOpen(false); addToast('success', 'Messages sent to 2 vendors regarding pending exceptions') }} />
+      <ToastContainer toasts={toasts} onDismiss={dismissToast} />
     </div>
   )
 }
