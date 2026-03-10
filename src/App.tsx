@@ -3,18 +3,12 @@ import { GenUIProvider } from './context/GenUIContext'
 import { useAuth } from './context/AuthContext'
 import { useDemo } from './context/DemoContext'
 import Login from "./Login"
-import Dashboard from "./Dashboard"
-import Detail from "./Detail"
-import QuoteDetail from "./QuoteDetail"
+import CommandCenter from "./CommandCenter"
+import Operations from "./Operations"
+import ServiceCenter from "./ServiceCenter"
 import OrderDetail from "./OrderDetail"
 import AckDetail from "./AckDetail"
 import Workspace from "./Workspace"
-import Inventory from "./Inventory"
-import Catalogs from "./Catalogs"
-import MAC from "./MAC"
-import Transactions from "./Transactions"
-import CRM from "./CRM"
-import Pricing from "./Pricing"
 import Navbar from "./components/Navbar"
 import DemoGuide from "./components/DemoGuide"
 import SessionExpiryModal from "./components/SessionExpiryModal"
@@ -24,13 +18,10 @@ import DemoProcessPanel from "./components/demo/DemoProcessPanel"
 import DemoStepBanner from "./components/demo/DemoStepBanner"
 import DemoAIIndicator from "./components/demo/DemoAIIndicator"
 
-// Simulations
+// Simulations (kept for demo mode)
 import ExpertHubTransactions from "./components/simulations/ExpertHubTransactions"
 import EmailSimulation from "./components/simulations/EmailSimulation"
 import DealerMonitorKanban from "./components/simulations/DealerMonitorKanban"
-import ServiceNowSimulation from "./components/simulations/ServiceNowSimulation"
-import SpecializedCatalog from "./components/simulations/SpecializedCatalog"
-import ConversationalSurvey from "./components/simulations/ConversationalSurvey"
 
 import {
   HomeIcon,
@@ -41,24 +32,25 @@ import {
 import logoLightBrand from './assets/logo-light-brand.png'
 import logoDarkBrand from './assets/logo-dark-brand.png'
 
+type ManufacturerPage = 'command-center' | 'operations' | 'service-center' | 'order-detail' | 'ack-detail' | 'workspace'
+
 function App() {
   const { user, initialLoading, signOut, showSessionWarning, refreshSession } = useAuth()
   const { isDemoActive, currentStep, isSidebarCollapsed } = useDemo()
-  const [currentPage, setCurrentPage] = useState<'dashboard' | 'detail' | 'quote-detail' | 'order-detail' | 'ack-detail' | 'ack-detail-ai' | 'workspace' | 'inventory' | 'catalogs' | 'mac' | 'transactions' | 'crm' | 'pricing'>('transactions')
+  const [currentPage, setCurrentPage] = useState<ManufacturerPage>('command-center')
   const [isDemoGuideOpen, setIsDemoGuideOpen] = useState(false)
 
   const handleNavigate = (page: string) => {
-    if (page === 'overview') {
-      setCurrentPage('dashboard')
+    if (page === 'overview' || page === 'dashboard') {
+      setCurrentPage('command-center')
     } else {
-      // @ts-ignore
-      setCurrentPage(page)
+      setCurrentPage(page as ManufacturerPage)
     }
   }
 
   const handleLogout = async () => {
     await signOut()
-    setCurrentPage('dashboard')
+    setCurrentPage('command-center')
   }
 
   if (initialLoading) {
@@ -81,157 +73,65 @@ function App() {
     return <Login />
   }
 
-  // --- SIMULATION CONFIGURATIONS ---
+  // --- SIMULATION CONFIGURATIONS (Demo Mode) ---
   const getSimulationConfig = () => {
     if (!isDemoActive) return { appName: undefined, companyName: undefined, customNavigation: undefined };
 
-    // Standardized app names and company per role
+    const manufacturerNav = [
+      { name: 'Command Center', page: 'command-center', icon: HomeIcon },
+      { name: 'Operations', page: 'operations', icon: BanknotesIcon },
+      { name: 'Service Center', page: 'service-center', icon: WrenchScrewdriverIcon },
+    ];
+
     const isExpert = ['expert-hub', 'dealer-kanban', 'ack-detail', 'transactions', 'mac', 'quote-detail'].includes(currentStep.app);
     const resolvedAppName = currentStep.app === 'email-marketplace' ? 'Wells Fargo Mail'
-      : currentStep.app === 'catalog' ? 'Marketplace'
-      : currentStep.app === 'service-now' ? 'ServiceNow'
       : isExpert ? 'Expert Hub'
       : 'Manufacturer Experience';
     const resolvedCompany = isExpert ? 'Strata Services' : 'Acme Corp';
 
     switch (currentStep.app) {
       case 'expert-hub':
-        return {
-          appName: resolvedAppName, companyName: resolvedCompany,
-          customNavigation: [
-            { name: 'Dashboard', page: 'dashboard', icon: HomeIcon },
-            { name: 'Service Center', page: 'mac', icon: WrenchScrewdriverIcon },
-            { name: 'Transactions', page: 'transactions', icon: BanknotesIcon },
-          ]
-        };
-      case 'service-now':
-        return {
-          appName: resolvedAppName, companyName: resolvedCompany,
-          customNavigation: [
-            { name: 'Dashboard', page: 'dashboard', icon: HomeIcon },
-            { name: 'Service Center', page: 'mac', icon: WrenchScrewdriverIcon },
-            { name: 'Transactions', page: 'transactions', icon: BanknotesIcon },
-          ]
-        };
       case 'dealer-kanban':
-        return {
-          appName: resolvedAppName, companyName: resolvedCompany,
-          customNavigation: [
-            { name: 'Dashboard', page: 'dashboard', icon: HomeIcon },
-            { name: 'Service Center', page: 'mac', icon: WrenchScrewdriverIcon },
-            { name: 'Transactions', page: 'transactions', icon: BanknotesIcon },
-          ]
-        };
-      case 'catalog':
-        return {
-          appName: resolvedAppName, companyName: resolvedCompany,
-          customNavigation: [
-            { name: 'Dashboard', page: 'dashboard', icon: HomeIcon },
-            { name: 'Service Center', page: 'mac', icon: WrenchScrewdriverIcon },
-            { name: 'Transactions', page: 'transactions', icon: BanknotesIcon },
-          ]
-        };
-      case 'email-marketplace':
-        return {
-          appName: resolvedAppName, companyName: resolvedCompany,
-          customNavigation: [
-            { name: 'Dashboard', page: 'dashboard', icon: HomeIcon },
-            { name: 'Service Center', page: 'mac', icon: WrenchScrewdriverIcon },
-            { name: 'Transactions', page: 'transactions', icon: BanknotesIcon },
-          ]
-        };
-      case 'quote-po':
-        return {
-          appName: resolvedAppName, companyName: resolvedCompany,
-          customNavigation: [
-            { name: 'Dashboard', page: 'dashboard', icon: HomeIcon },
-            { name: 'Service Center', page: 'mac', icon: WrenchScrewdriverIcon },
-            { name: 'Transactions', page: 'transactions', icon: BanknotesIcon },
-          ]
-        };
-      case 'dashboard':
-        return {
-          appName: resolvedAppName, companyName: resolvedCompany,
-          customNavigation: [
-            { name: 'Dashboard', page: 'dashboard', icon: HomeIcon },
-            { name: 'Service Center', page: 'mac', icon: WrenchScrewdriverIcon },
-            { name: 'Transactions', page: 'transactions', icon: BanknotesIcon },
-          ]
-        };
       case 'ack-detail':
-        return {
-          appName: resolvedAppName, companyName: resolvedCompany,
-          customNavigation: [
-            { name: 'Dashboard', page: 'dashboard', icon: HomeIcon },
-            { name: 'Service Center', page: 'mac', icon: WrenchScrewdriverIcon },
-            { name: 'Transactions', page: 'transactions', icon: BanknotesIcon },
-          ]
-        };
       case 'transactions':
-        return {
-          appName: resolvedAppName, companyName: resolvedCompany,
-          customNavigation: [
-            { name: 'Dashboard', page: 'dashboard', icon: HomeIcon },
-            { name: 'Service Center', page: 'mac', icon: WrenchScrewdriverIcon },
-            { name: 'Transactions', page: 'transactions', icon: BanknotesIcon },
-          ]
-        };
       case 'mac':
-        return {
-          appName: resolvedAppName, companyName: resolvedCompany,
-          customNavigation: [
-            { name: 'Dashboard', page: 'dashboard', icon: HomeIcon },
-            { name: 'Service Center', page: 'mac', icon: WrenchScrewdriverIcon },
-            { name: 'Transactions', page: 'transactions', icon: BanknotesIcon },
-          ]
-        };
       case 'quote-detail':
         return {
           appName: resolvedAppName, companyName: resolvedCompany,
           customNavigation: [
-            { name: 'Dashboard', page: 'dashboard', icon: HomeIcon },
-            { name: 'Service Center', page: 'mac', icon: WrenchScrewdriverIcon },
-            { name: 'Transactions', page: 'transactions', icon: BanknotesIcon },
+            { name: 'Command Center', page: 'command-center', icon: HomeIcon },
+            { name: 'Operations', page: 'operations', icon: BanknotesIcon },
+            { name: 'Service Center', page: 'service-center', icon: WrenchScrewdriverIcon },
           ]
         };
-      case 'inventory':
-        return {
-          appName: resolvedAppName, companyName: resolvedCompany,
-          customNavigation: [
-            { name: 'Dashboard', page: 'dashboard', icon: HomeIcon },
-            { name: 'Service Center', page: 'mac', icon: WrenchScrewdriverIcon },
-            { name: 'Transactions', page: 'transactions', icon: BanknotesIcon },
-          ]
-        };
+      case 'email-marketplace':
+        return { appName: resolvedAppName, companyName: resolvedCompany, customNavigation: manufacturerNav };
       default:
-        return { appName: undefined, companyName: undefined, customNavigation: undefined };
+        return { appName: resolvedAppName, companyName: resolvedCompany, customNavigation: manufacturerNav };
     }
   };
 
   const { appName, companyName, customNavigation } = getSimulationConfig();
 
-  // Determine the correct active nav tab during demo mode
+  // Map demo app names to manufacturer nav tabs
   const getActiveTab = () => {
     if (!isDemoActive) return currentPage;
     const appToTab: Record<string, string> = {
-      'dealer-kanban': 'transactions',
-      'expert-hub': 'transactions',
-      'service-now': 'dashboard',
-      'catalog': 'dashboard',
-      'email-marketplace': 'dashboard',
-      'dashboard': 'dashboard',
-      'transactions': 'transactions',
-      'quote-po': 'quote-detail',
-      'quote-detail': 'quote-detail',
-      'order-detail': 'order-detail',
-      'ack-detail': 'transactions',
-      'mac': 'mac',
-      'inventory': 'inventory',
+      'dealer-kanban': 'operations',
+      'expert-hub': 'operations',
+      'email-marketplace': 'command-center',
+      'dashboard': 'command-center',
+      'transactions': 'operations',
+      'order-detail': 'operations',
+      'ack-detail': 'operations',
+      'mac': 'service-center',
+      'quote-detail': 'operations',
+      'inventory': 'operations',
     };
     return appToTab[currentStep.app] || currentPage;
   };
 
-  // --- INDEPENDENT SIMULATION ROUTING ---
+  // --- SIMULATION ROUTING (Demo Mode) ---
   const renderSimulation = () => {
     switch (currentStep.app) {
       case 'expert-hub':
@@ -240,7 +140,7 @@ function App() {
             onLogout={handleLogout}
             onNavigateToDetail={(id) => {
               console.log('Navigate to detail', id);
-              setCurrentPage('detail');
+              setCurrentPage('order-detail');
             }}
             onNavigateToWorkspace={() => setCurrentPage('workspace')}
             onNavigate={(p) => handleNavigate(p)}
@@ -250,35 +150,23 @@ function App() {
         return <EmailSimulation />;
       case 'dealer-kanban':
         return <DealerMonitorKanban onNavigate={handleNavigate} />;
-      case 'service-now':
-        return <ServiceNowSimulation />;
-      case 'catalog':
-        return <SpecializedCatalog />;
-      case 'survey':
-        return <ConversationalSurvey />;
-      case 'quote-po':
-        return <QuoteDetail onBack={() => setCurrentPage('transactions')} onLogout={handleLogout} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
-      case 'order-detail':
-        return <OrderDetail onBack={() => setCurrentPage('transactions')} onLogout={handleLogout} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
       case 'dashboard':
-        return <Dashboard onLogout={handleLogout} onNavigateToDetail={() => setCurrentPage('detail')} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
+        return <CommandCenter onLogout={handleLogout} onNavigateToDetail={() => setCurrentPage('order-detail')} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
       case 'ack-detail':
-        return <AckDetail onBack={() => setCurrentPage('transactions')} onLogout={handleLogout} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
+        return <AckDetail onBack={() => setCurrentPage('operations')} onLogout={handleLogout} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
       case 'transactions':
-        return <Transactions onLogout={handleLogout} onNavigateToDetail={(type) => setCurrentPage(type as any)} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
+        return <Operations onLogout={handleLogout} onNavigateToDetail={(type: string) => setCurrentPage(type as ManufacturerPage)} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
       case 'mac':
-        return <MAC onLogout={handleLogout} onNavigateToDetail={() => setCurrentPage('detail')} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
-      case 'quote-detail':
-        return <QuoteDetail onBack={() => setCurrentPage('transactions')} onLogout={handleLogout} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
-      case 'inventory':
-        return <Inventory onLogout={handleLogout} onNavigateToDetail={() => setCurrentPage('detail')} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
+        return <ServiceCenter onLogout={handleLogout} onNavigateToDetail={() => setCurrentPage('order-detail')} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
+      case 'order-detail':
+        return <OrderDetail onBack={() => setCurrentPage('operations')} onLogout={handleLogout} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
       default:
         return (
           <ExpertHubTransactions
             onLogout={handleLogout}
             onNavigateToDetail={(id) => {
               console.log('Navigate to detail', id);
-              setCurrentPage('detail');
+              setCurrentPage('order-detail');
             }}
             onNavigateToWorkspace={() => setCurrentPage('workspace')}
             onNavigate={(p) => handleNavigate(p)}
@@ -287,28 +175,24 @@ function App() {
     }
   };
 
+  // --- NORMAL PAGE ROUTING ---
   const renderCurrentPage = () => {
-    if (currentPage === 'dashboard') return <Dashboard onLogout={handleLogout} onNavigateToDetail={() => setCurrentPage('detail')} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
-    if (currentPage === 'inventory') return <Inventory onLogout={handleLogout} onNavigateToDetail={() => setCurrentPage('detail')} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
-    if (currentPage === 'catalogs') return <Catalogs onLogout={handleLogout} onNavigateToDetail={() => setCurrentPage('detail')} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
-    if (currentPage === 'mac') return <MAC onLogout={handleLogout} onNavigateToDetail={() => setCurrentPage('detail')} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
-    if (currentPage === 'transactions') return (
-      <Transactions
-        onLogout={handleLogout}
-        onNavigateToDetail={(type) => setCurrentPage(type as any)}
-        onNavigateToWorkspace={() => setCurrentPage('workspace')}
-        onNavigate={handleNavigate}
-      />
-    );
-    if (currentPage === 'crm') return <CRM onLogout={handleLogout} onNavigateToDetail={() => setCurrentPage('detail')} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
-    if (currentPage === 'pricing') return <Pricing onLogout={handleLogout} onNavigateToDetail={() => setCurrentPage('detail')} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
-    if (currentPage === 'detail') return <Detail onBack={() => setCurrentPage('dashboard')} onLogout={handleLogout} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
-    if (currentPage === 'quote-detail') return <QuoteDetail onBack={() => setCurrentPage('transactions')} onLogout={handleLogout} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
-    if (currentPage === 'order-detail') return <OrderDetail onBack={() => setCurrentPage('transactions')} onLogout={handleLogout} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
-    if (currentPage === 'ack-detail') return <AckDetail onBack={() => setCurrentPage('transactions')} onLogout={handleLogout} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
-    if (currentPage === 'ack-detail-ai') return <AckDetail initialTab={1} onBack={() => setCurrentPage('transactions')} onLogout={handleLogout} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
-    if (currentPage === 'workspace') return <Workspace onBack={() => setCurrentPage('dashboard')} onLogout={handleLogout} onNavigateToWorkspace={() => setCurrentPage('workspace')} />;
-    return null;
+    switch (currentPage) {
+      case 'command-center':
+        return <CommandCenter onLogout={handleLogout} onNavigateToDetail={() => setCurrentPage('order-detail')} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
+      case 'operations':
+        return <Operations onLogout={handleLogout} onNavigateToDetail={(type: string) => setCurrentPage(type as ManufacturerPage)} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
+      case 'service-center':
+        return <ServiceCenter onLogout={handleLogout} onNavigateToDetail={() => setCurrentPage('order-detail')} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
+      case 'order-detail':
+        return <OrderDetail onBack={() => setCurrentPage('operations')} onLogout={handleLogout} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
+      case 'ack-detail':
+        return <AckDetail onBack={() => setCurrentPage('operations')} onLogout={handleLogout} onNavigateToWorkspace={() => setCurrentPage('workspace')} onNavigate={handleNavigate} />;
+      case 'workspace':
+        return <Workspace onBack={() => setCurrentPage('command-center')} onLogout={handleLogout} onNavigateToWorkspace={() => setCurrentPage('workspace')} />;
+      default:
+        return null;
+    }
   };
 
   return (
@@ -325,10 +209,10 @@ function App() {
       <DemoProcessPanel onNavigate={handleNavigate} />
       <DemoStepBanner />
 
-      {/* FIXED NAVBAR (Unified) — hidden for email simulation & workspace/detail */}
+      {/* FIXED NAVBAR — hidden for email simulation & workspace */}
       {(isDemoActive
         ? currentStep.app !== 'email-marketplace' && !['1.8', '3.5'].includes(currentStep.id)
-        : currentPage !== 'detail' && currentPage !== 'workspace'
+        : currentPage !== 'workspace'
       ) && (
         <div className="fixed top-0 left-0 right-0 z-[100]">
           <Navbar
@@ -345,7 +229,7 @@ function App() {
       )}
 
       {/* MAIN CONTENT VIEWPORT */}
-      <main className={`transition-all duration-300 ${(isDemoActive ? currentStep.app !== 'email-marketplace' : currentPage !== 'detail' && currentPage !== 'workspace') ? 'pt-16' : ''} ${isDemoActive ? (isSidebarCollapsed ? 'pl-0' : 'pl-80') + ' animate-in fade-in duration-500' : ''} min-h-screen bg-background`}>
+      <main className={`transition-all duration-300 ${(isDemoActive ? currentStep.app !== 'email-marketplace' : currentPage !== 'workspace') ? 'pt-16' : ''} ${isDemoActive ? (isSidebarCollapsed ? 'pl-0' : 'pl-80') + ' animate-in fade-in duration-500' : ''} min-h-screen bg-background`}>
         {isDemoActive && <DemoAIIndicator />}
         {isDemoActive ? renderSimulation() : renderCurrentPage()}
       </main>

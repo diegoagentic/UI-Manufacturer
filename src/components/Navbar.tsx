@@ -109,9 +109,9 @@ export default function Navbar({
     const userEmail = user?.email || ''
 
     const allNavigation = customNavigation || [
-        { name: 'Dashboard', page: 'dashboard', icon: HomeIcon },
-        { name: 'Service Center', page: 'mac', icon: ArrowPathRoundedSquareIcon },
-        { name: 'Transactions', page: 'transactions', icon: BanknotesIcon },
+        { name: 'Command Center', page: 'command-center', icon: HomeIcon },
+        { name: 'Operations', page: 'operations', icon: BanknotesIcon },
+        { name: 'Service Center', page: 'service-center', icon: WrenchScrewdriverIcon },
     ];
 
     // Use the full custom navigation provided by each simulation app
