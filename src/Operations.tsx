@@ -49,21 +49,21 @@ interface OperationsProps {
 }
 
 // --- Pipeline Stages ---
-const poPipelineStages = ['Received', 'AI Processing', 'Under Review', 'ACK Draft', 'ACK Sent', 'Completed']
+const poPipelineStages = ['Received', 'AI Processing', 'Under Review', 'Acknowledgement Draft', 'Acknowledgement Sent', 'Completed']
 const ackPipelineStages = ['Draft', 'AI Validated', 'Sent', 'Confirmed', 'Revision Pending']
 const exceptionPipelineStages = ['New', 'AI Analyzing', 'Pending Review', 'In Progress', 'Resolved']
 
 // --- KPI Data per tab ---
 const poKpis = [
   { label: 'Active POs', value: '156', sub: 'In pipeline', icon: CubeIcon, color: 'blue' },
-  { label: 'Pending ACK', value: '23', sub: 'Awaiting response', icon: ClockIcon, color: 'orange' },
+  { label: 'Pending Acknowledgement', value: '23', sub: 'Awaiting response', icon: ClockIcon, color: 'orange' },
   { label: 'With Exceptions', value: '7', sub: 'Need attention', icon: ExclamationTriangleIcon, color: 'red' },
   { label: 'Clean Match Rate', value: '91%', sub: 'Auto-accepted', icon: CheckCircleIcon, color: 'green' },
   { label: 'Total Value', value: '$3.8M', sub: 'Active POs', icon: CurrencyDollarIcon, color: 'indigo' },
 ]
 
 const ackKpis = [
-  { label: 'Pending ACKs', value: '23', sub: 'Awaiting review', icon: ClockIcon, color: 'orange' },
+  { label: 'Pending Acknowledgements', value: '23', sub: 'Awaiting review', icon: ClockIcon, color: 'orange' },
   { label: 'Discrepancies', value: '5', sub: 'Action required', icon: ExclamationTriangleIcon, color: 'red' },
   { label: 'Confirmed', value: '156', sub: 'On track', icon: CheckCircleIcon, color: 'green' },
   { label: 'Avg Lead Time', value: '4.2w', sub: 'Weeks to ship', icon: CalendarIcon, color: 'blue' },
@@ -89,10 +89,10 @@ const purchaseOrders = [
   { id: 'PO-2026-093', supplier: 'Urban Living Inc.', items: 28, amount: '$112,000', status: 'Under Review', date: 'Jan 13, 2026',
     confidence: 94, aiInsight: 'All line items validated — freight zone flagged', agentStage: 'complete' as const, flaggedFields: 1,
     shipEta: 'Feb 20, 2026', priority: 'standard' as const, channel: 'EDI' },
-  { id: 'PO-2026-092', supplier: 'Global Logistics', items: 8, amount: '$45,000', status: 'ACK Sent', date: 'Jan 12, 2026',
+  { id: 'PO-2026-092', supplier: 'Global Logistics', items: 8, amount: '$45,000', status: 'Acknowledgement Sent', date: 'Jan 12, 2026',
     confidence: 98, aiInsight: 'Clean match — auto-acknowledged', agentStage: 'complete' as const, flaggedFields: 0,
     shipEta: 'Jan 28, 2026', priority: 'standard' as const, channel: 'Email' },
-  { id: 'PO-2026-091', supplier: 'City Builders', items: 15, amount: '$89,000', status: 'ACK Draft', date: 'Jan 11, 2026',
+  { id: 'PO-2026-091', supplier: 'City Builders', items: 15, amount: '$89,000', status: 'Acknowledgement Draft', date: 'Jan 11, 2026',
     confidence: 76, aiInsight: '3 pricing discrepancies detected, draft pending review', agentStage: 'complete' as const, flaggedFields: 3,
     shipEta: 'Feb 5, 2026', priority: 'rush' as const, channel: 'Portal' },
   { id: 'PO-2026-090', supplier: 'Modern Homes', items: 32, amount: '$210,000', status: 'Completed', date: 'Jan 10, 2026',
@@ -148,8 +148,8 @@ const statusColors: Record<string, string> = {
   'Received': 'bg-zinc-100 text-zinc-700 dark:bg-zinc-500/15 dark:text-zinc-300',
   'AI Processing': 'bg-brand-50 text-brand-700 dark:bg-brand-500/15 dark:text-brand-300',
   'Under Review': 'bg-amber-50 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300',
-  'ACK Draft': 'bg-blue-50 text-blue-700 dark:bg-blue-500/15 dark:text-blue-300',
-  'ACK Sent': 'bg-green-50 text-green-700 dark:bg-green-500/15 dark:text-green-300',
+  'Acknowledgement Draft': 'bg-blue-50 text-blue-700 dark:bg-blue-500/15 dark:text-blue-300',
+  'Acknowledgement Sent': 'bg-green-50 text-green-700 dark:bg-green-500/15 dark:text-green-300',
   'Completed': 'bg-green-50 text-green-700 dark:bg-green-500/15 dark:text-green-300',
   'Draft': 'bg-zinc-100 text-zinc-700 dark:bg-zinc-500/15 dark:text-zinc-300',
   'AI Validated': 'bg-brand-50 text-brand-700 dark:bg-brand-500/15 dark:text-brand-300',
@@ -437,7 +437,7 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
               </button>
               <button
                 disabled={processingAction === 'ack-reminders'}
-                onClick={() => handleQuickAction('ack-reminders', 'Sending ACK reminders...', 'Reminders sent to 4 vendors awaiting acknowledgement')}
+                onClick={() => handleQuickAction('ack-reminders', 'Sending acknowledgement reminders...', 'Reminders sent to 4 vendors awaiting acknowledgement')}
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-white dark:bg-zinc-800 text-foreground hover:border-primary/30 hover:shadow-sm transition-all disabled:opacity-60"
               >
                 {processingAction === 'ack-reminders' ? <ArrowPathIcon className="w-3.5 h-3.5 animate-spin text-blue-500" /> : <PaperAirplaneIcon className="w-3.5 h-3.5 text-blue-500" />}
