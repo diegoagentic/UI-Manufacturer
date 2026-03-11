@@ -1,15 +1,38 @@
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import type { DashMetricsPeriod } from '../DashboardMetricsGrid';
 
-const data = [
-    { name: "Seating", value: 400 },
-    { name: "Desks", value: 300 },
-    { name: "Storage", value: 300 },
-    { name: "Accessories", value: 200 },
-];
+const dataByPeriod: Record<DashMetricsPeriod, { name: string; value: number }[]> = {
+    Day: [
+        { name: "Seating", value: 85 },
+        { name: "Desks", value: 62 },
+        { name: "Storage", value: 48 },
+        { name: "Accessories", value: 35 },
+    ],
+    Week: [
+        { name: "Seating", value: 220 },
+        { name: "Desks", value: 175 },
+        { name: "Storage", value: 160 },
+        { name: "Accessories", value: 95 },
+    ],
+    Month: [
+        { name: "Seating", value: 400 },
+        { name: "Desks", value: 300 },
+        { name: "Storage", value: 300 },
+        { name: "Accessories", value: 200 },
+    ],
+    Quarter: [
+        { name: "Seating", value: 1450 },
+        { name: "Desks", value: 1100 },
+        { name: "Storage", value: 980 },
+        { name: "Accessories", value: 720 },
+    ],
+};
 
-const COLORS = ["var(--chart-brand-fill)", "#E4E4E7", "#71717A", "#3F3F46"]; // Volt Lime, Zinc-200, Zinc-500, Zinc-700
+const COLORS = ["var(--chart-brand-fill)", "#E4E4E7", "#71717A", "#3F3F46"];
 
-export function CategoryDonutChart() {
+export function CategoryDonutChart({ period = 'Month' }: { period?: DashMetricsPeriod }) {
+    const data = dataByPeriod[period];
+
     return (
         <div className="h-[400px] w-full bg-white dark:bg-zinc-800 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col">
             <div className="flex items-center justify-between mb-2">
@@ -31,7 +54,7 @@ export function CategoryDonutChart() {
                             dataKey="value"
                             stroke="none"
                         >
-                            {data.map((entry, index) => (
+                            {data.map((_entry, index) => (
                                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} className="stroke-white dark:stroke-zinc-900 stroke-2" />
                             ))}
                         </Pie>

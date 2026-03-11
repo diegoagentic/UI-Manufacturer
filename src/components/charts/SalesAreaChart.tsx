@@ -1,28 +1,56 @@
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import type { DashMetricsPeriod } from '../DashboardMetricsGrid';
 
-const data = [
-    { name: "Jan", revenue: 4000 },
-    { name: "Feb", revenue: 3000 },
-    { name: "Mar", revenue: 2000 },
-    { name: "Apr", revenue: 2780 },
-    { name: "May", revenue: 1890 },
-    { name: "Jun", revenue: 2390 },
-    { name: "Jul", revenue: 3490 },
-];
+const dataByPeriod: Record<DashMetricsPeriod, { name: string; revenue: number }[]> = {
+    Day: [
+        { name: "8 AM", revenue: 820 },
+        { name: "10 AM", revenue: 1450 },
+        { name: "12 PM", revenue: 2100 },
+        { name: "2 PM", revenue: 1780 },
+        { name: "4 PM", revenue: 2350 },
+        { name: "6 PM", revenue: 1200 },
+    ],
+    Week: [
+        { name: "Mon", revenue: 5200 },
+        { name: "Tue", revenue: 4800 },
+        { name: "Wed", revenue: 6100 },
+        { name: "Thu", revenue: 5700 },
+        { name: "Fri", revenue: 7200 },
+    ],
+    Month: [
+        { name: "Jan", revenue: 4000 },
+        { name: "Feb", revenue: 3000 },
+        { name: "Mar", revenue: 2000 },
+        { name: "Apr", revenue: 2780 },
+        { name: "May", revenue: 1890 },
+        { name: "Jun", revenue: 2390 },
+        { name: "Jul", revenue: 3490 },
+    ],
+    Quarter: [
+        { name: "Q1", revenue: 9000 },
+        { name: "Q2", revenue: 7070 },
+        { name: "Q3", revenue: 8200 },
+        { name: "Q4", revenue: 10500 },
+    ],
+};
 
-export function SalesAreaChart() {
+const subtitles: Record<DashMetricsPeriod, string> = {
+    Day: 'Hourly revenue today',
+    Week: 'Daily revenue this week',
+    Month: 'Revenue trends over the last 7 months',
+    Quarter: 'Quarterly revenue performance',
+};
+
+export function SalesAreaChart({ period = 'Month' }: { period?: DashMetricsPeriod }) {
+    const data = dataByPeriod[period];
+
     return (
         <div className="h-[400px] w-full bg-white dark:bg-zinc-800 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col">
             <div className="flex items-center justify-between mb-4">
                 <div>
                     <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">Sales Performance</h3>
-                    <p className="text-sm text-zinc-500 dark:text-zinc-400">Revenue trends over the last 7 months</p>
+                    <p className="text-sm text-zinc-500 dark:text-zinc-400">{subtitles[period]}</p>
                 </div>
-                <select className="bg-zinc-100 dark:bg-zinc-800 border-none text-xs rounded-md px-2 py-1 text-zinc-600 dark:text-zinc-300 outline-none">
-                    <option>Last 7 Months</option>
-                    <option>Last 30 Days</option>
-                    <option>Year to Date</option>
-                </select>
             </div>
             <div className="flex-1 w-full min-h-0">
                 <ResponsiveContainer width="100%" height="100%" minHeight={200}>
@@ -34,28 +62,17 @@ export function SalesAreaChart() {
                             </linearGradient>
                         </defs>
                         <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5E7EB" className="dark:stroke-zinc-800" />
-                        <XAxis
-                            dataKey="name"
-                            axisLine={false}
-                            tickLine={false}
-                            tick={{ fill: '#9CA3AF', fontSize: 12 }}
-                            dy={10}
-                        />
-                        <YAxis
-                            axisLine={false}
-                            tickLine={false}
-                            tick={{ fill: '#9CA3AF', fontSize: 12 }}
-                            tickFormatter={(value) => `$${value}`}
-                        />
+                        <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#9CA3AF', fontSize: 12 }} dy={10} />
+                        <YAxis axisLine={false} tickLine={false} tick={{ fill: '#9CA3AF', fontSize: 12 }} tickFormatter={(value) => `$${value}`} />
                         <Tooltip
                             contentStyle={{
-                                backgroundColor: 'rgba(24, 24, 27, 0.9)', // Zinc-900 (Dark) default for dashboards usually looks better, or keep white and use class logic if available. Keeping it simple but branded.
+                                backgroundColor: 'rgba(24, 24, 27, 0.9)',
                                 borderRadius: '8px',
-                                border: '1px solid #27272a', // Zinc-800
+                                border: '1px solid #27272a',
                                 boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
-                                color: '#F4F4F5' // Zinc-100
+                                color: '#F4F4F5'
                             }}
-                            itemStyle={{ color: 'bg-brand-400' }} // Volt Lime text
+                            itemStyle={{ color: 'bg-brand-400' }}
                             formatter={(value) => [`$${value}`, 'Revenue']}
                         />
                         <Area
@@ -66,7 +83,7 @@ export function SalesAreaChart() {
                             fillOpacity={1}
                             fill="url(#colorRevenue)"
                             activeDot={{ r: 6, strokeWidth: 0, fill: 'var(--color-brand-300)' }}
-                            animationDuration={1500}
+                            animationDuration={600}
                         />
                     </AreaChart>
                 </ResponsiveContainer>

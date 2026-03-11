@@ -1,14 +1,40 @@
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import type { DashMetricsPeriod } from '../DashboardMetricsGrid';
 
-const data = [
-    { name: "Sarah J.", active: 12, completed: 8 },
-    { name: "Mike T.", active: 15, completed: 10 },
-    { name: "Emma W.", active: 8, completed: 15 },
-    { name: "James L.", active: 10, completed: 5 },
-    { name: "Olivia R.", active: 6, completed: 12 },
-];
+const dataByPeriod: Record<DashMetricsPeriod, { name: string; active: number; completed: number }[]> = {
+    Day: [
+        { name: "Sarah J.", active: 3, completed: 2 },
+        { name: "Mike T.", active: 4, completed: 1 },
+        { name: "Emma W.", active: 2, completed: 5 },
+        { name: "James L.", active: 3, completed: 1 },
+        { name: "Olivia R.", active: 1, completed: 3 },
+    ],
+    Week: [
+        { name: "Sarah J.", active: 8, completed: 5 },
+        { name: "Mike T.", active: 10, completed: 7 },
+        { name: "Emma W.", active: 5, completed: 11 },
+        { name: "James L.", active: 7, completed: 3 },
+        { name: "Olivia R.", active: 4, completed: 9 },
+    ],
+    Month: [
+        { name: "Sarah J.", active: 12, completed: 8 },
+        { name: "Mike T.", active: 15, completed: 10 },
+        { name: "Emma W.", active: 8, completed: 15 },
+        { name: "James L.", active: 10, completed: 5 },
+        { name: "Olivia R.", active: 6, completed: 12 },
+    ],
+    Quarter: [
+        { name: "Sarah J.", active: 35, completed: 28 },
+        { name: "Mike T.", active: 42, completed: 33 },
+        { name: "Emma W.", active: 22, completed: 48 },
+        { name: "James L.", active: 30, completed: 18 },
+        { name: "Olivia R.", active: 19, completed: 38 },
+    ],
+};
 
-export function TeamWorkloadChart() {
+export function TeamWorkloadChart({ period = 'Month' }: { period?: DashMetricsPeriod }) {
+    const data = dataByPeriod[period];
+
     return (
         <div className="h-[300px] w-full bg-white dark:bg-zinc-800 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col">
             <div className="flex items-center justify-between mb-4">
@@ -44,8 +70,8 @@ export function TeamWorkloadChart() {
                             itemStyle={{ color: '#1F2937' }}
                         />
                         <Legend />
-                        <Bar dataKey="active" fill="#f43f5e" name="Active Tasks" radius={[0, 4, 4, 0]} barSize={10} />
-                        <Bar dataKey="completed" fill="#14b8a6" name="Completed" radius={[0, 4, 4, 0]} barSize={10} />
+                        <Bar dataKey="active" fill="#f43f5e" name="Active Tasks" radius={[0, 4, 4, 0]} barSize={10} animationDuration={600} />
+                        <Bar dataKey="completed" fill="#14b8a6" name="Completed" radius={[0, 4, 4, 0]} barSize={10} animationDuration={600} />
                     </BarChart>
                 </ResponsiveContainer>
             </div>

@@ -27,14 +27,14 @@ function cn(...inputs: (string | undefined | null | false)[]) {
 }
 
 const items = [
-    { id: "SKU-OFF-2025-001", name: "Executive Chair Pro", category: "Premium Series", properties: "Leather / Black", stock: 285, status: "In Stock", statusColor: "bg-zinc-100 text-zinc-700", aiStatus: "info" },
-    { id: "SKU-OFF-2025-002", name: "Ergonomic Task Chair", category: "Standard Series", properties: "Mesh / Gray", stock: 520, status: "In Stock", statusColor: "bg-zinc-100 text-zinc-700" },
-    { id: "SKU-OFF-2025-003", name: "Conference Room Chair", category: "Meeting Series", properties: "Fabric / Navy", stock: 42, status: "Low Stock", statusColor: "bg-amber-50 text-amber-700 ring-amber-600/20", aiStatus: "warning" },
-    { id: "SKU-OFF-2025-004", name: "Visitor Stacking Chair", category: "Guest Series", properties: "Plastic / White", stock: 180, status: "In Stock", statusColor: "bg-zinc-100 text-zinc-700" },
-    { id: "SKU-OFF-2025-005", name: "Gaming Office Chair", category: "Sport Series", properties: "Leather / Red", stock: 0, status: "Out of Stock", statusColor: "bg-red-50 text-red-700 ring-red-600/20" },
-    { id: "SKU-OFF-2025-006", name: "Reception Lounge Chair", category: "Lobby Series", properties: "Velvet / Teal", stock: 95, status: "In Stock", statusColor: "bg-zinc-100 text-zinc-700" },
-    { id: "SKU-OFF-2025-007", name: "Drafting Stool High", category: "Studio Series", properties: "Mesh / Black", stock: 340, status: "In Stock", statusColor: "bg-zinc-100 text-zinc-700" },
-    { id: "SKU-OFF-2025-008", name: "Bench Seating 3-Seat", category: "Waiting Series", properties: "Metal / Chrome", stock: 28, status: "Low Stock", statusColor: "bg-amber-50 text-amber-700 ring-amber-600/20" },
+    { id: 'T-RCR306029HLG2', itemNumber: 'T-RCR306029HLG2', name: 'TBL, REC, 30Dx60Wx29H, Laminate', category: 'Tables', tag: '1-L-SHAPED OFFICES', qtyOrd: 37, qtyShip: 37, qtyBO: 0, listPrice: 3603, discPct: 84.75, netPrice: 549.46, amount: 20330.02, configs: ['Laminate: Landmark 7981K-12', 'Edge: 2MM Landmark', 'Grommet: Option A'], status: 'Shipped', statusColor: 'bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-300 dark:border-green-800', aiStatus: 'info' as const },
+    { id: 'X-BBFPFS182812', itemNumber: 'X-BBFPFS182812', name: 'CBX Full Depth BBF Pedestal, 18Wx28D', category: 'Casegoods', tag: '1-L-SHAPED OFFICES', qtyOrd: 37, qtyShip: 37, qtyBO: 0, listPrice: 1498, discPct: 84.75, netPrice: 228.44, amount: 8452.28, configs: ['Case: Landmark', 'Front: Black', 'Lock: Wesko Random'], status: 'Shipped', statusColor: 'bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-300 dark:border-green-800' },
+    { id: 'W-WS3072', itemNumber: 'W-WS3072', name: 'WORKSURFACE RECT 30Dx72W', category: 'Worksurfaces', tag: '2-U-SHAPED OFFICE', qtyOrd: 17, qtyShip: 17, qtyBO: 0, listPrice: 702, discPct: 84.75, netPrice: 107.06, amount: 1819.97, configs: ['Laminate: Landmark 7981K-12', 'Edge: 2MM Landmark'], status: 'Shipped', statusColor: 'bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-300 dark:border-green-800' },
+    { id: 'S-LATJJ2D36', itemNumber: 'S-LATJJ2D36', name: 'LATERAL FILE 2 DRAWER 36"', category: 'Storage', tag: '2-U-SHAPED OFFICE', qtyOrd: 17, qtyShip: 17, qtyBO: 0, listPrice: 1287, discPct: 84.75, netPrice: 196.27, amount: 3336.53, configs: ['Paint: Black', 'Lock: Wesko Random'], status: 'Shipped', statusColor: 'bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-300 dark:border-green-800' },
+    { id: 'F-SSC346030C', itemNumber: 'F-SSC346030C', name: 'LB LOUNGE 2 SEAT SOFA 34"H', category: 'Lounge', tag: 'MAIN CONF. ROOM', qtyOrd: 2, qtyShip: 0, qtyBO: 2, listPrice: 5765, discPct: 60, netPrice: 2306, amount: 4612, configs: ['Fabric: Wellesley Ocean', 'Trim: Black'], status: 'Backordered', statusColor: 'bg-red-50 text-red-700 border-red-200 dark:bg-red-900/30 dark:text-red-300 dark:border-red-800', aiStatus: 'warning' as const },
+    { id: '7730', itemNumber: '7730', name: 'AUBURN GRAY CONFERENCE CHAIR', category: 'Seating', tag: 'MAIN CONF. ROOM', qtyOrd: 12, qtyShip: 12, qtyBO: 0, listPrice: 816, discPct: 62, netPrice: 310.08, amount: 3720.96, configs: ['Fabric: Terrain Bluebird'], status: 'Shipped', statusColor: 'bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-300 dark:border-green-800', aiStatus: 'info' as const },
+    { id: 'X-LTD661218L', itemNumber: 'X-LTD661218L', name: 'CBX Triple Door Locker 66Hx12Wx18D', category: 'Storage', tag: 'LOCKER AREA', qtyOrd: 12, qtyShip: 0, qtyBO: 0, listPrice: 2215, discPct: 84.75, netPrice: 337.79, amount: 4053.43, configs: ['Case: Landmark', 'Lock: Wesko Random'], status: 'In Production', statusColor: 'bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-800' },
+    { id: '3500BK', itemNumber: '3500BK', name: 'PIERCE SIDE CHAIR BLACK', category: 'Seating', tag: '302-TRUCKERS LOUNGE', qtyOrd: 8, qtyShip: 0, qtyBO: 0, listPrice: 443, discPct: 62, netPrice: 168.34, amount: 1346.72, configs: ['Paint: Black'], status: 'In Production', statusColor: 'bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-800' },
 ]
 
 const demoItems = [
@@ -957,11 +957,11 @@ export default function OrderDetail({ onBack, onLogout, onNavigateToWorkspace, o
                                                         <TableHead className="w-10">
                                                             <Checkbox className="border-input text-zinc-900 dark:text-primary focus:ring-primary bg-background" />
                                                         </TableHead>
-                                                        <TableHead>SKU ID</TableHead>
-                                                        <TableHead>Image</TableHead>
-                                                        <TableHead>Product Name</TableHead>
-                                                        <TableHead>Properties</TableHead>
-                                                        <TableHead>Stock Level</TableHead>
+                                                        <TableHead>Item #</TableHead>
+                                                        <TableHead className="min-w-[220px]">Description</TableHead>
+                                                        <TableHead className="text-right">Qty</TableHead>
+                                                        <TableHead className="text-right">Net Price</TableHead>
+                                                        <TableHead className="text-right">Amount</TableHead>
                                                         <TableHead>Status</TableHead>
                                                     </TableRow>
                                                 </TableHeader>
@@ -982,53 +982,41 @@ export default function OrderDetail({ onBack, onLogout, onNavigateToWorkspace, o
                                                                     className="border-input text-zinc-900 dark:text-primary focus:ring-primary bg-background"
                                                                 />
                                                             </TableCell>
-                                                            <TableCell className="px-6 py-4 whitespace-nowrap text-sm font-medium text-foreground">
-                                                                {item.id}
+                                                            <TableCell className="px-4 py-3 whitespace-nowrap text-xs font-mono text-foreground">
+                                                                {item.itemNumber}
                                                             </TableCell>
-                                                            <TableCell className="px-6 py-4 whitespace-nowrap">
-                                                                <div className="h-10 w-10 flex-shrink-0">
-                                                                    {item.image ? (
-                                                                        <img className="h-10 w-10 rounded-full object-cover" src={item.image} alt="" />
-                                                                    ) : (
-                                                                        <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center">
-                                                                            <CubeIcon className="h-6 w-6 text-muted-foreground" />
-                                                                        </div>
+                                                            <TableCell className="px-4 py-3">
+                                                                <div>
+                                                                    <div className="text-sm font-medium text-foreground flex items-center gap-2">
+                                                                        {item.name}
+                                                                        {'aiStatus' in item && item.aiStatus && (
+                                                                            <div className={cn("h-2 w-2 rounded-full shrink-0", item.aiStatus === 'warning' ? "bg-amber-500 shadow-[0_0_0_2px_rgba(245,158,11,0.2)]" : "bg-primary shadow-[0_0_0_2px_rgba(var(--primary),0.2)]")} />
+                                                                        )}
+                                                                    </div>
+                                                                    <div className="flex items-center gap-1.5 mt-1">
+                                                                        <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">{item.tag}</span>
+                                                                    </div>
+                                                                    {'configs' in item && item.configs && (
+                                                                        <p className="text-[10px] text-muted-foreground mt-1 truncate max-w-[200px]">{item.configs.join(' · ')}</p>
                                                                     )}
                                                                 </div>
                                                             </TableCell>
-                                                            <TableCell className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
-                                                                <div className="flex flex-col">
-                                                                    <span className="text-foreground font-medium">{item.name}</span>
-                                                                    <span className="text-xs text-muted-foreground/70 mt-0.5">{item.category}</span>
-                                                                </div>
+                                                            <TableCell className="px-4 py-3 whitespace-nowrap text-right">
+                                                                <div className="text-sm font-medium text-foreground">{item.qtyOrd}</div>
+                                                                {item.qtyBO > 0 && <div className="text-[10px] text-red-600 dark:text-red-400 font-medium">{item.qtyBO} BO</div>}
+                                                                {item.qtyShip > 0 && item.qtyShip < item.qtyOrd && <div className="text-[10px] text-green-600 dark:text-green-400">{item.qtyShip} shipped</div>}
                                                             </TableCell>
-                                                            <TableCell className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
-                                                                {item.properties}
+                                                            <TableCell className="px-4 py-3 whitespace-nowrap text-right">
+                                                                <div className="text-sm text-foreground">${item.netPrice.toLocaleString('en-US', { minimumFractionDigits: 2 })}</div>
+                                                                <div className="text-[10px] text-muted-foreground">{item.discPct}% off</div>
                                                             </TableCell>
-                                                            <TableCell className="px-6 py-4 whitespace-nowrap">
-                                                                <div className="flex items-center gap-3">
-                                                                    <div className="h-8 w-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden flex items-end">
-                                                                        <div
-                                                                            className={cn(
-                                                                                "w-full rounded-full transition-all",
-                                                                                item.stock > 100 ? "bg-green-500" : item.stock > 20 ? "bg-amber-500" : "bg-red-500"
-                                                                            )}
-                                                                            style={{ height: `${Math.min((item.stock / 600) * 100, 100)}%` }}
-                                                                        />
-                                                                    </div>
-                                                                    <span className="text-xs text-muted-foreground font-medium min-w-[3ch]">{Math.round((item.stock / 600) * 100)}%</span>
-                                                                </div>
+                                                            <TableCell className="px-4 py-3 whitespace-nowrap text-right text-sm font-medium text-foreground">
+                                                                ${item.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                                                             </TableCell>
-                                                            <TableCell className="px-6 py-4 whitespace-nowrap">
-                                                                <Badge
-                                                                    variant={
-                                                                        item.status === 'In Stock' ? 'success' :
-                                                                            item.status === 'Low Stock' ? 'warning' :
-                                                                                'error'
-                                                                    }
-                                                                >
+                                                            <TableCell className="px-4 py-3 whitespace-nowrap">
+                                                                <span className={cn("inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium border", item.statusColor)}>
                                                                     {item.status}
-                                                                </Badge>
+                                                                </span>
                                                             </TableCell>
                                                         </TableRow>
                                                     ))}
@@ -1447,12 +1435,12 @@ export default function OrderDetail({ onBack, onLogout, onNavigateToWorkspace, o
                                             <span className="flex h-2 w-2 rounded-full bg-amber-500 animate-pulse"></span>
                                         </div>
                                         <div className="flex items-center gap-3">
-                                            <div className="h-10 w-10 rounded-full bg-amber-100 dark:bg-amber-500/20 flex items-center justify-center border border-amber-200 dark:border-amber-500/30">
-                                                <ClockIcon className="h-5 w-5 text-amber-600 dark:text-amber-400" />
+                                            <div className="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-500/20 flex items-center justify-center border border-blue-200 dark:border-blue-500/30">
+                                                <CubeIcon className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                                             </div>
                                             <div>
-                                                <p className="text-sm font-bold text-foreground">Pending Review</p>
-                                                <p className="text-xs text-muted-foreground">Waiting for Final Approval (2/3)</p>
+                                                <p className="text-sm font-bold text-foreground">Production Tracking</p>
+                                                <p className="text-xs text-muted-foreground">32 of 40 items shipped — $127,880.17</p>
                                             </div>
                                         </div>
                                     </div>
@@ -1462,29 +1450,15 @@ export default function OrderDetail({ onBack, onLogout, onNavigateToWorkspace, o
                                             <h4 className="text-xs font-medium text-muted-foreground mb-3 uppercase tracking-wide">Suggested Actions</h4>
                                             <div className="space-y-3">
                                                 <Button
-                                                    onClick={() => setIsDocumentModalOpen(true)}
                                                     variant="ghost"
                                                     className="w-full h-auto justify-start group relative flex items-center gap-3 p-3 rounded-xl border border-border bg-card hover:border-primary/50 hover:shadow-md transition-all text-left"
                                                 >
                                                     <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-colors text-zinc-900 dark:text-primary">
-                                                        <DocumentTextIcon className="h-5 w-5" />
+                                                        <ChartBarIcon className="h-5 w-5" />
                                                     </div>
                                                     <div>
-                                                        <p className="text-sm font-medium text-foreground group-hover:text-zinc-900 dark:group-hover:text-primary transition-colors">Process Quote</p>
-                                                        <p className="text-[10px] text-muted-foreground font-normal normal-case">Analyze PDF & Extract Data</p>
-                                                    </div>
-                                                </Button>
-
-                                                <Button
-                                                    variant="ghost"
-                                                    className="w-full h-auto justify-start group relative flex items-center gap-3 p-3 rounded-xl border border-border bg-card hover:border-green-500/50 hover:shadow-md transition-all text-left"
-                                                >
-                                                    <div className="h-8 w-8 rounded-lg bg-green-50 dark:bg-green-500/10 flex items-center justify-center group-hover:bg-green-500 group-hover:text-white transition-colors text-green-600 dark:text-green-400">
-                                                        <CheckIcon className="h-5 w-5" />
-                                                    </div>
-                                                    <div>
-                                                        <p className="text-sm font-medium text-foreground group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">Approve Order</p>
-                                                        <p className="text-[10px] text-muted-foreground font-normal normal-case">Move to Production</p>
+                                                        <p className="text-sm font-medium text-foreground group-hover:text-zinc-900 dark:group-hover:text-primary transition-colors">Track Production</p>
+                                                        <p className="text-[10px] text-muted-foreground font-normal normal-case">Monitor manufacturing progress</p>
                                                     </div>
                                                 </Button>
 
@@ -1493,11 +1467,38 @@ export default function OrderDetail({ onBack, onLogout, onNavigateToWorkspace, o
                                                     className="w-full h-auto justify-start group relative flex items-center gap-3 p-3 rounded-xl border border-border bg-card hover:border-amber-500/50 hover:shadow-md transition-all text-left"
                                                 >
                                                     <div className="h-8 w-8 rounded-lg bg-amber-50 dark:bg-amber-500/10 flex items-center justify-center group-hover:bg-amber-500 group-hover:text-white transition-colors text-amber-600 dark:text-amber-400">
-                                                        <PencilIcon className="h-5 w-5" />
+                                                        <ExclamationTriangleIcon className="h-5 w-5" />
                                                     </div>
                                                     <div>
-                                                        <p className="text-sm font-medium text-foreground group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">Request Changes</p>
-                                                        <p className="text-[10px] text-muted-foreground font-normal normal-case">Send feedback to vendor</p>
+                                                        <p className="text-sm font-medium text-foreground group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">Check Backorders</p>
+                                                        <p className="text-[10px] text-muted-foreground font-normal normal-case">8 items pending production</p>
+                                                    </div>
+                                                </Button>
+
+                                                <Button
+                                                    variant="ghost"
+                                                    className="w-full h-auto justify-start group relative flex items-center gap-3 p-3 rounded-xl border border-border bg-card hover:border-green-500/50 hover:shadow-md transition-all text-left"
+                                                >
+                                                    <div className="h-8 w-8 rounded-lg bg-green-50 dark:bg-green-500/10 flex items-center justify-center group-hover:bg-green-500 group-hover:text-white transition-colors text-green-600 dark:text-green-400">
+                                                        <PaperAirplaneIcon className="h-5 w-5" />
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-sm font-medium text-foreground group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">Generate Shipment</p>
+                                                        <p className="text-[10px] text-muted-foreground font-normal normal-case">Create BOL for completed items</p>
+                                                    </div>
+                                                </Button>
+
+                                                <Button
+                                                    onClick={() => setIsDocumentModalOpen(true)}
+                                                    variant="ghost"
+                                                    className="w-full h-auto justify-start group relative flex items-center gap-3 p-3 rounded-xl border border-border bg-card hover:border-indigo-500/50 hover:shadow-md transition-all text-left"
+                                                >
+                                                    <div className="h-8 w-8 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 flex items-center justify-center group-hover:bg-indigo-500 group-hover:text-white transition-colors text-indigo-600 dark:text-indigo-400">
+                                                        <ArrowDownTrayIcon className="h-5 w-5" />
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-sm font-medium text-foreground group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">Export PED</p>
+                                                        <p className="text-[10px] text-muted-foreground font-normal normal-case">Download industry-format PDF</p>
                                                     </div>
                                                 </Button>
                                             </div>
@@ -1512,8 +1513,8 @@ export default function OrderDetail({ onBack, onLogout, onNavigateToWorkspace, o
                                                         <div className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary"></div>
                                                     </div>
                                                     <div>
-                                                        <p className="text-xs font-medium text-zinc-900 dark:text-primary">AI Assistant is processing the new quote...</p>
-                                                        <p className="text-[10px] text-zinc-700 dark:text-primary/80 mt-1">Estimated completion: 30s</p>
+                                                        <p className="text-xs font-medium text-zinc-900 dark:text-primary">ProductionAgent monitoring fulfillment — Phase 1 shipping 11/15...</p>
+                                                        <p className="text-[10px] text-zinc-700 dark:text-primary/80 mt-1">8 items pending — fabric allocation in progress</p>
                                                     </div>
                                                 </div>
                                             </div>

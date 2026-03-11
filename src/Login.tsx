@@ -26,18 +26,24 @@ export default function Login() {
     )
 
     // MFA state
-    type MfaPhase = 'phone' | 'sending' | 'code' | 'verifying' | 'success';
+    type MfaPhase = 'welcome' | 'phone' | 'sending' | 'code' | 'verifying' | 'success';
     const [showMfa, setShowMfa] = useState(false)
-    const [mfaPhase, setMfaPhase] = useState<MfaPhase>('phone')
+    const [mfaPhase, setMfaPhase] = useState<MfaPhase>('welcome')
     const [mfaEmail, setMfaEmail] = useState('')
 
     const MFA_PHONE = '+1 (832) ***-4582'
     const MFA_CODE = ['8', '3', '1', '9', '0', '7']
 
     const startMfaFlow = useCallback(() => {
-        setMfaPhase('phone')
+        setMfaPhase('welcome')
         setShowMfa(true)
     }, [])
+
+    const handleMfaSkip = useCallback(() => {
+        setShowMfa(false)
+        completeMfaLogin(mfaEmail)
+        addToast('success', 'Logged in successfully!')
+    }, [completeMfaLogin, mfaEmail, addToast])
 
     const handleMfaSendCode = useCallback(() => {
         setMfaPhase('sending')
@@ -227,17 +233,20 @@ export default function Login() {
                     <div className="w-full max-w-md mx-4 rounded-2xl bg-zinc-900 border border-white/10 shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
                         {/* Header */}
                         <div className="px-8 pt-8 pb-4 text-center">
-                            <div className="mx-auto w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center mb-4">
-                                {mfaPhase === 'success' ? (
-                                    <ShieldCheckIcon className="w-7 h-7 text-green-400" />
-                                ) : (
-                                    <DevicePhoneMobileIcon className="w-7 h-7 text-primary" />
-                                )}
-                            </div>
+                            {mfaPhase !== 'welcome' && (
+                                <div className="mx-auto w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center mb-4">
+                                    {mfaPhase === 'success' ? (
+                                        <ShieldCheckIcon className="w-7 h-7 text-green-400" />
+                                    ) : (
+                                        <DevicePhoneMobileIcon className="w-7 h-7 text-primary" />
+                                    )}
+                                </div>
+                            )}
                             <h3 className="text-xl font-bold text-white">
-                                {mfaPhase === 'success' ? 'Verification Complete' : 'Multi-Factor Authentication'}
+                                {mfaPhase === 'welcome' ? 'Welcome!' : mfaPhase === 'success' ? 'Verification Complete' : 'Multi-Factor Authentication'}
                             </h3>
                             <p className="text-sm text-zinc-400 mt-1">
+                                {mfaPhase === 'welcome' && ''}
                                 {mfaPhase === 'phone' && 'Verify your identity with a one-time code sent to your phone.'}
                                 {mfaPhase === 'sending' && 'Sending verification code...'}
                                 {mfaPhase === 'code' && 'Enter the 6-digit code sent to your phone.'}
@@ -248,6 +257,27 @@ export default function Login() {
 
                         {/* Body */}
                         <div className="px-8 pb-8">
+                            {/* Welcome phase */}
+                            {mfaPhase === 'welcome' && (
+                                <div className="space-y-6 mt-2">
+                                    <p className="text-sm text-zinc-300 leading-relaxed">
+                                        To enhance the security of your account, we require an extra layer of protection. This additional step ensures that only you can access your account. Thank you for helping us keep your information safe and secure! Let us help you setting up your <span className="font-semibold text-white">Multi-Factor Authentication (MFA)</span>.
+                                    </p>
+                                    <button
+                                        onClick={() => setMfaPhase('phone')}
+                                        className="w-full h-12 rounded-xl bg-primary text-primary-foreground hover:opacity-90 font-bold text-base shadow-lg transition-all flex items-center justify-center gap-2"
+                                    >
+                                        Continue
+                                    </button>
+                                    <button
+                                        onClick={handleMfaSkip}
+                                        className="w-full text-sm text-zinc-400 hover:text-white underline underline-offset-2 transition-colors"
+                                    >
+                                        Skip MFA for now
+                                    </button>
+                                </div>
+                            )}
+
                             {/* Phone phase */}
                             {mfaPhase === 'phone' && (
                                 <div className="space-y-5 mt-2">

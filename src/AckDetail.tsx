@@ -24,14 +24,14 @@ function cn(...inputs: (string | undefined | null | false)[]) {
 }
 
 const items = [
-    { id: "SKU-OFF-2025-001", name: "Executive Chair Pro", category: "Premium Series", properties: "Leather / Black", stock: 285, status: "In Stock", statusColor: "bg-zinc-100 text-zinc-700", aiStatus: "info" },
-    { id: "SKU-OFF-2025-002", name: "Ergonomic Task Chair", category: "Standard Series", properties: "Mesh / Gray", stock: 520, status: "In Stock", statusColor: "bg-zinc-100 text-zinc-700" },
-    { id: "SKU-OFF-2025-003", name: "Conference Room Chair", category: "Meeting Series", properties: "Fabric / Navy", stock: 42, status: "Exception: Finish", statusColor: "bg-amber-50 text-amber-700 ring-amber-600/20", aiStatus: "warning" },
-    { id: "SKU-OFF-2025-004", name: "Visitor Stacking Chair", category: "Guest Series", properties: "Plastic / White", stock: 180, status: "In Stock", statusColor: "bg-zinc-100 text-zinc-700" },
-    { id: "SKU-OFF-2025-005", name: "Gaming Office Chair", category: "Sport Series", properties: "Leather / Red", stock: 0, status: "Out of Stock", statusColor: "bg-red-50 text-red-700 ring-red-600/20" },
-    { id: "SKU-OFF-2025-006", name: "Reception Lounge Chair", category: "Lobby Series", properties: "Velvet / Teal", stock: 95, status: "Exception: Date", statusColor: "bg-amber-50 text-amber-700 ring-amber-600/20", aiStatus: "warning" },
-    { id: "SKU-OFF-2025-007", name: "Drafting Stool High", category: "Studio Series", properties: "Mesh / Black", stock: 340, status: "In Stock", statusColor: "bg-zinc-100 text-zinc-700" },
-    { id: "SKU-OFF-2025-008", name: "Bench Seating 3-Seat", category: "Waiting Series", properties: "Metal / Chrome", stock: 28, status: "Low Stock", statusColor: "bg-amber-50 text-amber-700 ring-amber-600/20" },
+    { id: 'T-RCR306029HLG2', itemNumber: 'T-RCR306029HLG2', name: 'TBL, REC, 30Dx60Wx29H, Laminate', category: 'Tables', tag: '1-L-SHAPED OFFICES', qtyOrd: 37, qtyShip: 37, qtyBO: 0, listPrice: 3603, discPct: 84.75, netPrice: 549.46, amount: 20330.02, configs: ['Laminate: Landmark 7981K-12', 'Edge: 2MM Landmark', 'Grommet: Option A'], status: 'Confirmed', statusColor: 'bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-300 dark:border-green-800', aiStatus: 'info' as const },
+    { id: 'X-BBFPFS182812', itemNumber: 'X-BBFPFS182812', name: 'CBX Full Depth BBF Pedestal, 18Wx28D', category: 'Casegoods', tag: '1-L-SHAPED OFFICES', qtyOrd: 37, qtyShip: 37, qtyBO: 0, listPrice: 1498, discPct: 84.75, netPrice: 228.44, amount: 8452.28, configs: ['Case: Landmark', 'Front: Black', 'Lock: Wesko Random'], status: 'Confirmed', statusColor: 'bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-300 dark:border-green-800' },
+    { id: 'W-WS3072', itemNumber: 'W-WS3072', name: 'WORKSURFACE RECT 30Dx72W', category: 'Worksurfaces', tag: '2-U-SHAPED OFFICE', qtyOrd: 17, qtyShip: 17, qtyBO: 0, listPrice: 702, discPct: 84.75, netPrice: 107.06, amount: 1819.97, configs: ['Laminate: Landmark 7981K-12', 'Edge: 2MM Landmark'], status: 'Confirmed', statusColor: 'bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-300 dark:border-green-800' },
+    { id: 'S-LATJJ2D36', itemNumber: 'S-LATJJ2D36', name: 'LATERAL FILE 2 DRAWER 36"', category: 'Storage', tag: '2-U-SHAPED OFFICE', qtyOrd: 17, qtyShip: 17, qtyBO: 0, listPrice: 1287, discPct: 84.75, netPrice: 196.27, amount: 3336.53, configs: ['Paint: Black', 'Lock: Wesko Random'], status: 'Confirmed', statusColor: 'bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-300 dark:border-green-800' },
+    { id: 'F-SSC346030C', itemNumber: 'F-SSC346030C', name: 'LB LOUNGE 2 SEAT SOFA 34"H', category: 'Lounge', tag: 'MAIN CONF. ROOM', qtyOrd: 2, qtyShip: 0, qtyBO: 2, listPrice: 5765, discPct: 60, netPrice: 2306, amount: 4612, configs: ['Fabric: Wellesley Ocean', 'Trim: Black'], status: 'Exception: Finish', statusColor: 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-900/30 dark:text-amber-300 dark:border-amber-800', aiStatus: 'warning' as const },
+    { id: '7730', itemNumber: '7730', name: 'AUBURN GRAY CONFERENCE CHAIR', category: 'Seating', tag: 'MAIN CONF. ROOM', qtyOrd: 12, qtyShip: 12, qtyBO: 0, listPrice: 816, discPct: 62, netPrice: 310.08, amount: 3720.96, configs: ['Fabric: Terrain Bluebird'], status: 'Confirmed', statusColor: 'bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-300 dark:border-green-800', aiStatus: 'info' as const },
+    { id: 'X-LTD661218L', itemNumber: 'X-LTD661218L', name: 'CBX Triple Door Locker 66Hx12Wx18D', category: 'Storage', tag: 'LOCKER AREA', qtyOrd: 12, qtyShip: 0, qtyBO: 12, listPrice: 2215, discPct: 84.75, netPrice: 337.79, amount: 4053.43, configs: ['Case: Landmark', 'Lock: Wesko Random'], status: 'Exception: Date', statusColor: 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-900/30 dark:text-amber-300 dark:border-amber-800', aiStatus: 'warning' as const },
+    { id: '3500BK', itemNumber: '3500BK', name: 'PIERCE SIDE CHAIR BLACK', category: 'Seating', tag: '302-TRUCKERS LOUNGE', qtyOrd: 8, qtyShip: 8, qtyBO: 0, listPrice: 443, discPct: 62, netPrice: 168.34, amount: 1346.72, configs: ['Paint: Black'], status: 'Confirmed', statusColor: 'bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-300 dark:border-green-800' },
 ]
 
 interface Message {
@@ -516,7 +516,7 @@ export default function AckDetail({ onBack, onLogout, onNavigateToWorkspace, onN
             id: 1,
             sender: "System",
             avatar: "",
-            content: "Acknowledgement #ACK-3099 received from Manufacturer via EDI.",
+            content: "AIS Sales Order 1151064-B received — Acknowledgement for PO #8648-19240 from Corporate Interior Systems. 40 line items, Total Order: $127,880.17.",
             time: "10 mins ago",
             type: "system",
         },
@@ -524,7 +524,7 @@ export default function AckDetail({ onBack, onLogout, onNavigateToWorkspace, onN
             id: 2,
             sender: "AI Assistant",
             avatar: "AI",
-            content: "Smart Acknowledgement Engine intercepted the acknowledgement and compared it against PO #ORD-2055. Found 2 discrepancies requiring your review.",
+            content: "DiscrepancyResolverAgent compared ACK against PO #8648-19240. Match rate: 95%. Found 2 exceptions: finish substitution on F-SSC346030C (Navy → Azure) and ship date slip on X-LTD661218L (+12 days).",
             time: "10 mins ago",
             type: "action_processing",
         },
@@ -604,11 +604,11 @@ export default function AckDetail({ onBack, onLogout, onNavigateToWorkspace, onN
                             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 animate-in fade-in zoom-in duration-300">
                                 {[
                                     { label: 'MATCH RATE', value: '95%' },
-                                    { label: 'ITEMS', value: '40' },
-                                    { label: 'EST. DELIVERY', value: 'Nov 27, 2025' },
+                                    { label: 'LINE ITEMS', value: '40' },
+                                    { label: 'TOTAL ORDER', value: '$127,880.17' },
+                                    { label: 'P.O. REF', value: '#8648-19240' },
+                                    { label: 'SHIP VIA', value: 'Best Way' },
                                     { label: 'EXCEPTIONS', value: '2', color: 'text-amber-600 dark:text-amber-400' },
-                                    { label: 'ORIGINAL ORDER', value: '#ORD-2055' },
-                                    { label: 'STATUS', value: 'Review Needed', color: 'text-amber-600 dark:text-amber-400' },
                                 ].map((stat, i) => (
                                     <div key={i} className="bg-zinc-50 dark:bg-zinc-800/50 p-4 rounded-xl border border-zinc-100 dark:border-white/5">
                                         <p className="text-[10px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mb-1">{stat.label}</p>
@@ -798,12 +798,12 @@ export default function AckDetail({ onBack, onLogout, onNavigateToWorkspace, onN
                                                         <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider w-10">
                                                             <input type="checkbox" className="h-4 w-4 rounded border-input text-zinc-900 dark:text-primary focus:ring-primary bg-background" />
                                                         </th>
-                                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">SKU ID</th>
-                                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Image</th>
-                                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Product Name</th>
-                                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Properties</th>
-                                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Stock Level</th>
-                                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Status</th>
+                                                        <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Item #</th>
+                                                        <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider min-w-[220px]">Description</th>
+                                                        <th scope="col" className="px-4 py-3 text-right text-xs font-medium text-muted-foreground uppercase tracking-wider">Qty</th>
+                                                        <th scope="col" className="px-4 py-3 text-right text-xs font-medium text-muted-foreground uppercase tracking-wider">Net Price</th>
+                                                        <th scope="col" className="px-4 py-3 text-right text-xs font-medium text-muted-foreground uppercase tracking-wider">Amount</th>
+                                                        <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Status</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody className="bg-white dark:bg-zinc-800 divide-y divide-border">
@@ -819,46 +819,41 @@ export default function AckDetail({ onBack, onLogout, onNavigateToWorkspace, onN
                                                             <td className="px-6 py-4 whitespace-nowrap">
                                                                 <input type="checkbox" className="h-4 w-4 rounded border-input text-zinc-900 dark:text-primary focus:ring-primary bg-background" />
                                                             </td>
-                                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-foreground">{item.id}</td>
-                                                            <td className="px-6 py-4 whitespace-nowrap">
-                                                                <div className="h-8 w-8 rounded bg-muted flex items-center justify-center">
-                                                                    <CubeIcon className="h-5 w-5 text-muted-foreground" />
-                                                                </div>
-                                                            </td>
-                                                            <td className="px-6 py-4 whitespace-nowrap">
-                                                                <div className="flex items-center">
-                                                                    <div>
-                                                                        <div className="text-sm font-medium text-foreground flex items-center gap-2">
-                                                                            {item.name}
-                                                                            {item.aiStatus && (
-                                                                                <div className={cn(
-                                                                                    "h-2 w-2 rounded-full",
-                                                                                    item.aiStatus === 'warning' ? "bg-amber-500 shadow-[0_0_0_2px_rgba(245,158,11,0.2)]" : "bg-primary shadow-[0_0_0_2px_rgba(var(--primary),0.2)]"
-                                                                                )} />
-                                                                            )}
-                                                                        </div>
-                                                                        <div className="text-sm text-muted-foreground">{item.category}</div>
+                                                            <td className="px-4 py-3 whitespace-nowrap text-xs font-mono text-foreground">{item.itemNumber}</td>
+                                                            <td className="px-4 py-3">
+                                                                <div>
+                                                                    <div className="text-sm font-medium text-foreground flex items-center gap-2">
+                                                                        {item.name}
+                                                                        {'aiStatus' in item && item.aiStatus && (
+                                                                            <div className={cn(
+                                                                                "h-2 w-2 rounded-full shrink-0",
+                                                                                item.aiStatus === 'warning' ? "bg-amber-500 shadow-[0_0_0_2px_rgba(245,158,11,0.2)]" : "bg-primary shadow-[0_0_0_2px_rgba(var(--primary),0.2)]"
+                                                                            )} />
+                                                                        )}
                                                                     </div>
-                                                                </div>
-                                                            </td>
-                                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">{item.properties}</td>
-                                                            <td className="px-6 py-4 whitespace-nowrap">
-                                                                <div className="flex items-center gap-3">
-                                                                    <div className="h-8 w-1.5 bg-muted rounded-full relative overflow-hidden">
-                                                                        <div
-                                                                            className="absolute bottom-0 left-0 w-full bg-foreground rounded-full"
-                                                                            style={{ height: `${(item.stock / 600) * 100}%` }}
-                                                                        />
+                                                                    <div className="flex items-center gap-1.5 mt-1">
+                                                                        <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">{item.tag}</span>
                                                                     </div>
-                                                                    <span className="text-xs text-muted-foreground">{Math.floor((item.stock / 600) * 100)}%</span>
+                                                                    {'configs' in item && item.configs && (
+                                                                        <p className="text-[10px] text-muted-foreground mt-1 truncate max-w-[200px]">{item.configs.join(' · ')}</p>
+                                                                    )}
                                                                 </div>
                                                             </td>
-                                                            <td className="px-6 py-4 whitespace-nowrap">
+                                                            <td className="px-4 py-3 whitespace-nowrap text-right">
+                                                                <div className="text-sm font-medium text-foreground">{item.qtyOrd}</div>
+                                                                {item.qtyBO > 0 && (
+                                                                    <div className="text-[10px] text-amber-600 dark:text-amber-400 font-medium">{item.qtyBO} BO</div>
+                                                                )}
+                                                            </td>
+                                                            <td className="px-4 py-3 whitespace-nowrap text-right">
+                                                                <div className="text-sm text-foreground">${item.netPrice.toLocaleString('en-US', { minimumFractionDigits: 2 })}</div>
+                                                                <div className="text-[10px] text-muted-foreground">{item.discPct}% off</div>
+                                                            </td>
+                                                            <td className="px-4 py-3 whitespace-nowrap text-right text-sm font-medium text-foreground">${item.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}</td>
+                                                            <td className="px-4 py-3 whitespace-nowrap">
                                                                 <span className={cn(
-                                                                    "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border",
-                                                                    item.status === 'In Stock' ? "bg-zinc-100 text-zinc-800 border-zinc-200 dark:bg-zinc-800 dark:text-zinc-200 dark:border-zinc-700" :
-                                                                        item.status === 'Low Stock' ? "bg-amber-50 text-amber-800 border-amber-200 dark:bg-amber-900/30 dark:text-amber-200 dark:border-amber-800" :
-                                                                            "bg-red-50 text-red-800 border-red-200 dark:bg-red-900/30 dark:text-red-200 dark:border-red-800"
+                                                                    "inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium border",
+                                                                    item.statusColor
                                                                 )}>
                                                                     {item.status}
                                                                 </span>
@@ -1075,24 +1070,44 @@ export default function AckDetail({ onBack, onLogout, onNavigateToWorkspace, onN
                                                 </button>
                                                 {sections.productOverview && (
                                                     <div className="space-y-4 animate-in fade-in slide-in-from-top-1 duration-200 bg-zinc-50 dark:bg-zinc-800 border border-border rounded-lg p-4">
-                                                        <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-                                                            <CubeIcon className="h-12 w-12 text-muted-foreground/50" />
-                                                        </div>
                                                         <div>
                                                             <h4 className="text-base font-semibold text-foreground">{selectedItem.name}</h4>
-                                                            <p className="text-sm text-muted-foreground">{selectedItem.id}</p>
-                                                            <div className="flex gap-2 mt-2">
-                                                                <span className={cn(
-                                                                    "inline-flex items-center px-2 py-0.5 rounded text-xs font-medium",
-                                                                    selectedItem.statusColor
-                                                                )}>
-                                                                    {selectedItem.status}
-                                                                </span>
-                                                                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-muted text-muted-foreground border border-border">
-                                                                    Premium
-                                                                </span>
+                                                            <p className="text-xs font-mono text-muted-foreground mt-0.5">{selectedItem.itemNumber}</p>
+                                                            <div className="flex flex-wrap gap-1.5 mt-2">
+                                                                <span className={cn("inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium border", selectedItem.statusColor)}>{selectedItem.status}</span>
+                                                                <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-zinc-100 text-zinc-600 dark:bg-zinc-700 dark:text-zinc-300">{selectedItem.tag}</span>
+                                                                <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-muted text-muted-foreground border border-border">{selectedItem.category}</span>
                                                             </div>
                                                         </div>
+                                                        <div className="grid grid-cols-2 gap-3 text-xs">
+                                                            <div className="bg-background rounded p-2 border border-border">
+                                                                <span className="text-[10px] text-muted-foreground uppercase block">Qty Ordered</span>
+                                                                <span className="font-bold text-foreground">{selectedItem.qtyOrd}</span>
+                                                                {selectedItem.qtyBO > 0 && <span className="text-amber-600 dark:text-amber-400 ml-1">({selectedItem.qtyBO} BO)</span>}
+                                                            </div>
+                                                            <div className="bg-background rounded p-2 border border-border">
+                                                                <span className="text-[10px] text-muted-foreground uppercase block">Net Price</span>
+                                                                <span className="font-bold text-foreground">${selectedItem.netPrice.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
+                                                            </div>
+                                                            <div className="bg-background rounded p-2 border border-border">
+                                                                <span className="text-[10px] text-muted-foreground uppercase block">List Price</span>
+                                                                <span className="font-bold text-foreground">${selectedItem.listPrice.toLocaleString()}</span>
+                                                            </div>
+                                                            <div className="bg-background rounded p-2 border border-border">
+                                                                <span className="text-[10px] text-muted-foreground uppercase block">Amount</span>
+                                                                <span className="font-bold text-foreground">${selectedItem.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
+                                                            </div>
+                                                        </div>
+                                                        {'configs' in selectedItem && selectedItem.configs && (
+                                                            <div>
+                                                                <span className="text-[10px] text-muted-foreground uppercase font-medium block mb-1">Configurations</span>
+                                                                <div className="space-y-1">
+                                                                    {selectedItem.configs.map((c: string, i: number) => (
+                                                                        <div key={i} className="text-xs text-foreground bg-background rounded px-2 py-1 border border-border">{c}</div>
+                                                                    ))}
+                                                                </div>
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 )}
                                             </div>
@@ -1119,13 +1134,13 @@ export default function AckDetail({ onBack, onLogout, onNavigateToWorkspace, onN
                                                             <div key={i} className="relative pb-2 last:pb-0">
                                                                 <div className="absolute -left-[21px] top-1 h-2 w-2 rounded-full bg-primary" />
                                                                 <p className="text-sm font-medium text-foreground leading-none">{step}</p>
-                                                                <p className="text-xs text-muted-foreground mt-1">Completed Jan {5 + i * 5}, 2026</p>
+                                                                <p className="text-xs text-muted-foreground mt-1">Completed Oct {10 + i * 7}, 2025</p>
                                                             </div>
                                                         ))}
                                                         <div className="relative">
                                                             <div className="absolute -left-[21px] top-0 h-4 w-4 rounded-full bg-background border-2 border-zinc-400 dark:border-primary ring-4 ring-background" />
-                                                            <p className="font-medium text-foreground leading-none">Warehouse Storage</p>
-                                                            <p className="text-xs text-muted-foreground mt-1">In Progress</p>
+                                                            <p className="font-medium text-foreground leading-none">Ready to Ship</p>
+                                                            <p className="text-xs text-muted-foreground mt-1">Awaiting ACK confirmation</p>
                                                         </div>
                                                     </div>
                                                 )}
@@ -1271,11 +1286,11 @@ export default function AckDetail({ onBack, onLogout, onNavigateToWorkspace, onN
                                         </div>
                                         <div className="flex items-center gap-3">
                                             <div className="h-10 w-10 rounded-full bg-amber-100 dark:bg-amber-500/20 flex items-center justify-center border border-amber-200 dark:border-amber-500/30">
-                                                <ClockIcon className="h-5 w-5 text-amber-600 dark:text-amber-400" />
+                                                <ClipboardDocumentListIcon className="h-5 w-5 text-amber-600 dark:text-amber-400" />
                                             </div>
                                             <div>
-                                                <p className="text-sm font-bold text-foreground">Pending Review</p>
-                                                <p className="text-xs text-muted-foreground">Waiting for Final Approval (2/3)</p>
+                                                <p className="text-sm font-bold text-foreground">Acknowledgement Review</p>
+                                                <p className="text-xs text-muted-foreground">2 Exceptions — $127,880.17</p>
                                             </div>
                                         </div>
                                     </div>
@@ -1286,31 +1301,41 @@ export default function AckDetail({ onBack, onLogout, onNavigateToWorkspace, onN
                                             <div className="space-y-3">
                                                 <button onClick={() => setIsDocumentModalOpen(true)} className="w-full group relative flex items-center gap-3 p-3 rounded-xl border border-border bg-card hover:border-primary/50 hover:shadow-md transition-all text-left">
                                                     <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-colors text-zinc-900 dark:text-primary">
-                                                        <DocumentTextIcon className="h-5 w-5" />
+                                                        <DocumentChartBarIcon className="h-5 w-5" />
                                                     </div>
                                                     <div>
-                                                        <p className="text-sm font-medium text-foreground group-hover:text-zinc-900 dark:group-hover:text-primary transition-colors">Process Quote</p>
-                                                        <p className="text-[10px] text-muted-foreground">Analyze PDF & Extract Data</p>
-                                                    </div>
-                                                </button>
-
-                                                <button className="w-full group relative flex items-center gap-3 p-3 rounded-xl border border-border bg-card hover:border-green-500/50 hover:shadow-md transition-all text-left">
-                                                    <div className="h-8 w-8 rounded-lg bg-green-50 dark:bg-green-500/10 flex items-center justify-center group-hover:bg-green-500 group-hover:text-white transition-colors text-green-600 dark:text-green-400">
-                                                        <CheckIcon className="h-5 w-5" />
-                                                    </div>
-                                                    <div>
-                                                        <p className="text-sm font-medium text-foreground group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">Approve Order</p>
-                                                        <p className="text-[10px] text-muted-foreground">Move to Production</p>
+                                                        <p className="text-sm font-medium text-foreground group-hover:text-zinc-900 dark:group-hover:text-primary transition-colors">Compare vs PO</p>
+                                                        <p className="text-[10px] text-muted-foreground">Side-by-side ACK vs original PO</p>
                                                     </div>
                                                 </button>
 
                                                 <button className="w-full group relative flex items-center gap-3 p-3 rounded-xl border border-border bg-card hover:border-amber-500/50 hover:shadow-md transition-all text-left">
                                                     <div className="h-8 w-8 rounded-lg bg-amber-50 dark:bg-amber-500/10 flex items-center justify-center group-hover:bg-amber-500 group-hover:text-white transition-colors text-amber-600 dark:text-amber-400">
-                                                        <PencilIcon className="h-5 w-5" />
+                                                        <ExclamationTriangleIcon className="h-5 w-5" />
                                                     </div>
                                                     <div>
-                                                        <p className="text-sm font-medium text-foreground group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">Request Changes</p>
-                                                        <p className="text-[10px] text-muted-foreground">Send feedback to vendor</p>
+                                                        <p className="text-sm font-medium text-foreground group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">Resolve Exceptions</p>
+                                                        <p className="text-[10px] text-muted-foreground">2 items need attention</p>
+                                                    </div>
+                                                </button>
+
+                                                <button className="w-full group relative flex items-center gap-3 p-3 rounded-xl border border-border bg-card hover:border-green-500/50 hover:shadow-md transition-all text-left">
+                                                    <div className="h-8 w-8 rounded-lg bg-green-50 dark:bg-green-500/10 flex items-center justify-center group-hover:bg-green-500 group-hover:text-white transition-colors text-green-600 dark:text-green-400">
+                                                        <PaperAirplaneIcon className="h-5 w-5" />
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-sm font-medium text-foreground group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">Send Acknowledgement</p>
+                                                        <p className="text-[10px] text-muted-foreground">Confirm & send to dealer</p>
+                                                    </div>
+                                                </button>
+
+                                                <button className="w-full group relative flex items-center gap-3 p-3 rounded-xl border border-border bg-card hover:border-indigo-500/50 hover:shadow-md transition-all text-left">
+                                                    <div className="h-8 w-8 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 flex items-center justify-center group-hover:bg-indigo-500 group-hover:text-white transition-colors text-indigo-600 dark:text-indigo-400">
+                                                        <ArrowDownTrayIcon className="h-5 w-5" />
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-sm font-medium text-foreground group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">Export PED</p>
+                                                        <p className="text-[10px] text-muted-foreground">Download industry-format PDF</p>
                                                     </div>
                                                 </button>
                                             </div>
@@ -1325,8 +1350,8 @@ export default function AckDetail({ onBack, onLogout, onNavigateToWorkspace, onN
                                                         <div className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary"></div>
                                                     </div>
                                                     <div>
-                                                        <p className="text-xs font-medium text-zinc-900 dark:text-primary">AI Assistant is processing the new quote...</p>
-                                                        <p className="text-[10px] text-zinc-700 dark:text-primary/80 mt-1">Estimated completion: 30s</p>
+                                                        <p className="text-xs font-medium text-zinc-900 dark:text-primary">DiscrepancyResolverAgent analyzing exceptions against PO #8648-19240...</p>
+                                                        <p className="text-[10px] text-zinc-700 dark:text-primary/80 mt-1">Comparing 40 line items — 38 confirmed, 2 flagged</p>
                                                     </div>
                                                 </div>
                                             </div>

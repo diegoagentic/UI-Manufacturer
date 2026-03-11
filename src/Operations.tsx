@@ -53,30 +53,151 @@ const poPipelineStages = ['Received', 'AI Processing', 'Under Review', 'Acknowle
 const ackPipelineStages = ['Draft', 'AI Validated', 'Sent', 'Confirmed', 'Revision Pending']
 const exceptionPipelineStages = ['New', 'AI Analyzing', 'Pending Review', 'In Progress', 'Resolved']
 
-// --- KPI Data per tab ---
-const poKpis = [
-  { label: 'Active POs', value: '156', sub: 'In pipeline', icon: CubeIcon, color: 'blue' },
-  { label: 'Pending Acknowledgement', value: '23', sub: 'Awaiting response', icon: ClockIcon, color: 'orange' },
-  { label: 'With Exceptions', value: '7', sub: 'Need attention', icon: ExclamationTriangleIcon, color: 'red' },
-  { label: 'Clean Match Rate', value: '91%', sub: 'Auto-accepted', icon: CheckCircleIcon, color: 'green' },
-  { label: 'Total Value', value: '$3.8M', sub: 'Active POs', icon: CurrencyDollarIcon, color: 'indigo' },
-]
+// --- KPI Data per tab per period ---
+type OpsPeriod = 'Day' | 'Week' | 'Month' | 'Quarter';
 
-const ackKpis = [
-  { label: 'Pending Acknowledgements', value: '23', sub: 'Awaiting review', icon: ClockIcon, color: 'orange' },
-  { label: 'Discrepancies', value: '5', sub: 'Action required', icon: ExclamationTriangleIcon, color: 'red' },
-  { label: 'Confirmed', value: '156', sub: 'On track', icon: CheckCircleIcon, color: 'green' },
-  { label: 'Avg Lead Time', value: '4.2w', sub: 'Weeks to ship', icon: CalendarIcon, color: 'blue' },
-  { label: 'On-Time %', value: '94%', sub: 'Vendor perf.', icon: ArrowTrendingUpIcon, color: 'indigo' },
-]
+const poKpisByPeriod: Record<OpsPeriod, { label: string; value: string; sub: string; icon: typeof CubeIcon; color: string }[]> = {
+  Day: [
+    { label: 'Active POs', value: '12', sub: 'Today', icon: CubeIcon, color: 'blue' },
+    { label: 'Pending ACK', value: '4', sub: 'Awaiting response', icon: ClockIcon, color: 'orange' },
+    { label: 'With Exceptions', value: '1', sub: 'Need attention', icon: ExclamationTriangleIcon, color: 'red' },
+    { label: 'Clean Match Rate', value: '95%', sub: 'Auto-accepted', icon: CheckCircleIcon, color: 'green' },
+    { label: 'Total Value', value: '$184K', sub: 'Today POs', icon: CurrencyDollarIcon, color: 'indigo' },
+  ],
+  Week: [
+    { label: 'Active POs', value: '45', sub: 'This week', icon: CubeIcon, color: 'blue' },
+    { label: 'Pending ACK', value: '11', sub: 'Awaiting response', icon: ClockIcon, color: 'orange' },
+    { label: 'With Exceptions', value: '3', sub: 'Need attention', icon: ExclamationTriangleIcon, color: 'red' },
+    { label: 'Clean Match Rate', value: '93%', sub: 'Auto-accepted', icon: CheckCircleIcon, color: 'green' },
+    { label: 'Total Value', value: '$920K', sub: 'Weekly POs', icon: CurrencyDollarIcon, color: 'indigo' },
+  ],
+  Month: [
+    { label: 'Active POs', value: '156', sub: 'In pipeline', icon: CubeIcon, color: 'blue' },
+    { label: 'Pending ACK', value: '23', sub: 'Awaiting response', icon: ClockIcon, color: 'orange' },
+    { label: 'With Exceptions', value: '7', sub: 'Need attention', icon: ExclamationTriangleIcon, color: 'red' },
+    { label: 'Clean Match Rate', value: '91%', sub: 'Auto-accepted', icon: CheckCircleIcon, color: 'green' },
+    { label: 'Total Value', value: '$3.8M', sub: 'Active POs', icon: CurrencyDollarIcon, color: 'indigo' },
+  ],
+  Quarter: [
+    { label: 'Active POs', value: '312', sub: 'This quarter', icon: CubeIcon, color: 'blue' },
+    { label: 'Pending ACK', value: '38', sub: 'Awaiting response', icon: ClockIcon, color: 'orange' },
+    { label: 'With Exceptions', value: '15', sub: 'Need attention', icon: ExclamationTriangleIcon, color: 'red' },
+    { label: 'Clean Match Rate', value: '89%', sub: 'Auto-accepted', icon: CheckCircleIcon, color: 'green' },
+    { label: 'Total Value', value: '$11.2M', sub: 'Quarterly POs', icon: CurrencyDollarIcon, color: 'indigo' },
+  ],
+};
 
-const exceptionKpis = [
-  { label: 'Open Exceptions', value: '7', sub: 'Need resolution', icon: ExclamationTriangleIcon, color: 'red' },
-  { label: 'Avg Resolution', value: '3.2h', sub: 'Hours to resolve', icon: ClockIcon, color: 'orange' },
-  { label: 'Auto-Resolved', value: '34%', sub: 'No human needed', icon: SparklesIcon, color: 'green' },
-  { label: 'By Qty Mismatch', value: '3', sub: 'Most common', icon: ExclamationCircleIcon, color: 'blue' },
-  { label: 'This Week', value: '12', sub: 'Total exceptions', icon: CalendarIcon, color: 'indigo' },
-]
+const ackKpisByPeriod: Record<OpsPeriod, { label: string; value: string; sub: string; icon: typeof CubeIcon; color: string }[]> = {
+  Day: [
+    { label: 'Pending ACKs', value: '4', sub: 'Today', icon: ClockIcon, color: 'orange' },
+    { label: 'Discrepancies', value: '1', sub: 'Action required', icon: ExclamationTriangleIcon, color: 'red' },
+    { label: 'Confirmed', value: '18', sub: 'On track', icon: CheckCircleIcon, color: 'green' },
+    { label: 'Avg Lead Time', value: '3.8w', sub: 'Weeks to ship', icon: CalendarIcon, color: 'blue' },
+    { label: 'On-Time %', value: '96%', sub: 'Today perf.', icon: ArrowTrendingUpIcon, color: 'indigo' },
+  ],
+  Week: [
+    { label: 'Pending ACKs', value: '11', sub: 'This week', icon: ClockIcon, color: 'orange' },
+    { label: 'Discrepancies', value: '3', sub: 'Action required', icon: ExclamationTriangleIcon, color: 'red' },
+    { label: 'Confirmed', value: '62', sub: 'On track', icon: CheckCircleIcon, color: 'green' },
+    { label: 'Avg Lead Time', value: '4.0w', sub: 'Weeks to ship', icon: CalendarIcon, color: 'blue' },
+    { label: 'On-Time %', value: '95%', sub: 'Weekly perf.', icon: ArrowTrendingUpIcon, color: 'indigo' },
+  ],
+  Month: [
+    { label: 'Pending ACKs', value: '23', sub: 'Awaiting review', icon: ClockIcon, color: 'orange' },
+    { label: 'Discrepancies', value: '5', sub: 'Action required', icon: ExclamationTriangleIcon, color: 'red' },
+    { label: 'Confirmed', value: '156', sub: 'On track', icon: CheckCircleIcon, color: 'green' },
+    { label: 'Avg Lead Time', value: '4.2w', sub: 'Weeks to ship', icon: CalendarIcon, color: 'blue' },
+    { label: 'On-Time %', value: '94%', sub: 'Vendor perf.', icon: ArrowTrendingUpIcon, color: 'indigo' },
+  ],
+  Quarter: [
+    { label: 'Pending ACKs', value: '42', sub: 'This quarter', icon: ClockIcon, color: 'orange' },
+    { label: 'Discrepancies', value: '14', sub: 'Action required', icon: ExclamationTriangleIcon, color: 'red' },
+    { label: 'Confirmed', value: '480', sub: 'On track', icon: CheckCircleIcon, color: 'green' },
+    { label: 'Avg Lead Time', value: '4.5w', sub: 'Weeks to ship', icon: CalendarIcon, color: 'blue' },
+    { label: 'On-Time %', value: '92%', sub: 'Quarterly perf.', icon: ArrowTrendingUpIcon, color: 'indigo' },
+  ],
+};
+
+const exceptionKpisByPeriod: Record<OpsPeriod, { label: string; value: string; sub: string; icon: typeof CubeIcon; color: string }[]> = {
+  Day: [
+    { label: 'Open Exceptions', value: '2', sub: 'Today', icon: ExclamationTriangleIcon, color: 'red' },
+    { label: 'Avg Resolution', value: '2.8h', sub: 'Hours today', icon: ClockIcon, color: 'orange' },
+    { label: 'Auto-Resolved', value: '50%', sub: 'No human needed', icon: SparklesIcon, color: 'green' },
+    { label: 'By Qty Mismatch', value: '1', sub: 'Most common', icon: ExclamationCircleIcon, color: 'blue' },
+    { label: 'Today', value: '3', sub: 'Total exceptions', icon: CalendarIcon, color: 'indigo' },
+  ],
+  Week: [
+    { label: 'Open Exceptions', value: '4', sub: 'This week', icon: ExclamationTriangleIcon, color: 'red' },
+    { label: 'Avg Resolution', value: '3.0h', sub: 'Hours avg', icon: ClockIcon, color: 'orange' },
+    { label: 'Auto-Resolved', value: '40%', sub: 'No human needed', icon: SparklesIcon, color: 'green' },
+    { label: 'By Qty Mismatch', value: '2', sub: 'Most common', icon: ExclamationCircleIcon, color: 'blue' },
+    { label: 'This Week', value: '8', sub: 'Total exceptions', icon: CalendarIcon, color: 'indigo' },
+  ],
+  Month: [
+    { label: 'Open Exceptions', value: '7', sub: 'Need resolution', icon: ExclamationTriangleIcon, color: 'red' },
+    { label: 'Avg Resolution', value: '3.2h', sub: 'Hours to resolve', icon: ClockIcon, color: 'orange' },
+    { label: 'Auto-Resolved', value: '34%', sub: 'No human needed', icon: SparklesIcon, color: 'green' },
+    { label: 'By Qty Mismatch', value: '3', sub: 'Most common', icon: ExclamationCircleIcon, color: 'blue' },
+    { label: 'This Month', value: '12', sub: 'Total exceptions', icon: CalendarIcon, color: 'indigo' },
+  ],
+  Quarter: [
+    { label: 'Open Exceptions', value: '15', sub: 'This quarter', icon: ExclamationTriangleIcon, color: 'red' },
+    { label: 'Avg Resolution', value: '3.5h', sub: 'Hours avg', icon: ClockIcon, color: 'orange' },
+    { label: 'Auto-Resolved', value: '28%', sub: 'No human needed', icon: SparklesIcon, color: 'green' },
+    { label: 'By Qty Mismatch', value: '8', sub: 'Most common', icon: ExclamationCircleIcon, color: 'blue' },
+    { label: 'This Quarter', value: '38', sub: 'Total exceptions', icon: CalendarIcon, color: 'indigo' },
+  ],
+};
+
+// Chart data by period for PO Volume Trend
+const poVolumeTrendByPeriod: Record<OpsPeriod, { points: string; fillPoints: string; labels: string[] }> = {
+  Day: { points: '0,75 33,60 67,68 100,45 133,52 167,38 200,30', fillPoints: '0,75 33,60 67,68 100,45 133,52 167,38 200,30 200,100 0,100', labels: ['8AM','10AM','12PM','2PM','4PM','6PM',''] },
+  Week: { points: '0,70 40,55 80,62 120,40 160,35 200,28', fillPoints: '0,70 40,55 80,62 120,40 160,35 200,28 200,100 0,100', labels: ['Mon','Tue','Wed','Thu','Fri',''] },
+  Month: { points: '0,82 25,70 50,74 75,55 100,60 125,40 150,45 175,30 200,24', fillPoints: '0,82 25,70 50,74 75,55 100,60 125,40 150,45 175,30 200,24 200,100 0,100', labels: ['W1','W2','W3','W4','W5','W6','W7','W8','W9'] },
+  Quarter: { points: '0,65 50,48 100,52 150,35 200,22', fillPoints: '0,65 50,48 100,52 150,35 200,22 200,100 0,100', labels: ['Q1','Q2','Q3','Q4',''] },
+};
+
+const poVolumeTrendPct: Record<OpsPeriod, string> = { Day: '+8% ↑', Week: '+15% ↑', Month: '+12% ↑', Quarter: '+22% ↑' };
+
+// Chart data by period for Supplier Distribution
+const supplierDistByPeriod: Record<OpsPeriod, { name: string; pct: number }[]> = {
+  Day: [{ name: 'Acme Corp', pct: 35 }, { name: 'TechDealer', pct: 25 }, { name: 'Urban Living', pct: 20 }, { name: 'Modern Homes', pct: 12 }, { name: 'Others', pct: 8 }],
+  Week: [{ name: 'Acme Corp', pct: 32 }, { name: 'TechDealer', pct: 24 }, { name: 'Urban Living', pct: 19 }, { name: 'Modern Homes', pct: 15 }, { name: 'Others', pct: 10 }],
+  Month: [{ name: 'Acme Corp', pct: 30 }, { name: 'TechDealer', pct: 22 }, { name: 'Urban Living', pct: 18 }, { name: 'Modern Homes', pct: 17 }, { name: 'Others', pct: 13 }],
+  Quarter: [{ name: 'Acme Corp', pct: 28 }, { name: 'TechDealer', pct: 23 }, { name: 'Urban Living', pct: 20 }, { name: 'Modern Homes', pct: 18 }, { name: 'Others', pct: 11 }],
+};
+
+// Chart data by period for ACK Response Time
+const ackResponseByPeriod: Record<OpsPeriod, { bars: { label: string; h: number }[]; avg: string; trend: string }> = {
+  Day: { bars: [{ label: '8AM', h: 45 },{ label: '10AM', h: 72 },{ label: '12PM', h: 58 },{ label: '2PM', h: 80 },{ label: '4PM', h: 35 },{ label: '6PM', h: 22 }], avg: '0.8d', trend: '-12% ↓' },
+  Week: { bars: [{ label: 'Mon', h: 62 },{ label: 'Tue', h: 78 },{ label: 'Wed', h: 50 },{ label: 'Thu', h: 68 },{ label: 'Fri', h: 42 }], avg: '1.0d', trend: '-10% ↓' },
+  Month: { bars: [{ label: 'Mon', h: 65 },{ label: 'Tue', h: 82 },{ label: 'Wed', h: 45 },{ label: 'Thu', h: 70 },{ label: 'Fri', h: 38 },{ label: 'Sat', h: 22 }], avg: '1.2d', trend: '-8% ↓' },
+  Quarter: { bars: [{ label: 'Jan', h: 70 },{ label: 'Feb', h: 62 },{ label: 'Mar', h: 55 },{ label: 'Apr', h: 48 },{ label: 'May', h: 42 },{ label: 'Jun', h: 38 }], avg: '1.4d', trend: '-5% ↓' },
+};
+
+// Chart data by period for ACK Match Quality
+const ackMatchByPeriod: Record<OpsPeriod, { clean: number; autoCorrected: number; discrepancies: number }> = {
+  Day: { clean: 92, autoCorrected: 5, discrepancies: 3 },
+  Week: { clean: 88, autoCorrected: 7, discrepancies: 5 },
+  Month: { clean: 84, autoCorrected: 9, discrepancies: 7 },
+  Quarter: { clean: 82, autoCorrected: 10, discrepancies: 8 },
+};
+
+// Chart data by period for Exception Resolution
+const excResolutionByPeriod: Record<OpsPeriod, { bars: { label: string; value: number; hours: string }[]; avg: string; trend: string }> = {
+  Day: { bars: [{ label: 'Qty Mismatch', value: 90, hours: '3.8h' },{ label: 'Price Disc.', value: 65, hours: '3.2h' },{ label: 'Ship Date', value: 40, hours: '2.0h' },{ label: 'Part Mismatch', value: 55, hours: '2.8h' },{ label: 'Spec Issue', value: 25, hours: '1.2h' }], avg: '2.8h', trend: '-0.4h ↓' },
+  Week: { bars: [{ label: 'Qty Mismatch', value: 88, hours: '4.0h' },{ label: 'Price Disc.', value: 72, hours: '3.4h' },{ label: 'Ship Date', value: 42, hours: '2.1h' },{ label: 'Part Mismatch', value: 58, hours: '2.9h' },{ label: 'Spec Issue', value: 28, hours: '1.4h' }], avg: '3.0h', trend: '-0.2h ↓' },
+  Month: { bars: [{ label: 'Qty Mismatch', value: 85, hours: '4.2h' },{ label: 'Price Disc.', value: 70, hours: '3.5h' },{ label: 'Ship Date', value: 45, hours: '2.2h' },{ label: 'Part Mismatch', value: 60, hours: '3.0h' },{ label: 'Spec Issue', value: 30, hours: '1.5h' }], avg: '3.2h', trend: '+0.2h ↑' },
+  Quarter: { bars: [{ label: 'Qty Mismatch', value: 82, hours: '4.5h' },{ label: 'Price Disc.', value: 68, hours: '3.8h' },{ label: 'Ship Date', value: 48, hours: '2.4h' },{ label: 'Part Mismatch', value: 62, hours: '3.2h' },{ label: 'Spec Issue', value: 32, hours: '1.6h' }], avg: '3.5h', trend: '+0.3h ↑' },
+};
+
+// Chart data by period for Exception Trend
+const excTrendByPeriod: Record<OpsPeriod, { points: string; dotPoints: { x: number; y: number }[]; labels: string[]; pctChange: string }> = {
+  Day: { points: '0,35 33,28 67,42 100,30 133,38 167,45 200,40', dotPoints: [{x:0,y:35},{x:33,y:28},{x:67,y:42},{x:100,y:30},{x:133,y:38},{x:167,y:45},{x:200,y:40}], labels: ['8AM','10AM','12PM','2PM','4PM','6PM',''], pctChange: '-0.5% ↓' },
+  Week: { points: '0,28 40,38 80,32 120,42 160,35 200,48', dotPoints: [{x:0,y:28},{x:40,y:38},{x:80,y:32},{x:120,y:42},{x:160,y:35},{x:200,y:48}], labels: ['Mon','Tue','Wed','Thu','Fri',''], pctChange: '-1.2% ↓' },
+  Month: { points: '0,20 28,35 57,28 85,42 114,35 142,48 171,42 200,55', dotPoints: [{x:0,y:20},{x:28,y:35},{x:57,y:28},{x:85,y:42},{x:114,y:35},{x:142,y:48},{x:171,y:42},{x:200,y:55}], labels: ['W1','W2','W3','W4','W5','W6','W7','W8'], pctChange: '-1.8% ↓' },
+  Quarter: { points: '0,45 50,38 100,32 150,28 200,22', dotPoints: [{x:0,y:45},{x:50,y:38},{x:100,y:32},{x:150,y:28},{x:200,y:22}], labels: ['Q1','Q2','Q3','Q4',''], pctChange: '-3.2% ↓' },
+};
 
 // --- Mock Data ---
 const purchaseOrders = [
@@ -225,6 +346,7 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
   const [pedExportData, setPedExportData] = useState<PEDData | null>(null)
   const { toasts, addToast, dismissToast } = useToast()
   const [processingAction, setProcessingAction] = useState<string | null>(null)
+  const [metricsPeriod, setMetricsPeriod] = useState<OpsPeriod>('Month')
 
   const handleQuickAction = (actionId: string, infoMsg: string, successMsg: string, delay = 1500) => {
     setProcessingAction(actionId)
@@ -266,9 +388,9 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
     return () => t.forEach(clearTimeout)
   }, [currentStep?.id])
 
-  const currentKpis = lifecycleTab === 'purchase-orders' ? poKpis
-    : lifecycleTab === 'acknowledgements' ? ackKpis
-    : exceptionKpis
+  const currentKpis = lifecycleTab === 'purchase-orders' ? poKpisByPeriod[metricsPeriod]
+    : lifecycleTab === 'acknowledgements' ? ackKpisByPeriod[metricsPeriod]
+    : exceptionKpisByPeriod[metricsPeriod]
 
   const currentPipelineStages = lifecycleTab === 'purchase-orders' ? poPipelineStages
     : lifecycleTab === 'acknowledgements' ? ackPipelineStages
@@ -789,6 +911,25 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
         {/* Metrics View */}
         {activeTab === 'metrics' && (
           <div className="space-y-4">
+            {/* Period Selector */}
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm font-semibold text-foreground">Performance Metrics</h3>
+              <div className="flex items-center gap-1 bg-zinc-100 dark:bg-zinc-800/50 rounded-lg p-0.5 border border-zinc-200 dark:border-zinc-700/50">
+                {(['Day', 'Week', 'Month', 'Quarter'] as OpsPeriod[]).map((p) => (
+                  <button
+                    key={p}
+                    onClick={() => setMetricsPeriod(p)}
+                    className={cn('px-3 py-1 text-[10px] font-medium rounded-md transition-all',
+                      p === metricsPeriod
+                        ? 'bg-white dark:bg-brand-400 text-foreground dark:text-zinc-900 shadow-sm border border-border dark:border-transparent'
+                        : 'text-muted-foreground hover:text-foreground hover:bg-zinc-200/50 dark:hover:bg-zinc-700'
+                    )}
+                  >
+                    {p}
+                  </button>
+                ))}
+              </div>
+            </div>
             {/* KPI Strip */}
             <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
               {currentKpis.map((kpi) => (
@@ -843,17 +984,17 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
                   <div className="px-5 py-3 border-b border-border flex items-center justify-between">
                     <div>
                       <h3 className="text-sm font-semibold text-foreground">PO Volume Trend</h3>
-                      <p className="text-[10px] text-muted-foreground">Weekly incoming POs</p>
+                      <p className="text-[10px] text-muted-foreground">Incoming POs</p>
                     </div>
-                    <p className="text-[10px] text-green-600 dark:text-green-400 font-medium">+12% ↑</p>
+                    <p className="text-[10px] text-green-600 dark:text-green-400 font-medium">{poVolumeTrendPct[metricsPeriod]}</p>
                   </div>
                   <div className="h-44 px-5 pt-4 pb-2 flex flex-col">
                     <svg viewBox="0 0 200 100" className="flex-1 w-full" preserveAspectRatio="none">
-                      <polygon points="0,82 25,70 50,74 75,55 100,60 125,40 150,45 175,30 200,24 200,100 0,100" fill="#6366f1" opacity="0.12" />
-                      <polyline points="0,82 25,70 50,74 75,55 100,60 125,40 150,45 175,30 200,24" fill="none" stroke="#6366f1" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                      <polygon points={poVolumeTrendByPeriod[metricsPeriod].fillPoints} fill="#6366f1" opacity="0.12" />
+                      <polyline points={poVolumeTrendByPeriod[metricsPeriod].points} fill="none" stroke="#6366f1" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                     <div className="flex justify-between text-[9px] text-muted-foreground pt-1">
-                      {['W1','W2','W3','W4','W5','W6','W7','W8','W9'].map(w => <span key={w}>{w}</span>)}
+                      {poVolumeTrendByPeriod[metricsPeriod].labels.map(w => <span key={w}>{w}</span>)}
                     </div>
                   </div>
                 </div>
@@ -865,13 +1006,7 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
                     </div>
                   </div>
                   <div className="h-44 px-5 py-4 flex flex-col justify-center gap-2.5">
-                    {[
-                      { name: 'Acme Corp', pct: 30 },
-                      { name: 'TechDealer', pct: 22 },
-                      { name: 'Urban Living', pct: 18 },
-                      { name: 'Modern Homes', pct: 17 },
-                      { name: 'Others', pct: 13 },
-                    ].map(s => (
+                    {supplierDistByPeriod[metricsPeriod].map(s => (
                       <div key={s.name} className="flex items-center gap-2">
                         <span className="text-[9px] text-muted-foreground w-20 text-right shrink-0 truncate">{s.name}</span>
                         <div className="flex-1 h-3 bg-zinc-100 dark:bg-zinc-700 rounded-full overflow-hidden">
@@ -890,23 +1025,16 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
                   <div className="px-5 py-3 border-b border-border flex items-center justify-between">
                     <div>
                       <h3 className="text-sm font-semibold text-foreground">Response Time</h3>
-                      <p className="text-[10px] text-muted-foreground">Hours to acknowledge by day</p>
+                      <p className="text-[10px] text-muted-foreground">Hours to acknowledge</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-lg font-bold text-foreground">1.2d</p>
-                      <p className="text-[10px] text-green-600 dark:text-green-400 font-medium">-8% ↓</p>
+                      <p className="text-lg font-bold text-foreground">{ackResponseByPeriod[metricsPeriod].avg}</p>
+                      <p className="text-[10px] text-green-600 dark:text-green-400 font-medium">{ackResponseByPeriod[metricsPeriod].trend}</p>
                     </div>
                   </div>
                   <div className="h-44 px-5 pt-4 pb-2 flex flex-col">
                     <div className="flex-1 flex items-end gap-2">
-                      {[
-                        { label: 'Mon', h: 65 },
-                        { label: 'Tue', h: 82 },
-                        { label: 'Wed', h: 45 },
-                        { label: 'Thu', h: 70 },
-                        { label: 'Fri', h: 38 },
-                        { label: 'Sat', h: 22 },
-                      ].map(bar => (
+                      {ackResponseByPeriod[metricsPeriod].bars.map(bar => (
                         <div key={bar.label} className="flex-1 flex flex-col items-center gap-1" style={{ height: '100%' }}>
                           <div className="w-full flex-1" />
                           <div className="w-full rounded-t bg-indigo-400 dark:bg-indigo-500 shrink-0" style={{ height: `${bar.h}%` }} />
@@ -925,11 +1053,11 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
                   </div>
                   <div className="h-44 flex items-center justify-center gap-6 px-5">
                     <div className="relative w-28 h-28">
-                      <div className="absolute inset-0 rounded-full" style={{ background: 'conic-gradient(from -90deg, #22c55e 0deg 302deg, #f59e0b 302deg 335deg, #ef4444 335deg 360deg)' }} />
+                      <div className="absolute inset-0 rounded-full" style={{ background: `conic-gradient(from -90deg, #22c55e 0deg ${ackMatchByPeriod[metricsPeriod].clean * 3.6}deg, #f59e0b ${ackMatchByPeriod[metricsPeriod].clean * 3.6}deg ${(ackMatchByPeriod[metricsPeriod].clean + ackMatchByPeriod[metricsPeriod].autoCorrected) * 3.6}deg, #ef4444 ${(ackMatchByPeriod[metricsPeriod].clean + ackMatchByPeriod[metricsPeriod].autoCorrected) * 3.6}deg 360deg)` }} />
                       <div className="absolute inset-3 rounded-full bg-white dark:bg-zinc-800" />
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="text-center">
-                          <p className="text-sm font-bold text-foreground">84%</p>
+                          <p className="text-sm font-bold text-foreground">{ackMatchByPeriod[metricsPeriod].clean}%</p>
                           <p className="text-[8px] text-muted-foreground">clean</p>
                         </div>
                       </div>
@@ -938,21 +1066,21 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
                       <div className="flex items-center gap-2">
                         <div className="w-2.5 h-2.5 rounded-sm bg-green-500" />
                         <div>
-                          <p className="text-[10px] font-medium text-foreground">84%</p>
+                          <p className="text-[10px] font-medium text-foreground">{ackMatchByPeriod[metricsPeriod].clean}%</p>
                           <p className="text-[8px] text-muted-foreground">Exact Match</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
                         <div className="w-2.5 h-2.5 rounded-sm bg-amber-500" />
                         <div>
-                          <p className="text-[10px] font-medium text-foreground">9%</p>
+                          <p className="text-[10px] font-medium text-foreground">{ackMatchByPeriod[metricsPeriod].autoCorrected}%</p>
                           <p className="text-[8px] text-muted-foreground">Auto-Corrected</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
                         <div className="w-2.5 h-2.5 rounded-sm bg-red-500" />
                         <div>
-                          <p className="text-[10px] font-medium text-foreground">7%</p>
+                          <p className="text-[10px] font-medium text-foreground">{ackMatchByPeriod[metricsPeriod].discrepancies}%</p>
                           <p className="text-[8px] text-muted-foreground">Discrepancies</p>
                         </div>
                       </div>
@@ -970,18 +1098,12 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
                       <p className="text-[10px] text-muted-foreground">Avg hours by type</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-lg font-bold text-foreground">3.2h</p>
-                      <p className="text-[10px] text-amber-600 dark:text-amber-400 font-medium">+0.2h ↑</p>
+                      <p className="text-lg font-bold text-foreground">{excResolutionByPeriod[metricsPeriod].avg}</p>
+                      <p className="text-[10px] text-amber-600 dark:text-amber-400 font-medium">{excResolutionByPeriod[metricsPeriod].trend}</p>
                     </div>
                   </div>
                   <div className="h-44 px-5 py-4 flex flex-col justify-center gap-3">
-                    {[
-                      { label: 'Qty Mismatch', value: 85, hours: '4.2h' },
-                      { label: 'Price Disc.', value: 70, hours: '3.5h' },
-                      { label: 'Ship Date', value: 45, hours: '2.2h' },
-                      { label: 'Part Mismatch', value: 60, hours: '3.0h' },
-                      { label: 'Spec Issue', value: 30, hours: '1.5h' },
-                    ].map(bar => (
+                    {excResolutionByPeriod[metricsPeriod].bars.map(bar => (
                       <div key={bar.label} className="flex items-center gap-2">
                         <span className="text-[9px] text-muted-foreground w-20 text-right shrink-0">{bar.label}</span>
                         <div className="flex-1 h-3 bg-zinc-100 dark:bg-zinc-700 rounded-full overflow-hidden">
@@ -996,20 +1118,20 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
                   <div className="px-5 py-3 border-b border-border flex items-center justify-between">
                     <div>
                       <h3 className="text-sm font-semibold text-foreground">Exception Trend</h3>
-                      <p className="text-[10px] text-muted-foreground">Weekly exception rate</p>
+                      <p className="text-[10px] text-muted-foreground">Exception rate</p>
                     </div>
-                    <p className="text-[10px] text-green-600 dark:text-green-400 font-medium">-1.8% ↓</p>
+                    <p className="text-[10px] text-green-600 dark:text-green-400 font-medium">{excTrendByPeriod[metricsPeriod].pctChange}</p>
                   </div>
                   <div className="h-44 px-5 pt-4 pb-2 flex flex-col">
                     <svg viewBox="0 0 200 100" className="flex-1 w-full" preserveAspectRatio="none">
                       <line x1="0" y1="30" x2="200" y2="30" stroke="#94a3b8" strokeWidth="1" strokeDasharray="4 3" opacity="0.4" />
-                      <polyline points="0,20 28,35 57,28 85,42 114,35 142,48 171,42 200,55" fill="none" stroke="#f59e0b" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                      {[{x:0,y:20},{x:28,y:35},{x:57,y:28},{x:85,y:42},{x:114,y:35},{x:142,y:48},{x:171,y:42},{x:200,y:55}].map((p,i) => (
+                      <polyline points={excTrendByPeriod[metricsPeriod].points} fill="none" stroke="#f59e0b" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                      {excTrendByPeriod[metricsPeriod].dotPoints.map((p,i) => (
                         <circle key={i} cx={p.x} cy={p.y} r="3" fill="#f59e0b" />
                       ))}
                     </svg>
                     <div className="flex justify-between text-[9px] text-muted-foreground pt-1">
-                      {['W1','W2','W3','W4','W5','W6','W7','W8'].map(w => <span key={w}>{w}</span>)}
+                      {excTrendByPeriod[metricsPeriod].labels.map(w => <span key={w}>{w}</span>)}
                     </div>
                   </div>
                 </div>

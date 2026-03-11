@@ -1,14 +1,40 @@
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import type { DashMetricsPeriod } from '../DashboardMetricsGrid';
 
-const data = [
-    { name: "Seating", available: 400, reserved: 240, backordered: 100 },
-    { name: "Desks", available: 300, reserved: 139, backordered: 50 },
-    { name: "Storage", available: 200, reserved: 980, backordered: 200 }, // Scaled down for visual balance in mock
-    { name: "Tables", available: 278, reserved: 390, backordered: 80 },
-    { name: "Access.", available: 189, reserved: 480, backordered: 20 },
-];
+const dataByPeriod: Record<DashMetricsPeriod, { name: string; available: number; reserved: number; backordered: number }[]> = {
+    Day: [
+        { name: "Seating", available: 85, reserved: 42, backordered: 15 },
+        { name: "Desks", available: 62, reserved: 28, backordered: 8 },
+        { name: "Storage", available: 45, reserved: 180, backordered: 35 },
+        { name: "Tables", available: 58, reserved: 72, backordered: 12 },
+        { name: "Access.", available: 38, reserved: 90, backordered: 4 },
+    ],
+    Week: [
+        { name: "Seating", available: 250, reserved: 140, backordered: 55 },
+        { name: "Desks", available: 180, reserved: 82, backordered: 28 },
+        { name: "Storage", available: 120, reserved: 580, backordered: 120 },
+        { name: "Tables", available: 165, reserved: 230, backordered: 45 },
+        { name: "Access.", available: 110, reserved: 290, backordered: 12 },
+    ],
+    Month: [
+        { name: "Seating", available: 400, reserved: 240, backordered: 100 },
+        { name: "Desks", available: 300, reserved: 139, backordered: 50 },
+        { name: "Storage", available: 200, reserved: 980, backordered: 200 },
+        { name: "Tables", available: 278, reserved: 390, backordered: 80 },
+        { name: "Access.", available: 189, reserved: 480, backordered: 20 },
+    ],
+    Quarter: [
+        { name: "Seating", available: 1350, reserved: 820, backordered: 340 },
+        { name: "Desks", available: 1020, reserved: 475, backordered: 170 },
+        { name: "Storage", available: 680, reserved: 3340, backordered: 680 },
+        { name: "Tables", available: 945, reserved: 1330, backordered: 270 },
+        { name: "Access.", available: 640, reserved: 1635, backordered: 68 },
+    ],
+};
 
-export function InventoryHealthChart() {
+export function InventoryHealthChart({ period = 'Month' }: { period?: DashMetricsPeriod }) {
+    const data = dataByPeriod[period];
+
     return (
         <div className="h-[300px] w-full bg-white dark:bg-zinc-800 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col">
             <div className="flex items-center justify-between mb-4">
@@ -36,9 +62,9 @@ export function InventoryHealthChart() {
                             itemStyle={{ color: '#1F2937' }}
                         />
                         <Legend wrapperStyle={{ paddingTop: '10px' }} />
-                        <Bar dataKey="available" stackId="a" fill="#10b981" name="Available" radius={[0, 0, 4, 4]} />
-                        <Bar dataKey="reserved" stackId="a" fill="#f59e0b" name="Reserved" />
-                        <Bar dataKey="backordered" stackId="a" fill="#ef4444" name="Backordered" radius={[4, 4, 0, 0]} />
+                        <Bar dataKey="available" stackId="a" fill="#10b981" name="Available" radius={[0, 0, 4, 4]} animationDuration={600} />
+                        <Bar dataKey="reserved" stackId="a" fill="#f59e0b" name="Reserved" animationDuration={600} />
+                        <Bar dataKey="backordered" stackId="a" fill="#ef4444" name="Backordered" radius={[4, 4, 0, 0]} animationDuration={600} />
                     </BarChart>
                 </ResponsiveContainer>
             </div>

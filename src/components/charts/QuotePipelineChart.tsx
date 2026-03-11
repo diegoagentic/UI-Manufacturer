@@ -1,14 +1,40 @@
 import { Legend, RadialBar, RadialBarChart, ResponsiveContainer, Tooltip } from "recharts";
+import type { DashMetricsPeriod } from '../DashboardMetricsGrid';
 
-const data = [
-    { name: "Draft", uv: 31.47, pv: 2400, fill: "#94a3b8" },
-    { name: "Sent", uv: 26.69, pv: 4567, fill: "#3b82f6" },
-    { name: "Negotiating", uv: 15.69, pv: 1398, fill: "#eab308" },
-    { name: "Approved", uv: 8.22, pv: 9800, fill: "#22c55e" },
-    { name: "Rejected", uv: 4.63, pv: 3908, fill: "#ef4444" },
-];
+const dataByPeriod: Record<DashMetricsPeriod, { name: string; uv: number; fill: string }[]> = {
+    Day: [
+        { name: "Draft", uv: 8.5, fill: "#94a3b8" },
+        { name: "Sent", uv: 5.2, fill: "#3b82f6" },
+        { name: "Negotiating", uv: 3.1, fill: "#eab308" },
+        { name: "Approved", uv: 2.0, fill: "#22c55e" },
+        { name: "Rejected", uv: 0.8, fill: "#ef4444" },
+    ],
+    Week: [
+        { name: "Draft", uv: 18.3, fill: "#94a3b8" },
+        { name: "Sent", uv: 14.7, fill: "#3b82f6" },
+        { name: "Negotiating", uv: 9.2, fill: "#eab308" },
+        { name: "Approved", uv: 5.5, fill: "#22c55e" },
+        { name: "Rejected", uv: 2.8, fill: "#ef4444" },
+    ],
+    Month: [
+        { name: "Draft", uv: 31.47, fill: "#94a3b8" },
+        { name: "Sent", uv: 26.69, fill: "#3b82f6" },
+        { name: "Negotiating", uv: 15.69, fill: "#eab308" },
+        { name: "Approved", uv: 8.22, fill: "#22c55e" },
+        { name: "Rejected", uv: 4.63, fill: "#ef4444" },
+    ],
+    Quarter: [
+        { name: "Draft", uv: 42.1, fill: "#94a3b8" },
+        { name: "Sent", uv: 35.8, fill: "#3b82f6" },
+        { name: "Negotiating", uv: 22.4, fill: "#eab308" },
+        { name: "Approved", uv: 15.6, fill: "#22c55e" },
+        { name: "Rejected", uv: 8.9, fill: "#ef4444" },
+    ],
+};
 
-export function QuotePipelineChart() {
+export function QuotePipelineChart({ period = 'Month' }: { period?: DashMetricsPeriod }) {
+    const data = dataByPeriod[period];
+
     return (
         <div className="h-[300px] w-full bg-white dark:bg-zinc-800 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col">
             <div className="flex items-center justify-between mb-2">

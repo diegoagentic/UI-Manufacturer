@@ -1,14 +1,40 @@
 import { Bar, BarChart, CartesianGrid, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import type { DashMetricsPeriod } from '../DashboardMetricsGrid';
 
-const data = [
-    { name: "Impressions", value: 4000, fill: "#6366f1" }, // Indigo 500
-    { name: "Clicks", value: 3000, fill: "#818cf8" },      // Indigo 400
-    { name: "Leads", value: 2000, fill: "#a5b4fc" },       // Indigo 300
-    { name: "Quotes", value: 1200, fill: "#c7d2fe" },      // Indigo 200
-    { name: "Closed", value: 800, fill: "#e0e7ff" },       // Indigo 100
-];
+const dataByPeriod: Record<DashMetricsPeriod, { name: string; value: number; fill: string }[]> = {
+    Day: [
+        { name: "Impressions", value: 580, fill: "#6366f1" },
+        { name: "Clicks", value: 420, fill: "#818cf8" },
+        { name: "Leads", value: 280, fill: "#a5b4fc" },
+        { name: "Quotes", value: 150, fill: "#c7d2fe" },
+        { name: "Closed", value: 90, fill: "#e0e7ff" },
+    ],
+    Week: [
+        { name: "Impressions", value: 2200, fill: "#6366f1" },
+        { name: "Clicks", value: 1650, fill: "#818cf8" },
+        { name: "Leads", value: 1100, fill: "#a5b4fc" },
+        { name: "Quotes", value: 620, fill: "#c7d2fe" },
+        { name: "Closed", value: 380, fill: "#e0e7ff" },
+    ],
+    Month: [
+        { name: "Impressions", value: 4000, fill: "#6366f1" },
+        { name: "Clicks", value: 3000, fill: "#818cf8" },
+        { name: "Leads", value: 2000, fill: "#a5b4fc" },
+        { name: "Quotes", value: 1200, fill: "#c7d2fe" },
+        { name: "Closed", value: 800, fill: "#e0e7ff" },
+    ],
+    Quarter: [
+        { name: "Impressions", value: 12500, fill: "#6366f1" },
+        { name: "Clicks", value: 9200, fill: "#818cf8" },
+        { name: "Leads", value: 6100, fill: "#a5b4fc" },
+        { name: "Quotes", value: 3800, fill: "#c7d2fe" },
+        { name: "Closed", value: 2400, fill: "#e0e7ff" },
+    ],
+};
 
-export function FunnelBarChart() {
+export function FunnelBarChart({ period = 'Month' }: { period?: DashMetricsPeriod }) {
+    const data = dataByPeriod[period];
+
     return (
         <div className="h-[300px] w-full bg-white dark:bg-zinc-800 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col">
             <div className="flex items-center justify-between mb-4">
@@ -49,6 +75,7 @@ export function FunnelBarChart() {
                             radius={[0, 4, 4, 0]}
                             barSize={32}
                             activeBar={<Rectangle fill="#4f46e5" stroke="#4338ca" />}
+                            animationDuration={600}
                         />
                     </BarChart>
                 </ResponsiveContainer>

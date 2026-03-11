@@ -38,14 +38,114 @@ interface CommandCenterProps {
   onNavigate: (page: string) => void
 }
 
-// --- KPI Data ---
-const kpiData = [
-  { label: 'Pending ACKs', value: '23', sub: 'Awaiting response', icon: ClockIcon, color: 'orange' },
-  { label: 'Open Exceptions', value: '7', sub: 'Need resolution', icon: ExclamationTriangleIcon, color: 'red' },
-  { label: 'Auto-Accept Rate', value: '82%', sub: 'Last 30 days', icon: CheckCircleIcon, color: 'green' },
-  { label: 'Avg Response Time', value: '1.2d', sub: 'Days to acknowledge', icon: ArrowTrendingUpIcon, color: 'blue' },
-  { label: 'Active POs', value: '156', sub: 'In pipeline', icon: CubeIcon, color: 'indigo' },
-]
+// --- KPI Data by Period ---
+type CCPeriod = 'Day' | 'Week' | 'Month' | 'Quarter';
+
+const kpiDataByPeriod: Record<CCPeriod, { label: string; value: string; sub: string; icon: typeof ClockIcon; color: string }[]> = {
+  Day: [
+    { label: 'Pending ACKs', value: '4', sub: 'Today', icon: ClockIcon, color: 'orange' },
+    { label: 'Open Exceptions', value: '2', sub: 'Today', icon: ExclamationTriangleIcon, color: 'red' },
+    { label: 'Auto-Accept Rate', value: '88%', sub: 'Today', icon: CheckCircleIcon, color: 'green' },
+    { label: 'Avg Response Time', value: '0.8d', sub: 'Today avg', icon: ArrowTrendingUpIcon, color: 'blue' },
+    { label: 'Active POs', value: '12', sub: 'Today', icon: CubeIcon, color: 'indigo' },
+  ],
+  Week: [
+    { label: 'Pending ACKs', value: '11', sub: 'This week', icon: ClockIcon, color: 'orange' },
+    { label: 'Open Exceptions', value: '4', sub: 'This week', icon: ExclamationTriangleIcon, color: 'red' },
+    { label: 'Auto-Accept Rate', value: '85%', sub: 'Last 7 days', icon: CheckCircleIcon, color: 'green' },
+    { label: 'Avg Response Time', value: '1.0d', sub: 'Weekly avg', icon: ArrowTrendingUpIcon, color: 'blue' },
+    { label: 'Active POs', value: '45', sub: 'This week', icon: CubeIcon, color: 'indigo' },
+  ],
+  Month: [
+    { label: 'Pending ACKs', value: '23', sub: 'Awaiting response', icon: ClockIcon, color: 'orange' },
+    { label: 'Open Exceptions', value: '7', sub: 'Need resolution', icon: ExclamationTriangleIcon, color: 'red' },
+    { label: 'Auto-Accept Rate', value: '82%', sub: 'Last 30 days', icon: CheckCircleIcon, color: 'green' },
+    { label: 'Avg Response Time', value: '1.2d', sub: 'Days to acknowledge', icon: ArrowTrendingUpIcon, color: 'blue' },
+    { label: 'Active POs', value: '156', sub: 'In pipeline', icon: CubeIcon, color: 'indigo' },
+  ],
+  Quarter: [
+    { label: 'Pending ACKs', value: '42', sub: 'This quarter', icon: ClockIcon, color: 'orange' },
+    { label: 'Open Exceptions', value: '15', sub: 'This quarter', icon: ExclamationTriangleIcon, color: 'red' },
+    { label: 'Auto-Accept Rate', value: '79%', sub: 'Last 90 days', icon: CheckCircleIcon, color: 'green' },
+    { label: 'Avg Response Time', value: '1.4d', sub: 'Quarterly avg', icon: ArrowTrendingUpIcon, color: 'blue' },
+    { label: 'Active POs', value: '312', sub: 'This quarter', icon: CubeIcon, color: 'indigo' },
+  ],
+};
+
+// Performance Overview metrics by period
+const perfOverviewByPeriod: Record<CCPeriod, { label: string; value: number; target: string; color: string }[]> = {
+  Day: [
+    { label: 'Acknowledgement Turnaround', value: 92, target: '< 2 days', color: 'bg-green-500' },
+    { label: 'Exception Resolution', value: 80, target: '< 4 hours', color: 'bg-green-500' },
+    { label: 'On-Time Shipping', value: 96, target: '> 95%', color: 'bg-green-500' },
+    { label: 'AI Auto-Accept', value: 88, target: '> 80%', color: 'bg-green-500' },
+    { label: 'Clean Match Rate', value: 95, target: '> 90%', color: 'bg-green-500' },
+  ],
+  Week: [
+    { label: 'Acknowledgement Turnaround', value: 88, target: '< 2 days', color: 'bg-green-500' },
+    { label: 'Exception Resolution', value: 76, target: '< 4 hours', color: 'bg-amber-500' },
+    { label: 'On-Time Shipping', value: 95, target: '> 95%', color: 'bg-green-500' },
+    { label: 'AI Auto-Accept', value: 85, target: '> 80%', color: 'bg-green-500' },
+    { label: 'Clean Match Rate', value: 93, target: '> 90%', color: 'bg-green-500' },
+  ],
+  Month: [
+    { label: 'Acknowledgement Turnaround', value: 85, target: '< 2 days', color: 'bg-green-500' },
+    { label: 'Exception Resolution', value: 72, target: '< 4 hours', color: 'bg-amber-500' },
+    { label: 'On-Time Shipping', value: 94, target: '> 95%', color: 'bg-blue-500' },
+    { label: 'AI Auto-Accept', value: 82, target: '> 80%', color: 'bg-indigo-500' },
+    { label: 'Clean Match Rate', value: 91, target: '> 90%', color: 'bg-green-500' },
+  ],
+  Quarter: [
+    { label: 'Acknowledgement Turnaround', value: 82, target: '< 2 days', color: 'bg-amber-500' },
+    { label: 'Exception Resolution', value: 68, target: '< 4 hours', color: 'bg-red-500' },
+    { label: 'On-Time Shipping', value: 92, target: '> 95%', color: 'bg-amber-500' },
+    { label: 'AI Auto-Accept', value: 79, target: '> 80%', color: 'bg-amber-500' },
+    { label: 'Clean Match Rate', value: 89, target: '> 90%', color: 'bg-amber-500' },
+  ],
+};
+
+// Chart data by period for Command Center charts
+const ccPoVolumeByPeriod: Record<CCPeriod, { points: string; fillPoints: string; labels: string[]; total: string; trend: string }> = {
+  Day: { points: '0,70 33,55 67,62 100,42 133,48 167,35 200,28', fillPoints: '0,70 33,55 67,62 100,42 133,48 167,35 200,28 200,100 0,100', labels: ['8AM','10AM','12PM','2PM','4PM','6PM',''], total: '48', trend: '+8% ↑' },
+  Week: { points: '0,65 40,50 80,58 120,38 160,32 200,25', fillPoints: '0,65 40,50 80,58 120,38 160,32 200,25 200,100 0,100', labels: ['Mon','Tue','Wed','Thu','Fri',''], total: '128', trend: '+15% ↑' },
+  Month: { points: '0,82 25,70 50,74 75,55 100,60 125,40 150,45 175,30 200,24', fillPoints: '0,82 25,70 50,74 75,55 100,60 125,40 150,45 175,30 200,24 200,100 0,100', labels: ['W1','W2','W3','W4','W5','W6','W7','W8','W9'], total: '342', trend: '+12% ↑' },
+  Quarter: { points: '0,60 50,45 100,50 150,32 200,20', fillPoints: '0,60 50,45 100,50 150,32 200,20 200,100 0,100', labels: ['Q1','Q2','Q3','Q4',''], total: '1,245', trend: '+22% ↑' },
+};
+
+const ccAckTurnaroundByPeriod: Record<CCPeriod, { bars: { label: string; h: number }[]; avg: string; trend: string }> = {
+  Day: { bars: [{ label: '8AM', h: 48 },{ label: '10AM', h: 75 },{ label: '12PM', h: 55 },{ label: '2PM', h: 82 },{ label: '4PM', h: 38 },{ label: '6PM', h: 25 }], avg: '0.8d', trend: '-15% ↓' },
+  Week: { bars: [{ label: 'Mon', h: 60 },{ label: 'Tue', h: 78 },{ label: 'Wed', h: 48 },{ label: 'Thu', h: 65 },{ label: 'Fri', h: 40 }], avg: '1.0d', trend: '-10% ↓' },
+  Month: { bars: [{ label: 'Mon', h: 65 },{ label: 'Tue', h: 82 },{ label: 'Wed', h: 45 },{ label: 'Thu', h: 70 },{ label: 'Fri', h: 38 },{ label: 'Sat', h: 22 }], avg: '1.2d', trend: '-8% ↓' },
+  Quarter: { bars: [{ label: 'Jan', h: 72 },{ label: 'Feb', h: 65 },{ label: 'Mar', h: 58 },{ label: 'Apr', h: 50 },{ label: 'May', h: 45 },{ label: 'Jun', h: 40 }], avg: '1.4d', trend: '-5% ↓' },
+};
+
+const ccExcRateByPeriod: Record<CCPeriod, { points: string; dotPoints: { x: number; y: number }[]; labels: string[]; rate: string; trend: string }> = {
+  Day: { points: '0,38 33,30 67,42 100,28 133,35 167,40 200,32', dotPoints: [{x:0,y:38},{x:33,y:30},{x:67,y:42},{x:100,y:28},{x:133,y:35},{x:167,y:40},{x:200,y:32}], labels: ['8AM','10AM','12PM','2PM','4PM','6PM',''], rate: '3.8%', trend: '-0.4% ↓' },
+  Week: { points: '0,30 40,38 80,28 120,40 160,32 200,42', dotPoints: [{x:0,y:30},{x:40,y:38},{x:80,y:28},{x:120,y:40},{x:160,y:32},{x:200,y:42}], labels: ['Mon','Tue','Wed','Thu','Fri',''], rate: '4.0%', trend: '-1.2% ↓' },
+  Month: { points: '0,20 28,35 57,28 85,42 114,35 142,48 171,42 200,55', dotPoints: [{x:0,y:20},{x:28,y:35},{x:57,y:28},{x:85,y:42},{x:114,y:35},{x:142,y:48},{x:171,y:42},{x:200,y:55}], labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'], rate: '4.2%', trend: '-1.8% ↓' },
+  Quarter: { points: '0,48 50,40 100,35 150,28 200,22', dotPoints: [{x:0,y:48},{x:50,y:40},{x:100,y:35},{x:150,y:28},{x:200,y:22}], labels: ['Q1','Q2','Q3','Q4',''], rate: '3.5%', trend: '-3.0% ↓' },
+};
+
+const ccAutoAcceptByPeriod: Record<CCPeriod, { pct: number; dashPct: string; trend: string }> = {
+  Day: { pct: 88, dashPct: '138.2', trend: '+8% ↑ vs yesterday' },
+  Week: { pct: 85, dashPct: '133.5', trend: '+6% ↑ vs last week' },
+  Month: { pct: 82, dashPct: '128.8', trend: '+5% ↑ vs last month' },
+  Quarter: { pct: 79, dashPct: '124.1', trend: '+3% ↑ vs last quarter' },
+};
+
+const ccResolutionByPeriod: Record<CCPeriod, { bars: { label: string; value: number; hours: string }[]; avg: string; trend: string }> = {
+  Day: { bars: [{ label: 'Qty Mismatch', value: 90, hours: '3.8h' },{ label: 'Price Disc.', value: 68, hours: '3.2h' },{ label: 'Ship Date', value: 42, hours: '2.0h' },{ label: 'Substitution', value: 55, hours: '2.8h' },{ label: 'Missing Info', value: 28, hours: '1.2h' }], avg: '2.8h', trend: '-0.6h ↓' },
+  Week: { bars: [{ label: 'Qty Mismatch', value: 88, hours: '4.0h' },{ label: 'Price Disc.', value: 72, hours: '3.4h' },{ label: 'Ship Date', value: 44, hours: '2.1h' },{ label: 'Substitution', value: 58, hours: '2.9h' },{ label: 'Missing Info', value: 30, hours: '1.4h' }], avg: '3.0h', trend: '-0.4h ↓' },
+  Month: { bars: [{ label: 'Qty Mismatch', value: 85, hours: '4.2h' },{ label: 'Price Disc.', value: 70, hours: '3.5h' },{ label: 'Ship Date', value: 45, hours: '2.2h' },{ label: 'Substitution', value: 60, hours: '3.0h' },{ label: 'Missing Info', value: 30, hours: '1.5h' }], avg: '3.4h', trend: '+0.2h ↑' },
+  Quarter: { bars: [{ label: 'Qty Mismatch', value: 82, hours: '4.5h' },{ label: 'Price Disc.', value: 68, hours: '3.8h' },{ label: 'Ship Date', value: 48, hours: '2.4h' },{ label: 'Substitution', value: 62, hours: '3.2h' },{ label: 'Missing Info', value: 32, hours: '1.6h' }], avg: '3.8h', trend: '+0.4h ↑' },
+};
+
+const ccOnTimeByPeriod: Record<CCPeriod, { points: string; fillPoints: string; labels: string[]; pct: string; trend: string }> = {
+  Day: { points: '0,18 33,12 67,22 100,10 133,15 167,8 200,10', fillPoints: '0,18 33,12 67,22 100,10 133,15 167,8 200,10 200,100 0,100', labels: ['8AM','10AM','12PM','2PM','4PM','6PM',''], pct: '96%', trend: 'target: 95%' },
+  Week: { points: '0,22 40,15 80,25 120,12 160,18 200,10', fillPoints: '0,22 40,15 80,25 120,12 160,18 200,10 200,100 0,100', labels: ['Mon','Tue','Wed','Thu','Fri',''], pct: '95%', trend: 'target: 95%' },
+  Month: { points: '0,25 28,20 57,30 85,18 114,22 142,12 171,18 200,15', fillPoints: '0,25 28,20 57,30 85,18 114,22 142,12 171,18 200,15 200,100 0,100', labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'], pct: '94%', trend: 'target: 95%' },
+  Quarter: { points: '0,30 50,22 100,28 150,18 200,12', fillPoints: '0,30 50,22 100,28 150,18 200,12 200,100 0,100', labels: ['Q1','Q2','Q3','Q4',''], pct: '92%', trend: 'target: 95%' },
+};
 
 // --- Urgent Actions ---
 const urgentActions = [
@@ -152,6 +252,7 @@ const kpiColorStyles: Record<string, string> = {
 export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigateToWorkspace, onNavigate }: CommandCenterProps) {
   const { currentTenant } = useTenant()
   const [mainTab, setMainTab] = useState<'follow_up' | 'your_tools' | 'metrics'>('follow_up')
+  const [ccPeriod, setCcPeriod] = useState<CCPeriod>('Month')
   const [features, setFeatures] = useState<Feature[]>(defaultFeatures)
   const [isFeatureManagerOpen, setIsFeatureManagerOpen] = useState(false)
   const [expandedUrgent, setExpandedUrgent] = useState<Set<number>>(new Set([1]))
@@ -236,22 +337,6 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
         {/* ==================== FOLLOW UP TAB ==================== */}
         {mainTab === 'follow_up' && (
           <div className="space-y-6">
-
-            {/* KPI Strip */}
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-              {kpiData.map((kpi) => (
-                <div key={kpi.label} className="bg-white dark:bg-zinc-800 rounded-xl border border-border p-4 flex items-start gap-3">
-                  <div className={cn("p-2 rounded-lg", kpiColorStyles[kpi.color])}>
-                    <kpi.icon className="w-5 h-5" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-2xl font-bold text-foreground">{kpi.value}</p>
-                    <p className="text-xs font-medium text-foreground truncate">{kpi.label}</p>
-                    <p className="text-[10px] text-muted-foreground">{kpi.sub}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
 
             {/* 2x2 Grid: Urgent Actions, AI Suggestions, Recent Activity, Performance */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -360,13 +445,7 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
                   <h2 className="text-base font-semibold text-foreground">Performance Overview</h2>
                 </div>
                 <div className="p-4 space-y-2.5 flex-1 overflow-y-auto">
-                  {[
-                    { label: 'Acknowledgement Turnaround', value: 85, target: '< 2 days', color: 'bg-green-500' },
-                    { label: 'Exception Resolution', value: 72, target: '< 4 hours', color: 'bg-amber-500' },
-                    { label: 'On-Time Shipping', value: 94, target: '> 95%', color: 'bg-blue-500' },
-                    { label: 'AI Auto-Accept', value: 82, target: '> 80%', color: 'bg-indigo-500' },
-                    { label: 'Clean Match Rate', value: 91, target: '> 90%', color: 'bg-green-500' },
-                  ].map(metric => (
+                  {perfOverviewByPeriod['Month'].map(metric => (
                     <div key={metric.label} className="p-3 rounded-lg border border-border bg-zinc-50/50 dark:bg-zinc-900/30">
                       <div className="flex items-center justify-between mb-1.5">
                         <span className="text-sm font-medium text-foreground">{metric.label}</span>
@@ -582,9 +661,26 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
         {/* ==================== METRICS TAB ==================== */}
         {mainTab === 'metrics' && (
           <div className="space-y-4">
-            {/* Config bar */}
+            {/* Config bar + Period Selector */}
             <div className="flex items-center justify-between px-4 py-3 bg-zinc-50/50 dark:bg-zinc-900/10 border border-zinc-200/50 dark:border-white/5 rounded-lg">
-              <span className="text-sm font-medium text-foreground">Metrics configured for you</span>
+              <div className="flex items-center gap-3">
+                <span className="text-sm font-medium text-foreground">Metrics configured for you</span>
+                <div className="flex items-center gap-1 bg-zinc-100 dark:bg-zinc-800/50 rounded-lg p-0.5 border border-zinc-200 dark:border-zinc-700/50">
+                  {(['Day', 'Week', 'Month', 'Quarter'] as CCPeriod[]).map((p) => (
+                    <button
+                      key={p}
+                      onClick={() => setCcPeriod(p)}
+                      className={cn('px-3 py-1 text-[10px] font-medium rounded-md transition-all',
+                        p === ccPeriod
+                          ? 'bg-white dark:bg-brand-400 text-foreground dark:text-zinc-900 shadow-sm border border-border dark:border-transparent'
+                          : 'text-muted-foreground hover:text-foreground hover:bg-zinc-200/50 dark:hover:bg-zinc-700'
+                      )}
+                    >
+                      {p}
+                    </button>
+                  ))}
+                </div>
+              </div>
               <button
                 onClick={() => setIsMetricsManagerOpen(true)}
                 className="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-white/10 rounded-md shadow-sm text-xs font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-all"
@@ -601,6 +697,22 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
               features={metricCharts}
               onToggleFeature={handleToggleMetric}
             />
+
+            {/* KPI Strip */}
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+              {kpiDataByPeriod[ccPeriod].map((kpi) => (
+                <div key={kpi.label} className="bg-white dark:bg-zinc-800 rounded-xl border border-border p-4 flex items-start gap-3">
+                  <div className={cn("p-2 rounded-lg", kpiColorStyles[kpi.color])}>
+                    <kpi.icon className="w-5 h-5" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-2xl font-bold text-foreground">{kpi.value}</p>
+                    <p className="text-xs font-medium text-foreground truncate">{kpi.label}</p>
+                    <p className="text-[10px] text-muted-foreground">{kpi.sub}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
 
             {/* Reorderable chart grid */}
             <Reorder.Group
@@ -630,20 +742,20 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
                         <Bars3Icon className="w-4 h-4 text-muted-foreground/50 cursor-grab active:cursor-grabbing shrink-0" />
                         <div className="flex-1">
                           <h3 className="text-sm font-semibold text-foreground">PO Volume</h3>
-                          <p className="text-[10px] text-muted-foreground">Incoming POs by week</p>
+                          <p className="text-[10px] text-muted-foreground">Incoming POs</p>
                         </div>
                         <div className="text-right">
-                          <p className="text-lg font-bold text-foreground">342</p>
-                          <p className="text-[10px] text-green-600 dark:text-green-400 font-medium">+12% ↑</p>
+                          <p className="text-lg font-bold text-foreground">{ccPoVolumeByPeriod[ccPeriod].total}</p>
+                          <p className="text-[10px] text-green-600 dark:text-green-400 font-medium">{ccPoVolumeByPeriod[ccPeriod].trend}</p>
                         </div>
                       </div>
                       <div className="h-44 px-5 pt-4 pb-2 flex flex-col">
                         <svg viewBox="0 0 200 100" className="flex-1 w-full" preserveAspectRatio="none">
-                          <polygon points="0,82 25,70 50,74 75,55 100,60 125,40 150,45 175,30 200,24 200,100 0,100" fill="#6366f1" opacity="0.12" />
-                          <polyline points="0,82 25,70 50,74 75,55 100,60 125,40 150,45 175,30 200,24" fill="none" stroke="#6366f1" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                          <polygon points={ccPoVolumeByPeriod[ccPeriod].fillPoints} fill="#6366f1" opacity="0.12" />
+                          <polyline points={ccPoVolumeByPeriod[ccPeriod].points} fill="none" stroke="#6366f1" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                         <div className="flex justify-between text-[9px] text-muted-foreground pt-1">
-                          {['W1','W2','W3','W4','W5','W6','W7','W8','W9'].map(w => <span key={w}>{w}</span>)}
+                          {ccPoVolumeByPeriod[ccPeriod].labels.map(w => <span key={w}>{w}</span>)}
                         </div>
                       </div>
                     </>)}
@@ -654,23 +766,16 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
                         <Bars3Icon className="w-4 h-4 text-muted-foreground/50 cursor-grab active:cursor-grabbing shrink-0" />
                         <div className="flex-1">
                           <h3 className="text-sm font-semibold text-foreground">Acknowledgement Turnaround</h3>
-                          <p className="text-[10px] text-muted-foreground">Hours to acknowledge by day</p>
+                          <p className="text-[10px] text-muted-foreground">Hours to acknowledge</p>
                         </div>
                         <div className="text-right">
-                          <p className="text-lg font-bold text-foreground">1.2d</p>
-                          <p className="text-[10px] text-green-600 dark:text-green-400 font-medium">-8% ↓</p>
+                          <p className="text-lg font-bold text-foreground">{ccAckTurnaroundByPeriod[ccPeriod].avg}</p>
+                          <p className="text-[10px] text-green-600 dark:text-green-400 font-medium">{ccAckTurnaroundByPeriod[ccPeriod].trend}</p>
                         </div>
                       </div>
                       <div className="h-44 px-5 pt-4 pb-2 flex flex-col">
                         <div className="flex-1 flex items-end gap-2">
-                          {[
-                            { label: 'Mon', h: 65 },
-                            { label: 'Tue', h: 82 },
-                            { label: 'Wed', h: 45 },
-                            { label: 'Thu', h: 70 },
-                            { label: 'Fri', h: 38 },
-                            { label: 'Sat', h: 22 },
-                          ].map(bar => (
+                          {ccAckTurnaroundByPeriod[ccPeriod].bars.map(bar => (
                             <div key={bar.label} className="flex-1 flex flex-col items-center gap-1" style={{ height: '100%' }}>
                               <div className="w-full flex-1" />
                               <div className="w-full rounded-t bg-indigo-400 dark:bg-indigo-500 shrink-0" style={{ height: `${bar.h}%` }} />
@@ -690,20 +795,20 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
                           <p className="text-[10px] text-muted-foreground">% of POs with discrepancies</p>
                         </div>
                         <div className="text-right">
-                          <p className="text-lg font-bold text-foreground">4.2%</p>
-                          <p className="text-[10px] text-green-600 dark:text-green-400 font-medium">-1.8% ↓</p>
+                          <p className="text-lg font-bold text-foreground">{ccExcRateByPeriod[ccPeriod].rate}</p>
+                          <p className="text-[10px] text-green-600 dark:text-green-400 font-medium">{ccExcRateByPeriod[ccPeriod].trend}</p>
                         </div>
                       </div>
                       <div className="h-44 px-5 pt-4 pb-2 flex flex-col">
                         <svg viewBox="0 0 200 100" className="flex-1 w-full" preserveAspectRatio="none">
                           <line x1="0" y1="30" x2="200" y2="30" stroke="#94a3b8" strokeWidth="1" strokeDasharray="4 3" opacity="0.4" />
-                          <polyline points="0,20 28,35 57,28 85,42 114,35 142,48 171,42 200,55" fill="none" stroke="#f59e0b" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                          {[{x:0,y:20},{x:28,y:35},{x:57,y:28},{x:85,y:42},{x:114,y:35},{x:142,y:48},{x:171,y:42},{x:200,y:55}].map((p,i) => (
+                          <polyline points={ccExcRateByPeriod[ccPeriod].points} fill="none" stroke="#f59e0b" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                          {ccExcRateByPeriod[ccPeriod].dotPoints.map((p,i) => (
                             <circle key={i} cx={p.x} cy={p.y} r="3" fill="#f59e0b" />
                           ))}
                         </svg>
                         <div className="flex justify-between text-[9px] text-muted-foreground pt-1">
-                          {['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'].map(m => <span key={m}>{m}</span>)}
+                          {ccExcRateByPeriod[ccPeriod].labels.map(m => <span key={m}>{m}</span>)}
                         </div>
                       </div>
                     </>)}
@@ -716,14 +821,14 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
                           <h3 className="text-sm font-semibold text-foreground">Auto-Accept Rate</h3>
                           <p className="text-[10px] text-muted-foreground">% ACKs auto-accepted</p>
                         </div>
-                        <p className="text-[10px] text-green-600 dark:text-green-400 font-medium">+5% ↑ vs last month</p>
+                        <p className="text-[10px] text-green-600 dark:text-green-400 font-medium">{ccAutoAcceptByPeriod[ccPeriod].trend}</p>
                       </div>
                       <div className="h-44 flex items-center justify-center">
                         <svg viewBox="0 0 120 75" className="w-44 h-28">
                           <path d="M 10 65 A 50 50 0 0 1 110 65" fill="none" stroke="#e5e7eb" strokeWidth="10" strokeLinecap="round" className="dark:hidden" />
                           <path d="M 10 65 A 50 50 0 0 1 110 65" fill="none" stroke="#3f3f46" strokeWidth="10" strokeLinecap="round" className="hidden dark:block" />
-                          <path d="M 10 65 A 50 50 0 0 1 110 65" fill="none" stroke="#22c55e" strokeWidth="10" strokeLinecap="round" strokeDasharray="128.8 157" />
-                          <text x="60" y="55" textAnchor="middle" fill="currentColor" fontSize="22" fontWeight="bold">82%</text>
+                          <path d="M 10 65 A 50 50 0 0 1 110 65" fill="none" stroke="#22c55e" strokeWidth="10" strokeLinecap="round" strokeDasharray={`${ccAutoAcceptByPeriod[ccPeriod].dashPct} 157`} />
+                          <text x="60" y="55" textAnchor="middle" fill="currentColor" fontSize="22" fontWeight="bold">{ccAutoAcceptByPeriod[ccPeriod].pct}%</text>
                           <text x="60" y="70" textAnchor="middle" fill="#94a3b8" fontSize="8">target: 80%</text>
                         </svg>
                       </div>
@@ -738,18 +843,12 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
                           <p className="text-[10px] text-muted-foreground">Avg hours by exception type</p>
                         </div>
                         <div className="text-right">
-                          <p className="text-lg font-bold text-foreground">3.4h</p>
-                          <p className="text-[10px] text-amber-600 dark:text-amber-400 font-medium">+0.2h ↑</p>
+                          <p className="text-lg font-bold text-foreground">{ccResolutionByPeriod[ccPeriod].avg}</p>
+                          <p className="text-[10px] text-amber-600 dark:text-amber-400 font-medium">{ccResolutionByPeriod[ccPeriod].trend}</p>
                         </div>
                       </div>
                       <div className="h-44 px-5 py-4 flex flex-col justify-center gap-3">
-                        {[
-                          { label: 'Qty Mismatch', value: 85, hours: '4.2h' },
-                          { label: 'Price Disc.', value: 70, hours: '3.5h' },
-                          { label: 'Ship Date', value: 45, hours: '2.2h' },
-                          { label: 'Substitution', value: 60, hours: '3.0h' },
-                          { label: 'Missing Info', value: 30, hours: '1.5h' },
-                        ].map(bar => (
+                        {ccResolutionByPeriod[ccPeriod].bars.map(bar => (
                           <div key={bar.label} className="flex items-center gap-2">
                             <span className="text-[9px] text-muted-foreground w-20 text-right shrink-0">{bar.label}</span>
                             <div className="flex-1 h-3 bg-zinc-100 dark:bg-zinc-700 rounded-full overflow-hidden">
@@ -770,18 +869,18 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
                           <p className="text-[10px] text-muted-foreground">% shipped on/before committed date</p>
                         </div>
                         <div className="text-right">
-                          <p className="text-lg font-bold text-foreground">94%</p>
-                          <p className="text-[10px] text-amber-600 dark:text-amber-400 font-medium">target: 95%</p>
+                          <p className="text-lg font-bold text-foreground">{ccOnTimeByPeriod[ccPeriod].pct}</p>
+                          <p className="text-[10px] text-amber-600 dark:text-amber-400 font-medium">{ccOnTimeByPeriod[ccPeriod].trend}</p>
                         </div>
                       </div>
                       <div className="h-44 px-5 pt-4 pb-2 flex flex-col">
                         <svg viewBox="0 0 200 100" className="flex-1 w-full" preserveAspectRatio="none">
                           <line x1="0" y1="15" x2="200" y2="15" stroke="#22c55e" strokeWidth="1" strokeDasharray="4 3" opacity="0.4" />
-                          <polygon points="0,25 28,20 57,30 85,18 114,22 142,12 171,18 200,15 200,100 0,100" fill="#3b82f6" opacity="0.08" />
-                          <polyline points="0,25 28,20 57,30 85,18 114,22 142,12 171,18 200,15" fill="none" stroke="#3b82f6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                          <polygon points={ccOnTimeByPeriod[ccPeriod].fillPoints} fill="#3b82f6" opacity="0.08" />
+                          <polyline points={ccOnTimeByPeriod[ccPeriod].points} fill="none" stroke="#3b82f6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                         <div className="flex justify-between text-[9px] text-muted-foreground pt-1">
-                          {['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'].map(m => <span key={m}>{m}</span>)}
+                          {ccOnTimeByPeriod[ccPeriod].labels.map(m => <span key={m}>{m}</span>)}
                         </div>
                       </div>
                     </>)}
