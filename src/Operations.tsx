@@ -31,6 +31,8 @@ import AIScanModal from './components/modals/AIScanModal'
 import CompareDeltasModal from './components/modals/CompareDeltasModal'
 import AIAutoResolveModal from './components/modals/AIAutoResolveModal'
 import ContactVendorsModal from './components/modals/ContactVendorsModal'
+import PEDExportModal, { getMockPEDData } from './components/modals/PEDExportModal'
+import type { PEDData } from './components/modals/PEDExportModal'
 import { useToast, ToastContainer } from './components/AuthToast'
 import { clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
@@ -219,6 +221,8 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
   const [isCompareDeltasOpen, setIsCompareDeltasOpen] = useState(false)
   const [isAutoResolveOpen, setIsAutoResolveOpen] = useState(false)
   const [isContactVendorsOpen, setIsContactVendorsOpen] = useState(false)
+  const [isPEDExportOpen, setIsPEDExportOpen] = useState(false)
+  const [pedExportData, setPedExportData] = useState<PEDData | null>(null)
   const { toasts, addToast, dismissToast } = useToast()
   const [processingAction, setProcessingAction] = useState<string | null>(null)
 
@@ -408,11 +412,10 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
                 Send Reminders
               </button>
               <button
-                disabled={processingAction === 'export-pos'}
-                onClick={() => handleQuickAction('export-pos', 'Preparing PO export...', '24 Purchase Orders exported successfully')}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-white dark:bg-zinc-800 text-foreground hover:border-primary/30 hover:shadow-sm transition-all disabled:opacity-60"
+                onClick={() => { setPedExportData(getMockPEDData('order')); setIsPEDExportOpen(true); }}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-white dark:bg-zinc-800 text-foreground hover:border-primary/30 hover:shadow-sm transition-all"
               >
-                {processingAction === 'export-pos' ? <ArrowPathIcon className="w-3.5 h-3.5 animate-spin text-zinc-500" /> : <ArrowDownTrayIcon className="w-3.5 h-3.5 text-zinc-500" />}
+                <ArrowDownTrayIcon className="w-3.5 h-3.5 text-zinc-500" />
                 Export POs
               </button>
               <button
@@ -448,11 +451,10 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
                 Compare Deltas
               </button>
               <button
-                disabled={processingAction === 'export-acks'}
-                onClick={() => handleQuickAction('export-acks', 'Preparing ACK export...', '18 Acknowledgements exported successfully')}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-white dark:bg-zinc-800 text-foreground hover:border-primary/30 hover:shadow-sm transition-all disabled:opacity-60"
+                onClick={() => { setPedExportData(getMockPEDData('acknowledgment')); setIsPEDExportOpen(true); }}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-white dark:bg-zinc-800 text-foreground hover:border-primary/30 hover:shadow-sm transition-all"
               >
-                {processingAction === 'export-acks' ? <ArrowPathIcon className="w-3.5 h-3.5 animate-spin text-zinc-500" /> : <ArrowDownTrayIcon className="w-3.5 h-3.5 text-zinc-500" />}
+                <ArrowDownTrayIcon className="w-3.5 h-3.5 text-zinc-500" />
                 Export ACKs
               </button>
             </>)}
@@ -1025,6 +1027,7 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
       <CompareDeltasModal isOpen={isCompareDeltasOpen} onClose={() => setIsCompareDeltasOpen(false)} onAccept={() => { setIsCompareDeltasOpen(false); addToast('success', 'All matching fields accepted — 2 mismatches flagged for review') }} />
       <AIAutoResolveModal isOpen={isAutoResolveOpen} onClose={() => setIsAutoResolveOpen(false)} onApply={() => { setIsAutoResolveOpen(false); addToast('success', '3 exceptions auto-resolved and applied successfully') }} />
       <ContactVendorsModal isOpen={isContactVendorsOpen} onClose={() => setIsContactVendorsOpen(false)} onSend={() => { setIsContactVendorsOpen(false); addToast('success', 'Messages sent to 2 vendors regarding pending exceptions') }} />
+      <PEDExportModal isOpen={isPEDExportOpen} onClose={() => setIsPEDExportOpen(false)} data={pedExportData} />
       <ToastContainer toasts={toasts} onDismiss={dismissToast} />
     </div>
   )
