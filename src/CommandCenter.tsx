@@ -19,6 +19,9 @@ import {
   PencilSquareIcon,
   Bars3Icon,
   ArrowRightIcon,
+  ChevronDownIcon,
+  EyeIcon,
+  ArrowDownTrayIcon,
 } from '@heroicons/react/24/outline'
 import { Reorder } from 'framer-motion'
 import Breadcrumbs from './components/Breadcrumbs'
@@ -149,19 +152,160 @@ const ccOnTimeByPeriod: Record<CCPeriod, { points: string; fillPoints: string; l
 
 // --- Urgent Actions ---
 const urgentActions = [
-  { id: 1, severity: 'critical', title: '3 ACKs pending >48h', description: 'Herman Miller, Steelcase, Knoll — exceeding SLA threshold', action: 'Review ACKs' },
-  { id: 2, severity: 'high', title: 'Exception rate spike on Supplier XYZ', description: '12% exception rate (vs 4% avg) — 5 new discrepancies today', action: 'View Exceptions' },
-  { id: 3, severity: 'medium', title: '5 POs missing ship dates', description: 'Orders from last week still awaiting confirmed ship dates', action: 'View POs' },
-  { id: 4, severity: 'low', title: 'Quarterly supplier review due', description: 'Performance scorecards ready for top 10 suppliers', action: 'View Report' },
+  {
+    id: 1, severity: 'critical', title: '3 ACKs pending >48h', description: 'Herman Miller, Steelcase, Knoll — exceeding SLA threshold', action: 'Review ACKs',
+    details: {
+      fields: [
+        { label: 'DEALERS', value: 'Herman Miller, Steelcase, Knoll' },
+        { label: 'SLA THRESHOLD', value: '24 hours (exceeded by 24h+)' },
+        { label: 'OLDEST ACK', value: 'ACK-8835 — 52 hours pending' },
+        { label: 'TOTAL ORDER VALUE', value: '$67,200.00 at risk' },
+      ],
+      items: [
+        { name: 'Herman Miller — ACK-8835', status: '52h pending', severity: 'critical' as const },
+        { name: 'Steelcase — ACK-8838', status: '49h pending', severity: 'critical' as const },
+        { name: 'Knoll — ACK-8840', status: '36h pending', severity: 'high' as const },
+      ],
+    },
+    aiSuggestion: 'These 3 ACKs have 95%+ match confidence. Auto-accepting would clear the backlog and restore SLA compliance within minutes.',
+  },
+  {
+    id: 2, severity: 'high', title: 'Exception rate spike on Supplier XYZ', description: '12% exception rate (vs 4% avg) — 5 new discrepancies today', action: 'View Exceptions',
+    details: {
+      fields: [
+        { label: 'DEALER', value: 'Supplier XYZ (Coastal Props)' },
+        { label: 'CURRENT RATE', value: '12.4% (3× above average)' },
+        { label: 'NEW EXCEPTIONS', value: '5 today (price & qty)' },
+        { label: 'ROOT CAUSE', value: 'Outdated price list (Q4 2025)' },
+      ],
+    },
+    aiSuggestion: 'Pattern detected: 85% of exceptions are price-related. Sending updated Q1 2026 price list to this dealer would eliminate most discrepancies.',
+  },
+  {
+    id: 3, severity: 'medium', title: '5 POs missing ship dates', description: 'Orders from last week still awaiting confirmed ship dates', action: 'View POs',
+    details: {
+      fields: [
+        { label: 'AFFECTED POs', value: 'PO-2026-082 through PO-2026-086' },
+        { label: 'DEALER', value: 'Multiple (3 dealers)' },
+        { label: 'DAYS OVERDUE', value: '3-5 business days' },
+        { label: 'COMBINED VALUE', value: '$42,100.00' },
+      ],
+    },
+  },
+  {
+    id: 4, severity: 'low', title: 'Quarterly supplier review due', description: 'Performance scorecards ready for top 10 suppliers', action: 'View Report',
+    details: {
+      fields: [
+        { label: 'REVIEW PERIOD', value: 'Q1 2026 (Jan–Mar)' },
+        { label: 'SUPPLIERS', value: '10 top-volume suppliers' },
+        { label: 'METRICS TRACKED', value: 'On-time, exception rate, quality' },
+        { label: 'DUE DATE', value: 'March 15, 2026' },
+      ],
+    },
+  },
 ]
 
 // --- Recent Activity ---
 const recentActivity = [
-  { id: 1, action: 'Acknowledgement auto-accepted', detail: 'PO-2026-089 — Herman Miller — all lines matched', time: '2 min ago', type: 'success' },
-  { id: 2, action: 'Exception created', detail: 'PO-2026-091 — Qty mismatch on 3 lines', time: '15 min ago', type: 'warning' },
-  { id: 3, action: 'Delta engine completed', detail: 'ACK-8842 — 2 auto-corrections, 1 escalated', time: '32 min ago', type: 'info' },
-  { id: 4, action: 'PO received', detail: 'PO-2026-095 from Acme Corp — 45 line items', time: '1h ago', type: 'info' },
-  { id: 5, action: 'Claim submitted', detail: 'Issue #1023 — freight damage — carrier liability 70%', time: '2h ago', type: 'success' },
+  {
+    id: 1, action: 'Acknowledgement auto-accepted', detail: 'PO-2026-089 — Herman Miller — all lines matched', time: '2 min ago', type: 'success',
+    icon: CheckCircleIcon,
+    meta: 'AI confidence: 98.5% — all 12 line items matched within tolerance',
+    actions: [
+      { label: 'View ACK', icon: EyeIcon, primary: true },
+      { label: 'Download PDF', icon: ArrowDownTrayIcon, primary: false },
+    ],
+    details: {
+      fields: [
+        { label: 'PO NUMBER', value: 'PO-2026-089' },
+        { label: 'DEALER', value: 'Herman Miller Direct' },
+        { label: 'LINE ITEMS', value: '12 of 12 matched' },
+        { label: 'ORDER VALUE', value: '$18,450.00' },
+      ],
+      timeline: [
+        { step: 'PO Received', date: 'Mar 9', done: true },
+        { step: 'AI Parsed', date: 'Mar 9', done: true },
+        { step: 'Auto-Accepted', date: 'Mar 11', done: true },
+        { step: 'ACK Sent', date: 'Mar 11', done: true },
+      ],
+    },
+  },
+  {
+    id: 2, action: 'Exception created', detail: 'PO-2026-091 — Qty mismatch on 3 lines', time: '15 min ago', type: 'warning',
+    icon: ExclamationTriangleIcon,
+    meta: 'Requires manual review — quantities exceed production batch sizes',
+    actions: [
+      { label: 'Review Exception', icon: EyeIcon, primary: true },
+      { label: 'Escalate', icon: ArrowRightIcon, primary: false },
+    ],
+    details: {
+      fields: [
+        { label: 'PO NUMBER', value: 'PO-2026-091' },
+        { label: 'DEALER', value: 'Office Images Inc.' },
+        { label: 'EXCEPTION TYPE', value: 'Quantity Mismatch' },
+        { label: 'AFFECTED LINES', value: '3 of 18' },
+      ],
+      discrepancies: [
+        { field: 'Task Chair x50', expected: '50 units', actual: '48 units', diff: '-2' },
+        { field: 'Desk Frame x30', expected: '30 units', actual: '28 units', diff: '-2' },
+        { field: 'Monitor Arm x25', expected: '25 units', actual: '20 units', diff: '-5' },
+      ],
+    },
+  },
+  {
+    id: 3, action: 'Delta engine completed', detail: 'ACK-8842 — 2 auto-corrections, 1 escalated', time: '32 min ago', type: 'info',
+    icon: BoltIcon,
+    aiSuggestion: 'The escalated line has a price variance of 4.2% — within historical tolerance for this dealer. Consider auto-approving future variances under 5%.',
+    actions: [
+      { label: 'View Delta Report', icon: EyeIcon, primary: true },
+    ],
+    details: {
+      fields: [
+        { label: 'ACK NUMBER', value: 'ACK-8842' },
+        { label: 'DEALER', value: 'Steelcase Distribution' },
+        { label: 'AUTO-CORRECTED', value: '2 lines (ship date, packaging)' },
+        { label: 'ESCALATED', value: '1 line (price variance 4.2%)' },
+      ],
+    },
+  },
+  {
+    id: 4, action: 'PO received', detail: 'PO-2026-095 from Acme Corp — 45 line items', time: '1h ago', type: 'info',
+    icon: DocumentTextIcon,
+    actions: [
+      { label: 'View PO', icon: EyeIcon, primary: true },
+      { label: 'Download PDF', icon: ArrowDownTrayIcon, primary: false },
+    ],
+    details: {
+      fields: [
+        { label: 'PO NUMBER', value: 'PO-2026-095' },
+        { label: 'DEALER', value: 'Acme Corp' },
+        { label: 'LINE ITEMS', value: '45' },
+        { label: 'ESTIMATED VALUE', value: '$32,800.00' },
+      ],
+    },
+  },
+  {
+    id: 5, action: 'Claim submitted', detail: 'Issue #1023 — freight damage — carrier liability 70%', time: '2h ago', type: 'success',
+    icon: ClipboardDocumentCheckIcon,
+    meta: 'Carrier acknowledged liability — reimbursement expected within 5 business days',
+    actions: [
+      { label: 'View Claim', icon: EyeIcon, primary: true },
+    ],
+    details: {
+      fields: [
+        { label: 'CLAIM ID', value: 'Issue #1023' },
+        { label: 'TYPE', value: 'Freight Damage' },
+        { label: 'CARRIER', value: 'FastFreight Logistics' },
+        { label: 'LIABILITY', value: '70% carrier / 30% insurance' },
+      ],
+      trackingSteps: [
+        { location: 'Damage reported by dealer', date: 'Mar 8', status: 'done' as const },
+        { location: 'Photos & documentation submitted', date: 'Mar 9', status: 'done' as const },
+        { location: 'Carrier acknowledged claim', date: 'Mar 10', status: 'current' as const },
+        { location: 'Reimbursement pending', date: 'Mar 15 (est)', status: 'pending' as const },
+      ],
+    },
+  },
 ]
 
 // --- Your Tools Widget Definitions ---
@@ -187,6 +331,16 @@ const aiSuggestions = [
     impact: 'Save 2.5h',
     icon: BoltIcon,
     type: 'savings',
+    details: {
+      fields: [
+        { label: 'DEALER', value: 'TechDealer Solutions' },
+        { label: 'POs', value: '#PO-2026-092, #PO-2026-093, #PO-2026-094' },
+        { label: 'SKU OVERLAP', value: '80% (36 of 45 items)' },
+        { label: 'TIME SAVED', value: '2.5 hours validation' },
+      ],
+      reasoning: 'All 3 POs reference the same product family (ErgoSeries) and share common BOM components. Batch validation can apply shared pricing rules, availability checks, and shipping calculations simultaneously instead of processing each PO individually.',
+      confidence: 96,
+    },
   },
   {
     id: 2,
@@ -195,6 +349,16 @@ const aiSuggestions = [
     impact: 'Reduce errors',
     icon: ExclamationTriangleIcon,
     type: 'action',
+    details: {
+      fields: [
+        { label: 'DEALER', value: 'Coastal Props & Furniture' },
+        { label: 'EXCEPTION RATE', value: '12.4% (vs 4.1% avg)' },
+        { label: 'ROOT CAUSE', value: 'Outdated price list (Q4 2025)' },
+        { label: 'AFFECTED POs', value: '7 POs this month' },
+      ],
+      reasoning: 'Price discrepancies account for 85% of exceptions from this dealer. Their current catalog references Q4 2025 pricing. Sending an updated price list would eliminate most exceptions and reduce manual review workload by approximately 3 hours per week.',
+      confidence: 91,
+    },
   },
   {
     id: 3,
@@ -203,6 +367,16 @@ const aiSuggestions = [
     impact: '+15% automation',
     icon: SparklesIcon,
     type: 'opportunity',
+    details: {
+      fields: [
+        { label: 'CURRENT THRESHOLD', value: '90% confidence' },
+        { label: 'PROPOSED THRESHOLD', value: '85% confidence' },
+        { label: 'ADDITIONAL AUTO-ACCEPTS', value: '12 ACKs/week' },
+        { label: 'ERROR RISK', value: '<1% (0.7% estimated)' },
+      ],
+      reasoning: 'Analysis of 500 ACKs in the 85-90% confidence band shows only 0.7% required corrections after auto-acceptance. The time saved (4.8 hours/week) significantly outweighs the minimal error risk. Recommendation based on 90-day historical data with 99.3% accuracy in this range.',
+      confidence: 88,
+    },
   },
   {
     id: 4,
@@ -211,6 +385,16 @@ const aiSuggestions = [
     impact: 'Save $1,800',
     icon: TruckIcon,
     type: 'savings',
+    details: {
+      fields: [
+        { label: 'DEALER', value: 'Urban Living Interiors' },
+        { label: 'ORDERS', value: '#OR-4510, #OR-4511, #OR-4515' },
+        { label: 'CURRENT FREIGHT', value: '$15,000 (3 separate)' },
+        { label: 'CONSOLIDATED', value: '$13,200 (1 combined)' },
+      ],
+      reasoning: 'All 3 orders ship to the same distribution center in Chicago, IL. Combining shipments fills a single full-truckload (FTL) at 94% capacity, which is more cost-effective than 3 partial loads. Delivery dates are within a 3-day window, making consolidation feasible without impacting SLAs.',
+      confidence: 94,
+    },
   },
 ]
 
@@ -256,6 +440,8 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
   const [features, setFeatures] = useState<Feature[]>(defaultFeatures)
   const [isFeatureManagerOpen, setIsFeatureManagerOpen] = useState(false)
   const [expandedUrgent, setExpandedUrgent] = useState<Set<number>>(new Set([1]))
+  const [expandedActivityId, setExpandedActivityId] = useState<number | null>(null)
+  const [expandedSuggestionId, setExpandedSuggestionId] = useState<number | null>(null)
   const [toolsOrder, setToolsOrder] = useState<string[]>(
     defaultFeatures.filter(f => f.enabled).map(f => f.id)
   )
@@ -356,10 +542,14 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
                   {urgentActions.map(action => (
                     <div
                       key={action.id}
-                      className={cn("p-3 rounded-lg border cursor-pointer transition-all hover:shadow-sm",
-                        action.severity === 'critical' ? "border-red-200 dark:border-red-500/20 bg-red-50/50 dark:bg-red-500/5 hover:border-red-300 dark:hover:border-red-500/30" :
-                        action.severity === 'high' ? "border-amber-200 dark:border-amber-500/20 bg-amber-50/50 dark:bg-amber-500/5 hover:border-amber-300 dark:hover:border-amber-500/30" :
-                        "border-border bg-zinc-50/50 dark:bg-zinc-900/30 hover:border-primary/30"
+                      className={cn("overflow-hidden rounded-xl border cursor-pointer transition-all duration-300",
+                        expandedUrgent.has(action.id)
+                          ? (action.severity === 'critical' ? "border-red-300 dark:border-red-500/30 bg-red-50/30 dark:bg-red-500/5 shadow-sm" :
+                             action.severity === 'high' ? "border-amber-300 dark:border-amber-500/30 bg-amber-50/30 dark:bg-amber-500/5 shadow-sm" :
+                             "border-zinc-400 bg-muted/30 shadow-sm")
+                          : (action.severity === 'critical' ? "border-red-200 dark:border-red-500/20 bg-red-50/50 dark:bg-red-500/5 hover:border-red-300 dark:hover:border-red-500/30" :
+                             action.severity === 'high' ? "border-amber-200 dark:border-amber-500/20 bg-amber-50/50 dark:bg-amber-500/5 hover:border-amber-300 dark:hover:border-amber-500/30" :
+                             "border-border bg-zinc-50/50 dark:bg-zinc-900/30 hover:border-primary/30")
                       )}
                       onClick={() => setExpandedUrgent(prev => {
                         const next = new Set(prev)
@@ -367,18 +557,203 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
                         return next
                       })}
                     >
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-3 p-3">
                         <span className={cn("text-[10px] uppercase font-bold px-2 py-0.5 rounded-full border shrink-0", severityColors[action.severity])}>
                           {action.severity}
                         </span>
                         <span className="text-sm font-medium text-foreground flex-1">{action.title}</span>
-                        <button className="text-xs px-3 py-1 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors shrink-0">
+                        <button onClick={(e) => e.stopPropagation()} className="text-xs px-3 py-1 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors shrink-0">
                           {action.action}
                         </button>
+                        <ChevronDownIcon className={cn("w-4 h-4 text-muted-foreground transition-transform duration-300 shrink-0",
+                          expandedUrgent.has(action.id) ? 'rotate-180' : ''
+                        )} />
                       </div>
-                      {expandedUrgent.has(action.id) && (
-                        <p className="text-xs text-muted-foreground mt-2 pl-[72px]">{action.description}</p>
+                      {/* Expandable Details */}
+                      <div className={cn("transition-all duration-300 ease-in-out overflow-hidden",
+                        expandedUrgent.has(action.id) ? 'max-h-[500px] opacity-100 border-t border-border/50' : 'max-h-0 opacity-0'
+                      )}>
+                        <div className="p-4 bg-muted/20 space-y-3">
+                          <p className="text-xs text-muted-foreground pl-2 border-l-2 border-border">{action.description}</p>
+                          {action.details?.fields && (
+                            <div className="grid grid-cols-2 gap-x-6 gap-y-2">
+                              {action.details.fields.map((f, idx) => (
+                                <div key={idx}>
+                                  <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{f.label}</p>
+                                  <p className="text-xs font-medium text-foreground">{f.value}</p>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                          {action.details?.items && (
+                            <div className="rounded-lg border border-border bg-card/50 p-2.5 space-y-1.5">
+                              <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Affected Items</p>
+                              {action.details.items.map((item, idx) => (
+                                <div key={idx} className="flex items-center justify-between text-xs">
+                                  <span className="font-medium text-foreground">{item.name}</span>
+                                  <span className={cn("text-[10px] font-bold px-1.5 py-0.5 rounded",
+                                    item.severity === 'critical' ? 'bg-red-100 dark:bg-red-500/20 text-red-700 dark:text-red-400' :
+                                    'bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-400'
+                                  )}>{item.status}</span>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                          {action.aiSuggestion && (
+                            <div className="rounded-lg bg-indigo-50 dark:bg-indigo-900/10 border border-indigo-100 dark:border-indigo-500/10 p-3">
+                              <div className="flex items-start gap-3">
+                                <SparklesIcon className="w-4 h-4 text-indigo-500 mt-0.5 shrink-0" />
+                                <div className="flex-1">
+                                  <p className="text-xs font-semibold text-indigo-700 dark:text-indigo-300 mb-1">AI Insight</p>
+                                  <p className="text-xs text-indigo-600/80 dark:text-indigo-400/80 leading-relaxed">{action.aiSuggestion}</p>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Recent Activity */}
+              <div className="bg-white dark:bg-zinc-800 rounded-xl border border-border flex flex-col">
+                <div className="px-5 py-4 border-b border-border flex items-center gap-2 shrink-0">
+                  <ClockIcon className="w-5 h-5 text-blue-500" />
+                  <h2 className="text-base font-semibold text-foreground">Recent Activity</h2>
+                </div>
+                <div className="p-4 space-y-2.5 flex-1 overflow-y-auto">
+                  {recentActivity.map(item => (
+                    <div
+                      key={item.id}
+                      className={cn("group relative overflow-hidden rounded-xl border transition-all duration-300 cursor-pointer",
+                        expandedActivityId === item.id
+                          ? 'bg-muted/30 border-zinc-400 shadow-sm'
+                          : 'bg-secondary border-border hover:border-zinc-400 hover:bg-muted/10'
                       )}
+                      onClick={() => setExpandedActivityId(expandedActivityId === item.id ? null : item.id)}
+                    >
+                      <div className="flex items-start gap-3 p-3">
+                        <div className={cn("w-2 h-2 rounded-full mt-1.5 shrink-0", activityTypeColors[item.type])} />
+                        <div className="min-w-0 flex-1">
+                          <p className="text-sm font-medium text-foreground">{item.action}</p>
+                          <p className="text-xs text-muted-foreground truncate">{item.detail}</p>
+                        </div>
+                        <span className="text-[10px] text-muted-foreground whitespace-nowrap mr-1">{item.time}</span>
+                        <ChevronDownIcon className={cn("w-4 h-4 text-muted-foreground transition-transform duration-300 shrink-0",
+                          expandedActivityId === item.id ? 'rotate-180' : ''
+                        )} />
+                      </div>
+                      {/* Expandable Details */}
+                      <div className={cn("transition-all duration-300 ease-in-out overflow-hidden",
+                        expandedActivityId === item.id ? 'max-h-[500px] opacity-100 border-t border-border/50' : 'max-h-0 opacity-0'
+                      )}>
+                        <div className="p-4 bg-muted/20 space-y-3">
+                          {item.meta && (
+                            <div className="text-xs text-muted-foreground flex items-center gap-2 pl-2 border-l-2 border-border">
+                              {item.meta}
+                            </div>
+                          )}
+                          {item.details?.fields && (
+                            <div className="grid grid-cols-2 gap-x-6 gap-y-2">
+                              {item.details.fields.map((f, idx) => (
+                                <div key={idx}>
+                                  <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{f.label}</p>
+                                  <p className="text-xs font-medium text-foreground">{f.value}</p>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                          {item.details?.timeline && (
+                            <div className="flex items-center gap-0 mt-1">
+                              {item.details.timeline.map((step, idx) => (
+                                <div key={idx} className="flex items-center">
+                                  <div className="flex flex-col items-center">
+                                    <div className={cn("w-5 h-5 rounded-full flex items-center justify-center text-[8px] font-bold",
+                                      step.done ? 'bg-green-500 text-white' : 'bg-zinc-200 dark:bg-zinc-700 text-muted-foreground'
+                                    )}>
+                                      {step.done ? '✓' : idx + 1}
+                                    </div>
+                                    <p className="text-[9px] font-medium text-foreground mt-0.5 whitespace-nowrap">{step.step}</p>
+                                    <p className="text-[9px] text-muted-foreground">{step.date}</p>
+                                  </div>
+                                  {idx < item.details.timeline!.length - 1 && (
+                                    <div className={cn("w-8 h-0.5 mx-0.5 mt-[-18px]", step.done ? 'bg-green-400' : 'bg-zinc-200 dark:bg-zinc-700')} />
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                          {item.details?.discrepancies && (
+                            <div className="rounded-lg border border-amber-200 dark:border-amber-500/20 bg-amber-50/50 dark:bg-amber-900/10 p-2.5">
+                              <p className="text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 mb-1.5">Discrepancies Found</p>
+                              <div className="space-y-1.5">
+                                {item.details.discrepancies.map((d, idx) => (
+                                  <div key={idx} className="flex items-center justify-between text-xs">
+                                    <span className="font-medium text-foreground">{d.field}</span>
+                                    <div className="flex items-center gap-3">
+                                      <span className="text-muted-foreground">Expected: {d.expected}</span>
+                                      <span className="text-amber-600 dark:text-amber-400 font-semibold">Actual: {d.actual}</span>
+                                      <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-400">{d.diff}</span>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                          {item.details?.trackingSteps && (
+                            <div className="space-y-0">
+                              {item.details.trackingSteps.map((ts, idx) => (
+                                <div key={idx} className="flex items-start gap-2.5">
+                                  <div className="flex flex-col items-center">
+                                    <div className={cn("w-2.5 h-2.5 rounded-full mt-0.5",
+                                      ts.status === 'done' ? 'bg-green-500' :
+                                      ts.status === 'current' ? 'bg-amber-500 ring-2 ring-amber-200 dark:ring-amber-500/30' :
+                                      'bg-zinc-300 dark:bg-zinc-600'
+                                    )} />
+                                    {idx < item.details.trackingSteps!.length - 1 && (
+                                      <div className={cn("w-0.5 h-5", ts.status === 'done' ? 'bg-green-300 dark:bg-green-700' : 'bg-zinc-200 dark:bg-zinc-700')} />
+                                    )}
+                                  </div>
+                                  <div className="pb-2">
+                                    <p className={cn("text-xs font-medium",
+                                      ts.status === 'current' ? 'text-amber-600 dark:text-amber-400' :
+                                      ts.status === 'pending' ? 'text-muted-foreground' : 'text-foreground'
+                                    )}>{ts.location}</p>
+                                    <p className="text-[10px] text-muted-foreground">{ts.date}</p>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                          {item.aiSuggestion && (
+                            <div className="rounded-lg bg-indigo-50 dark:bg-indigo-900/10 border border-indigo-100 dark:border-indigo-500/10 p-3">
+                              <div className="flex items-start gap-3">
+                                <SparklesIcon className="w-4 h-4 text-indigo-500 mt-0.5 shrink-0" />
+                                <div className="flex-1">
+                                  <p className="text-xs font-semibold text-indigo-700 dark:text-indigo-300 mb-1">AI Insight</p>
+                                  <p className="text-xs text-indigo-600/80 dark:text-indigo-400/80 leading-relaxed">{item.aiSuggestion}</p>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                          {item.actions && item.actions.length > 0 && (
+                            <div className="flex flex-wrap gap-2 pt-2 border-t border-border/50">
+                              {item.actions.map((action, idx) => (
+                                <button key={idx} onClick={(e) => e.stopPropagation()} className={cn("flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors border",
+                                  action.primary
+                                    ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 border-transparent hover:bg-zinc-700 dark:hover:bg-zinc-200'
+                                    : 'bg-white dark:bg-transparent text-foreground border-border hover:bg-muted'
+                                )}>
+                                  <action.icon className="w-3.5 h-3.5" />
+                                  {action.label}
+                                </button>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -395,45 +770,82 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
                 </div>
                 <div className="p-4 space-y-2.5 flex-1 overflow-y-auto">
                   {aiSuggestions.map((suggestion) => (
-                    <div key={suggestion.id} className="p-3 rounded-lg border border-border bg-zinc-50/50 dark:bg-zinc-900/30 hover:border-indigo-200 dark:hover:border-indigo-900/50 transition-colors group cursor-pointer">
-                      <div className="flex items-start gap-3">
+                    <div
+                      key={suggestion.id}
+                      className={cn("group relative overflow-hidden rounded-xl border transition-all duration-300 cursor-pointer",
+                        expandedSuggestionId === suggestion.id
+                          ? 'bg-muted/30 border-indigo-300 dark:border-indigo-500/30 shadow-sm'
+                          : 'bg-secondary border-border hover:border-indigo-200 dark:hover:border-indigo-900/50'
+                      )}
+                      onClick={() => setExpandedSuggestionId(expandedSuggestionId === suggestion.id ? null : suggestion.id)}
+                    >
+                      <div className="flex items-start gap-3 p-3">
                         <div className="w-8 h-8 rounded-full bg-white dark:bg-zinc-700 border border-zinc-100 dark:border-zinc-600 flex items-center justify-center shrink-0 shadow-sm group-hover:scale-105 transition-transform">
                           <suggestion.icon className="w-4 h-4 text-zinc-500" />
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="flex justify-between items-start gap-2">
                             <h4 className="text-sm font-semibold text-foreground">{suggestion.title}</h4>
-                            <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700 shrink-0">
-                              {suggestion.impact}
-                            </span>
+                            <div className="flex items-center gap-2 shrink-0">
+                              <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700">
+                                {suggestion.impact}
+                              </span>
+                              <ChevronDownIcon className={cn("w-4 h-4 text-muted-foreground transition-transform duration-300",
+                                expandedSuggestionId === suggestion.id ? 'rotate-180' : ''
+                              )} />
+                            </div>
                           </div>
                           <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
                             {suggestion.description}
                           </p>
-                          <button className="mt-2 text-xs font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 flex items-center gap-1 group/btn">
-                            Apply Suggestion <ArrowRightIcon className="w-3 h-3 group-hover/btn:translate-x-0.5 transition-transform" />
-                          </button>
                         </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Recent Activity */}
-              <div className="bg-white dark:bg-zinc-800 rounded-xl border border-border flex flex-col">
-                <div className="px-5 py-4 border-b border-border shrink-0">
-                  <h2 className="text-base font-semibold text-foreground">Recent Activity</h2>
-                </div>
-                <div className="p-4 space-y-2.5 flex-1 overflow-y-auto">
-                  {recentActivity.map(item => (
-                    <div key={item.id} className="flex items-start gap-3 p-3 rounded-lg border border-border bg-zinc-50/50 dark:bg-zinc-900/30 hover:border-primary/30 hover:shadow-sm cursor-pointer transition-all">
-                      <div className={cn("w-2 h-2 rounded-full mt-1.5 shrink-0", activityTypeColors[item.type])} />
-                      <div className="min-w-0 flex-1">
-                        <p className="text-sm font-medium text-foreground">{item.action}</p>
-                        <p className="text-xs text-muted-foreground truncate">{item.detail}</p>
+                      {/* Expandable Details */}
+                      <div className={cn("transition-all duration-300 ease-in-out overflow-hidden",
+                        expandedSuggestionId === suggestion.id ? 'max-h-[400px] opacity-100 border-t border-border/50' : 'max-h-0 opacity-0'
+                      )}>
+                        <div className="p-4 bg-muted/20 space-y-3">
+                          {suggestion.details?.fields && (
+                            <div className="grid grid-cols-2 gap-x-6 gap-y-2">
+                              {suggestion.details.fields.map((f, idx) => (
+                                <div key={idx}>
+                                  <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{f.label}</p>
+                                  <p className="text-xs font-medium text-foreground">{f.value}</p>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                          {suggestion.details?.reasoning && (
+                            <div className="rounded-lg bg-indigo-50 dark:bg-indigo-900/10 border border-indigo-100 dark:border-indigo-500/10 p-3">
+                              <div className="flex items-start gap-2.5">
+                                <SparklesIcon className="w-4 h-4 text-indigo-500 mt-0.5 shrink-0" />
+                                <div className="flex-1">
+                                  <div className="flex items-center justify-between mb-1">
+                                    <p className="text-[10px] font-bold uppercase tracking-wider text-indigo-700 dark:text-indigo-300">AI Reasoning</p>
+                                    {suggestion.details.confidence && (
+                                      <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-indigo-100 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300">
+                                        {suggestion.details.confidence}% confidence
+                                      </span>
+                                    )}
+                                  </div>
+                                  <p className="text-xs text-indigo-600/80 dark:text-indigo-400/80 leading-relaxed">
+                                    {suggestion.details.reasoning}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                          <div className="pt-2 border-t border-border/50">
+                            <button
+                              onClick={(e) => e.stopPropagation()}
+                              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-indigo-600 dark:bg-indigo-500 text-white hover:bg-indigo-700 dark:hover:bg-indigo-400 transition-colors"
+                            >
+                              <SparklesIcon className="w-3.5 h-3.5" />
+                              Apply Suggestion
+                            </button>
+                          </div>
+                        </div>
                       </div>
-                      <span className="text-[10px] text-muted-foreground whitespace-nowrap">{item.time}</span>
                     </div>
                   ))}
                 </div>
