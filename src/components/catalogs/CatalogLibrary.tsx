@@ -244,7 +244,7 @@ export default function CatalogLibrary() {
                             placeholder="Search catalogs..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full pl-10 pr-4 py-2 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all shadow-sm"
+                            className="w-full pl-10 pr-4 py-2 bg-card border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all shadow-sm"
                         />
                     </div>
                     <div className="flex items-center gap-3">
@@ -253,8 +253,8 @@ export default function CatalogLibrary() {
                             className={cn(
                                 "flex items-center gap-2 px-3 py-2 border rounded-lg transition-colors text-sm font-medium shadow-sm",
                                 showFilters || activeFilterCount > 0
-                                    ? "bg-zinc-100 dark:bg-zinc-800 border-zinc-300 dark:border-zinc-600 text-zinc-900 dark:text-zinc-100"
-                                    : "bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 hover:bg-brand-300 dark:hover:bg-brand-600/50 text-foreground"
+                                    ? "bg-muted border-border text-foreground"
+                                    : "bg-card border-border hover:bg-brand-300 dark:hover:bg-brand-600/50 text-foreground"
                             )}
                         >
                             <FunnelIcon className="w-4 h-4" />
@@ -277,13 +277,13 @@ export default function CatalogLibrary() {
 
                 {/* Filters Panel */}
                 {showFilters && (
-                    <div className="bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 grid grid-cols-1 sm:grid-cols-3 gap-4 animate-in slide-in-from-top-2 fade-in">
+                    <div className="bg-card border border-border rounded-xl p-4 grid grid-cols-1 sm:grid-cols-3 gap-4 animate-in slide-in-from-top-2 fade-in">
                         <div className="space-y-1.5">
                             <label className="text-xs font-medium text-muted-foreground">Product Owner</label>
                             <select
                                 value={filters.owner}
                                 onChange={(e) => setFilters(prev => ({ ...prev, owner: e.target.value }))}
-                                className="w-full px-3 py-2 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-sm focus:ring-2 focus:ring-primary outline-none"
+                                className="w-full px-3 py-2 bg-muted dark:bg-zinc-800 border border-border rounded-lg text-sm focus:ring-2 focus:ring-primary outline-none"
                             >
                                 {owners.map(o => <option key={o} value={o}>{o}</option>)}
                             </select>
@@ -293,7 +293,7 @@ export default function CatalogLibrary() {
                             <select
                                 value={filters.status}
                                 onChange={(e) => setFilters(prev => ({ ...prev, status: e.target.value }))}
-                                className="w-full px-3 py-2 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-sm focus:ring-2 focus:ring-primary outline-none"
+                                className="w-full px-3 py-2 bg-muted dark:bg-zinc-800 border border-border rounded-lg text-sm focus:ring-2 focus:ring-primary outline-none"
                             >
                                 {statuses.map(s => <option key={s} value={s}>{s}</option>)}
                             </select>
@@ -303,7 +303,7 @@ export default function CatalogLibrary() {
                             <select
                                 value={filters.manufacturer}
                                 onChange={(e) => setFilters(prev => ({ ...prev, manufacturer: e.target.value }))}
-                                className="w-full px-3 py-2 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-sm focus:ring-2 focus:ring-primary outline-none"
+                                className="w-full px-3 py-2 bg-muted dark:bg-zinc-800 border border-border rounded-lg text-sm focus:ring-2 focus:ring-primary outline-none"
                             >
                                 {manufacturers.map(m => <option key={m} value={m}>{m}</option>)}
                             </select>
@@ -323,7 +323,7 @@ export default function CatalogLibrary() {
             {/* Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {filteredCatalogs.map(catalog => (
-                    <div key={catalog.id} className="group bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-sm hover:shadow-md dark:hover:shadow-glow-sm transition-all hover:border-primary/50 cursor-pointer flex flex-col relative z-0 h-[380px]">
+                    <div key={catalog.id} className="group bg-card border border-border rounded-2xl shadow-sm hover:shadow-md dark:hover:shadow-glow-sm transition-all hover:border-primary/50 cursor-pointer flex flex-col relative z-0 h-[380px]">
                         {/* Cover Area */}
                         <div
                             className={`h-32 ${catalog.cover} p-6 flex items-end relative rounded-t-2xl shrink-0`}
@@ -337,7 +337,7 @@ export default function CatalogLibrary() {
                         </div>
 
                         {/* Content */}
-                        <div className="p-4 flex-1 flex flex-col justify-between space-y-4 rounded-b-2xl overflow-hidden bg-white dark:bg-zinc-800">
+                        <div className="p-4 flex-1 flex flex-col justify-between space-y-4 rounded-b-2xl overflow-hidden bg-card">
                             {historyView[catalog.id] ? (
                                 // History View
                                 <div className="flex flex-col h-full animate-in fade-in slide-in-from-right-4 duration-300">
@@ -345,30 +345,30 @@ export default function CatalogLibrary() {
                                         <h4 className="text-sm font-semibold text-foreground">History Log</h4>
                                         <button
                                             onClick={(e) => toggleHistory(catalog.id, e)}
-                                            className="p-1 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-colors text-muted-foreground hover:text-foreground"
+                                            className="p-1 hover:bg-muted rounded-full transition-colors text-muted-foreground hover:text-foreground"
                                         >
                                             <XMarkIcon className="w-4 h-4" />
                                         </button>
                                     </div>
                                     <div className="flex-1 overflow-y-auto space-y-2 pr-1 custom-scrollbar">
                                         {generateLogs(catalog.id).map((item, idx) => (
-                                            <div key={idx} className="flex items-start gap-2 p-2 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-colors text-xs border border-zinc-100 dark:border-zinc-800">
+                                            <div key={idx} className="flex items-start gap-2 p-2 rounded-lg hover:bg-muted dark:hover:bg-zinc-800/50 transition-colors text-xs border border-zinc-100 dark:border-zinc-800">
                                                 <div className="mt-0.5 shrink-0">
                                                     {item.type === 'price_increase' && <ArrowTrendingUpIcon className="w-3.5 h-3.5 text-red-500" />}
                                                     {item.type === 'spec_update' && <WrenchIcon className="w-3.5 h-3.5 text-blue-500" />}
                                                     {item.type === 'new' && <SparklesIcon className="w-3.5 h-3.5 text-amber-500" />}
-                                                    {item.type === 'discontinued' && <TrashIcon className="w-3.5 h-3.5 text-zinc-400" />}
+                                                    {item.type === 'discontinued' && <TrashIcon className="w-3.5 h-3.5 text-muted-foreground" />}
                                                 </div>
                                                 <div className="flex-1 min-w-0">
                                                     <p className="font-medium text-foreground truncate">{item.details}</p>
                                                     <p className="text-muted-foreground">{item.msg}</p>
-                                                    <p className="text-[10px] text-zinc-400 mt-0.5">{item.time}</p>
+                                                    <p className="text-[10px] text-muted-foreground mt-0.5">{item.time}</p>
                                                 </div>
                                             </div>
                                         ))}
                                     </div>
                                     <div className="pt-2 mt-auto text-center border-t border-zinc-100 dark:border-zinc-800">
-                                        <button className="text-xs text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200 font-medium hover:underline transition-colors">
+                                        <button className="text-xs text-muted-foreground hover:text-zinc-900 dark:text-muted-foreground dark:hover:text-zinc-200 font-medium hover:underline transition-colors">
                                             View Full Audit Trail
                                         </button>
                                     </div>
@@ -397,9 +397,9 @@ export default function CatalogLibrary() {
                                         </div>
 
                                         {/* Last Sync Text */}
-                                        <div className="text-[10px] text-zinc-400 h-4">
+                                        <div className="text-[10px] text-muted-foreground h-4">
                                             {syncingId === catalog.id ? (
-                                                <span className="text-zinc-700 dark:text-zinc-300 animate-pulse font-medium">{syncStatus}</span>
+                                                <span className="text-muted-foreground animate-pulse font-medium">{syncStatus}</span>
                                             ) : (
                                                 `Last synced ${catalog.lastSync}`
                                             )}
@@ -422,10 +422,10 @@ export default function CatalogLibrary() {
                                                 {expandedResults[catalog.id] && (
                                                     <div className="mt-2 space-y-1 overflow-y-auto max-h-[100px] custom-scrollbar pr-1">
                                                         {syncResults[catalog.id].map((result, idx) => (
-                                                            <div key={idx} className="flex items-start gap-2 p-2 rounded-md bg-zinc-50 dark:bg-zinc-800/50 text-[11px]">
+                                                            <div key={idx} className="flex items-start gap-2 p-2 rounded-md bg-muted dark:bg-zinc-800/50 text-[11px]">
                                                                 {result.type === 'price_increase' && <ArrowTrendingUpIcon className="w-3.5 h-3.5 text-red-500 mt-0.5 shrink-0" />}
                                                                 {result.type === 'price_decrease' && <ArrowTrendingDownIcon className="w-3.5 h-3.5 text-green-500 mt-0.5 shrink-0" />}
-                                                                {result.type === 'discontinued' && <TrashIcon className="w-3.5 h-3.5 text-zinc-400 mt-0.5 shrink-0" />}
+                                                                {result.type === 'discontinued' && <TrashIcon className="w-3.5 h-3.5 text-muted-foreground mt-0.5 shrink-0" />}
                                                                 {result.type === 'new' && <SparklesIcon className="w-3.5 h-3.5 text-amber-500 mt-0.5 shrink-0" />}
                                                                 {result.type === 'spec_update' && <WrenchIcon className="w-3.5 h-3.5 text-blue-500 mt-0.5 shrink-0" />}
 
@@ -437,7 +437,7 @@ export default function CatalogLibrary() {
                                                         ))}
                                                         <button
                                                             onClick={(e) => clearResults(catalog.id, e)}
-                                                            className="w-full text-center text-[10px] text-zinc-400 hover:text-foreground py-1 mt-1 transition-colors"
+                                                            className="w-full text-center text-[10px] text-muted-foreground hover:text-foreground py-1 mt-1 transition-colors"
                                                         >
                                                             Dismiss Report
                                                         </button>
@@ -454,7 +454,7 @@ export default function CatalogLibrary() {
                                             <button
                                                 onClick={(e) => { e.stopPropagation(); handleSync(catalog.id); }}
                                                 disabled={syncingId === catalog.id}
-                                                className={`p-2 rounded-lg transition-colors ${syncingId === catalog.id ? 'animate-spin text-zinc-500' : 'hover:bg-brand-300 dark:hover:bg-brand-600/50 text-muted-foreground hover:text-zinc-900 dark:hover:text-white'}`}
+                                                className={`p-2 rounded-lg transition-colors ${syncingId === catalog.id ? 'animate-spin text-muted-foreground' : 'hover:bg-brand-300 dark:hover:bg-brand-600/50 text-muted-foreground hover:text-foreground'}`}
                                                 title="Sync Catalog"
                                             >
                                                 <ArrowPathIcon className="w-4 h-4" />
@@ -463,7 +463,7 @@ export default function CatalogLibrary() {
                                             {/* History Toggle Button */}
                                             <button
                                                 onClick={(e) => toggleHistory(catalog.id, e)}
-                                                className={`p-2 rounded-lg transition-colors ${historyView[catalog.id] ? 'bg-zinc-100 dark:bg-zinc-800 text-foreground' : 'hover:bg-brand-300 dark:hover:bg-brand-600/50 text-muted-foreground hover:text-zinc-900 dark:hover:text-white'}`}
+                                                className={`p-2 rounded-lg transition-colors ${historyView[catalog.id] ? 'bg-muted text-foreground' : 'hover:bg-brand-300 dark:hover:bg-brand-600/50 text-muted-foreground hover:text-foreground'}`}
                                                 title="View History Log"
                                             >
                                                 <ClockIcon className="w-4 h-4" />
@@ -481,7 +481,7 @@ export default function CatalogLibrary() {
 
                                         <button
                                             onClick={(e) => { e.stopPropagation(); handleOpenQuote(catalog.name); }}
-                                            className="text-zinc-900 hover:text-zinc-700 dark:text-zinc-300 dark:hover:text-white text-xs font-semibold bg-zinc-100 hover:bg-brand-300 dark:bg-zinc-800 dark:hover:bg-brand-600/50 px-3 py-1.5 rounded-lg transition-colors border border-zinc-200 dark:border-zinc-700"
+                                            className="text-zinc-900 hover:text-muted-foreground dark:hover:text-white text-xs font-semibold bg-zinc-100 hover:bg-brand-300 dark:bg-zinc-800 dark:hover:bg-brand-600/50 px-3 py-1.5 rounded-lg transition-colors border border-border"
                                         >
                                             Create Quote
                                         </button>
@@ -495,14 +495,14 @@ export default function CatalogLibrary() {
                 {/* Simulated Empty State */}
                 {filteredCatalogs.length === 0 && (
                     <div className="col-span-full py-12 text-center text-muted-foreground">
-                        <BuildingStorefrontIcon className="w-12 h-12 mx-auto mb-3 text-zinc-300 dark:text-zinc-700" />
+                        <BuildingStorefrontIcon className="w-12 h-12 mx-auto mb-3 text-zinc-300 dark:text-muted-foreground" />
                         <p>No catalogs found matching your filters.</p>
                         <button
                             onClick={() => {
                                 setSearchQuery('');
                                 setFilters({ owner: 'All', status: 'All', manufacturer: 'All' });
                             }}
-                            className="mt-4 text-zinc-500 hover:text-zinc-900 underline hover:no-underline transition-colors"
+                            className="mt-4 text-muted-foreground hover:text-zinc-900 underline hover:no-underline transition-colors"
                         >
                             Clear all filters
                         </button>
@@ -536,7 +536,7 @@ export default function CatalogLibrary() {
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white dark:bg-zinc-800 p-6 text-left align-middle shadow-xl transition-all border border-zinc-200 dark:border-zinc-800">
+                                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-card p-6 text-left align-middle shadow-xl transition-all border border-border">
                                     <div className="flex items-center gap-4 mb-4">
                                         <div className="p-3 bg-red-100 dark:bg-red-900/30 rounded-full text-red-600 dark:text-red-400">
                                             <ExclamationTriangleIcon className="w-6 h-6" />
@@ -557,7 +557,7 @@ export default function CatalogLibrary() {
                                     <div className="mt-6 flex justify-end gap-3">
                                         <button
                                             type="button"
-                                            className="px-4 py-2 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-sm font-medium hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors"
+                                            className="px-4 py-2 bg-card border border-border rounded-lg text-sm font-medium hover:bg-muted dark:hover:bg-zinc-700 transition-colors"
                                             onClick={() => setDeleteId(null)}
                                         >
                                             Cancel

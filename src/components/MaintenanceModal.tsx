@@ -124,7 +124,7 @@ export default function MaintenanceModal({ isOpen, onClose, selectedCount, onCon
                     <button
                         onClick={handleSubmit}
                         disabled={!issueType || !provider || !date}
-                        className="px-4 py-2 text-sm font-medium text-zinc-900 bg-primary hover:bg-primary/90 rounded-lg shadow-sm disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                        className="px-4 py-2 text-sm font-medium text-primary-foreground bg-primary hover:bg-primary/90 rounded-lg shadow-sm disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                     >
                         Schedule
                     </button>

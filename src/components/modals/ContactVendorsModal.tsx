@@ -117,7 +117,7 @@ export default function ContactVendorsModal({ isOpen, onClose, onSend }: Contact
                     <EnvelopeIcon className="w-3.5 h-3.5 text-muted-foreground" />
                     <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">Message Preview</p>
                   </div>
-                  <div className="bg-zinc-50 dark:bg-zinc-950 border border-border rounded-xl p-4 max-h-[160px] overflow-y-auto">
+                  <div className="bg-muted dark:bg-zinc-950 border border-border rounded-xl p-4 max-h-[160px] overflow-y-auto">
                     <pre className="text-[11px] text-muted-foreground whitespace-pre-wrap font-sans leading-relaxed">{MESSAGE_TEMPLATE}</pre>
                   </div>
                 </div>

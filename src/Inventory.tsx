@@ -360,9 +360,9 @@ export default function Inventory({ onLogout, onNavigateToDetail, onNavigateToWo
             case 'In Use': return 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400';
             case 'Reserved': return 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400';
             case 'In Consignment': return 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400';
-            case 'Sold': return 'bg-zinc-100 text-zinc-700 dark:bg-card dark:text-zinc-400 line-through opacity-75';
+            case 'Sold': return 'bg-zinc-100 text-muted-foreground dark:bg-card dark:text-muted-foreground line-through opacity-75';
             case 'Write-off': return 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400';
-            default: return 'bg-zinc-100 text-zinc-700 dark:bg-card dark:text-zinc-400';
+            default: return 'bg-zinc-100 text-muted-foreground dark:bg-card dark:text-muted-foreground';
         }
     };
 
@@ -372,7 +372,7 @@ export default function Inventory({ onLogout, onNavigateToDetail, onNavigateToWo
             : 'text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/10';
     };
 
-    const getCategoryIcon = (category: string, className: string = "w-12 h-12 mb-2 text-zinc-300 dark:text-zinc-600") => {
+    const getCategoryIcon = (category: string, className: string = "w-12 h-12 mb-2 text-zinc-300 dark:text-muted-foreground") => {
         switch (category) {
             case 'Lighting': return <LightBulbIcon className={className} />;
             case 'Furniture': return <TableCellsIcon className={className} />; // TableCells as generic furniture/desk
@@ -399,7 +399,7 @@ export default function Inventory({ onLogout, onNavigateToDetail, onNavigateToWo
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
                         {/* Pill-style Tabs (Matching Transactions) */}
-                        <div className="flex gap-1 bg-zinc-100 dark:bg-card/50 p-1 rounded-lg w-fit overflow-x-auto max-w-full border border-zinc-200 dark:border-zinc-800">
+                        <div className="flex gap-1 bg-zinc-100 dark:bg-card/50 p-1 rounded-lg w-fit overflow-x-auto max-w-full border border-border">
                             {[
                                 { id: 'inventory', label: 'Inventory', count: MOCK_INVENTORY.length },
                                 { id: 'locations', label: 'Locations', count: 4 }
@@ -442,14 +442,14 @@ export default function Inventory({ onLogout, onNavigateToDetail, onNavigateToWo
                         </div>
                         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 overflow-x-auto pb-4">
                             {Object.entries(inventorySummary).map(([key, data]) => (
-                                <div key={key} className="bg-white dark:bg-zinc-800 rounded-2xl p-6 border border-zinc-200 dark:border-zinc-700 shadow-sm hover:shadow-md transition-all group min-w-[200px]">
+                                <div key={key} className="bg-card rounded-2xl p-6 border border-border shadow-sm hover:shadow-md transition-all group min-w-[200px]">
                                     <div className="flex items-center justify-between">
                                         <div>
                                             <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">{data.label}</p>
                                             <p className="mt-1 text-3xl font-semibold text-foreground group-hover:scale-105 transition-transform origin-left">{data.value}</p>
                                         </div>
                                         <div
-                                            className={cn("p-3 rounded-xl relative group", colorStyles[data.color] || 'bg-zinc-50 text-zinc-600')}
+                                            className={cn("p-3 rounded-xl relative group", colorStyles[data.color] || 'bg-muted text-muted-foreground')}
                                             title={data.label}
                                         >
                                             {data.icon}
@@ -483,7 +483,7 @@ export default function Inventory({ onLogout, onNavigateToDetail, onNavigateToWo
                         </div>
                     </div>
                 ) : (
-                    <div className="bg-white/60 dark:bg-zinc-800 backdrop-blur-md rounded-2xl p-4 border border-zinc-200 dark:border-zinc-700 shadow-sm flex flex-col xl:flex-row items-center justify-between gap-4 animate-in fade-in slide-in-from-top-4 duration-300">
+                    <div className="bg-white/60 dark:bg-zinc-800 backdrop-blur-md rounded-2xl p-4 border border-border shadow-sm flex flex-col xl:flex-row items-center justify-between gap-4 animate-in fade-in slide-in-from-top-4 duration-300">
                         {/* Collapsed Ticker View - Carousel */}
                         <div className="flex items-center gap-2 flex-1 min-w-0">
                             <button
@@ -527,7 +527,7 @@ export default function Inventory({ onLogout, onNavigateToDetail, onNavigateToWo
                         <div className="w-px h-12 bg-zinc-200 dark:bg-zinc-700 hidden xl:block mx-2"></div>
 
                         {/* Quick Actions (Product Owner Context) */}
-                        <div className="flex items-center gap-1 overflow-x-auto min-w-max pl-4 border-l border-zinc-200 dark:border-zinc-700 xl:border-none xl:pl-0">
+                        <div className="flex items-center gap-1 overflow-x-auto min-w-max pl-4 border-l border-border xl:border-none xl:pl-0">
                             {[
                                 { icon: <QrCodeIcon className="w-5 h-5" />, label: "Scan Item" },
                                 { icon: <ArrowPathRoundedSquareIcon className="w-5 h-5" />, label: "Quick Transfer", onClick: () => setIsQuickMovementsModalOpen(true) },
@@ -546,10 +546,10 @@ export default function Inventory({ onLogout, onNavigateToDetail, onNavigateToWo
                             onClick={() => setShowMetrics(true)}
                             className="flex flex-col items-center justify-center gap-1 group p-2 hover:bg-brand-300 dark:hover:bg-brand-600/50 rounded-lg transition-colors"
                         >
-                            <div className="text-gray-500 dark:text-gray-400 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">
+                            <div className="text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">
                                 <ChevronDownIcon className="w-4 h-4" />
                             </div>
-                            <span className="text-[10px] font-medium text-gray-500 dark:text-gray-400 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">Details</span>
+                            <span className="text-[10px] font-medium text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">Details</span>
                         </button>
                     </div >
                 )
@@ -562,7 +562,7 @@ export default function Inventory({ onLogout, onNavigateToDetail, onNavigateToWo
                         <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-300">
 
                             {/* Filters & View Toggle Bar */}
-                            <div className="bg-card p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+                            <div className="bg-card p-4 rounded-xl border border-border shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
 
                                 {/* Left: Search & Filters */}
                                 <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
@@ -573,7 +573,7 @@ export default function Inventory({ onLogout, onNavigateToDetail, onNavigateToWo
                                             placeholder="Search assets..."
                                             value={searchQuery}
                                             onChange={(e) => setSearchQuery(e.target.value)}
-                                            className="w-full pl-9 pr-4 py-2 bg-zinc-50 dark:bg-card/50 border border-zinc-200 dark:border-zinc-700 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:outline-none transition-all"
+                                            className="w-full pl-9 pr-4 py-2 bg-muted dark:bg-card/50 border border-border rounded-lg text-sm focus:ring-2 focus:ring-primary focus:outline-none transition-all"
                                         />
                                     </div>
                                     <div className="flex items-center gap-2 w-full sm:w-auto">
@@ -627,10 +627,10 @@ export default function Inventory({ onLogout, onNavigateToDetail, onNavigateToWo
 
                             {/* List View */}
                             {viewMode === 'list' && (
-                                <div className="bg-card dark:bg-zinc-800 rounded-xl border border-zinc-200 dark:border-zinc-700 shadow-sm overflow-hidden">
+                                <div className="bg-card dark:bg-zinc-800 rounded-xl border border-border shadow-sm overflow-hidden">
                                     <div className="overflow-x-auto">
                                         <table className="w-full text-left text-sm">
-                                            <thead className="bg-zinc-50 dark:bg-card/50 border-b border-zinc-200 dark:border-zinc-800">
+                                            <thead className="bg-muted dark:bg-card/50 border-b border-border">
                                                 <tr>
                                                     <th className="p-4 w-12">
                                                         <input
@@ -667,20 +667,20 @@ export default function Inventory({ onLogout, onNavigateToDetail, onNavigateToWo
                                                                         <img
                                                                             src={item.image}
                                                                             alt={item.assetName}
-                                                                            className="w-10 h-10 rounded-lg object-cover border border-zinc-200 dark:border-zinc-700"
+                                                                            className="w-10 h-10 rounded-lg object-cover border border-border"
                                                                             onError={(e) => {
                                                                                 e.currentTarget.style.display = 'none';
                                                                                 e.currentTarget.nextElementSibling?.classList.remove('hidden');
                                                                                 e.currentTarget.nextElementSibling?.classList.add('flex');
                                                                             }}
                                                                         />
-                                                                        <div className="w-10 h-10 rounded-lg bg-zinc-100 dark:bg-card hidden items-center justify-center border border-zinc-200 dark:border-zinc-700">
-                                                                            {getCategoryIcon(item.category, "w-6 h-6 text-zinc-400")}
+                                                                        <div className="w-10 h-10 rounded-lg bg-zinc-100 dark:bg-card hidden items-center justify-center border border-border">
+                                                                            {getCategoryIcon(item.category, "w-6 h-6 text-muted-foreground")}
                                                                         </div>
                                                                     </>
                                                                 ) : (
-                                                                    <div className="w-10 h-10 rounded-lg bg-zinc-100 dark:bg-card flex items-center justify-center border border-zinc-200 dark:border-zinc-700">
-                                                                        {getCategoryIcon(item.category, "w-6 h-6 text-zinc-400")}
+                                                                    <div className="w-10 h-10 rounded-lg bg-zinc-100 dark:bg-card flex items-center justify-center border border-border">
+                                                                        {getCategoryIcon(item.category, "w-6 h-6 text-muted-foreground")}
                                                                     </div>
                                                                 )}
                                                                 <div>
@@ -692,7 +692,7 @@ export default function Inventory({ onLogout, onNavigateToDetail, onNavigateToWo
                                                         <td className="p-4 text-muted-foreground">{item.category}</td>
                                                         <td className="p-4">
                                                             <div className="flex items-center gap-1.5 text-muted-foreground">
-                                                                <MapPinIcon className="w-3.5 h-3.5 text-zinc-400" />
+                                                                <MapPinIcon className="w-3.5 h-3.5 text-muted-foreground" />
                                                                 <span>{item.location}</span>
                                                             </div>
                                                         </td>
@@ -729,7 +729,7 @@ export default function Inventory({ onLogout, onNavigateToDetail, onNavigateToWo
                                             onClick={() => toggleSelection(item.id)}
                                             className={cn(
                                                 "group bg-card dark:bg-zinc-800 rounded-2xl border shadow-sm hover:shadow-lg transition-all cursor-pointer relative overflow-hidden flex flex-col h-[340px]",
-                                                selectedIds.has(item.id) ? "border-primary ring-1 ring-primary" : "border-zinc-200 dark:border-zinc-700 hover:border-primary/50"
+                                                selectedIds.has(item.id) ? "border-primary ring-1 ring-primary" : "border-border hover:border-primary/50"
                                             )}
                                         >
                                             {/* Image Section */}
@@ -746,13 +746,13 @@ export default function Inventory({ onLogout, onNavigateToDetail, onNavigateToWo
                                                                 e.currentTarget.nextElementSibling?.classList.add('flex');
                                                             }}
                                                         />
-                                                        <div className="w-full h-full bg-zinc-100 dark:bg-zinc-900 hidden flex-col items-center justify-center text-zinc-300 dark:text-zinc-600">
+                                                        <div className="w-full h-full bg-zinc-100 dark:bg-zinc-900 hidden flex-col items-center justify-center text-zinc-300 dark:text-muted-foreground">
                                                             {getCategoryIcon(item.category)}
                                                             <span className="text-xs font-medium">{item.category}</span>
                                                         </div>
                                                     </>
                                                 ) : (
-                                                    <div className="w-full h-full flex flex-col items-center justify-center text-zinc-300 dark:text-zinc-600">
+                                                    <div className="w-full h-full flex flex-col items-center justify-center text-zinc-300 dark:text-muted-foreground">
                                                         {getCategoryIcon(item.category)}
                                                         <span className="text-xs font-medium">{item.category}</span>
                                                     </div>
@@ -799,7 +799,7 @@ export default function Inventory({ onLogout, onNavigateToDetail, onNavigateToWo
                                                     </div>
                                                     <p className="text-xs text-muted-foreground mb-3 truncate">{item.description}</p>
 
-                                                    <div className="flex items-center gap-1.5 text-xs text-zinc-500 dark:text-zinc-400 mb-2">
+                                                    <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-2">
                                                         <MapPinIcon className="w-3.5 h-3.5 shrink-0" />
                                                         <span className="truncate">{item.location}</span>
                                                     </div>
@@ -821,7 +821,7 @@ export default function Inventory({ onLogout, onNavigateToDetail, onNavigateToWo
                             )}
                             {/* Pagination Footer */}
                             {filteredData.length > 0 && (
-                                <div className="flex items-center justify-between border-t border-zinc-200 dark:border-zinc-700 pt-4 mt-8">
+                                <div className="flex items-center justify-between border-t border-border pt-4 mt-8">
                                     <div className="text-sm text-muted-foreground">
                                         Showing <span className="font-medium text-foreground">{startIndex + 1}</span> to <span className="font-medium text-foreground">{Math.min(endIndex, filteredData.length)}</span> of <span className="font-medium text-foreground">{filteredData.length}</span> results
                                     </div>
@@ -881,8 +881,8 @@ export default function Inventory({ onLogout, onNavigateToDetail, onNavigateToWo
             {/* Sticky Bulk Actions Footer */}
             {
                 selectedIds.size > 0 && (
-                    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-card border border-zinc-200 dark:border-zinc-700 shadow-xl rounded-full px-6 py-3 flex items-center gap-6 z-50 animate-in slide-in-from-bottom-5 fade-in duration-300">
-                        <div className="flex items-center gap-2 border-r border-zinc-200 dark:border-zinc-700 pr-6">
+                    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-card border border-border shadow-xl rounded-full px-6 py-3 flex items-center gap-6 z-50 animate-in slide-in-from-bottom-5 fade-in duration-300">
+                        <div className="flex items-center gap-2 border-r border-border pr-6">
                             <div className="bg-primary text-primary-foreground text-xs font-bold px-2 py-0.5 rounded-full">
                                 {selectedIds.size}
                             </div>
@@ -895,7 +895,7 @@ export default function Inventory({ onLogout, onNavigateToDetail, onNavigateToWo
                                 className="flex items-center gap-2 px-3 py-1.5 hover:bg-accent rounded-lg text-sm font-medium text-foreground transition-colors group"
                             >
                                 <div className="p-0.5 rounded-md transition-colors group-hover:bg-brand-300 dark:group-hover:bg-transparent">
-                                    <ArrowPathRoundedSquareIcon className="w-4 h-4 text-muted-foreground group-hover:text-zinc-600 dark:group-hover:text-primary transition-colors" />
+                                    <ArrowPathRoundedSquareIcon className="w-4 h-4 text-muted-foreground group-hover:text-muted-foreground dark:group-hover:text-primary transition-colors" />
                                 </div>
                                 Change Status
                             </button>
@@ -932,7 +932,7 @@ export default function Inventory({ onLogout, onNavigateToDetail, onNavigateToWo
                             </div>
                             <div className="flex-1">
                                 <h4 className="font-semibold text-sm">{toastMessage.title}</h4>
-                                <p className="text-xs text-zinc-400 dark:text-zinc-600 mt-1">{toastMessage.description}</p>
+                                <p className="text-xs text-muted-foreground dark:text-muted-foreground mt-1">{toastMessage.description}</p>
                                 <div className="mt-3 flex gap-3">
                                     <button
                                         onClick={() => onNavigate('mac')}
@@ -942,7 +942,7 @@ export default function Inventory({ onLogout, onNavigateToDetail, onNavigateToWo
                                     </button>
                                     <button
                                         onClick={() => setShowToast(false)}
-                                        className="text-xs font-medium text-zinc-500 hover:text-zinc-300 dark:hover:text-zinc-700"
+                                        className="text-xs font-medium text-muted-foreground hover:text-zinc-300 dark:hover:text-muted-foreground"
                                     >
                                         Dismiss
                                     </button>

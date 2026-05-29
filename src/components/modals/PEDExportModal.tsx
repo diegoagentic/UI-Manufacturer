@@ -263,12 +263,12 @@ const typeLabels: Record<PEDDocumentType, string> = {
 
 const statusColors: Record<string, string> = {
     'In Production': 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300',
-    'Order Received': 'bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300',
+    'Order Received': 'bg-zinc-100 text-muted-foreground dark:bg-zinc-800 dark:text-zinc-300',
     'Ready to Ship': 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300',
-    'Delivered': 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300',
+    'Delivered': 'bg-gray-100 text-foreground dark:bg-gray-800 dark:text-gray-300',
     'Sent to Dealer': 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300',
     'Sent': 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300',
-    'Draft': 'bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300',
+    'Draft': 'bg-zinc-100 text-muted-foreground dark:bg-zinc-800 dark:text-zinc-300',
     'Confirmed': 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300',
     'Discrepancy': 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300',
     'Partial': 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300',
@@ -395,21 +395,21 @@ export default function PEDExportModal({ isOpen, onClose, data }: PEDExportModal
                                 </div>
 
                                 {/* Document Preview */}
-                                <div className="flex-1 overflow-y-auto p-6 bg-zinc-50 dark:bg-zinc-900/50">
-                                    <div ref={printRef} className="max-w-4xl mx-auto bg-white dark:bg-zinc-800 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-700 p-8 space-y-5">
+                                <div className="flex-1 overflow-y-auto p-6 bg-muted/50">
+                                    <div ref={printRef} className="max-w-4xl mx-auto bg-card rounded-xl shadow-sm border border-border p-8 space-y-5">
 
                                         {/* === HEADER === */}
                                         <div className="flex items-start justify-between pb-4 border-b-2 border-zinc-900 dark:border-zinc-100">
                                             <div>
-                                                <h1 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">{data.vendorName.split('—')[0].trim()}</h1>
-                                                <p className="text-[11px] text-zinc-500 whitespace-pre-line mt-1">{data.vendorAddress}</p>
-                                                <p className="text-[11px] text-zinc-500">Tel: {data.vendorPhone}</p>
+                                                <h1 className="text-xl font-bold text-foreground tracking-tight">{data.vendorName.split('—')[0].trim()}</h1>
+                                                <p className="text-[11px] text-muted-foreground whitespace-pre-line mt-1">{data.vendorAddress}</p>
+                                                <p className="text-[11px] text-muted-foreground">Tel: {data.vendorPhone}</p>
                                             </div>
                                             <div className="text-right">
-                                                <p className="text-xs font-semibold uppercase tracking-wider text-zinc-500">{label}</p>
-                                                <p className="text-xl font-extrabold text-zinc-900 dark:text-zinc-100 mt-0.5">Sales Order {data.salesOrderNumber}</p>
-                                                <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">Order Date: <span className="font-semibold">{data.orderDate}</span></p>
-                                                <span className={`inline-block mt-2 px-2.5 py-0.5 rounded-full text-[11px] font-semibold ${statusColors[data.status] || 'bg-zinc-100 text-zinc-700'}`}>
+                                                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{label}</p>
+                                                <p className="text-xl font-extrabold text-foreground mt-0.5">Sales Order {data.salesOrderNumber}</p>
+                                                <p className="text-sm text-muted-foreground mt-1">Order Date: <span className="font-semibold">{data.orderDate}</span></p>
+                                                <span className={`inline-block mt-2 px-2.5 py-0.5 rounded-full text-[11px] font-semibold ${statusColors[data.status] || 'bg-zinc-100 text-muted-foreground'}`}>
                                                     {data.status}
                                                 </span>
                                             </div>
@@ -424,23 +424,23 @@ export default function PEDExportModal({ isOpen, onClose, data }: PEDExportModal
                                         )}
 
                                         {/* === BILL TO / SHIP TO === */}
-                                        <div className="grid grid-cols-2 gap-6 border border-zinc-200 dark:border-zinc-700 rounded-lg p-4">
+                                        <div className="grid grid-cols-2 gap-6 border border-border rounded-lg p-4">
                                             <div>
-                                                <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-2">Bill To:</p>
-                                                <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{data.billToName}</p>
-                                                <p className="text-xs text-zinc-600 dark:text-zinc-400 whitespace-pre-line mt-1">{data.billToAddress}</p>
-                                                <p className="text-xs text-zinc-500 mt-1">Tel: {data.billToPhone}</p>
+                                                <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-2">Bill To:</p>
+                                                <p className="text-sm font-semibold text-foreground">{data.billToName}</p>
+                                                <p className="text-xs text-muted-foreground whitespace-pre-line mt-1">{data.billToAddress}</p>
+                                                <p className="text-xs text-muted-foreground mt-1">Tel: {data.billToPhone}</p>
                                             </div>
                                             <div>
-                                                <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-2">Ship To:</p>
-                                                <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{data.shipToName}</p>
-                                                <p className="text-xs text-zinc-600 dark:text-zinc-400 whitespace-pre-line mt-1">{data.shipToAddress}</p>
-                                                <p className="text-xs text-zinc-500 mt-1">Delivery Contact: {data.shipToDeliveryContact}</p>
+                                                <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-2">Ship To:</p>
+                                                <p className="text-sm font-semibold text-foreground">{data.shipToName}</p>
+                                                <p className="text-xs text-muted-foreground whitespace-pre-line mt-1">{data.shipToAddress}</p>
+                                                <p className="text-xs text-muted-foreground mt-1">Delivery Contact: {data.shipToDeliveryContact}</p>
                                             </div>
                                         </div>
 
                                         {/* === ORDER METADATA GRID === */}
-                                        <div className="border border-zinc-200 dark:border-zinc-700 rounded-lg overflow-hidden">
+                                        <div className="border border-border rounded-lg overflow-hidden">
                                             <div className="grid grid-cols-4 gap-px bg-zinc-200 dark:bg-zinc-700">
                                                 {[
                                                     { label: 'P.O. No.', value: data.poNumber },
@@ -452,25 +452,25 @@ export default function PEDExportModal({ isOpen, onClose, data }: PEDExportModal
                                                     { label: 'Sales Rep', value: data.salesRep },
                                                     { label: 'ETA', value: data.eta },
                                                 ].map((item, i) => (
-                                                    <div key={i} className="bg-white dark:bg-zinc-800 px-3 py-2">
-                                                        <p className="text-[9px] font-bold uppercase tracking-wider text-zinc-400">{item.label}</p>
-                                                        <p className="text-xs font-medium text-zinc-900 dark:text-zinc-100 mt-0.5">{item.value}</p>
+                                                    <div key={i} className="bg-card px-3 py-2">
+                                                        <p className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground">{item.label}</p>
+                                                        <p className="text-xs font-medium text-foreground mt-0.5">{item.value}</p>
                                                     </div>
                                                 ))}
                                             </div>
-                                            <div className="bg-white dark:bg-zinc-800 px-3 py-2 border-t border-zinc-200 dark:border-zinc-700 flex items-center gap-6">
+                                            <div className="bg-card px-3 py-2 border-t border-border flex items-center gap-6">
                                                 <div>
-                                                    <span className="text-[9px] font-bold uppercase tracking-wider text-zinc-400">Discount Structure: </span>
-                                                    <span className="text-xs font-medium text-zinc-900 dark:text-zinc-100">{data.discountStructure}</span>
+                                                    <span className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground">Discount Structure: </span>
+                                                    <span className="text-xs font-medium text-foreground">{data.discountStructure}</span>
                                                 </div>
                                                 <div>
-                                                    <span className="text-[9px] font-bold uppercase tracking-wider text-zinc-400">Project: </span>
-                                                    <span className="text-xs font-semibold text-zinc-900 dark:text-zinc-100">{data.project}</span>
+                                                    <span className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground">Project: </span>
+                                                    <span className="text-xs font-semibold text-foreground">{data.project}</span>
                                                 </div>
                                             </div>
-                                            <div className="bg-white dark:bg-zinc-800 px-3 py-2 border-t border-zinc-200 dark:border-zinc-700">
-                                                <span className="text-[9px] font-bold uppercase tracking-wider text-zinc-400">Salesperson: </span>
-                                                <span className="text-xs text-zinc-700 dark:text-zinc-300">{data.salesRepEmail} : Chestnut, Crystal</span>
+                                            <div className="bg-card px-3 py-2 border-t border-border">
+                                                <span className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground">Salesperson: </span>
+                                                <span className="text-xs text-muted-foreground">{data.salesRepEmail} : Chestnut, Crystal</span>
                                             </div>
                                             {data.type === 'quote' && data.validUntil && (
                                                 <div className="bg-blue-50 dark:bg-blue-900/20 px-3 py-2 border-t border-blue-200 dark:border-blue-800">
@@ -484,26 +484,26 @@ export default function PEDExportModal({ isOpen, onClose, data }: PEDExportModal
                                         <div>
                                             <table className="w-full text-left border-collapse">
                                                 <thead>
-                                                    <tr className="bg-zinc-100 dark:bg-zinc-900/80 border-y border-zinc-300 dark:border-zinc-600">
-                                                        <th className="py-2 px-2 text-[9px] font-bold uppercase tracking-wider text-zinc-500 w-10">Line</th>
-                                                        <th className="py-2 px-2 text-[9px] font-bold uppercase tracking-wider text-zinc-500" colSpan={2}>Qty</th>
-                                                        <th className="py-2 px-2 text-[9px] font-bold uppercase tracking-wider text-zinc-500">Item Number</th>
-                                                        <th className="py-2 px-2 text-[9px] font-bold uppercase tracking-wider text-zinc-500">Description</th>
-                                                        <th className="py-2 px-2 text-[9px] font-bold uppercase tracking-wider text-zinc-500 text-right">Disc %</th>
-                                                        <th className="py-2 px-2 text-[9px] font-bold uppercase tracking-wider text-zinc-500 text-right">List</th>
-                                                        <th className="py-2 px-2 text-[9px] font-bold uppercase tracking-wider text-zinc-500 text-right">Net Price</th>
-                                                        <th className="py-2 px-2 text-[9px] font-bold uppercase tracking-wider text-zinc-500 text-right">Amount</th>
+                                                    <tr className="bg-zinc-100 dark:bg-zinc-900/80 border-y border-border">
+                                                        <th className="py-2 px-2 text-[9px] font-bold uppercase tracking-wider text-muted-foreground w-10">Line</th>
+                                                        <th className="py-2 px-2 text-[9px] font-bold uppercase tracking-wider text-muted-foreground" colSpan={2}>Qty</th>
+                                                        <th className="py-2 px-2 text-[9px] font-bold uppercase tracking-wider text-muted-foreground">Item Number</th>
+                                                        <th className="py-2 px-2 text-[9px] font-bold uppercase tracking-wider text-muted-foreground">Description</th>
+                                                        <th className="py-2 px-2 text-[9px] font-bold uppercase tracking-wider text-muted-foreground text-right">Disc %</th>
+                                                        <th className="py-2 px-2 text-[9px] font-bold uppercase tracking-wider text-muted-foreground text-right">List</th>
+                                                        <th className="py-2 px-2 text-[9px] font-bold uppercase tracking-wider text-muted-foreground text-right">Net Price</th>
+                                                        <th className="py-2 px-2 text-[9px] font-bold uppercase tracking-wider text-muted-foreground text-right">Amount</th>
                                                     </tr>
-                                                    <tr className="bg-zinc-50 dark:bg-zinc-900/40 border-b border-zinc-200 dark:border-zinc-700">
-                                                        <th className="py-1 px-2 text-[8px] text-zinc-400">Ref.</th>
-                                                        <th className="py-1 px-1 text-[8px] text-zinc-400">Req.</th>
-                                                        <th className="py-1 px-1 text-[8px] text-zinc-400">Ship</th>
-                                                        <th className="py-1 px-2 text-[8px] text-zinc-400"></th>
-                                                        <th className="py-1 px-2 text-[8px] text-zinc-400"></th>
-                                                        <th className="py-1 px-2 text-[8px] text-zinc-400"></th>
-                                                        <th className="py-1 px-2 text-[8px] text-zinc-400"></th>
-                                                        <th className="py-1 px-2 text-[8px] text-zinc-400"></th>
-                                                        <th className="py-1 px-2 text-[8px] text-zinc-400"></th>
+                                                    <tr className="bg-muted/40 border-b border-border">
+                                                        <th className="py-1 px-2 text-[8px] text-muted-foreground">Ref.</th>
+                                                        <th className="py-1 px-1 text-[8px] text-muted-foreground">Req.</th>
+                                                        <th className="py-1 px-1 text-[8px] text-muted-foreground">Ship</th>
+                                                        <th className="py-1 px-2 text-[8px] text-muted-foreground"></th>
+                                                        <th className="py-1 px-2 text-[8px] text-muted-foreground"></th>
+                                                        <th className="py-1 px-2 text-[8px] text-muted-foreground"></th>
+                                                        <th className="py-1 px-2 text-[8px] text-muted-foreground"></th>
+                                                        <th className="py-1 px-2 text-[8px] text-muted-foreground"></th>
+                                                        <th className="py-1 px-2 text-[8px] text-muted-foreground"></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -512,33 +512,33 @@ export default function PEDExportModal({ isOpen, onClose, data }: PEDExportModal
                                                             {items.map((item, idx) => (
                                                                 <Fragment key={item.lineRef}>
                                                                     <tr className={`border-b border-zinc-100 dark:border-zinc-800 ${idx === 0 ? 'border-t-2 border-t-zinc-200 dark:border-t-zinc-600' : ''}`}>
-                                                                        <td className="py-2 px-2 text-xs font-semibold text-zinc-700 dark:text-zinc-300 align-top">{item.lineRef}</td>
-                                                                        <td className="py-2 px-1 text-xs text-zinc-700 dark:text-zinc-300 align-top text-center">{item.qtyReq}</td>
+                                                                        <td className="py-2 px-2 text-xs font-semibold text-muted-foreground align-top">{item.lineRef}</td>
+                                                                        <td className="py-2 px-1 text-xs text-muted-foreground align-top text-center">{item.qtyReq}</td>
                                                                         <td className="py-2 px-1 text-xs align-top text-center">
-                                                                            <span className={item.qtyBO > 0 ? 'text-amber-600 dark:text-amber-400 font-semibold' : 'text-zinc-500'}>{item.qtyShip}</span>
+                                                                            <span className={item.qtyBO > 0 ? 'text-amber-600 dark:text-amber-400 font-semibold' : 'text-muted-foreground'}>{item.qtyShip}</span>
                                                                             {item.qtyBO > 0 && (
                                                                                 <span className="block text-[9px] text-red-500 font-semibold">BO: {item.qtyBO}</span>
                                                                             )}
                                                                         </td>
-                                                                        <td className="py-2 px-2 text-xs font-mono text-zinc-600 dark:text-zinc-400 align-top">{item.itemNumber}</td>
+                                                                        <td className="py-2 px-2 text-xs font-mono text-muted-foreground align-top">{item.itemNumber}</td>
                                                                         <td className="py-2 px-2 align-top">
-                                                                            <p className="text-xs text-zinc-900 dark:text-zinc-100 font-medium">{item.description}</p>
+                                                                            <p className="text-xs text-foreground font-medium">{item.description}</p>
                                                                             <p className="text-[10px] text-sky-600 dark:text-sky-400 font-semibold mt-1">Tag: {item.tag}</p>
                                                                             {item.configs && item.configs.length > 0 && (
                                                                                 <div className="mt-1 space-y-0.5">
                                                                                     {item.configs.map((cfg, ci) => (
-                                                                                        <p key={ci} className="text-[10px] text-zinc-400">
-                                                                                            <span className="text-zinc-500 dark:text-zinc-500">{cfg.label}:</span>{' '}
-                                                                                            <span className="text-zinc-600 dark:text-zinc-400">{cfg.value}</span>
+                                                                                        <p key={ci} className="text-[10px] text-muted-foreground">
+                                                                                            <span className="text-muted-foreground dark:text-muted-foreground">{cfg.label}:</span>{' '}
+                                                                                            <span className="text-muted-foreground">{cfg.value}</span>
                                                                                         </p>
                                                                                     ))}
                                                                                 </div>
                                                                             )}
                                                                         </td>
-                                                                        <td className="py-2 px-2 text-xs text-zinc-600 dark:text-zinc-400 text-right align-top">{item.discPct}</td>
-                                                                        <td className="py-2 px-2 text-xs text-zinc-500 text-right align-top">{item.listPrice}</td>
-                                                                        <td className="py-2 px-2 text-xs text-zinc-600 dark:text-zinc-400 text-right align-top">{item.netPrice}</td>
-                                                                        <td className="py-2 px-2 text-xs font-semibold text-zinc-900 dark:text-zinc-100 text-right align-top">{item.amount}</td>
+                                                                        <td className="py-2 px-2 text-xs text-muted-foreground text-right align-top">{item.discPct}</td>
+                                                                        <td className="py-2 px-2 text-xs text-muted-foreground text-right align-top">{item.listPrice}</td>
+                                                                        <td className="py-2 px-2 text-xs text-muted-foreground text-right align-top">{item.netPrice}</td>
+                                                                        <td className="py-2 px-2 text-xs font-semibold text-foreground text-right align-top">{item.amount}</td>
                                                                     </tr>
                                                                 </Fragment>
                                                             ))}
@@ -550,67 +550,67 @@ export default function PEDExportModal({ isOpen, onClose, data }: PEDExportModal
 
                                         {/* === MATERIAL SPECS + TOTALS === */}
                                         <div className="grid grid-cols-2 gap-6">
-                                            <div className="border border-zinc-200 dark:border-zinc-700 rounded-lg p-3 space-y-1">
-                                                <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-2">Material Specifications</p>
+                                            <div className="border border-border rounded-lg p-3 space-y-1">
+                                                <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-2">Material Specifications</p>
                                                 {data.materialSpecs.map((spec, i) => (
-                                                    <p key={i} className="text-[10px] text-zinc-500">
-                                                        <span className="font-semibold text-zinc-600 dark:text-zinc-400">{spec.label}:</span>{' '}
+                                                    <p key={i} className="text-[10px] text-muted-foreground">
+                                                        <span className="font-semibold text-muted-foreground">{spec.label}:</span>{' '}
                                                         {spec.value}
                                                     </p>
                                                 ))}
                                             </div>
 
                                             <div className="space-y-1.5">
-                                                <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
+                                                <div className="flex justify-between text-xs text-muted-foreground">
                                                     <span>Total List Products</span><span className="font-medium">{data.totalListProducts}</span>
                                                 </div>
-                                                <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
+                                                <div className="flex justify-between text-xs text-muted-foreground">
                                                     <span>Total Net Products</span><span className="font-medium">{data.totalNetProducts}</span>
                                                 </div>
-                                                <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
+                                                <div className="flex justify-between text-xs text-muted-foreground">
                                                     <span>Total Freight</span><span>{data.totalFreight}</span>
                                                 </div>
-                                                <div className="flex justify-between text-xs text-zinc-500 pt-1 border-t border-zinc-200 dark:border-zinc-700">
+                                                <div className="flex justify-between text-xs text-muted-foreground pt-1 border-t border-border">
                                                     <span>Total Product Weight</span><span>{data.totalProductWeight} lbs</span>
                                                 </div>
-                                                <div className="pt-2 mt-1 border-t border-zinc-200 dark:border-zinc-700 space-y-1">
-                                                    <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
+                                                <div className="pt-2 mt-1 border-t border-border space-y-1">
+                                                    <div className="flex justify-between text-xs text-muted-foreground">
                                                         <span>Nontaxable Subtotal</span><span>{data.nontaxableSubtotal}</span>
                                                     </div>
-                                                    <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
+                                                    <div className="flex justify-between text-xs text-muted-foreground">
                                                         <span>Taxable Subtotal</span><span>{data.taxableSubtotal}</span>
                                                     </div>
-                                                    <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
+                                                    <div className="flex justify-between text-xs text-muted-foreground">
                                                         <span>Tax</span><span>{data.tax}</span>
                                                     </div>
                                                 </div>
-                                                <div className="flex justify-between text-sm font-extrabold text-zinc-900 dark:text-zinc-100 pt-2 mt-2 border-t-2 border-zinc-900 dark:border-zinc-100 bg-yellow-50 dark:bg-yellow-900/20 px-3 py-2 rounded-md -mx-1">
+                                                <div className="flex justify-between text-sm font-extrabold text-foreground pt-2 mt-2 border-t-2 border-zinc-900 dark:border-zinc-100 bg-yellow-50 dark:bg-yellow-900/20 px-3 py-2 rounded-md -mx-1">
                                                     <span>Total Order</span><span>{data.totalOrder}</span>
                                                 </div>
                                             </div>
                                         </div>
 
                                         {/* === SHIPPING INFO === */}
-                                        <div className="grid grid-cols-3 gap-4 py-3 px-4 rounded-lg bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-700">
+                                        <div className="grid grid-cols-3 gap-4 py-3 px-4 rounded-lg bg-muted/50 border border-border">
                                             <div className="flex items-center gap-2">
-                                                <TruckIcon className="w-4 h-4 text-zinc-400 shrink-0" />
+                                                <TruckIcon className="w-4 h-4 text-muted-foreground shrink-0" />
                                                 <div>
-                                                    <p className="text-[9px] text-zinc-400 uppercase font-bold">Ship Via</p>
-                                                    <p className="text-xs font-medium text-zinc-700 dark:text-zinc-300">{data.shipVia}</p>
+                                                    <p className="text-[9px] text-muted-foreground uppercase font-bold">Ship Via</p>
+                                                    <p className="text-xs font-medium text-muted-foreground">{data.shipVia}</p>
                                                 </div>
                                             </div>
                                             <div className="flex items-center gap-2">
-                                                <CalendarIcon className="w-4 h-4 text-zinc-400 shrink-0" />
+                                                <CalendarIcon className="w-4 h-4 text-muted-foreground shrink-0" />
                                                 <div>
-                                                    <p className="text-[9px] text-zinc-400 uppercase font-bold">ETA</p>
-                                                    <p className="text-xs font-medium text-zinc-700 dark:text-zinc-300">{data.eta}</p>
+                                                    <p className="text-[9px] text-muted-foreground uppercase font-bold">ETA</p>
+                                                    <p className="text-xs font-medium text-muted-foreground">{data.eta}</p>
                                                 </div>
                                             </div>
                                             <div className="flex items-center gap-2">
-                                                <DocumentTextIcon className="w-4 h-4 text-zinc-400 shrink-0" />
+                                                <DocumentTextIcon className="w-4 h-4 text-muted-foreground shrink-0" />
                                                 <div>
-                                                    <p className="text-[9px] text-zinc-400 uppercase font-bold">F.O.B.</p>
-                                                    <p className="text-xs font-medium text-zinc-700 dark:text-zinc-300">{data.fob}</p>
+                                                    <p className="text-[9px] text-muted-foreground uppercase font-bold">F.O.B.</p>
+                                                    <p className="text-xs font-medium text-muted-foreground">{data.fob}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -642,18 +642,18 @@ export default function PEDExportModal({ isOpen, onClose, data }: PEDExportModal
 
                                         {/* === NOTES === */}
                                         {data.notes && (
-                                            <div className="py-3 px-4 rounded-lg bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-700">
-                                                <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400 mb-1">Notes & Special Instructions</p>
-                                                <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">{data.notes}</p>
+                                            <div className="py-3 px-4 rounded-lg bg-muted/50 border border-border">
+                                                <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-1">Notes & Special Instructions</p>
+                                                <p className="text-xs text-muted-foreground leading-relaxed">{data.notes}</p>
                                             </div>
                                         )}
 
                                         {/* === FOOTER === */}
-                                        <div className="pt-4 border-t border-zinc-200 dark:border-zinc-700 text-center">
-                                            <p className="text-[10px] text-zinc-400">
+                                        <div className="pt-4 border-t border-border text-center">
+                                            <p className="text-[10px] text-muted-foreground">
                                                 Manufacturer Copy — Page 1 • Generated by <span className="font-semibold">Strata Experience Platform</span>
                                             </p>
-                                            <p className="text-[10px] text-zinc-400 mt-0.5">
+                                            <p className="text-[10px] text-muted-foreground mt-0.5">
                                                 {label} {data.salesOrderNumber} • {data.vendorName} • {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                                             </p>
                                         </div>

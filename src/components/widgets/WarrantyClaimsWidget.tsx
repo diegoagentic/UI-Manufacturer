@@ -60,7 +60,7 @@ export default function WarrantyClaimsWidget() {
                                 <h4 className="text-sm font-bold text-foreground">
                                     {claim.id}
                                 </h4>
-                                <p className="text-xs font-medium text-zinc-600 dark:text-zinc-400 mt-0.5">
+                                <p className="text-xs font-medium text-muted-foreground mt-0.5">
                                     {claim.product}
                                 </p>
                             </div>
@@ -77,7 +77,7 @@ export default function WarrantyClaimsWidget() {
                                 <span className="font-medium text-foreground">Issue:</span> {claim.issue}
                             </span>
                             {claim.image && (
-                                <div className="flex items-center gap-1 text-[10px] text-zinc-500 font-medium">
+                                <div className="flex items-center gap-1 text-[10px] text-muted-foreground font-medium">
                                     <PhotoIcon className="w-3 h-3" />
                                     <span>Image attached</span>
                                 </div>

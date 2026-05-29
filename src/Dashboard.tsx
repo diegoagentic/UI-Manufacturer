@@ -186,10 +186,10 @@ const recentQuotes = [
 ]
 
 const recentOrders = [
-    { id: "#ORD-2055", customer: "AutoManfacture Co.", client: "AutoManfacture Co.", project: "Office Renovation", amount: "$385,000", status: "Pending Review", date: "Dec 20, 2025", initials: "AC", statusColor: "bg-zinc-100 text-zinc-700" },
+    { id: "#ORD-2055", customer: "AutoManfacture Co.", client: "AutoManfacture Co.", project: "Office Renovation", amount: "$385,000", status: "Pending Review", date: "Dec 20, 2025", initials: "AC", statusColor: "bg-zinc-100 text-muted-foreground" },
     { id: "#ORD-2054", customer: "TechDealer Solutions", client: "TechDealer Solutions", project: "HQ Upgrade", amount: "$62,500", status: "In Production", date: "Nov 15, 2025", initials: "TS", statusColor: "bg-brand-50 text-brand-700 ring-brand-600/20" },
     { id: "#ORD-2053", customer: "Urban Living Inc.", client: "Urban Living Inc.", project: "Lobby Refresh", amount: "$112,000", status: "Shipped", date: "Oct 30, 2025", initials: "UL", statusColor: "bg-green-50 text-green-700 ring-green-600/20" },
-    { id: "#ORD-2052", customer: "Global Logistics", client: "Global Logistics", project: "Warehouse Expansion", amount: "$45,000", status: "Delivered", date: "Oct 15, 2025", initials: "GL", statusColor: "bg-gray-100 text-gray-700" },
+    { id: "#ORD-2052", customer: "Global Logistics", client: "Global Logistics", project: "Warehouse Expansion", amount: "$45,000", status: "Delivered", date: "Oct 15, 2025", initials: "GL", statusColor: "bg-gray-100 text-foreground" },
 ]
 
 
@@ -594,9 +594,9 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                         <div key={i} className="flex items-center gap-1.5">
                                             <div className="relative">
                                                 <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-emerald-500/20 to-teal-500/20 flex items-center justify-center ring-1 ring-emerald-500/30 animate-ai-glow">
-                                                    <SparklesIcon className="w-3 h-3 text-emerald-500" />
+                                                    <SparklesIcon className="w-3 h-3 text-success" />
                                                 </div>
-                                                <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-green-500 text-white flex items-center justify-center ring-1 ring-white dark:ring-zinc-900">
+                                                <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-green-500 text-white flex items-center justify-center ring-1 ring-background">
                                                     <CheckIcon className="w-1.5 h-1.5" />
                                                 </div>
                                             </div>
@@ -955,7 +955,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                             <div className={cn(
                                                 "flex items-center gap-4 p-3 rounded-xl transition-all duration-500",
                                                 approvalStates16[i] === 'approved'
-                                                    ? 'bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20'
+                                                    ? 'bg-emerald-50 dark:bg-success/10 border border-emerald-200 dark:border-emerald-500/20'
                                                     : i === approvedCount16
                                                         ? 'bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 animate-pulse'
                                                         : 'bg-muted/30 border border-border/50'
@@ -963,10 +963,10 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                                 <div className="relative shrink-0">
                                                     <DemoAvatar name={approver.name} size="lg" />
                                                     {approvalStates16[i] === 'approved' && (
-                                                        <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-emerald-500 text-white flex items-center justify-center ring-2 ring-white dark:ring-zinc-900"><CheckIcon className="w-2.5 h-2.5" /></div>
+                                                        <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-success text-white flex items-center justify-center ring-2 ring-background"><CheckIcon className="w-2.5 h-2.5" /></div>
                                                     )}
                                                     {approvalStates16[i] !== 'approved' && i === approvedCount16 && (
-                                                        <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-blue-500 text-white flex items-center justify-center ring-2 ring-white dark:ring-zinc-900"><ArrowPathIcon className="w-2.5 h-2.5 animate-spin" /></div>
+                                                        <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-blue-500 text-white flex items-center justify-center ring-2 ring-background"><ArrowPathIcon className="w-2.5 h-2.5 animate-spin" /></div>
                                                     )}
                                                 </div>
                                                 <div className="flex-1 min-w-0">
@@ -979,7 +979,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                                 </div>
                                                 <div className="text-right shrink-0">
                                                     {approvalStates16[i] === 'approved' ? (
-                                                        <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400">Auto-Approved</span>
+                                                        <span className="text-[10px] font-bold text-success dark:text-success">Auto-Approved</span>
                                                     ) : i === approvedCount16 ? (
                                                         <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400">Reviewing...</span>
                                                     ) : (
@@ -997,13 +997,13 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                         <span className="text-[10px] font-bold text-foreground">{approvedCount16}/2</span>
                                     </div>
                                     <div className="h-2 bg-muted rounded-full overflow-hidden">
-                                        <div className={cn("h-full rounded-full transition-all duration-700", approvedCount16 === 2 ? 'bg-emerald-500' : 'bg-blue-500')} style={{ width: `${(approvedCount16 / 2) * 100}%` }} />
+                                        <div className={cn("h-full rounded-full transition-all duration-700", approvedCount16 === 2 ? 'bg-success' : 'bg-blue-500')} style={{ width: `${(approvedCount16 / 2) * 100}%` }} />
                                     </div>
                                 </div>
 
                                 {approvedCount16 === 2 ? (
-                                    <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 flex items-center gap-2 animate-in fade-in duration-500">
-                                        <CheckCircleIcon className="w-4 h-4 text-emerald-500 shrink-0" />
+                                    <div className="p-3 rounded-xl bg-emerald-50 dark:bg-success/10 border border-emerald-200 dark:border-emerald-500/20 flex items-center gap-2 animate-in fade-in duration-500">
+                                        <CheckCircleIcon className="w-4 h-4 text-success shrink-0" />
                                         <span className="text-[10px] text-emerald-700 dark:text-emerald-300 font-medium">All approvals complete — advancing to PO generation</span>
                                     </div>
                                 ) : (
@@ -1032,11 +1032,11 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
 
                         {/* Quote Approval Complete */}
                         <div className="bg-card border border-emerald-200 dark:border-emerald-500/20 rounded-2xl overflow-hidden shadow-sm">
-                            <div className="px-5 py-3 bg-emerald-50 dark:bg-emerald-500/10 flex items-center gap-3">
-                                <CheckCircleIcon className="w-5 h-5 text-emerald-500 shrink-0" />
+                            <div className="px-5 py-3 bg-emerald-50 dark:bg-success/10 flex items-center gap-3">
+                                <CheckCircleIcon className="w-5 h-5 text-success shrink-0" />
                                 <div className="flex-1">
                                     <p className="text-xs font-bold text-emerald-700 dark:text-emerald-300">Quote Approval Chain — Complete</p>
-                                    <p className="text-[10px] text-emerald-600 dark:text-emerald-400">QT-1025 approved by System Policy Engine + David Park</p>
+                                    <p className="text-[10px] text-success dark:text-success">QT-1025 approved by System Policy Engine + David Park</p>
                                 </div>
                             </div>
                             <div className="p-4 flex items-center gap-6">
@@ -1047,11 +1047,11 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                     <div key={i} className="flex items-center gap-2">
                                         <div className="relative">
                                             <DemoAvatar name={a.name} size="sm" />
-                                            <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-emerald-500 text-white flex items-center justify-center ring-1 ring-white dark:ring-zinc-900"><CheckIcon className="w-2 h-2" /></div>
+                                            <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-success text-white flex items-center justify-center ring-1 ring-background"><CheckIcon className="w-2 h-2" /></div>
                                         </div>
                                         <div>
                                             <span className="text-[11px] font-medium text-foreground">{a.name}</span>
-                                            <span className="text-[10px] text-emerald-600 dark:text-emerald-400 ml-1.5">· {a.status}</span>
+                                            <span className="text-[10px] text-success dark:text-success ml-1.5">· {a.status}</span>
                                         </div>
                                     </div>
                                 ))}
@@ -1069,7 +1069,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                         <h3 className="text-sm font-bold text-foreground">PO Generation</h3>
                                         <p className="text-[10px] text-muted-foreground">POBuilderAgent generating purchase order from QT-1025</p>
                                     </div>
-                                    {poGenPhase18 === 'complete' && <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1"><CheckCircleIcon className="w-3.5 h-3.5" /> PO-1029</span>}
+                                    {poGenPhase18 === 'complete' && <span className="text-[10px] font-bold text-success dark:text-success flex items-center gap-1"><CheckCircleIcon className="w-3.5 h-3.5" /> PO-1029</span>}
                                 </div>
                                 <div className="grid grid-cols-4 gap-2">
                                     {[
@@ -1084,11 +1084,11 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                         const isDone = currentIdx > stepIdx || (currentIdx === stepIdx && poGenPhase18 === 'complete' && step.phase === 'complete');
                                         const isActive = currentIdx === stepIdx && poGenPhase18 !== 'complete';
                                         return (
-                                            <div key={step.phase} className={cn("p-2.5 rounded-lg border text-center transition-all", isDone ? 'border-emerald-500/30 bg-emerald-50 dark:bg-emerald-500/5' : isActive ? 'border-blue-500/30 bg-blue-50 dark:bg-blue-500/5 animate-pulse' : 'border-border bg-muted/20')}>
-                                                <div className={cn("w-5 h-5 rounded-full mx-auto mb-1 flex items-center justify-center", isDone ? 'bg-emerald-500 text-white' : isActive ? 'bg-blue-500 text-white' : 'bg-muted text-muted-foreground')}>
+                                            <div key={step.phase} className={cn("p-2.5 rounded-lg border text-center transition-all", isDone ? 'border-emerald-500/30 bg-emerald-50 dark:bg-success/5' : isActive ? 'border-blue-500/30 bg-blue-50 dark:bg-blue-500/5 animate-pulse' : 'border-border bg-muted/20')}>
+                                                <div className={cn("w-5 h-5 rounded-full mx-auto mb-1 flex items-center justify-center", isDone ? 'bg-success text-white' : isActive ? 'bg-blue-500 text-white' : 'bg-muted text-muted-foreground')}>
                                                     {isDone ? <CheckIcon className="w-3 h-3" /> : isActive ? <ArrowPathIcon className="w-3 h-3 animate-spin" /> : <ClockIcon className="w-3 h-3" />}
                                                 </div>
-                                                <p className={cn("text-[9px] font-medium", isDone ? 'text-emerald-600 dark:text-emerald-400' : isActive ? 'text-blue-600 dark:text-blue-400' : 'text-muted-foreground')}>{step.label}</p>
+                                                <p className={cn("text-[9px] font-medium", isDone ? 'text-success dark:text-success' : isActive ? 'text-blue-600 dark:text-blue-400' : 'text-muted-foreground')}>{step.label}</p>
                                             </div>
                                         );
                                     })}
@@ -1101,8 +1101,8 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                             <div className="bg-card border border-border rounded-2xl overflow-hidden shadow-sm animate-in fade-in slide-in-from-top-2 duration-300">
                                 <div className="px-5 py-3 border-b border-border flex items-center justify-between">
                                     <div className="flex items-center gap-3">
-                                        <div className="p-2 rounded-xl bg-purple-50 dark:bg-purple-500/10">
-                                            <ClipboardDocumentCheckIcon className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                                        <div className="p-2 rounded-xl bg-purple-50 dark:bg-ai/10">
+                                            <ClipboardDocumentCheckIcon className="w-5 h-5 text-ai dark:text-purple-400" />
                                         </div>
                                         <div>
                                             <h3 className="text-sm font-bold text-foreground">Order Approval Chain</h3>
@@ -1122,7 +1122,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                             <div className={cn(
                                                 "flex items-center gap-3 p-2.5 rounded-lg transition-all duration-500",
                                                 orderApprovalStates18[i] === 'approved'
-                                                    ? 'bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20'
+                                                    ? 'bg-emerald-50 dark:bg-success/10 border border-emerald-200 dark:border-emerald-500/20'
                                                     : i === orderApprovedCount18
                                                         ? 'bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 animate-pulse'
                                                         : 'bg-muted/30 border border-border/50'
@@ -1130,17 +1130,17 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                                 <div className="relative shrink-0">
                                                     <DemoAvatar name={approver.name} size="md" />
                                                     {orderApprovalStates18[i] === 'approved' && (
-                                                        <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-emerald-500 text-white flex items-center justify-center ring-1 ring-white dark:ring-zinc-900"><CheckIcon className="w-2 h-2" /></div>
+                                                        <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-success text-white flex items-center justify-center ring-1 ring-background"><CheckIcon className="w-2 h-2" /></div>
                                                     )}
                                                     {orderApprovalStates18[i] !== 'approved' && i === orderApprovedCount18 && (
-                                                        <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-blue-500 text-white flex items-center justify-center ring-1 ring-white dark:ring-zinc-900"><ArrowPathIcon className="w-2 h-2 animate-spin" /></div>
+                                                        <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-blue-500 text-white flex items-center justify-center ring-1 ring-background"><ArrowPathIcon className="w-2 h-2 animate-spin" /></div>
                                                     )}
                                                 </div>
                                                 <div className="flex-1 min-w-0">
                                                     <span className="text-[11px] font-bold text-foreground">{approver.name}</span>
                                                     <span className="text-[10px] text-muted-foreground ml-1.5">· {approver.role}</span>
                                                 </div>
-                                                <span className={cn("text-[10px] font-bold", orderApprovalStates18[i] === 'approved' ? 'text-emerald-600 dark:text-emerald-400' : i === orderApprovedCount18 ? 'text-blue-600 dark:text-blue-400' : 'text-muted-foreground')}>
+                                                <span className={cn("text-[10px] font-bold", orderApprovalStates18[i] === 'approved' ? 'text-success dark:text-success' : i === orderApprovedCount18 ? 'text-blue-600 dark:text-blue-400' : 'text-muted-foreground')}>
                                                     {orderApprovalStates18[i] === 'approved' ? 'Approved' : i === orderApprovedCount18 ? 'Reviewing...' : 'Pending'}
                                                 </span>
                                             </div>
@@ -1149,11 +1149,11 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                 </div>
                                 {(phase18 === 'order-complete' || phase18 === 'done') && (
                                     <div className="px-5 pb-4">
-                                        <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 flex items-center gap-3">
-                                            <CheckCircleIcon className="w-5 h-5 text-emerald-500 shrink-0" />
+                                        <div className="p-3 rounded-xl bg-emerald-50 dark:bg-success/10 border border-emerald-200 dark:border-emerald-500/20 flex items-center gap-3">
+                                            <CheckCircleIcon className="w-5 h-5 text-success shrink-0" />
                                             <div>
                                                 <p className="text-xs font-bold text-emerald-700 dark:text-emerald-300">Order PO-1029 Fully Approved</p>
-                                                <p className="text-[10px] text-emerald-600 dark:text-emerald-400">All 3 approval levels complete — order entering production pipeline</p>
+                                                <p className="text-[10px] text-success dark:text-success">All 3 approval levels complete — order entering production pipeline</p>
                                             </div>
                                         </div>
                                     </div>
@@ -1366,7 +1366,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                     </div>
 
                                     {/* What was resolved */}
-                                    <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20">
+                                    <div className="p-3 rounded-xl bg-emerald-50 dark:bg-success/10 border border-emerald-200 dark:border-emerald-500/20">
                                         <p className="text-[10px] font-bold text-emerald-700 dark:text-emerald-300 mb-2">Automatically Resolved</p>
                                         <div className="space-y-1">
                                             {[
@@ -1375,7 +1375,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                                 'Armrest upgraded: 4D Adjustable (faster delivery, +$750)',
                                                 '8 vendor substitutions applied (equivalent or better specs)',
                                             ].map((item, i) => (
-                                                <div key={i} className="flex items-center gap-2 text-xs text-emerald-600 dark:text-emerald-400">
+                                                <div key={i} className="flex items-center gap-2 text-xs text-success dark:text-success">
                                                     <CheckCircleIcon className="w-3.5 h-3.5 shrink-0" />
                                                     <span>{item}</span>
                                                 </div>
@@ -1390,7 +1390,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                             disabled={managerApproved17 || requestChangesOpen17}
                                             className={cn(
                                                 'px-6 py-3 text-sm font-bold rounded-xl transition-all shadow-sm flex items-center gap-2',
-                                                managerApproved17 ? 'bg-emerald-500 text-white' : 'bg-primary text-primary-foreground hover:opacity-90 hover:scale-[1.02] disabled:opacity-50'
+                                                managerApproved17 ? 'bg-success text-white' : 'bg-primary text-primary-foreground hover:opacity-90 hover:scale-[1.02] disabled:opacity-50'
                                             )}
                                         >
                                             {managerApproved17 ? <><CheckIcon className="w-4 h-4" /> Quote Approved</> : <><CheckBadgeIcon className="w-4 h-4" /> Approve Quote</>}
@@ -1408,7 +1408,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                             <PencilSquareIcon className="w-4 h-4" /> Request Changes
                                         </button>
                                         {managerApproved17 && (
-                                            <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-medium animate-pulse">Generating PO...</span>
+                                            <span className="text-[10px] text-success dark:text-success font-medium animate-pulse">Generating PO...</span>
                                         )}
                                     </div>
 
@@ -1422,7 +1422,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                             <p className="text-[11px] text-amber-600 dark:text-amber-400">Describe any inconsistencies found in the 50 line items. The quote will be sent back to the Expert for revision.</p>
                                             <textarea
                                                 placeholder="e.g. Line items 12-15 show incorrect unit pricing for Acoustic Panels. Also, SKU-PLT-0200 quantity should be 30 not 20..."
-                                                className="w-full h-20 px-3 py-2 text-xs rounded-lg bg-white dark:bg-zinc-900 border border-amber-200 dark:border-amber-500/30 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-amber-400 resize-none"
+                                                className="w-full h-20 px-3 py-2 text-xs rounded-lg bg-card border border-amber-200 dark:border-amber-500/30 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-amber-400 resize-none"
                                             />
                                             <div className="flex items-center gap-2">
                                                 <button
@@ -1520,7 +1520,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                 {/* Left Scroll Button (Expanded) */}
                                 <button
                                     onClick={() => scroll(expandedScrollRef, 'left')}
-                                    className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 p-2 rounded-full bg-white dark:bg-zinc-800 shadow-lg border border-gray-200 dark:border-white/10 text-zinc-500 hover:text-foreground opacity-0 group-hover/expanded:opacity-100 transition-all disabled:opacity-0"
+                                    className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 p-2 rounded-full bg-card shadow-lg border border-gray-200 dark:border-white/10 text-muted-foreground hover:text-foreground opacity-0 group-hover/expanded:opacity-100 transition-all disabled:opacity-0"
                                 >
                                     <ChevronLeftIcon className="w-5 h-5" />
                                 </button>
@@ -1533,7 +1533,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                     {Object.entries(platformSummary).map(([key, data]) => (
                                         <div
                                             key={key}
-                                            className={`min-w-[230px] max-w-[230px] h-[200px] flex flex-col justify-between bg-white dark:bg-zinc-800 backdrop-blur-sm rounded-xl p-3 border border-zinc-200 dark:border-zinc-700 transition-all duration-300 group/card ${expandedCardId === key ? 'ring-1 ring-primary/20 shadow-md' : 'shadow-sm hover:shadow-md'}`}
+                                            className={`min-w-[230px] max-w-[230px] h-[200px] flex flex-col justify-between bg-card backdrop-blur-sm rounded-xl p-3 border border-border transition-all duration-300 group/card ${expandedCardId === key ? 'ring-1 ring-primary/20 shadow-md' : 'shadow-sm hover:shadow-md'}`}
                                         >
                                             <div className="flex-1 flex flex-col">
                                                 {/* Header: Label + Icon */}
@@ -1610,7 +1610,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                 {/* Right Scroll Button (Expanded) */}
                                 <button
                                     onClick={() => scroll(expandedScrollRef, 'right')}
-                                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 p-2 rounded-full bg-white dark:bg-zinc-800 shadow-lg border border-gray-200 dark:border-white/10 text-zinc-500 hover:text-foreground opacity-0 group-hover/expanded:opacity-100 transition-all"
+                                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 p-2 rounded-full bg-card shadow-lg border border-gray-200 dark:border-white/10 text-muted-foreground hover:text-foreground opacity-0 group-hover/expanded:opacity-100 transition-all"
                                 >
                                     <ChevronRightIcon className="w-5 h-5" />
                                 </button>
@@ -1631,7 +1631,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                             onClick={action.action}
                                             className="flex flex-col items-center justify-center gap-2 p-3 rounded-xl border border-dashed border-border bg-white/50 dark:bg-zinc-800/50 hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:border-brand-400 hover:text-zinc-900 transition-all group"
                                         >
-                                            <div className="p-2.5 rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-500 group-hover:text-zinc-900 group-hover:bg-brand-100 dark:group-hover:bg-brand-900/20 transition-colors">
+                                            <div className="p-2.5 rounded-full bg-zinc-100 dark:bg-zinc-900 text-muted-foreground group-hover:text-zinc-900 group-hover:bg-brand-100 dark:group-hover:bg-brand-900/20 transition-colors">
                                                 {action.icon}
                                             </div>
                                             <div className="text-center">
@@ -1645,13 +1645,13 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                         </div>
                     </>
                 ) : (
-                    <div className="bg-white/60 dark:bg-zinc-800 backdrop-blur-md rounded-2xl p-4 border border-zinc-200 dark:border-zinc-700 shadow-sm flex flex-col xl:flex-row items-center justify-between gap-4 animate-in fade-in slide-in-from-top-4 duration-300">
+                    <div className="bg-white/60 dark:bg-zinc-800 backdrop-blur-md rounded-2xl p-4 border border-border shadow-sm flex flex-col xl:flex-row items-center justify-between gap-4 animate-in fade-in slide-in-from-top-4 duration-300">
                         {/* Collapsed Ticker View - Carousel */}
                         <div className="flex items-center gap-2 flex-1 min-w-0">
                             {/* Left Scroll Button */}
                             <button
                                 onClick={() => scroll(scrollContainerRef, 'left')}
-                                className="p-1.5 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-400 hover:text-foreground transition-colors shrink-0"
+                                className="p-1.5 rounded-full hover:bg-muted text-muted-foreground hover:text-foreground transition-colors shrink-0"
                             >
                                 <ChevronLeftIcon className="w-4 h-4" />
                             </button>
@@ -1688,7 +1688,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                             {/* Right Scroll Button */}
                             <button
                                 onClick={() => scroll(scrollContainerRef, 'right')}
-                                className="p-1.5 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-400 hover:text-foreground transition-colors shrink-0"
+                                className="p-1.5 rounded-full hover:bg-muted text-muted-foreground hover:text-foreground transition-colors shrink-0"
                             >
                                 <ChevronRightIcon className="w-4 h-4" />
                             </button>
@@ -1697,7 +1697,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                         <div className="w-px h-12 bg-zinc-200 dark:bg-zinc-700 hidden xl:block mx-2"></div>
 
                         {/* Quick Actions Integrated - Compact */}
-                        <div className="flex items-center gap-1 overflow-x-auto min-w-max pl-4 border-l border-zinc-200 dark:border-zinc-700 xl:border-none xl:pl-0">
+                        <div className="flex items-center gap-1 overflow-x-auto min-w-max pl-4 border-l border-border xl:border-none xl:pl-0">
                             {[
                                 { icon: <DocumentPlusIcon className="w-5 h-5" />, label: "New Quote" },
                                 { icon: <CubeIcon className="w-5 h-5" />, label: "Check Stock" },
@@ -1707,14 +1707,14 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                 <button
                                     key={i}
                                     onClick={action.action}
-                                    className="p-2 rounded-lg hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:text-zinc-900 dark:hover:text-white transition-colors relative group"
+                                    className="p-2 rounded-lg hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:text-foreground transition-colors relative group"
                                     title={action.label}
                                 >
                                     {action.icon}
                                 </button>
                             ))}
                             <div className="w-px h-6 bg-zinc-200 dark:bg-zinc-700 mx-1"></div>
-                            <button className="p-2 rounded-lg hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:text-zinc-900 dark:hover:text-white transition-colors relative group" title="View All & Manage">
+                            <button className="p-2 rounded-lg hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:text-foreground transition-colors relative group" title="View All & Manage">
                                 <Squares2X2Icon className="w-5 h-5" />
                             </button>
                         </div>
@@ -1723,7 +1723,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
 
                         <button
                             onClick={() => setShowMetrics(true)}
-                            className="p-2 rounded-lg hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:text-zinc-900 dark:hover:text-white transition-colors"
+                            className="p-2 rounded-lg hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:text-foreground transition-colors"
                             title="Expand Summary"
                         >
                             <ChevronDownIcon className="w-5 h-5" />
@@ -1734,7 +1734,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
 
                 {/* Main Tabs Navigation */}
                 <div className="flex items-center mt-8 mb-6">
-                    <div className="flex items-center gap-1 p-1 bg-zinc-100 dark:bg-zinc-800/50 rounded-xl border border-zinc-200 dark:border-zinc-800">
+                    <div className="flex items-center gap-1 p-1 bg-muted/50 rounded-xl border border-border">
                         <button
                             onClick={() => setMainTab('follow_up')}
                             className={cn(
@@ -1742,7 +1742,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                 mainTab === 'follow_up'
                                     ? "bg-brand-300 dark:bg-brand-500 text-zinc-900 shadow-sm"
 
-                                    : "text-muted-foreground hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:text-zinc-900 dark:hover:text-white"
+                                    : "text-muted-foreground hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:text-foreground"
                             )}
                         >
                             <ListBulletIcon className="w-4 h-4" />
@@ -1755,7 +1755,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                 mainTab === 'your_tools'
                                     ? "bg-brand-300 dark:bg-brand-500 text-zinc-900 shadow-sm"
 
-                                    : "text-muted-foreground hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:text-zinc-900 dark:hover:text-white"
+                                    : "text-muted-foreground hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:text-foreground"
                             )}
                         >
                             <WrenchScrewdriverIcon className="w-4 h-4" />
@@ -1768,7 +1768,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                 mainTab === 'metrics'
                                     ? "bg-brand-300 dark:bg-brand-500 text-zinc-900 shadow-sm"
 
-                                    : "text-muted-foreground hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:text-zinc-900 dark:hover:text-white"
+                                    : "text-muted-foreground hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:text-foreground"
                             )}
                         >
                             <ChartBarIcon className="w-4 h-4" />
@@ -1797,7 +1797,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                     </div>
                                     <div className="space-y-3">
                                         {urgentActions.filter(action => action.id !== 4 || currentStep.id === '2.1').map((action) => (
-                                            <div key={action.id} className={`group border rounded-xl hover:border-zinc-400 transition-all duration-700 bg-zinc-50/50 dark:bg-zinc-800/50 ${(highlightedAction === action.id || (action.id === 4 && currentStep.id === '2.1'))
+                                            <div key={action.id} className={`group border rounded-xl hover:border-zinc-400 transition-all duration-700 bg-muted/50 dark:bg-zinc-800/50 ${(highlightedAction === action.id || (action.id === 4 && currentStep.id === '2.1'))
                                                 ? 'ring-4 ring-brand-500 shadow-[0_0_30px_rgba(var(--brand-500),0.6)] animate-pulse border-brand-500'
                                                 : 'border-border'
                                                 }`}>
@@ -1821,7 +1821,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                                         <div className="flex items-center gap-2 shrink-0">
                                                             <span className={`text-[10px] font-bold px-2 py-1 rounded-md ${action.type === 'critical' ? 'bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-400' :
                                                                 action.type === 'warning' ? 'bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400' :
-                                                                    'bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400'
+                                                                    'bg-zinc-100 text-muted-foreground dark:bg-zinc-800 dark:text-muted-foreground'
                                                                 }`}>
                                                                 {action.time}
                                                             </span>
@@ -1859,8 +1859,8 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                 <div className="bg-card rounded-2xl border border-border shadow-sm p-6">
                                     <div className="flex items-center justify-between mb-6">
                                         <h3 className="text-lg font-brand font-semibold text-foreground flex items-center gap-2">
-                                            {/* Changed from text-primary (lime) to text-zinc-500 for better visibility in light mode */}
-                                            <ClockIcon className="w-5 h-5 text-zinc-500 dark:text-zinc-400" />
+                                            {/* Changed from text-primary (lime) to text-muted-foreground for better visibility in light mode */}
+                                            <ClockIcon className="w-5 h-5 text-muted-foreground" />
                                             Recent Activity
                                         </h3>
                                         <button className="flex items-center gap-2 text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-lg px-2 py-1 transition-colors">
@@ -2003,12 +2003,12 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                             <div key={suggestion.id} className="p-4 rounded-xl border border-border bg-muted dark:bg-secondary/50 hover:border-indigo-200 dark:hover:border-indigo-900/50 transition-colors group cursor-pointer">
                                                 <div className="flex items-start gap-4">
                                                     <div className="w-10 h-10 rounded-full bg-card dark:bg-secondary border border-zinc-100 dark:border-zinc-700 flex items-center justify-center shrink-0 shadow-sm group-hover:scale-105 transition-transform">
-                                                        <suggestion.icon className="w-5 h-5 text-zinc-500" />
+                                                        <suggestion.icon className="w-5 h-5 text-muted-foreground" />
                                                     </div>
                                                     <div className="flex-1">
                                                         <div className="flex justify-between items-start">
                                                             <h4 className="text-sm font-semibold text-foreground">{suggestion.title}</h4>
-                                                            <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700">
+                                                            <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-muted text-muted-foreground border border-border">
                                                                 {suggestion.impact}
                                                             </span>
                                                         </div>
@@ -2038,7 +2038,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                             <h3 className="text-lg font-brand font-semibold text-foreground">Performance</h3>
                                             <p className="text-xs text-muted-foreground mt-1">Operational metrics vs Targets</p>
                                         </div>
-                                        <div className="flex bg-zinc-100 dark:bg-zinc-800/50 rounded-lg p-0.5 border border-zinc-200 dark:border-zinc-700/50">
+                                        <div className="flex bg-muted/50 rounded-lg p-0.5 border border-border/50">
                                             {['Day', 'Month', 'Sem', 'Year'].map((period) => (
                                                 <button key={period} className={`px-3 py-1 text-[10px] font-medium rounded-md transition-all ${period === 'Month' ? 'bg-white dark:bg-brand-400 text-foreground dark:text-zinc-900 shadow-sm border border-border dark:border-transparent' : 'text-muted-foreground hover:text-foreground hover:bg-zinc-200/50 dark:hover:bg-zinc-700'}`}>
                                                     {period}
@@ -2054,7 +2054,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                                     <span className="text-sm font-medium text-foreground">{metric.label}</span>
                                                     <span className="text-lg font-bold text-foreground">{metric.value}%</span>
                                                 </div>
-                                                <div className="relative h-2 bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
+                                                <div className="relative h-2 bg-muted rounded-full overflow-hidden">
                                                     <div
                                                         className={`absolute top-0 left-0 h-full ${metric.color} rounded-full`}
                                                         style={{ width: `${metric.value}%` }}
@@ -2084,12 +2084,12 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                             {/* Config Bar - Optimized for Contrast */}
                             <div className="flex items-center justify-between px-4 py-3 bg-gray-50/50 dark:bg-zinc-900/10 border border-gray-200/50 dark:border-white/5 rounded-lg backdrop-blur-sm animate-in fade-in slide-in-from-top-2">
                                 <div className="flex items-center gap-2">
-                                    <span className="text-sm font-medium text-gray-900 dark:text-white">Tools configured for you</span>
+                                    <span className="text-sm font-medium text-foreground">Tools configured for you</span>
                                 </div>
                                 <button
                                     onClick={() => setIsFeatureManagerOpen(true)}
                                     className={cn(
-                                        "flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-white/10 rounded-md shadow-sm text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-zinc-700 transition-all",
+                                        "flex items-center gap-1.5 px-3 py-1.5 bg-card border border-gray-200 dark:border-white/10 rounded-md shadow-sm text-xs font-medium text-muted-foreground hover:bg-gray-50 dark:hover:bg-zinc-700 transition-all",
                                         isCustomizeHighlighted && "ring-2 ring-purple-500 animate-pulse relative z-50"
                                     )}
                                 >
@@ -2134,7 +2134,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                                     <div className="p-6 border-b border-border">
                                                         <div className="flex items-center justify-between mb-4">
                                                             <h3 className="text-lg font-brand font-semibold text-foreground flex items-center gap-2 cursor-grab active:cursor-grabbing">
-                                                                <Bars3Icon className="w-5 h-5 text-zinc-400 hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400 transition-colors" />
+                                                                <Bars3Icon className="w-5 h-5 text-muted-foreground hover:text-muted-foreground dark:text-muted-foreground dark:hover:text-muted-foreground transition-colors" />
                                                                 Recent Orders
                                                             </h3>
                                                         </div>
@@ -2289,7 +2289,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                                                                                         </MenuItem>
                                                                                                         <MenuItem>
                                                                                                             {({ active }) => (
-                                                                                                                <button onClick={(e) => e.stopPropagation()} className={`${active ? 'bg-gray-50 dark:bg-white/5' : ''} group flex w-full items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-200`}>
+                                                                                                                <button onClick={(e) => e.stopPropagation()} className={`${active ? 'bg-gray-50 dark:bg-white/5' : ''} group flex w-full items-center px-4 py-2 text-sm text-foreground dark:text-gray-200`}>
                                                                                                                     <span className="w-4 h-4 mr-2" ><PencilSquareIcon /></span> Edit
                                                                                                                 </button>
                                                                                                             )}
@@ -2303,7 +2303,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                                                                                         </MenuItem>
                                                                                                         <MenuItem>
                                                                                                             {({ active }) => (
-                                                                                                                <button onClick={(e) => e.stopPropagation()} className={`${active ? 'bg-gray-50 dark:bg-white/5' : ''} group flex w-full items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-200`}>
+                                                                                                                <button onClick={(e) => e.stopPropagation()} className={`${active ? 'bg-gray-50 dark:bg-white/5' : ''} group flex w-full items-center px-4 py-2 text-sm text-foreground dark:text-gray-200`}>
                                                                                                                     <span className="w-4 h-4 mr-2" ><EnvelopeIcon /></span> Contact
                                                                                                                 </button>
                                                                                                             )}
@@ -2322,10 +2322,10 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                                                                                 <div className="flex items-start gap-4">
                                                                                                     <div className="flex-1 space-y-4">
                                                                                                         <div className="flex items-center gap-3">
-                                                                                                            <div className="h-10 w-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center"><UserIcon className="w-6 h-6 text-gray-500" /></div>
+                                                                                                            <div className="h-10 w-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center"><UserIcon className="w-6 h-6 text-muted-foreground" /></div>
                                                                                                             <div>
-                                                                                                                <p className="text-sm font-medium text-gray-900 dark:text-white">Sarah Johnson</p>
-                                                                                                                <p className="text-xs text-gray-500">Project Manager</p>
+                                                                                                                <p className="text-sm font-medium text-foreground">Sarah Johnson</p>
+                                                                                                                <p className="text-xs text-muted-foreground">Project Manager</p>
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <div className="h-px bg-gray-200 dark:bg-white/10 w-full"></div>
@@ -2334,7 +2334,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                                                                                             <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gray-200 dark:bg-gray-700 -translate-y-1/2"></div>
                                                                                                             <div className="relative flex justify-between">
                                                                                                                 {['Placed', 'Mfg', 'Qual', 'Ship'].map((step, i) => (
-                                                                                                                    <div key={i} className={`flex flex-col items-center gap-2 ${i < 2 ? 'text-zinc-900 dark:text-white' : 'text-gray-400'}`}>
+                                                                                                                    <div key={i} className={`flex flex-col items-center gap-2 ${i < 2 ? 'text-foreground' : 'text-muted-foreground'}`}>
                                                                                                                         <div className={`w-3 h-3 rounded-full ${i < 2 ? 'bg-primary ring-4 ring-brand-100 dark:ring-brand-900/30' : 'bg-gray-300 dark:bg-gray-600'}`}></div>
                                                                                                                         <span className="text-xs font-medium">{step}</span>
                                                                                                                     </div>
@@ -2343,13 +2343,13 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                                                                                         </div>
                                                                                                     </div>
                                                                                                     <div className="w-64">
-                                                                                                        <div className="p-3 bg-white dark:bg-zinc-800 rounded-xl border border-gray-200 dark:border-white/10 shadow-sm">
-                                                                                                            <p className="text-xs font-medium text-gray-500 uppercase">Alert</p>
+                                                                                                        <div className="p-3 bg-card rounded-xl border border-gray-200 dark:border-white/10 shadow-sm">
+                                                                                                            <p className="text-xs font-medium text-muted-foreground uppercase">Alert</p>
                                                                                                             <div className="mt-2 flex items-start gap-2">
                                                                                                                 <ExclamationTriangleIcon className="h-5 w-5 text-amber-500 flex-shrink-0" />
                                                                                                                 <div>
                                                                                                                     <p className="text-sm font-medium text-amber-700 dark:text-amber-400">Customs Delay</p>
-                                                                                                                    <p className="text-xs text-gray-500 mt-1">Shipment held at port. ETA +24h.</p>
+                                                                                                                    <p className="text-xs text-muted-foreground mt-1">Shipment held at port. ETA +24h.</p>
                                                                                                                     <button onClick={() => setTrackingOrder(order)} className="mt-2 text-xs font-medium text-zinc-900 dark:text-primary decoration-primary underline-offset-2 hover:underline">Track Shipment</button>
                                                                                                                 </div>
                                                                                                             </div>
@@ -2370,7 +2370,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                                                 {filteredOrders.map((order) => (
                                                                     <div
                                                                         key={order.id}
-                                                                        className={`group relative bg-secondary rounded-2xl border ${expandedIds.has(order.id) ? 'border-zinc-300 dark:border-zinc-600 ring-1 ring-zinc-300 dark:ring-zinc-600' : 'border-gray-200 dark:border-white/10'} shadow-sm hover:shadow-md transition-all cursor-pointer overflow-hidden flex flex-col`}
+                                                                        className={`group relative bg-secondary rounded-2xl border ${expandedIds.has(order.id) ? 'border-border ring-1 ring-border' : 'border-gray-200 dark:border-white/10'} shadow-sm hover:shadow-md transition-all cursor-pointer overflow-hidden flex flex-col`}
                                                                         onClick={() => toggleExpand(order.id)}
                                                                     >
                                                                         <div className="p-5">
@@ -2380,19 +2380,19 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                                                                         {order.initials}
                                                                                     </div>
                                                                                     <div>
-                                                                                        <h4 className="text-sm font-bold text-gray-900 dark:text-white">{order.customer}</h4>
-                                                                                        <p className="text-xs text-gray-500">{order.id}</p>
+                                                                                        <h4 className="text-sm font-bold text-foreground">{order.customer}</h4>
+                                                                                        <p className="text-xs text-muted-foreground">{order.id}</p>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div className="flex items-center gap-1">
-                                                                                    <button onClick={(e) => { e.stopPropagation(); onNavigateToDetail(); }} className="p-1 rounded-full hover:bg-primary hover:text-zinc-900 dark:hover:bg-primary text-gray-400 hover:text-zinc-900 dark:hover:text-zinc-900 transition-colors">
+                                                                                    <button onClick={(e) => { e.stopPropagation(); onNavigateToDetail(); }} className="p-1 rounded-full hover:bg-primary hover:text-primary-foreground dark:hover:bg-primary text-muted-foreground hover:text-zinc-900 dark:hover:text-primary-foreground transition-colors">
                                                                                         <DocumentTextIcon className="h-5 w-5" />
                                                                                     </button>
-                                                                                    <button onClick={(e) => e.stopPropagation()} className="p-1 rounded-full hover:bg-primary hover:text-zinc-900 dark:hover:bg-primary text-gray-400 hover:text-zinc-900 dark:hover:text-zinc-900 transition-colors">
+                                                                                    <button onClick={(e) => e.stopPropagation()} className="p-1 rounded-full hover:bg-primary hover:text-primary-foreground dark:hover:bg-primary text-muted-foreground hover:text-zinc-900 dark:hover:text-primary-foreground transition-colors">
                                                                                         <PencilSquareIcon className="h-5 w-5" />
                                                                                     </button>
                                                                                     <Menu as="div" className="relative inline-block text-left">
-                                                                                        <MenuButton onClick={(e) => e.stopPropagation()} className="p-1 rounded-full hover:bg-primary hover:text-zinc-900 dark:hover:bg-primary text-gray-400 dark:hover:text-zinc-900">
+                                                                                        <MenuButton onClick={(e) => e.stopPropagation()} className="p-1 rounded-full hover:bg-primary hover:text-primary-foreground dark:hover:bg-primary text-muted-foreground dark:hover:text-primary-foreground">
                                                                                             <EllipsisHorizontalIcon className="h-5 w-5" />
                                                                                         </MenuButton>
                                                                                         <Transition
@@ -2404,7 +2404,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                                                                             leaveFrom="transform opacity-100 scale-100"
                                                                                             leaveTo="transform opacity-0 scale-95"
                                                                                         >
-                                                                                            <MenuItems className="absolute right-0 z-50 mt-2 w-48 origin-top-right rounded-xl bg-white dark:bg-zinc-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none border border-gray-100 dark:border-white/10">
+                                                                                            <MenuItems className="absolute right-0 z-50 mt-2 w-48 origin-top-right rounded-xl bg-card shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none border border-gray-100 dark:border-white/10">
                                                                                                 <div className="py-1">
                                                                                                     <MenuItem>
                                                                                                         {({ active }) => (
@@ -2421,13 +2421,13 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                                                             </div>
 
                                                                             <div className="space-y-3">
-                                                                                <div className="flex justify-between items-center py-2 border-b border-gray-100 dark:border-white/5">
-                                                                                    <span className="text-xs text-gray-500">Amount</span>
-                                                                                    <span className="text-sm font-semibold text-gray-900 dark:text-white">{order.amount}</span>
+                                                                                <div className="flex justify-between items-center py-2 border-b border-border">
+                                                                                    <span className="text-xs text-muted-foreground">Amount</span>
+                                                                                    <span className="text-sm font-semibold text-foreground">{order.amount}</span>
                                                                                 </div>
-                                                                                <div className="flex justify-between items-center py-2 border-b border-gray-100 dark:border-white/5">
-                                                                                    <span className="text-xs text-gray-500">Date</span>
-                                                                                    <span className="text-sm text-gray-700 dark:text-gray-300">{order.date}</span>
+                                                                                <div className="flex justify-between items-center py-2 border-b border-border">
+                                                                                    <span className="text-xs text-muted-foreground">Date</span>
+                                                                                    <span className="text-sm text-muted-foreground">{order.date}</span>
                                                                                 </div>
                                                                                 <div className="flex justify-between items-center pt-2">
                                                                                     <span className={cn("inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ring-1 ring-inset", order.statusColor)}>
@@ -2438,16 +2438,16 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                                                         </div>
 
                                                                         {expandedIds.has(order.id) && (
-                                                                            <div className="mt-4 pt-4 px-5 border-t border-gray-100 dark:border-white/5">
+                                                                            <div className="mt-4 pt-4 px-5 border-t border-border">
                                                                                 <div className="flex flex-col md:flex-row gap-8">
                                                                                     <div className="flex-1 space-y-6">
                                                                                         <div className="flex items-center gap-3">
-                                                                                            <div className="h-8 w-8 rounded-full bg-gray-100 dark:bg-zinc-800 flex items-center justify-center text-gray-500">
+                                                                                            <div className="h-8 w-8 rounded-full bg-gray-100 dark:bg-zinc-800 flex items-center justify-center text-muted-foreground">
                                                                                                 <UserIcon className="h-4 w-4" />
                                                                                             </div>
                                                                                             <div>
-                                                                                                <p className="text-sm font-bold text-gray-900 dark:text-white">Sarah Johnson</p>
-                                                                                                <p className="text-xs text-gray-500">Project Manager</p>
+                                                                                                <p className="text-sm font-bold text-foreground">Sarah Johnson</p>
+                                                                                                <p className="text-xs text-muted-foreground">Project Manager</p>
                                                                                             </div>
                                                                                         </div>
 
@@ -2455,11 +2455,11 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                                                                             <div className="absolute top-3 left-0 w-full h-0.5 bg-gray-200 dark:bg-zinc-700" />
                                                                                             <div className="relative z-10 flex justify-between">
                                                                                                 {['Placed', 'Mfg', 'Qual', 'Ship'].map((step, i) => (
-                                                                                                    <div key={i} className="flex flex-col items-center bg-white dark:bg-zinc-900 px-1">
-                                                                                                        <div className={`h-6 w-6 rounded-full flex items-center justify-center ${i <= 1 ? 'bg-primary text-primary-foreground' : 'bg-gray-200 dark:bg-zinc-700 text-gray-400'}`}>
+                                                                                                    <div key={i} className="flex flex-col items-center bg-card px-1">
+                                                                                                        <div className={`h-6 w-6 rounded-full flex items-center justify-center ${i <= 1 ? 'bg-primary text-primary-foreground' : 'bg-gray-200 dark:bg-zinc-700 text-muted-foreground'}`}>
                                                                                                             {i < 1 ? <CheckIcon className="h-4 w-4" /> : <div className={`h-2 w-2 rounded-full ${i <= 1 ? 'bg-primary-foreground' : 'bg-white/50'}`} />}
                                                                                                         </div>
-                                                                                                        <span className={`mt-2 text-xs font-medium ${i <= 1 ? 'text-zinc-900 dark:text-zinc-100' : 'text-gray-500'}`}>{step}</span>
+                                                                                                        <span className={`mt-2 text-xs font-medium ${i <= 1 ? 'text-foreground' : 'text-muted-foreground'}`}>{step}</span>
                                                                                                     </div>
                                                                                                 ))}
                                                                                             </div>
@@ -2487,14 +2487,14 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                                                         {expandedIds.has(order.id) && (
                                                                             <div className="mt-6 bg-gray-50 dark:bg-white/5 p-4 border-t border-gray-200 dark:border-white/10">
                                                                                 <div className="flex items-center gap-2 mb-3">
-                                                                                    <ShoppingBagIcon className="h-4 w-4 text-gray-400" />
-                                                                                    <span className="text-xs font-medium text-gray-600 dark:text-gray-300">Order Items (3)</span>
+                                                                                    <ShoppingBagIcon className="h-4 w-4 text-muted-foreground" />
+                                                                                    <span className="text-xs font-medium text-muted-foreground dark:text-gray-300">Order Items (3)</span>
                                                                                 </div>
                                                                                 <div className="space-y-2">
                                                                                     {['Office Chair Ergonomic', 'Standing Desk Motorized'].map((item, i) => (
                                                                                         <div key={i} className="flex justify-between text-xs">
-                                                                                            <span className="text-gray-500">{item}</span>
-                                                                                            <span className="text-gray-900 dark:text-white font-medium">x1</span>
+                                                                                            <span className="text-muted-foreground">{item}</span>
+                                                                                            <span className="text-foreground font-medium">x1</span>
                                                                                         </div>
                                                                                     ))}
                                                                                 </div>
@@ -2531,10 +2531,10 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                                         <div className="flex-1 overflow-auto">
                                                             <div className="space-y-4">
                                                                 {recentQuotes.map((quote) => (
-                                                                    <div key={quote.id} className="flex items-center justify-between p-3 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-800 hover:border-primary/30 transition-colors cursor-pointer group">
+                                                                    <div key={quote.id} className="flex items-center justify-between p-3 rounded-xl bg-muted dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-800 hover:border-primary/30 transition-colors cursor-pointer group">
                                                                         <div className="flex items-center gap-3">
-                                                                            <div className="w-10 h-10 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center shrink-0">
-                                                                                <DocumentTextIcon className="w-5 h-5 text-zinc-400 group-hover:text-zinc-600 dark:text-zinc-500 dark:group-hover:text-zinc-300 transition-colors" />
+                                                                            <div className="w-10 h-10 rounded-lg bg-card border border-border flex items-center justify-center shrink-0">
+                                                                                <DocumentTextIcon className="w-5 h-5 text-muted-foreground group-hover:text-muted-foreground dark:text-muted-foreground dark:group-hover:text-zinc-300 transition-colors" />
                                                                             </div>
                                                                             <div>
                                                                                 <p className="text-sm font-semibold text-foreground">{quote.id}</p>
@@ -2545,7 +2545,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                                                             <p className="text-sm font-bold text-foreground">{quote.amount}</p>
                                                                             <span className={`inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium ${quote.status === 'Approved' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' :
                                                                                 quote.status === 'Pending' ? 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400' :
-                                                                                    'bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-400'
+                                                                                    'bg-zinc-100 text-muted-foreground dark:bg-zinc-800 dark:text-muted-foreground'
                                                                                 }`}>
                                                                                 {quote.status}
                                                                             </span>
@@ -2554,7 +2554,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                                                 ))}
                                                             </div>
                                                         </div>
-                                                        <button className="w-full mt-4 py-2 rounded-lg border border-border text-sm font-medium text-muted-foreground hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
+                                                        <button className="w-full mt-4 py-2 rounded-lg border border-border text-sm font-medium text-muted-foreground hover:bg-muted dark:hover:bg-zinc-800 transition-colors">
                                                             Create New Quote
                                                         </button>
                                                     </div>
@@ -2573,7 +2573,7 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                                 /* Placeholder for New B2B Widgets */
                                                 <div className="bg-card rounded-2xl border border-dashed border-zinc-300 dark:border-zinc-700 p-8 flex flex-col items-center justify-center text-center animate-in fade-in slide-in-from-bottom-4 duration-500">
                                                     <div className="w-12 h-12 rounded-full bg-muted dark:bg-secondary flex items-center justify-center mb-4">
-                                                        <CubeIcon className="w-6 h-6 text-zinc-400" />
+                                                        <CubeIcon className="w-6 h-6 text-muted-foreground" />
                                                     </div>
                                                     <h3 className="text-lg font-brand font-semibold text-foreground">{feature?.title}</h3>
                                                     <p className="text-sm text-muted-foreground mt-1 max-w-md">{feature?.description}</p>
@@ -2625,18 +2625,18 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <DialogPanel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-card p-6 text-left align-middle shadow-xl transition-all border border-zinc-200 dark:border-zinc-800">
+                                <DialogPanel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-card p-6 text-left align-middle shadow-xl transition-all border border-border">
                                     <Dialog.Title
                                         as="h3"
-                                        className="text-lg font-medium leading-6 text-zinc-900 dark:text-white flex justify-between items-center mb-6"
+                                        className="text-lg font-medium leading-6 text-foreground flex justify-between items-center mb-6"
                                     >
                                         <span>Tracking Details - {trackingOrder?.id}</span>
                                         <button
                                             onClick={() => setTrackingOrder(null)}
-                                            className="rounded-full p-1 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                                            className="rounded-full p-1 hover:bg-muted transition-colors"
                                         >
                                             <span className="sr-only">Close</span>
-                                            <svg className="h-5 w-5 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <svg className="h-5 w-5 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                                             </svg>
                                         </button>
@@ -2645,17 +2645,17 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                         {/* Left Col: Timeline */}
                                         <div>
-                                            <h4 className="text-sm font-semibold text-zinc-900 dark:text-white mb-4 uppercase tracking-wider">Shipment Progress</h4>
-                                            <div className="space-y-6 relative pl-2 border-l border-zinc-200 dark:border-zinc-800 ml-2">
+                                            <h4 className="text-sm font-semibold text-foreground mb-4 uppercase tracking-wider">Shipment Progress</h4>
+                                            <div className="space-y-6 relative pl-2 border-l border-border ml-2">
                                                 {trackingSteps.map((step, idx) => (
                                                     <div key={idx} className="relative pl-6">
                                                         <div className={cn(
-                                                            "absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full ring-4 ring-white dark:ring-zinc-900",
+                                                            "absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full ring-4 ring-background",
                                                             step.completed ? "bg-primary" : "bg-zinc-300 dark:bg-zinc-700",
                                                             step.alert && "bg-red-500 dark:bg-red-500"
                                                         )} />
-                                                        <p className="text-sm font-medium text-zinc-900 dark:text-white">{step.status}</p>
-                                                        <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">{step.date} · {step.location}</p>
+                                                        <p className="text-sm font-medium text-foreground">{step.status}</p>
+                                                        <p className="text-xs text-muted-foreground mt-0.5">{step.date} · {step.location}</p>
                                                     </div>
                                                 ))}
                                             </div>
@@ -2663,19 +2663,19 @@ export default function Dashboard({ onLogout, onNavigateToDetail, onNavigateToWo
 
                                         {/* Right Col: Georefence & Actions */}
                                         <div className="flex flex-col h-full">
-                                            <h4 className="text-sm font-semibold text-zinc-900 dark:text-white mb-4 uppercase tracking-wider">Delivery Location</h4>
+                                            <h4 className="text-sm font-semibold text-foreground mb-4 uppercase tracking-wider">Delivery Location</h4>
 
                                             {/* Map Placeholder */}
-                                            <div className="bg-zinc-100 dark:bg-zinc-800 rounded-lg h-40 w-full mb-4 flex items-center justify-center border border-zinc-200 dark:border-zinc-700">
+                                            <div className="bg-muted rounded-lg h-40 w-full mb-4 flex items-center justify-center border border-border">
                                                 <div className="text-center">
-                                                    <MapPinIcon className="h-8 w-8 text-zinc-400 mx-auto mb-2" />
-                                                    <span className="text-xs text-zinc-500 dark:text-zinc-400 block">Map Preview Unavailable</span>
+                                                    <MapPinIcon className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
+                                                    <span className="text-xs text-muted-foreground block">Map Preview Unavailable</span>
                                                 </div>
                                             </div>
 
-                                            <div className="bg-zinc-50 dark:bg-zinc-800/50 p-3 rounded-lg border border-zinc-100 dark:border-zinc-800 mb-6">
-                                                <p className="text-xs font-medium text-zinc-900 dark:text-white">Distribution Center NY-05</p>
-                                                <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">45 Industrial Park Dr, Brooklyn, NY 11201</p>
+                                            <div className="bg-muted dark:bg-zinc-800/50 p-3 rounded-lg border border-zinc-100 dark:border-zinc-800 mb-6">
+                                                <p className="text-xs font-medium text-foreground">Distribution Center NY-05</p>
+                                                <p className="text-xs text-muted-foreground mt-1">45 Industrial Park Dr, Brooklyn, NY 11201</p>
                                             </div>
 
                                             <div className="mt-auto pt-6 border-t border-zinc-100 dark:border-zinc-800">

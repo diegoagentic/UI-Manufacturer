@@ -161,13 +161,13 @@ export default function InventoryMaintenance() {
             case 'In-Progress': return 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-900/30 dark:text-amber-400';
             case 'Completed': return 'bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-400';
             case 'Overdue': return 'bg-red-50 text-red-700 border-red-200 dark:bg-red-900/30 dark:text-red-400';
-            default: return 'bg-zinc-50 text-zinc-700 border-zinc-200';
+            default: return 'bg-muted text-muted-foreground border-zinc-200';
         }
     };
 
     const getPriorityIcon = (priority: string) => {
         if (priority === 'High' || priority === 'Critical') return <ExclamationTriangleIcon className="w-4 h-4 text-red-500" />;
-        return <WrenchScrewdriverIcon className="w-4 h-4 text-zinc-400" />;
+        return <WrenchScrewdriverIcon className="w-4 h-4 text-muted-foreground" />;
     };
 
     return (
@@ -255,7 +255,7 @@ export default function InventoryMaintenance() {
                                 Service History & Audit Trail
                             </h4>
 
-                            <div className="relative pl-4 border-l border-zinc-200 dark:border-zinc-700 space-y-6">
+                            <div className="relative pl-4 border-l border-border space-y-6">
                                 {task.history?.map((event, index) => (
                                     <div key={event.id} className="relative">
                                         {/* Timeline Dot */}
@@ -279,7 +279,7 @@ export default function InventoryMaintenance() {
                                                     </div>
                                                 </div>
                                                 {event.notes && (
-                                                    <p className="text-zinc-600 dark:text-zinc-400 text-xs italic border-t border-zinc-100 dark:border-zinc-800 pt-2 mt-2">
+                                                    <p className="text-muted-foreground text-xs italic border-t border-zinc-100 dark:border-zinc-800 pt-2 mt-2">
                                                         "{event.notes}"
                                                     </p>
                                                 )}

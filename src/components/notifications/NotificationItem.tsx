@@ -63,7 +63,7 @@ export default function NotificationItem({ notification, onActionClick }: { noti
     };
 
     return (
-        <div className="group relative p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800 border border-transparent hover:border-border hover:shadow-md transition-all duration-200">
+        <div className="group relative p-4 rounded-2xl bg-muted dark:bg-zinc-800 border border-transparent hover:border-border hover:shadow-md transition-all duration-200">
             <div className="flex justify-between items-start gap-4">
 
                 <div className="flex-1 min-w-0">

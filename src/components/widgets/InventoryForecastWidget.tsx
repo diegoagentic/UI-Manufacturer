@@ -48,7 +48,7 @@ export default function InventoryForecastWidget() {
             description="AI-driven stock predictions & health."
             icon={ChartBarIcon}
             action={
-                <button className="text-xs font-medium text-zinc-900 dark:text-white hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors flex items-center gap-1">
+                <button className="text-xs font-medium text-foreground hover:text-muted-foreground dark:hover:text-zinc-300 transition-colors flex items-center gap-1">
                     <ArrowTrendingUpIcon className="w-3 h-3" />
                     Full Report
                 </button>

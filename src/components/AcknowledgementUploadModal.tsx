@@ -43,9 +43,9 @@ const ackOptions = [
         description: 'Enter acknowledgement details line-by-line. Best for corrections or non-standard formats.',
         icon: PencilSquareIcon,
         estimatedTime: '5-10 mins',
-        color: 'text-zinc-600',
+        color: 'text-muted-foreground',
         bgColor: 'bg-zinc-100',
-        darkColor: 'dark:text-zinc-400',
+        darkColor: 'dark:text-muted-foreground',
         darkBgColor: 'dark:bg-zinc-800'
     }
 ]
@@ -146,7 +146,7 @@ export default function AcknowledgementUploadModal({ isOpen, onClose }: Acknowle
                                                     <div className="flex-1">
                                                         <div className="flex items-center gap-2 mb-1">
                                                             <h4 className="text-sm font-bold text-foreground">{option.title}</h4>
-                                                            <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-secondary text-zinc-500 border border-border">
+                                                            <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-secondary text-muted-foreground border border-border">
                                                                 {option.estimatedTime}
                                                             </span>
                                                         </div>
@@ -209,7 +209,7 @@ export default function AcknowledgementUploadModal({ isOpen, onClose }: Acknowle
                                         <div className="mt-6 pt-4 border-t border-border flex justify-between items-center shrink-0">
                                             <button
                                                 onClick={() => setStep('selection')}
-                                                className="px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                                                className="px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
                                             >
                                                 Back
                                             </button>
@@ -217,7 +217,7 @@ export default function AcknowledgementUploadModal({ isOpen, onClose }: Acknowle
                                                 disabled={!selectedOrder}
                                                 className={`px-6 py-2 rounded-lg text-sm font-medium transition-colors ${selectedOrder
                                                     ? 'bg-primary text-zinc-900 hover:bg-brand-400'
-                                                    : 'bg-muted text-zinc-400 cursor-not-allowed'
+                                                    : 'bg-muted text-muted-foreground cursor-not-allowed'
                                                     }`}
                                             >
                                                 Continue

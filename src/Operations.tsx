@@ -266,18 +266,18 @@ const kpiColorStyles: Record<string, string> = {
 }
 
 const statusColors: Record<string, string> = {
-  'Received': 'bg-zinc-100 text-zinc-700 dark:bg-zinc-500/15 dark:text-zinc-300',
+  'Received': 'bg-zinc-100 text-muted-foreground dark:bg-muted0/15 dark:text-zinc-300',
   'AI Processing': 'bg-brand-50 text-brand-700 dark:bg-brand-500/15 dark:text-brand-300',
   'Under Review': 'bg-amber-50 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300',
   'Acknowledgement Draft': 'bg-blue-50 text-blue-700 dark:bg-blue-500/15 dark:text-blue-300',
   'Acknowledgement Sent': 'bg-green-50 text-green-700 dark:bg-green-500/15 dark:text-green-300',
   'Completed': 'bg-green-50 text-green-700 dark:bg-green-500/15 dark:text-green-300',
-  'Draft': 'bg-zinc-100 text-zinc-700 dark:bg-zinc-500/15 dark:text-zinc-300',
+  'Draft': 'bg-zinc-100 text-muted-foreground dark:bg-muted0/15 dark:text-zinc-300',
   'AI Validated': 'bg-brand-50 text-brand-700 dark:bg-brand-500/15 dark:text-brand-300',
   'Sent': 'bg-blue-50 text-blue-700 dark:bg-blue-500/15 dark:text-blue-300',
   'Confirmed': 'bg-green-50 text-green-700 dark:bg-green-500/15 dark:text-green-300',
   'Revision Pending': 'bg-amber-50 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300',
-  'New': 'bg-zinc-100 text-zinc-700 dark:bg-zinc-500/15 dark:text-zinc-300',
+  'New': 'bg-zinc-100 text-muted-foreground dark:bg-muted0/15 dark:text-zinc-300',
   'AI Analyzing': 'bg-brand-50 text-brand-700 dark:bg-brand-500/15 dark:text-brand-300',
   'Pending Review': 'bg-amber-50 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300',
   'In Progress': 'bg-blue-50 text-blue-700 dark:bg-blue-500/15 dark:text-blue-300',
@@ -288,7 +288,7 @@ const severityColors: Record<string, string> = {
   critical: 'bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-300',
   high: 'bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300',
   medium: 'bg-yellow-100 text-yellow-700 dark:bg-yellow-500/20 dark:text-yellow-300',
-  low: 'bg-zinc-100 text-zinc-600 dark:bg-zinc-500/20 dark:text-zinc-300',
+  low: 'bg-zinc-100 text-muted-foreground dark:bg-muted0/20 dark:text-zinc-300',
 }
 
 // --- Agent Pipeline Helpers ---
@@ -433,7 +433,7 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
         ]} />
 
         {/* Lifecycle Tabs */}
-        <div className="flex items-center gap-1 p-1 bg-zinc-100 dark:bg-zinc-800/50 rounded-xl border border-zinc-200 dark:border-zinc-800 w-fit">
+        <div className="flex items-center gap-1 p-1 bg-muted/50 rounded-xl border border-border w-fit">
           {[
             { id: 'purchase-orders' as const, label: 'Purchase Orders', icon: DocumentTextIcon },
             { id: 'acknowledgements' as const, label: 'Acknowledgements', icon: ClipboardDocumentCheckIcon },
@@ -446,7 +446,7 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
                 "flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all",
                 lifecycleTab === tab.id
                   ? "bg-brand-300 dark:bg-brand-500 text-zinc-900 shadow-sm"
-                  : "text-muted-foreground hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:text-zinc-900 dark:hover:text-white"
+                  : "text-muted-foreground hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:text-foreground"
               )}
             >
               <tab.icon className="w-4 h-4" />
@@ -457,7 +457,7 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
 
         {/* Status Tabs + View Mode + Search */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="flex items-center gap-1 bg-white/60 dark:bg-zinc-800/50 p-1 rounded-lg border border-zinc-200 dark:border-zinc-800 w-fit">
+          <div className="flex items-center gap-1 bg-white/60 dark:bg-zinc-800/50 p-1 rounded-lg border border-border w-fit">
             {[
               { id: 'active' as const, label: 'Active', count: counts.active },
               { id: 'completed' as const, label: 'Completed', count: counts.completed },
@@ -507,7 +507,7 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
                 placeholder="Search..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className="pl-9 pr-3 py-2 text-sm bg-white dark:bg-zinc-900 border border-border rounded-lg focus:ring-1 focus:ring-primary outline-none w-48"
+                className="pl-9 pr-3 py-2 text-sm bg-card border border-border rounded-lg focus:ring-1 focus:ring-primary outline-none w-48"
               />
             </div>
 
@@ -520,7 +520,7 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
             {lifecycleTab === 'purchase-orders' && (<>
               <button
                 onClick={() => setIsAIScanOpen(true)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-white dark:bg-zinc-800 text-foreground hover:border-primary/30 hover:shadow-sm transition-all"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-card text-foreground hover:border-primary/30 hover:shadow-sm transition-all"
               >
                 <BoltIcon className="w-3.5 h-3.5 text-indigo-500" />
                 Run AI Scan
@@ -528,22 +528,22 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
               <button
                 disabled={processingAction === 'po-reminders'}
                 onClick={() => handleQuickAction('po-reminders', 'Sending vendor reminders...', 'Reminders sent to 3 vendors with pending POs')}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-white dark:bg-zinc-800 text-foreground hover:border-primary/30 hover:shadow-sm transition-all disabled:opacity-60"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-card text-foreground hover:border-primary/30 hover:shadow-sm transition-all disabled:opacity-60"
               >
                 {processingAction === 'po-reminders' ? <ArrowPathIcon className="w-3.5 h-3.5 animate-spin text-blue-500" /> : <PaperAirplaneIcon className="w-3.5 h-3.5 text-blue-500" />}
                 Send Reminders
               </button>
               <button
                 onClick={() => { setPedExportData(getMockPEDData('order')); setIsPEDExportOpen(true); }}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-white dark:bg-zinc-800 text-foreground hover:border-primary/30 hover:shadow-sm transition-all"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-card text-foreground hover:border-primary/30 hover:shadow-sm transition-all"
               >
-                <ArrowDownTrayIcon className="w-3.5 h-3.5 text-zinc-500" />
+                <ArrowDownTrayIcon className="w-3.5 h-3.5 text-muted-foreground" />
                 Export POs
               </button>
               <button
                 disabled={processingAction === 'validate-pos'}
                 onClick={() => handleQuickAction('validate-pos', 'Running validation on pending POs...', '12 POs validated — 2 flagged for review')}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-white dark:bg-zinc-800 text-foreground hover:border-primary/30 hover:shadow-sm transition-all disabled:opacity-60"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-card text-foreground hover:border-primary/30 hover:shadow-sm transition-all disabled:opacity-60"
               >
                 {processingAction === 'validate-pos' ? <ArrowPathIcon className="w-3.5 h-3.5 animate-spin text-green-500" /> : <ShieldCheckIcon className="w-3.5 h-3.5 text-green-500" />}
                 Validate All Pending
@@ -560,23 +560,23 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
               <button
                 disabled={processingAction === 'ack-reminders'}
                 onClick={() => handleQuickAction('ack-reminders', 'Sending acknowledgement reminders...', 'Reminders sent to 4 vendors awaiting acknowledgement')}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-white dark:bg-zinc-800 text-foreground hover:border-primary/30 hover:shadow-sm transition-all disabled:opacity-60"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-card text-foreground hover:border-primary/30 hover:shadow-sm transition-all disabled:opacity-60"
               >
                 {processingAction === 'ack-reminders' ? <ArrowPathIcon className="w-3.5 h-3.5 animate-spin text-blue-500" /> : <PaperAirplaneIcon className="w-3.5 h-3.5 text-blue-500" />}
                 Send Reminders
               </button>
               <button
                 onClick={() => setIsCompareDeltasOpen(true)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-white dark:bg-zinc-800 text-foreground hover:border-primary/30 hover:shadow-sm transition-all"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-card text-foreground hover:border-primary/30 hover:shadow-sm transition-all"
               >
                 <EyeIcon className="w-3.5 h-3.5 text-indigo-500" />
                 Compare Deltas
               </button>
               <button
                 onClick={() => { setPedExportData(getMockPEDData('acknowledgment')); setIsPEDExportOpen(true); }}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-white dark:bg-zinc-800 text-foreground hover:border-primary/30 hover:shadow-sm transition-all"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-card text-foreground hover:border-primary/30 hover:shadow-sm transition-all"
               >
-                <ArrowDownTrayIcon className="w-3.5 h-3.5 text-zinc-500" />
+                <ArrowDownTrayIcon className="w-3.5 h-3.5 text-muted-foreground" />
                 Export ACKs
               </button>
             </>)}
@@ -591,14 +591,14 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
               <button
                 disabled={processingAction === 'escalate'}
                 onClick={() => handleQuickAction('escalate', 'Escalating critical exceptions...', '2 critical exceptions escalated to procurement manager')}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-white dark:bg-zinc-800 text-foreground hover:border-primary/30 hover:shadow-sm transition-all disabled:opacity-60"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-card text-foreground hover:border-primary/30 hover:shadow-sm transition-all disabled:opacity-60"
               >
                 {processingAction === 'escalate' ? <ArrowPathIcon className="w-3.5 h-3.5 animate-spin text-amber-500" /> : <ArrowPathIcon className="w-3.5 h-3.5 text-amber-500" />}
                 Escalate Critical
               </button>
               <button
                 onClick={() => setIsContactVendorsOpen(true)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-white dark:bg-zinc-800 text-foreground hover:border-primary/30 hover:shadow-sm transition-all"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-card text-foreground hover:border-primary/30 hover:shadow-sm transition-all"
               >
                 <ChatBubbleLeftRightIcon className="w-3.5 h-3.5 text-blue-500" />
                 Contact Vendors
@@ -606,9 +606,9 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
               <button
                 disabled={processingAction === 'export-report'}
                 onClick={() => handleQuickAction('export-report', 'Generating exception report...', 'Exception report exported — 15 items across 3 categories')}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-white dark:bg-zinc-800 text-foreground hover:border-primary/30 hover:shadow-sm transition-all disabled:opacity-60"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-border bg-card text-foreground hover:border-primary/30 hover:shadow-sm transition-all disabled:opacity-60"
               >
-                {processingAction === 'export-report' ? <ArrowPathIcon className="w-3.5 h-3.5 animate-spin text-zinc-500" /> : <ArrowDownTrayIcon className="w-3.5 h-3.5 text-zinc-500" />}
+                {processingAction === 'export-report' ? <ArrowPathIcon className="w-3.5 h-3.5 animate-spin text-muted-foreground" /> : <ArrowDownTrayIcon className="w-3.5 h-3.5 text-muted-foreground" />}
                 Export Report
               </button>
             </>)}
@@ -621,7 +621,7 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
             {currentPipelineStages.map(stage => {
               const stageItems = filteredData.filter(i => i.status === stage)
               return (
-                <div key={stage} className="bg-white dark:bg-zinc-900 rounded-xl border border-border min-h-[200px]">
+                <div key={stage} className="bg-card rounded-xl border border-border min-h-[200px]">
                   <div className="px-3 py-2 border-b border-border flex items-center justify-between">
                     <span className="text-xs font-semibold text-foreground">{stage}</span>
                     <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-muted text-muted-foreground">{stageItems.length}</span>
@@ -643,7 +643,7 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
                           key={item.id}
                           onClick={() => onNavigateToDetail(lifecycleTab === 'purchase-orders' ? 'order-detail' : 'ack-detail')}
                           className={cn(
-                            "p-2.5 rounded-lg border cursor-pointer transition-all bg-zinc-50 dark:bg-zinc-800",
+                            "p-2.5 rounded-lg border cursor-pointer transition-all bg-muted dark:bg-zinc-800",
                             // Default state
                             "border-border hover:border-primary/30 hover:shadow-sm",
                             // Active AI processing animation (demo step)
@@ -814,10 +814,10 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
 
         {/* List View */}
         {viewMode === 'list' && activeTab !== 'metrics' && (
-          <div className="bg-white dark:bg-zinc-800 rounded-xl border border-border overflow-hidden">
+          <div className="bg-card rounded-xl border border-border overflow-hidden">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-border bg-zinc-50/50 dark:bg-zinc-900/30">
+                <tr className="border-b border-border bg-muted/50 dark:bg-zinc-900/30">
                   <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase">ID</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase">
                     {lifecycleTab === 'exceptions' ? 'Vendor / Problem' : 'Supplier'}
@@ -835,7 +835,7 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
                 {filteredData.map((item: any) => (
                   <tr
                     key={item.id}
-                    className="hover:bg-zinc-50/50 dark:hover:bg-zinc-900/30 cursor-pointer transition-colors group"
+                    className="hover:bg-muted/50 dark:hover:bg-zinc-900/30 cursor-pointer transition-colors group"
                   >
                     <td className="px-4 py-3">
                       <span className="font-medium text-foreground">{item.id}</span>
@@ -914,7 +914,7 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
             {/* Period Selector */}
             <div className="flex items-center justify-between">
               <h3 className="text-sm font-semibold text-foreground">Performance Metrics</h3>
-              <div className="flex items-center gap-1 bg-zinc-100 dark:bg-zinc-800/50 rounded-lg p-0.5 border border-zinc-200 dark:border-zinc-700/50">
+              <div className="flex items-center gap-1 bg-muted/50 rounded-lg p-0.5 border border-border/50">
                 {(['Day', 'Week', 'Month', 'Quarter'] as OpsPeriod[]).map((p) => (
                   <button
                     key={p}
@@ -933,7 +933,7 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
             {/* KPI Strip */}
             <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
               {currentKpis.map((kpi) => (
-                <div key={kpi.label} className="bg-white dark:bg-zinc-800 rounded-xl border border-border p-4 flex items-start gap-3">
+                <div key={kpi.label} className="bg-card rounded-xl border border-border p-4 flex items-start gap-3">
                   <div className={cn("p-2 rounded-lg", kpiColorStyles[kpi.color])}>
                     <kpi.icon className="w-5 h-5" />
                   </div>
@@ -950,7 +950,7 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 
               {/* Volume / Pipeline Summary */}
-              <div className="bg-white dark:bg-zinc-800 rounded-xl border border-border overflow-hidden">
+              <div className="bg-card rounded-xl border border-border overflow-hidden">
                 <div className="px-5 py-3 border-b border-border flex items-center justify-between">
                   <div>
                     <h3 className="text-sm font-semibold text-foreground">Pipeline Summary</h3>
@@ -980,7 +980,7 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
 
               {/* PO tab charts */}
               {lifecycleTab === 'purchase-orders' && (<>
-                <div className="bg-white dark:bg-zinc-800 rounded-xl border border-border overflow-hidden">
+                <div className="bg-card rounded-xl border border-border overflow-hidden">
                   <div className="px-5 py-3 border-b border-border flex items-center justify-between">
                     <div>
                       <h3 className="text-sm font-semibold text-foreground">PO Volume Trend</h3>
@@ -998,7 +998,7 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
                     </div>
                   </div>
                 </div>
-                <div className="bg-white dark:bg-zinc-800 rounded-xl border border-border overflow-hidden">
+                <div className="bg-card rounded-xl border border-border overflow-hidden">
                   <div className="px-5 py-3 border-b border-border flex items-center justify-between">
                     <div>
                       <h3 className="text-sm font-semibold text-foreground">Supplier Distribution</h3>
@@ -1021,7 +1021,7 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
 
               {/* ACK tab charts */}
               {lifecycleTab === 'acknowledgements' && (<>
-                <div className="bg-white dark:bg-zinc-800 rounded-xl border border-border overflow-hidden">
+                <div className="bg-card rounded-xl border border-border overflow-hidden">
                   <div className="px-5 py-3 border-b border-border flex items-center justify-between">
                     <div>
                       <h3 className="text-sm font-semibold text-foreground">Response Time</h3>
@@ -1044,7 +1044,7 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
                     </div>
                   </div>
                 </div>
-                <div className="bg-white dark:bg-zinc-800 rounded-xl border border-border overflow-hidden">
+                <div className="bg-card rounded-xl border border-border overflow-hidden">
                   <div className="px-5 py-3 border-b border-border flex items-center justify-between">
                     <div>
                       <h3 className="text-sm font-semibold text-foreground">Match Quality</h3>
@@ -1054,7 +1054,7 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
                   <div className="h-44 flex items-center justify-center gap-6 px-5">
                     <div className="relative w-28 h-28">
                       <div className="absolute inset-0 rounded-full" style={{ background: `conic-gradient(from -90deg, #22c55e 0deg ${ackMatchByPeriod[metricsPeriod].clean * 3.6}deg, #f59e0b ${ackMatchByPeriod[metricsPeriod].clean * 3.6}deg ${(ackMatchByPeriod[metricsPeriod].clean + ackMatchByPeriod[metricsPeriod].autoCorrected) * 3.6}deg, #ef4444 ${(ackMatchByPeriod[metricsPeriod].clean + ackMatchByPeriod[metricsPeriod].autoCorrected) * 3.6}deg 360deg)` }} />
-                      <div className="absolute inset-3 rounded-full bg-white dark:bg-zinc-800" />
+                      <div className="absolute inset-3 rounded-full bg-card" />
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="text-center">
                           <p className="text-sm font-bold text-foreground">{ackMatchByPeriod[metricsPeriod].clean}%</p>
@@ -1091,7 +1091,7 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
 
               {/* Exceptions tab charts */}
               {lifecycleTab === 'exceptions' && (<>
-                <div className="bg-white dark:bg-zinc-800 rounded-xl border border-border overflow-hidden">
+                <div className="bg-card rounded-xl border border-border overflow-hidden">
                   <div className="px-5 py-3 border-b border-border flex items-center justify-between">
                     <div>
                       <h3 className="text-sm font-semibold text-foreground">Resolution Time</h3>
@@ -1114,7 +1114,7 @@ export default function Operations({ onLogout, onNavigateToDetail, onNavigateToW
                     ))}
                   </div>
                 </div>
-                <div className="bg-white dark:bg-zinc-800 rounded-xl border border-border overflow-hidden">
+                <div className="bg-card rounded-xl border border-border overflow-hidden">
                   <div className="px-5 py-3 border-b border-border flex items-center justify-between">
                     <div>
                       <h3 className="text-sm font-semibold text-foreground">Exception Trend</h3>

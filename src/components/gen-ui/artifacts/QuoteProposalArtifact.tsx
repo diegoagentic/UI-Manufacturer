@@ -28,7 +28,7 @@ export default function QuoteProposalArtifact({ data }: { data: any }) {
     }
 
     return (
-        <div className="bg-white dark:bg-zinc-800 rounded-xl border border-zinc-200 dark:border-zinc-800 shadow-sm overflow-hidden group">
+        <div className="bg-card rounded-xl border border-border shadow-sm overflow-hidden group">
             {/* Header */}
             <div className="relative bg-indigo-600 px-4 py-8 flex flex-col items-center justify-center text-white overflow-hidden">
                 {/* Abstract Background Pattern */}
@@ -47,11 +47,11 @@ export default function QuoteProposalArtifact({ data }: { data: any }) {
             <div className="p-4 space-y-4">
                 <div className="flex justify-between items-end border-b border-zinc-100 dark:border-zinc-800 pb-3">
                     <div>
-                        <p className="text-xs text-zinc-500 uppercase font-semibold">Vibe / Style</p>
+                        <p className="text-xs text-muted-foreground uppercase font-semibold">Vibe / Style</p>
                         <p className="text-sm font-medium text-foreground">{data.style}</p>
                     </div>
                     <div className="text-right">
-                        <p className="text-xs text-zinc-500 uppercase font-semibold">Est. Total</p>
+                        <p className="text-xs text-muted-foreground uppercase font-semibold">Est. Total</p>
                         <p className="text-lg font-bold text-indigo-600 dark:text-indigo-400">{data.total}</p>
                     </div>
                 </div>
@@ -61,7 +61,7 @@ export default function QuoteProposalArtifact({ data }: { data: any }) {
                         <div key={i} className="aspect-[4/3] bg-zinc-200 dark:bg-zinc-800 rounded md:group-hover:opacity-100 transition-opacity"></div>
                     ))}
                 </div>
-                <p className="text-[10px] text-center text-zinc-400">Includes moodboard, product list, and sustainability specs.</p>
+                <p className="text-[10px] text-center text-muted-foreground">Includes moodboard, product list, and sustainability specs.</p>
 
                 <button
                     onClick={handlePreview}

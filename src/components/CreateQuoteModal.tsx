@@ -46,7 +46,7 @@ export default function CreateQuoteModal({ isOpen, onClose, onNavigate }: Create
                                         <XMarkIcon className="h-5 w-5" />
                                     </button>
                                 </div>
-                                <div className="flex-1 overflow-y-auto p-6 bg-zinc-50/50 dark:bg-zinc-900/50">
+                                <div className="flex-1 overflow-y-auto p-6 bg-muted/50 dark:bg-zinc-900/50">
                                     <QuoteGenerationFlow onNavigate={onNavigate} onComplete={onClose} />
                                 </div>
                             </DialogPanel>

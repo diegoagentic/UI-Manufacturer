@@ -39,7 +39,7 @@ export default function POVerificationWidget() {
             description="AI-powered discrepancy detection."
             icon={DocumentCheckIcon}
             action={
-                <button className="text-xs font-medium text-zinc-900 dark:text-white hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors flex items-center gap-1">
+                <button className="text-xs font-medium text-foreground hover:text-muted-foreground dark:hover:text-zinc-300 transition-colors flex items-center gap-1">
                     <ArrowPathIcon className="w-3 h-3" />
                     Sync
                 </button>
@@ -53,7 +53,7 @@ export default function POVerificationWidget() {
                                 <h4 className="text-sm font-bold text-foreground">{item.client}</h4>
                                 <div className="flex items-center gap-2 text-[10px] text-muted-foreground font-mono mt-0.5">
                                     <span>{item.id}</span>
-                                    <span className="text-zinc-300 dark:text-zinc-600">vs</span>
+                                    <span className="text-zinc-300 dark:text-muted-foreground">vs</span>
                                     <span>{item.ackId}</span>
                                 </div>
                             </div>

@@ -26,11 +26,11 @@ const STEP_CARD_PREVIEW: Record<string, {
     accentClass: string;
 }> = {
     '1.2': {
-        icon: <CheckCircle2 size={12} className="text-emerald-400" />,
+        icon: <CheckCircle2 size={12} className="text-success" />,
         title: 'Extraction Complete',
         subtitle: '5 agents — 200 items extracted',
         detail: 'OCR + Parser processed 2 PDF attachments. 4 delivery zones mapped.',
-        accentClass: 'border-emerald-500/20 bg-emerald-500/5',
+        accentClass: 'border-emerald-500/20 bg-success/5',
     },
     '1.3': {
         icon: <BrainCircuit size={12} className="text-green-400" />,
@@ -93,7 +93,7 @@ export default function DealerMonitorKanban(_props: { onNavigate?: (page: string
     });
 
     return (
-        <div className="bg-gray-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 font-sans selection:bg-primary selection:text-primary-foreground">
+        <div className="bg-gray-50 dark:bg-zinc-950 text-foreground font-sans selection:bg-primary selection:text-primary-foreground">
             <main className="p-6 space-y-6 flex flex-col">
                 {/* Summary Bar — hidden for demo build */}
                 {false && (
@@ -111,7 +111,7 @@ export default function DealerMonitorKanban(_props: { onNavigate?: (page: string
                                 </div>
                                 <div className="flex flex-col">
                                     <span className="text-lg font-semibold text-zinc-100 leading-none">{kpi.value}</span>
-                                    <span className="text-[10px] text-zinc-500 mt-1 font-medium">{kpi.label}</span>
+                                    <span className="text-[10px] text-muted-foreground mt-1 font-medium">{kpi.label}</span>
                                 </div>
                                 {i < 3 && <div className="h-8 w-px bg-zinc-800 ml-4 hidden xl:block opacity-50" />}
                             </div>
@@ -120,13 +120,13 @@ export default function DealerMonitorKanban(_props: { onNavigate?: (page: string
                     <div className="w-px h-12 bg-zinc-800 hidden xl:block mx-2" />
                     {/* Quick Actions */}
                     <div className="flex items-center gap-1 min-w-max pl-4 border-l border-zinc-800 xl:border-none xl:pl-0">
-                        <button className="p-2 rounded-lg hover:bg-zinc-800 text-zinc-500 hover:text-zinc-200 transition-colors" title="Filter">
+                        <button className="p-2 rounded-lg hover:bg-zinc-800 text-muted-foreground hover:text-zinc-200 transition-colors" title="Filter">
                             <Filter size={18} />
                         </button>
-                        <button className="p-2 rounded-lg hover:bg-zinc-800 text-zinc-500 hover:text-zinc-200 transition-colors" title="Search">
+                        <button className="p-2 rounded-lg hover:bg-zinc-800 text-muted-foreground hover:text-zinc-200 transition-colors" title="Search">
                             <Search size={18} />
                         </button>
-                        <button className="p-2 rounded-lg hover:bg-zinc-800 text-zinc-500 hover:text-zinc-200 transition-colors" title="Settings">
+                        <button className="p-2 rounded-lg hover:bg-zinc-800 text-muted-foreground hover:text-zinc-200 transition-colors" title="Settings">
                             <Settings size={18} />
                         </button>
                         <div className="w-px h-8 bg-zinc-800 mx-1" />
@@ -143,11 +143,11 @@ export default function DealerMonitorKanban(_props: { onNavigate?: (page: string
                     {COLUMNS.map(column => (
                         <div key={column.id} className="flex flex-col gap-4 overflow-hidden">
                             <div className="flex items-center justify-between mb-1 px-2">
-                                <h4 className="font-medium text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+                                <h4 className="font-medium text-foreground flex items-center gap-2">
                                     {column.title}
-                                    <span className="bg-gray-200 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 text-xs px-2 py-0.5 rounded-full">{column.count}</span>
+                                    <span className="bg-gray-200 dark:bg-zinc-800 text-muted-foreground text-xs px-2 py-0.5 rounded-full">{column.count}</span>
                                 </h4>
-                                <MoreHorizontal size={16} className="text-zinc-400 dark:text-zinc-500 cursor-pointer hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors" />
+                                <MoreHorizontal size={16} className="text-muted-foreground dark:text-muted-foreground cursor-pointer hover:text-muted-foreground dark:hover:text-zinc-300 transition-colors" />
                             </div>
 
                             <div className="flex-1 overflow-y-auto space-y-3 pr-1 scrollbar-micro bg-gray-100/50 dark:bg-zinc-900/50 rounded-2xl p-3 border border-gray-200/50 dark:border-zinc-800/50">
@@ -169,37 +169,37 @@ export default function DealerMonitorKanban(_props: { onNavigate?: (page: string
                                         <div
                                             key={card.id}
                                             data-demo-target={demoTarget}
-                                            className={`bg-white dark:bg-zinc-800 border p-4 rounded-2xl transition-all cursor-pointer group shadow-sm ${hasPanel ? 'ring-2 ring-indigo-500/50 border-indigo-500/30 shadow-lg shadow-indigo-500/10 scale-[1.02]' : `border-gray-200 dark:border-zinc-700 hover:border-gray-300 dark:hover:border-zinc-600 ${card.priority === 'critical' ? 'ring-1 ring-red-500/20' : ''}`}`}
+                                            className={`bg-card border p-4 rounded-2xl transition-all cursor-pointer group shadow-sm ${hasPanel ? 'ring-2 ring-indigo-500/50 border-indigo-500/30 shadow-lg shadow-indigo-500/10 scale-[1.02]' : `border-gray-200 dark:border-zinc-700 hover:border-gray-300 dark:hover:border-zinc-600 ${card.priority === 'critical' ? 'ring-1 ring-red-500/20' : ''}`}`}
                                         >
                                             <div className="flex flex-col gap-3">
                                                 <div className="flex items-start justify-between">
                                                     <span className={`text-[10px] font-medium uppercase px-2 py-0.5 rounded-full ring-1 ring-inset ${card.priority === 'critical' ? 'bg-red-500/10 text-red-400 ring-red-500/30' :
                                                         card.priority === 'high' ? 'bg-amber-500/10 text-amber-400 ring-amber-500/30' :
-                                                            'bg-gray-200 dark:bg-zinc-700 text-zinc-500 dark:text-zinc-400 ring-gray-300 dark:ring-zinc-600'
+                                                            'bg-gray-200 dark:bg-zinc-700 text-muted-foreground ring-gray-300 dark:ring-zinc-600'
                                                         }`}>
                                                         {card.priority}
                                                     </span>
                                                     <div className="flex items-center gap-1.5">
-                                                        <Clock size={12} className="text-zinc-500" />
-                                                        <span className="text-[10px] text-zinc-500 font-medium">4h ago</span>
+                                                        <Clock size={12} className="text-muted-foreground" />
+                                                        <span className="text-[10px] text-muted-foreground font-medium">4h ago</span>
                                                     </div>
                                                 </div>
 
                                                 <div className="space-y-1">
-                                                    <h4 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100 group-hover:text-primary transition-colors">{card.title}</h4>
-                                                    <p className="text-xs text-zinc-500 font-medium">{card.dealer}</p>
+                                                    <h4 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">{card.title}</h4>
+                                                    <p className="text-xs text-muted-foreground font-medium">{card.dealer}</p>
                                                 </div>
 
                                                 <div className="flex items-center gap-2">
                                                     <div className="flex -space-x-2">
                                                         {[1, 2].map(i => (
-                                                            <div key={i} className="w-6 h-6 rounded-full border-2 border-white dark:border-zinc-800 bg-gray-300 dark:bg-zinc-700 flex items-center justify-center text-[10px] font-medium text-zinc-600 dark:text-zinc-300">
+                                                            <div key={i} className="w-6 h-6 rounded-full border-2 border-white dark:border-zinc-800 bg-gray-300 dark:bg-zinc-700 flex items-center justify-center text-[10px] font-medium text-muted-foreground dark:text-zinc-300">
                                                                 {i === 1 ? 'AI' : 'JD'}
                                                             </div>
                                                         ))}
                                                     </div>
                                                     <div className="flex-1" />
-                                                    <div className="flex items-center gap-1.5 text-[10px] text-zinc-500 font-medium">
+                                                    <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground font-medium">
                                                         <CheckCircle2 size={12} className="text-green-400" />
                                                         <span>4 items ready</span>
                                                     </div>
@@ -214,10 +214,10 @@ export default function DealerMonitorKanban(_props: { onNavigate?: (page: string
                                                                 {preview.icon}
                                                                 <div className="flex flex-col min-w-0">
                                                                     <span className="text-[11px] font-semibold text-zinc-800 dark:text-zinc-200 leading-tight">{preview.title}</span>
-                                                                    <span className="text-[10px] text-zinc-500 font-medium">{preview.subtitle}</span>
+                                                                    <span className="text-[10px] text-muted-foreground font-medium">{preview.subtitle}</span>
                                                                 </div>
                                                             </div>
-                                                            <p className="text-[10px] leading-relaxed text-zinc-400 px-1">
+                                                            <p className="text-[10px] leading-relaxed text-muted-foreground px-1">
                                                                 {preview.detail}
                                                             </p>
                                                             <div className="flex items-center gap-2 text-[10px] text-indigo-600/70 dark:text-indigo-300/70 font-medium py-0.5 px-1">
@@ -235,7 +235,7 @@ export default function DealerMonitorKanban(_props: { onNavigate?: (page: string
                                                             <Sparkles size={12} />
                                                             <span className="text-[10px] font-medium uppercase tracking-wider">AI Insight</span>
                                                         </div>
-                                                        <p className="text-[11px] leading-relaxed text-zinc-500 dark:text-zinc-400 italic bg-gray-50 dark:bg-zinc-900 p-3 rounded-xl border border-gray-200/50 dark:border-zinc-700/50">
+                                                        <p className="text-[11px] leading-relaxed text-muted-foreground italic bg-gray-50 dark:bg-zinc-900 p-3 rounded-xl border border-gray-200/50 dark:border-zinc-700/50">
                                                             "{card.aiInsight}"
                                                         </p>
                                                         <button className="w-full flex items-center justify-center gap-2 text-xs font-medium text-primary hover:underline group/btn">
@@ -249,7 +249,7 @@ export default function DealerMonitorKanban(_props: { onNavigate?: (page: string
                                     );
                                 })}
 
-                                <button className="w-full py-3 border border-dashed border-gray-300 dark:border-zinc-700 rounded-2xl text-zinc-400 dark:text-zinc-600 hover:border-gray-400 dark:hover:border-zinc-600 hover:text-zinc-500 dark:hover:text-zinc-400 transition-all text-xs font-medium">
+                                <button className="w-full py-3 border border-dashed border-gray-300 dark:border-zinc-700 rounded-2xl text-muted-foreground dark:text-muted-foreground hover:border-gray-400 dark:hover:border-zinc-600 hover:text-muted-foreground dark:hover:text-muted-foreground transition-all text-xs font-medium">
                                     + Add Item
                                 </button>
                             </div>

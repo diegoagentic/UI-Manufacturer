@@ -61,8 +61,8 @@ export default function OrderSimulationArtifact({ onBack, onGeneratePO }: OrderS
 
     if (isCollapsed) {
         return (
-            <div className="flex-1 flex flex-col items-center justify-center p-6 bg-zinc-50 dark:bg-zinc-800/50 animate-in fade-in zoom-in duration-300 h-full">
-                <div className="bg-white/90 dark:bg-zinc-900/90 p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 shadow-sm flex items-center justify-between w-full text-left">
+            <div className="flex-1 flex flex-col items-center justify-center p-6 bg-muted dark:bg-zinc-800/50 animate-in fade-in zoom-in duration-300 h-full">
+                <div className="bg-white/90 dark:bg-zinc-900/90 p-4 rounded-xl border border-border shadow-sm flex items-center justify-between w-full text-left">
                     <div className="flex items-center gap-3">
                         <div className="w-10 h-10 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 rounded-full flex items-center justify-center shrink-0">
                             <ChartBarIcon className="w-5 h-5" />
@@ -97,7 +97,7 @@ export default function OrderSimulationArtifact({ onBack, onGeneratePO }: OrderS
                         <p className="text-sm text-muted-foreground">Preview how this order appears to different stakeholders</p>
                     </div>
                 </div>
-                <div className="flex bg-zinc-100 dark:bg-zinc-800 p-1 rounded-lg">
+                <div className="flex bg-muted p-1 rounded-lg">
                     <button
                         onClick={() => setActiveRole('manufacturer')}
                         className={`px-4 py-2 rounded-md text-sm font-medium transition-all flex items-center gap-2 ${activeRole === 'manufacturer'
@@ -133,8 +133,8 @@ export default function OrderSimulationArtifact({ onBack, onGeneratePO }: OrderS
                 <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 h-full">
 
                     {/* Left Column: Document Preview */}
-                    <div className="flex flex-col bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl shadow-sm overflow-hidden min-h-[500px]">
-                        <div className="bg-zinc-100 dark:bg-zinc-800 p-3 border-b border-zinc-200 dark:border-zinc-700 font-mono text-xs flex justify-between items-center text-muted-foreground">
+                    <div className="flex flex-col bg-card border border-border rounded-xl shadow-sm overflow-hidden min-h-[500px]">
+                        <div className="bg-muted p-3 border-b border-border font-mono text-xs flex justify-between items-center text-muted-foreground">
                             <span>
                                 {activeRole === 'manufacturer' && 'preview: production_order_ORD-7829.pdf'}
                                 {activeRole === 'dealer' && 'preview: purchase_order_client_ORD-7829.pdf'}
@@ -146,29 +146,29 @@ export default function OrderSimulationArtifact({ onBack, onGeneratePO }: OrderS
                         </div>
 
                         {/* Interactive Visual Document Layout */}
-                        <div className="flex-1 p-8 overflow-y-auto bg-zinc-50 dark:bg-zinc-950/50 flex flex-col items-center">
+                        <div className="flex-1 p-8 overflow-y-auto bg-muted dark:bg-zinc-950/50 flex flex-col items-center">
                             <div className="w-full max-w-md bg-white border border-zinc-200 shadow-md transform transition-all hover:-translate-y-1 hover:shadow-lg p-8 rounded-sm">
                                 {activeRole === 'manufacturer' && (
                                     <div className="text-zinc-900 text-[10px] space-y-4">
                                         <div className="flex justify-between items-start border-b border-zinc-300 pb-4 mb-4">
                                             <div>
                                                 <h1 className="text-xl font-black uppercase tracking-widest text-zinc-800">Manufacturing Plan</h1>
-                                                <p className="text-zinc-500 mt-1">Order Ref: #{orderData.id}-MFG</p>
+                                                <p className="text-muted-foreground mt-1">Order Ref: #{orderData.id}-MFG</p>
                                             </div>
                                             <div className="text-right">
                                                 <div className="font-bold border border-zinc-300 px-2 py-1">SCHEDULED</div>
-                                                <p className="mt-2 text-zinc-500">Est. Ship: 14 Days</p>
+                                                <p className="mt-2 text-muted-foreground">Est. Ship: 14 Days</p>
                                             </div>
                                         </div>
                                         <div className="grid grid-cols-2 gap-4">
                                             <div>
-                                                <div className="font-bold text-zinc-500 mb-1">PRODUCE FOR (DEALER)</div>
+                                                <div className="font-bold text-muted-foreground mb-1">PRODUCE FOR (DEALER)</div>
                                                 <div className="font-medium">Acme Office Solutions</div>
                                                 <div>Region: East Coast US</div>
                                                 <div>ID: DLR-3920</div>
                                             </div>
                                             <div>
-                                                <div className="font-bold text-zinc-500 mb-1">BILL OF MATERIALS</div>
+                                                <div className="font-bold text-muted-foreground mb-1">BILL OF MATERIALS</div>
                                                 <div className="p-2 bg-zinc-100 rounded">
                                                     <div>• 30x Ergonomic Frame Assy</div>
                                                     <div>• 15x Standing Desk Actuator</div>
@@ -192,21 +192,21 @@ export default function OrderSimulationArtifact({ onBack, onGeneratePO }: OrderS
                                         <div className="flex justify-between items-start border-b-2 border-primary pb-4 mb-4">
                                             <div>
                                                 <h1 className="text-xl font-black uppercase tracking-widest text-primary">Purchase Order</h1>
-                                                <p className="text-zinc-500 mt-1">From: Enterprise Client LLC</p>
+                                                <p className="text-muted-foreground mt-1">From: Enterprise Client LLC</p>
                                             </div>
                                             <div className="text-right">
                                                 <div className="font-bold text-lg">PO-2026-991</div>
-                                                <p className="mt-1 text-zinc-500">Date: Feb 20, 2026</p>
+                                                <p className="mt-1 text-muted-foreground">Date: Feb 20, 2026</p>
                                             </div>
                                         </div>
                                         <div className="grid grid-cols-2 gap-4">
                                             <div>
-                                                <div className="font-bold text-zinc-500 mb-1">VENDOR</div>
+                                                <div className="font-bold text-muted-foreground mb-1">VENDOR</div>
                                                 <div className="font-medium">Acme Office Solutions</div>
                                                 <div>100 Dealer Way</div>
                                             </div>
                                             <div>
-                                                <div className="font-bold text-zinc-500 mb-1">SHIP TO</div>
+                                                <div className="font-bold text-muted-foreground mb-1">SHIP TO</div>
                                                 <div className="font-medium">Enterprise Client</div>
                                                 <div>10948 Willow Court</div>
                                             </div>
@@ -234,16 +234,16 @@ export default function OrderSimulationArtifact({ onBack, onGeneratePO }: OrderS
                                     <div className="text-zinc-900 text-[10px] space-y-4 font-sans">
                                         <div className="text-center mb-6">
                                             <h1 className="text-2xl font-light tracking-wide text-zinc-800">INVOICE</h1>
-                                            <p className="text-zinc-400 mt-1">Invoice #INV-7829-EU</p>
+                                            <p className="text-muted-foreground mt-1">Invoice #INV-7829-EU</p>
                                         </div>
                                         <div className="flex justify-between border-t border-b border-zinc-200 py-4 mb-4">
                                             <div>
-                                                <div className="font-bold text-zinc-500 mb-1">BILLED TO</div>
+                                                <div className="font-bold text-muted-foreground mb-1">BILLED TO</div>
                                                 <div className="text-sm">Enterprise Client LLC</div>
                                                 <div>10948 Willow Court</div>
                                             </div>
                                             <div className="text-right">
-                                                <div className="font-bold text-zinc-500 mb-1">AMOUNT DUE</div>
+                                                <div className="font-bold text-muted-foreground mb-1">AMOUNT DUE</div>
                                                 <div className="text-xl font-medium text-zinc-800">${totals.total.toLocaleString()}</div>
                                                 <div className="mt-1 font-bold text-green-600 bg-green-50 px-2 py-1 rounded inline-block">PAID NET-30</div>
                                             </div>
@@ -260,15 +260,15 @@ export default function OrderSimulationArtifact({ onBack, onGeneratePO }: OrderS
                                             ))}
                                         </div>
                                         <div className="space-y-1 mt-4 text-right pr-4">
-                                            <div className="flex justify-end gap-8 text-zinc-600">
+                                            <div className="flex justify-end gap-8 text-muted-foreground">
                                                 <span>Subtotal</span>
                                                 <span className="w-16">${totals.subtotal.toLocaleString()}</span>
                                             </div>
-                                            <div className="flex justify-end gap-8 text-zinc-600">
+                                            <div className="flex justify-end gap-8 text-muted-foreground">
                                                 <span>Shipping</span>
                                                 <span className="w-16">${orderData.shipping.toLocaleString()}</span>
                                             </div>
-                                            <div className="flex justify-end gap-8 text-zinc-600">
+                                            <div className="flex justify-end gap-8 text-muted-foreground">
                                                 <span>Tax</span>
                                                 <span className="w-16">${(totals.subtotal * orderData.taxRate).toLocaleString()}</span>
                                             </div>
@@ -369,7 +369,7 @@ export default function OrderSimulationArtifact({ onBack, onGeneratePO }: OrderS
 
             {/* Bottom Action Area */}
             {onGeneratePO && !isGenerated && (
-                <div className="p-4 border-t border-border flex justify-end bg-zinc-50 dark:bg-zinc-800/50">
+                <div className="p-4 border-t border-border flex justify-end bg-muted dark:bg-zinc-800/50">
                     <button
                         onClick={() => {
                             setIsGenerated(true)
@@ -383,7 +383,7 @@ export default function OrderSimulationArtifact({ onBack, onGeneratePO }: OrderS
                 </div>
             )}
             {onGeneratePO && isGenerated && (
-                <div className="p-4 border-t border-border flex justify-end bg-zinc-50 dark:bg-zinc-800/50">
+                <div className="p-4 border-t border-border flex justify-end bg-muted dark:bg-zinc-800/50">
                     <div className="px-6 py-2.5 bg-green-100 dark:bg-green-900/10 text-green-700 dark:text-green-400 font-bold rounded-xl flex items-center gap-2 border border-green-200 dark:border-green-800/50">
                         <CheckCircleIcon className="w-5 h-5" />
                         PO Generation Started

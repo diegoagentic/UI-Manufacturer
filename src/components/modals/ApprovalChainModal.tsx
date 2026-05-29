@@ -123,7 +123,7 @@ export default function ApprovalChainModal({ isOpen, onClose, trigger, approvers
                                                 'w-8 h-8 rounded-full flex items-center justify-center shrink-0 z-10 transition-all duration-300',
                                                 approver.status === 'approved' && 'bg-green-500 text-white',
                                                 approver.status === 'current' && 'bg-amber-500 text-white animate-pulse',
-                                                approver.status === 'pending' && 'bg-zinc-200 dark:bg-zinc-700 text-zinc-400',
+                                                approver.status === 'pending' && 'bg-zinc-200 dark:bg-zinc-700 text-muted-foreground',
                                                 approver.status === 'rejected' && 'bg-red-500 text-white',
                                             )}>
                                                 {approver.status === 'approved' && <CheckCircleIcon className="w-5 h-5" />}

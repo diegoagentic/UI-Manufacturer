@@ -56,7 +56,7 @@ export default function ProjectTrackerWidget() {
                     <div key={project.id} className="group">
                         <div className="flex items-center justify-between mb-2">
                             <div>
-                                <h4 className="text-sm font-semibold text-foreground group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors cursor-pointer">
+                                <h4 className="text-sm font-semibold text-foreground group-hover:text-muted-foreground dark:group-hover:text-zinc-300 transition-colors cursor-pointer">
                                     {project.client}
                                 </h4>
                                 <span className="text-xs text-muted-foreground font-mono">{project.id} • {project.items} Items</span>
@@ -95,7 +95,7 @@ export default function ProjectTrackerWidget() {
                                             }`}>
                                             <StageIcon className="w-3 h-3" />
                                         </div>
-                                        <span className={`text-[9px] font-medium uppercase ${isCurrent ? 'text-zinc-900 dark:text-white' : 'text-muted-foreground'
+                                        <span className={`text-[9px] font-medium uppercase ${isCurrent ? 'text-foreground' : 'text-muted-foreground'
                                             }`}>{stage.label}</span>
                                     </div>
                                 )

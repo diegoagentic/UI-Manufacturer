@@ -235,11 +235,11 @@ export default function CatalogImportModal({ isOpen, onClose, onImportComplete }
                             {/* Header */}
                             <div className="flex items-center justify-between p-4 border-b border-border">
                                 <Dialog.Title className="text-lg font-semibold text-foreground flex items-center gap-2">
-                                    <CloudArrowUpIcon className="w-5 h-5 text-zinc-500" />
+                                    <CloudArrowUpIcon className="w-5 h-5 text-muted-foreground" />
                                     Import Catalog
                                 </Dialog.Title>
                                 {step !== 'processing' && (
-                                    <button onClick={onClose} className="p-1 rounded-full hover:bg-muted text-zinc-500 transition-colors">
+                                    <button onClick={onClose} className="p-1 rounded-full hover:bg-muted text-muted-foreground transition-colors">
                                         <XMarkIcon className="w-5 h-5" />
                                     </button>
                                 )}
@@ -309,7 +309,7 @@ export default function CatalogImportModal({ isOpen, onClose, onImportComplete }
 
                                         {sourceType === 'file' && (
                                             <div className="border-2 border-dashed border-input rounded-xl p-8 text-center bg-muted/50 hover:bg-muted transition-colors cursor-pointer">
-                                                <CloudArrowUpIcon className="w-10 h-10 text-zinc-400 mx-auto mb-3" />
+                                                <CloudArrowUpIcon className="w-10 h-10 text-muted-foreground mx-auto mb-3" />
                                                 <p className="text-sm font-medium text-foreground">Click to upload catalog file</p>
                                                 <p className="text-xs text-muted-foreground mt-1">Supports JSON, CSV, XML</p>
                                             </div>
@@ -389,7 +389,7 @@ export default function CatalogImportModal({ isOpen, onClose, onImportComplete }
                                                     <div className="font-medium text-foreground">Current Tenant Only</div>
                                                     <div className="text-xs text-muted-foreground">Available only to users in this workspace.</div>
                                                 </div>
-                                                <BuildingOfficeIcon className="w-6 h-6 text-zinc-400 ml-auto" />
+                                                <BuildingOfficeIcon className="w-6 h-6 text-muted-foreground ml-auto" />
                                             </label>
 
                                             {/* Option 2: All Tenants */}
@@ -409,7 +409,7 @@ export default function CatalogImportModal({ isOpen, onClose, onImportComplete }
                                                     <div className="font-medium text-foreground">All Tenants</div>
                                                     <div className="text-xs text-muted-foreground">Make this catalog globally available to all organizations.</div>
                                                 </div>
-                                                <GlobeAltIcon className="w-6 h-6 text-zinc-400 ml-auto" />
+                                                <GlobeAltIcon className="w-6 h-6 text-muted-foreground ml-auto" />
                                             </label>
 
                                             {/* Option 3: Specific Tenants */}
@@ -429,13 +429,13 @@ export default function CatalogImportModal({ isOpen, onClose, onImportComplete }
                                                     <div className="font-medium text-foreground">Specific Tenants</div>
                                                     <div className="text-xs text-muted-foreground">Choose specific organizations from the list.</div>
                                                 </div>
-                                                <UsersIcon className="w-6 h-6 text-zinc-400 ml-auto" />
+                                                <UsersIcon className="w-6 h-6 text-muted-foreground ml-auto" />
                                             </label>
                                         </div>
 
                                         {/* Multi-select List */}
                                         {tenantScope === 'select' && (
-                                            <div className="mt-4 border border-zinc-200 dark:border-zinc-700 rounded-xl overflow-hidden animate-in fade-in slide-in-from-top-2">
+                                            <div className="mt-4 border border-border rounded-xl overflow-hidden animate-in fade-in slide-in-from-top-2">
                                                 <div className="bg-muted/50 px-4 py-2 border-b border-border text-xs font-medium text-muted-foreground uppercase">
                                                     Select Tenants
                                                 </div>

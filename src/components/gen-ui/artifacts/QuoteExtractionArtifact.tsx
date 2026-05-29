@@ -202,7 +202,7 @@ export default function QuoteExtractionArtifact({ fileName, onComplete }: QuoteE
             <div className="text-center mb-6 shrink-0">
                 <div className="inline-flex items-center justify-center p-3.5 bg-emerald-50 dark:bg-emerald-900/10 rounded-2xl mb-3 relative">
                     <div className="absolute inset-0 rounded-2xl border border-emerald-500/20 w-full h-full animate-[ping_3s_cubic-bezier(0,0,0.2,1)_infinite]"></div>
-                    <SparklesIcon className="w-8 h-8 text-emerald-500 dark:text-emerald-400" />
+                    <SparklesIcon className="w-8 h-8 text-success dark:text-success" />
                 </div>
                 <h3 className="text-lg font-semibold text-foreground">Autonomous Processing</h3>
                 <p className="text-xs font-mono text-muted-foreground mt-1 uppercase tracking-wider h-4 overflow-visible whitespace-nowrap">{currentLog}</p>
@@ -215,18 +215,18 @@ export default function QuoteExtractionArtifact({ fileName, onComplete }: QuoteE
                         {index !== steps.length - 1 && (
                             <div className={clsx(
                                 "absolute left-[11px] top-6 w-0.5 h-full -z-10 transition-colors duration-500",
-                                step.status === 'complete' ? "bg-indigo-200 dark:bg-indigo-700/50" : "bg-zinc-100 dark:bg-zinc-800"
+                                step.status === 'complete' ? "bg-indigo-200 dark:bg-indigo-700/50" : "bg-muted"
                             )}></div>
                         )}
 
                         <div className="flex items-start gap-4">
                             <div className={clsx(
-                                "w-6 h-6 rounded-full flex items-center justify-center shrink-0 border-2 transition-all duration-300 z-10 bg-white dark:bg-zinc-800",
+                                "w-6 h-6 rounded-full flex items-center justify-center shrink-0 border-2 transition-all duration-300 z-10 bg-card",
                                 step.status === 'complete'
                                     ? "border-green-500 text-green-500 bg-green-50 dark:bg-green-900/10"
                                     : step.status === 'active'
                                         ? "border-indigo-500 text-indigo-500 animate-pulse bg-indigo-50 dark:bg-indigo-900/10"
-                                        : "border-zinc-200 dark:border-zinc-700 text-zinc-300"
+                                        : "border-border text-zinc-300"
                             )}>
                                 {step.status === 'complete' ? (
                                     <CheckCircleIcon className="w-4 h-4" />

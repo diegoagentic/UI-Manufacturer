@@ -96,7 +96,7 @@ export default function AIScanModal({ isOpen, onClose }: AIScanModalProps) {
                     <div className="relative w-10 h-10 rounded-xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center">
                       <SparklesIcon className="w-5 h-5 text-indigo-500 dark:text-indigo-400" />
                       {phase === 'processing' && <div className="absolute -top-1 -right-1 w-3 h-3 bg-indigo-500 rounded-full animate-pulse" />}
-                      {phase === 'complete' && <div className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full" />}
+                      {phase === 'complete' && <div className="absolute -top-1 -right-1 w-3 h-3 bg-success rounded-full" />}
                     </div>
                     <div>
                       <Dialog.Title className="text-sm font-bold text-foreground">
@@ -118,11 +118,11 @@ export default function AIScanModal({ isOpen, onClose }: AIScanModalProps) {
                     const status = phase === 'complete' ? 'done' : i < activeAgent ? 'done' : i === activeAgent ? 'running' : 'pending'
                     return (
                       <div key={agent.id} className="flex-1 flex items-center gap-1.5 px-2 py-1.5 rounded-lg border border-border bg-muted/30">
-                        <agent.icon className={`w-3.5 h-3.5 ${status === 'done' ? 'text-emerald-500' : status === 'running' ? 'text-indigo-500' : 'text-muted-foreground/50'}`} />
-                        <span className={`text-[10px] font-medium truncate ${status === 'done' ? 'text-emerald-600 dark:text-emerald-400' : status === 'running' ? 'text-indigo-600 dark:text-indigo-400' : 'text-muted-foreground/50'}`}>
+                        <agent.icon className={`w-3.5 h-3.5 ${status === 'done' ? 'text-success' : status === 'running' ? 'text-indigo-500' : 'text-muted-foreground/50'}`} />
+                        <span className={`text-[10px] font-medium truncate ${status === 'done' ? 'text-success dark:text-success' : status === 'running' ? 'text-indigo-600 dark:text-indigo-400' : 'text-muted-foreground/50'}`}>
                           {agent.name}
                         </span>
-                        {status === 'done' && <CheckCircleIcon className="w-3 h-3 text-emerald-500 ml-auto shrink-0" />}
+                        {status === 'done' && <CheckCircleIcon className="w-3 h-3 text-success ml-auto shrink-0" />}
                         {status === 'running' && <div className="w-2 h-2 bg-indigo-500 rounded-full animate-pulse ml-auto shrink-0" />}
                       </div>
                     )
@@ -147,13 +147,13 @@ export default function AIScanModal({ isOpen, onClose }: AIScanModalProps) {
 
                 {phase === 'processing' ? (
                   <div className="px-6 pb-5">
-                    <div className="bg-zinc-50 dark:bg-zinc-950 border border-border rounded-xl p-4 max-h-[200px] overflow-y-auto">
+                    <div className="bg-muted dark:bg-zinc-950 border border-border rounded-xl p-4 max-h-[200px] overflow-y-auto">
                       <div className="space-y-2">
                         {logs.map((log, i) => (
                           <div key={i} className="flex items-start gap-2">
                             <span className="text-muted-foreground font-mono text-[10px] mt-0.5 select-none">{'>'}</span>
                             <div className="flex-1 min-w-0">
-                              <span className={`text-[10px] font-bold mr-1.5 ${log.type === 'success' ? 'text-emerald-500' : log.type === 'warning' ? 'text-amber-500' : 'text-indigo-500'}`}>
+                              <span className={`text-[10px] font-bold mr-1.5 ${log.type === 'success' ? 'text-success' : log.type === 'warning' ? 'text-amber-500' : 'text-indigo-500'}`}>
                                 {log.agent}:
                               </span>
                               <span className={`text-[11px] font-mono ${i === logs.length - 1 ? 'text-foreground' : 'text-muted-foreground'}`}>

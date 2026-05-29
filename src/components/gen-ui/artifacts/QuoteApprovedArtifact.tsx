@@ -33,7 +33,7 @@ export default function QuoteApprovedArtifact({ onGeneratePO }: QuoteApprovedArt
 
     if (actionTaken === 'simulate') {
         return (
-            <div className="w-full max-w-4xl h-[600px] -ml-2 -mt-2 shadow-lg rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-card">
+            <div className="w-full max-w-4xl h-[600px] -ml-2 -mt-2 shadow-lg rounded-2xl overflow-hidden border border-border bg-card">
                 <OrderSimulationArtifact
                     onBack={() => setActionTaken(null)}
                     onGeneratePO={handleGeneratePO}
@@ -44,9 +44,9 @@ export default function QuoteApprovedArtifact({ onGeneratePO }: QuoteApprovedArt
 
     if (actionTaken === 'po') {
         return (
-            <div className="flex-1 flex flex-col items-center justify-center p-6 bg-zinc-50 dark:bg-zinc-800/50 animate-in fade-in zoom-in duration-300 h-full">
-                <div className="bg-white/90 dark:bg-zinc-900/90 p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 shadow-sm flex items-center gap-3 text-left">
-                    <div className="w-10 h-10 bg-zinc-100 dark:bg-zinc-800 text-zinc-500 rounded-full flex items-center justify-center shrink-0">
+            <div className="flex-1 flex flex-col items-center justify-center p-6 bg-muted dark:bg-zinc-800/50 animate-in fade-in zoom-in duration-300 h-full">
+                <div className="bg-white/90 dark:bg-zinc-900/90 p-4 rounded-xl border border-border shadow-sm flex items-center gap-3 text-left">
+                    <div className="w-10 h-10 bg-muted text-muted-foreground rounded-full flex items-center justify-center shrink-0">
                         <DocumentTextIcon className="w-5 h-5" />
                     </div>
                     <div>
@@ -76,7 +76,7 @@ export default function QuoteApprovedArtifact({ onGeneratePO }: QuoteApprovedArt
             </button>
             <button
                 onClick={handleSimulate}
-                className="mt-6 text-sm font-medium text-zinc-500 dark:text-zinc-400 hover:text-primary dark:hover:text-primary transition-colors flex items-center gap-2"
+                className="mt-6 text-sm font-medium text-muted-foreground hover:text-primary dark:hover:text-primary transition-colors flex items-center gap-2"
             >
                 <EyeIcon className="w-4 h-4" />
                 Simulate Benefit View

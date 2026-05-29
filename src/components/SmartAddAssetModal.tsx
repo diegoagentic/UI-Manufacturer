@@ -214,7 +214,7 @@ export default function SmartAddAssetModal({ isOpen, onClose, onConfirm }: Smart
                                 "w-full flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg transition-all",
                                 activeTab === tab.id
                                     ? "bg-background text-foreground shadow-sm"
-                                    : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 hover:bg-muted/50"
+                                    : "text-muted-foreground hover:text-muted-foreground dark:hover:text-zinc-300 hover:bg-muted/50"
                             )}
                         >
                             <tab.icon className="w-4 h-4" />
@@ -249,7 +249,7 @@ export default function SmartAddAssetModal({ isOpen, onClose, onConfirm }: Smart
                     </div>
                     <div>
                         <h3 className="font-semibold text-foreground group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">{mode.label}</h3>
-                        <p className="text-xs text-muted-foreground mt-1 max-w-[150px] group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors">{mode.desc}</p>
+                        <p className="text-xs text-muted-foreground mt-1 max-w-[150px] group-hover:text-muted-foreground dark:group-hover:text-zinc-300 transition-colors">{mode.desc}</p>
                     </div>
                 </button>
             ))}
@@ -271,7 +271,7 @@ export default function SmartAddAssetModal({ isOpen, onClose, onConfirm }: Smart
                         </div>
                         <span className={cn(
                             "absolute top-10 text-[10px] whitespace-nowrap font-medium transition-colors duration-300",
-                            currentStep >= step.id ? "text-foreground font-semibold" : "text-zinc-400"
+                            currentStep >= step.id ? "text-foreground font-semibold" : "text-muted-foreground"
                         )}>
                             {step.label}
                         </span>
@@ -296,7 +296,7 @@ export default function SmartAddAssetModal({ isOpen, onClose, onConfirm }: Smart
                         <div className="space-y-4">
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-2">
-                                    <label className="text-xs font-medium text-zinc-500 uppercase tracking-wide">Asset Name *</label>
+                                    <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Asset Name *</label>
                                     <input
                                         type="text"
                                         value={formData.assetName}
@@ -306,7 +306,7 @@ export default function SmartAddAssetModal({ isOpen, onClose, onConfirm }: Smart
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-xs font-medium text-zinc-500 uppercase tracking-wide">SKU</label>
+                                    <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">SKU</label>
                                     <div className="relative">
                                         <input
                                             type="text"
@@ -316,7 +316,7 @@ export default function SmartAddAssetModal({ isOpen, onClose, onConfirm }: Smart
                                             className="w-full px-4 py-2.5 bg-muted/50 border border-border rounded-xl focus:ring-2 focus:ring-primary focus:outline-none text-sm"
                                         />
                                         <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-2">
-                                            <span className="text-xs text-zinc-400">Auto</span>
+                                            <span className="text-xs text-muted-foreground">Auto</span>
                                             <div className="w-8 h-4 bg-primary/20 rounded-full relative cursor-pointer">
                                                 <div className="w-4 h-4 bg-primary rounded-full absolute right-0 top-0 shadow-sm" />
                                             </div>
@@ -327,7 +327,7 @@ export default function SmartAddAssetModal({ isOpen, onClose, onConfirm }: Smart
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-2">
-                                    <label className="text-xs font-medium text-zinc-500 uppercase tracking-wide">Category *</label>
+                                    <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Category *</label>
                                     <select
                                         value={formData.category}
                                         onChange={e => setFormData({ ...formData, category: e.target.value })}
@@ -340,7 +340,7 @@ export default function SmartAddAssetModal({ isOpen, onClose, onConfirm }: Smart
                                     </select>
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-xs font-medium text-zinc-500 uppercase tracking-wide">Subcategory</label>
+                                    <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Subcategory</label>
                                     <select
                                         value={formData.subCategory}
                                         onChange={e => setFormData({ ...formData, subCategory: e.target.value })}
@@ -355,7 +355,7 @@ export default function SmartAddAssetModal({ isOpen, onClose, onConfirm }: Smart
                             </div>
 
                             <div className="space-y-2">
-                                <label className="text-xs font-medium text-zinc-500 uppercase tracking-wide">Description</label>
+                                <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Description</label>
                                 <textarea
                                     rows={3}
                                     value={formData.description}
@@ -381,7 +381,7 @@ export default function SmartAddAssetModal({ isOpen, onClose, onConfirm }: Smart
 
                                 {formData.createMultiple && (
                                     <div className="w-32 animate-in fade-in slide-in-from-left-2 duration-300">
-                                        <label className="text-[10px] font-medium text-zinc-500 uppercase tracking-wide block mb-1">Quantity</label>
+                                        <label className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide block mb-1">Quantity</label>
                                         <input
                                             type="number"
                                             min={1}
@@ -398,10 +398,10 @@ export default function SmartAddAssetModal({ isOpen, onClose, onConfirm }: Smart
 
                     {currentStep === 2 && (
                         <div className="space-y-4">
-                            <h3 className="text-sm font-medium text-zinc-900 dark:text-zinc-100">Location Assignment</h3>
+                            <h3 className="text-sm font-medium text-foreground">Location Assignment</h3>
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-2">
-                                    <label className="text-xs font-medium text-zinc-500 uppercase tracking-wide">Assignment Type</label>
+                                    <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Assignment Type</label>
                                     <div className="flex bg-muted/50 p-1 rounded-lg border border-border">
                                         {['Warehouse', 'Project', 'Location'].map(type => (
                                             <button
@@ -415,7 +415,7 @@ export default function SmartAddAssetModal({ isOpen, onClose, onConfirm }: Smart
                                 </div>
                             </div>
                             <div className="space-y-2">
-                                <label className="text-xs font-medium text-zinc-500 uppercase tracking-wide">Warehouse</label>
+                                <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Warehouse</label>
                                 <select
                                     value={formData.location}
                                     onChange={e => setFormData({ ...formData, location: e.target.value })}
@@ -431,10 +431,10 @@ export default function SmartAddAssetModal({ isOpen, onClose, onConfirm }: Smart
 
                     {currentStep === 3 && (
                         <div className="space-y-4">
-                            <h3 className="text-sm font-medium text-zinc-900 dark:text-zinc-100">Financial & Status</h3>
+                            <h3 className="text-sm font-medium text-foreground">Financial & Status</h3>
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-2">
-                                    <label className="text-xs font-medium text-zinc-500 uppercase tracking-wide">Value ($)</label>
+                                    <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Value ($)</label>
                                     <input
                                         type="text"
                                         value={formData.value}
@@ -443,7 +443,7 @@ export default function SmartAddAssetModal({ isOpen, onClose, onConfirm }: Smart
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-xs font-medium text-zinc-500 uppercase tracking-wide">Status</label>
+                                    <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Status</label>
                                     <select
                                         value={formData.status}
                                         onChange={e => setFormData({ ...formData, status: e.target.value })}
@@ -464,19 +464,19 @@ export default function SmartAddAssetModal({ isOpen, onClose, onConfirm }: Smart
                                 <h3 className="text-sm font-semibold text-foreground mb-3">Summary to Create</h3>
                                 <div className="space-y-2 text-sm">
                                     <div className="flex justify-between border-b border-primary/10 pb-2">
-                                        <span className="text-zinc-500">Asset Name</span>
+                                        <span className="text-muted-foreground">Asset Name</span>
                                         <span className="font-medium">{formData.assetName || 'Untitled'}</span>
                                     </div>
                                     <div className="flex justify-between border-b border-primary/10 pb-2">
-                                        <span className="text-zinc-500">Category</span>
+                                        <span className="text-muted-foreground">Category</span>
                                         <span className="font-medium">{formData.category || '-'}</span>
                                     </div>
                                     <div className="flex justify-between border-b border-primary/10 pb-2">
-                                        <span className="text-zinc-500">Location</span>
+                                        <span className="text-muted-foreground">Location</span>
                                         <span className="font-medium">{formData.location || 'Unassigned'}</span>
                                     </div>
                                     <div className="flex justify-between">
-                                        <span className="text-zinc-500">Value</span>
+                                        <span className="text-muted-foreground">Value</span>
                                         <span className="font-medium">${formData.value || '0.00'}</span>
                                     </div>
                                 </div>
@@ -495,7 +495,7 @@ export default function SmartAddAssetModal({ isOpen, onClose, onConfirm }: Smart
                             "px-4 py-2 text-sm font-medium rounded-lg transition-colors flex items-center gap-2",
                             currentStep === 1
                                 ? "opacity-0 pointer-events-none" // Hide when on step 1 since back is in header
-                                : "text-zinc-500 hover:text-foreground hover:bg-muted"
+                                : "text-muted-foreground hover:text-foreground hover:bg-muted"
                         )}
                     >
                         <ChevronLeftIcon className="w-4 h-4" />
@@ -529,8 +529,8 @@ export default function SmartAddAssetModal({ isOpen, onClose, onConfirm }: Smart
                             </span>
                             <span className="text-xs font-medium text-muted-foreground bg-muted px-2 py-1 rounded-full">{template.category}</span>
                         </div>
-                        <h4 className="font-semibold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-900 dark:group-hover:text-white mb-1">{template.label}</h4>
-                        <p className="text-xs text-zinc-500 line-clamp-2">{template.description}</p>
+                        <h4 className="font-semibold text-foreground group-hover:text-zinc-900 dark:group-hover:text-white mb-1">{template.label}</h4>
+                        <p className="text-xs text-muted-foreground line-clamp-2">{template.description}</p>
                     </button>
                 ))}
             </div>
@@ -552,7 +552,7 @@ export default function SmartAddAssetModal({ isOpen, onClose, onConfirm }: Smart
                         <TableCellsIcon className="w-16 h-16 text-zinc-300 mx-auto mb-4 group-hover:text-primary transition-colors" />
                         <h3 className="text-lg font-semibold text-foreground">Upload CSV File</h3>
                         <p className="text-sm text-muted-foreground">Drag and drop or click to browse</p>
-                        <button className="mt-4 text-xs font-medium text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-300 hover:underline z-10 relative">
+                        <button className="mt-4 text-xs font-medium text-muted-foreground hover:text-zinc-800 dark:hover:text-zinc-300 hover:underline z-10 relative">
                             Download Sample Template
                         </button>
                     </div>
@@ -564,7 +564,7 @@ export default function SmartAddAssetModal({ isOpen, onClose, onConfirm }: Smart
             {csvState === 'validating' && (
                 <div className="h-full flex flex-col items-center justify-center text-center space-y-4">
                     <ArrowPathIcon className="w-8 h-8 text-primary animate-spin" />
-                    <p className="text-sm font-medium text-zinc-600">Validating records...</p>
+                    <p className="text-sm font-medium text-muted-foreground">Validating records...</p>
                 </div>
             )}
 
@@ -600,8 +600,8 @@ export default function SmartAddAssetModal({ isOpen, onClose, onConfirm }: Smart
 
                         <div className="border border-border rounded-xl overflow-hidden">
                             <div className="bg-muted/50 px-4 py-2 border-b border-border flex justify-between">
-                                <span className="text-xs font-bold text-zinc-500 uppercase">Preview</span>
-                                <span className="text-xs text-zinc-400">Showing 3 of 7</span>
+                                <span className="text-xs font-bold text-muted-foreground uppercase">Preview</span>
+                                <span className="text-xs text-muted-foreground">Showing 3 of 7</span>
                             </div>
                             <div className="p-4 space-y-2">
                                 {['Executive Leather Chair', 'Adjustable LED Floor Lamp', 'Tempered Glass Partition'].map((item, i) => (
@@ -615,7 +615,7 @@ export default function SmartAddAssetModal({ isOpen, onClose, onConfirm }: Smart
                     </div>
 
                     <div className="pt-6 flex justify-end gap-3 border-t border-border mt-4">
-                        <button onClick={() => setCsvState('upload')} className="px-4 py-2 text-sm text-zinc-500 hover:text-foreground hover:bg-muted rounded-lg transition-colors">Cancel</button>
+                        <button onClick={() => setCsvState('upload')} className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors">Cancel</button>
                         <button onClick={handleCreateFromCsv} className="px-6 py-2 bg-primary text-zinc-900 text-sm font-medium rounded-lg shadow hover:bg-primary/90 transition-colors">
                             Create 6 Assets
                         </button>
@@ -702,7 +702,7 @@ export default function SmartAddAssetModal({ isOpen, onClose, onConfirm }: Smart
                             </p>
                         </div>
                     </div>
-                    <button onClick={onClose} className="p-2 text-muted-foreground hover:text-zinc-600 hover:bg-muted rounded-full transition-colors">
+                    <button onClick={onClose} className="p-2 text-muted-foreground hover:text-muted-foreground hover:bg-muted rounded-full transition-colors">
                         <XMarkIcon className="w-6 h-6" />
                     </button>
                 </div>

@@ -15,7 +15,7 @@ export default function SuccessModal({ isOpen, type = 'po', poNumber = 'PO-2026-
 
     return (
         <div className="absolute inset-0 z-50 flex items-center justify-center bg-white/90 dark:bg-black/90 backdrop-blur-md p-4 animate-in fade-in duration-300">
-            <div className="bg-white dark:bg-zinc-800 rounded-2xl shadow-2xl w-full max-w-md border border-zinc-200 dark:border-zinc-800 text-center p-8 relative overflow-hidden">
+            <div className="bg-card rounded-2xl shadow-2xl w-full max-w-md border border-border text-center p-8 relative overflow-hidden">
                 <div className={`absolute top-0 left-0 w-full h-2 bg-gradient-to-r ${isPO ? 'from-green-400 to-emerald-600' : 'from-amber-400 to-orange-600'}`}></div>
 
                 <div className="flex justify-center mb-6">
@@ -46,17 +46,17 @@ export default function SuccessModal({ isOpen, type = 'po', poNumber = 'PO-2026-
 
                     <button
                         onClick={onCreateNew || onClose}
-                        className="w-full bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 py-3 rounded-xl font-medium transition-colors"
+                        className="w-full bg-muted hover:bg-zinc-200 dark:hover:bg-zinc-700 text-muted-foreground py-3 rounded-xl font-medium transition-colors"
                     >
                         Create New Quote
                     </button>
 
                     <div className="grid grid-cols-2 gap-3 mt-2">
-                        <button className="flex items-center justify-center gap-2 py-2.5 px-4 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 rounded-xl text-sm font-medium transition-colors">
+                        <button className="flex items-center justify-center gap-2 py-2.5 px-4 bg-muted hover:bg-zinc-200 dark:hover:bg-zinc-700 text-muted-foreground rounded-xl text-sm font-medium transition-colors">
                             <ArrowDownTrayIcon className="w-4 h-4" />
                             Download PDF
                         </button>
-                        <button className="flex items-center justify-center gap-2 py-2.5 px-4 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 rounded-xl text-sm font-medium transition-colors">
+                        <button className="flex items-center justify-center gap-2 py-2.5 px-4 bg-muted hover:bg-zinc-200 dark:hover:bg-zinc-700 text-muted-foreground rounded-xl text-sm font-medium transition-colors">
                             <ShareIcon className="w-4 h-4" />
                             Share
                         </button>

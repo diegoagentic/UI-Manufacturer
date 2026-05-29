@@ -51,11 +51,11 @@ const trackingSteps = [
 ]
 
 const recentOrders = [
-    { id: "#ORD-2055", customer: "AutoManfacture Co.", client: "AutoManfacture Co.", project: "Office Renovation", amount: "$385,000", status: "Order Received", date: "Dec 20, 2025", initials: "AC", statusColor: "bg-zinc-100 text-zinc-700", location: "New York" },
+    { id: "#ORD-2055", customer: "AutoManfacture Co.", client: "AutoManfacture Co.", project: "Office Renovation", amount: "$385,000", status: "Order Received", date: "Dec 20, 2025", initials: "AC", statusColor: "bg-zinc-100 text-muted-foreground", location: "New York" },
     { id: "#ORD-2054", customer: "TechDealer Solutions", client: "TechDealer Solutions", project: "HQ Upgrade", amount: "$62,500", status: "In Production", date: "Nov 15, 2025", initials: "TS", statusColor: "bg-brand-50 text-brand-700 ring-brand-600/20", location: "London" },
     { id: "#ORD-2053", customer: "Urban Living Inc.", client: "Urban Living Inc.", project: "Lobby Refresh", amount: "$112,000", status: "Ready to Ship", date: "Oct 30, 2025", initials: "UL", statusColor: "bg-green-50 text-green-700 ring-green-600/20", location: "Austin" },
-    { id: "#ORD-2052", customer: "Global Logistics", client: "Global Logistics", project: "Warehouse Expansion", amount: "$45,000", status: "Delivered", date: "Oct 15, 2025", initials: "GL", statusColor: "bg-gray-100 text-gray-700", location: "Berlin" },
-    { id: "#ORD-2051", customer: "City Builders", client: "City Builders", project: "City Center", amount: "$120,000", status: "Order Received", date: "Jan 05, 2026", initials: "CB", statusColor: "bg-zinc-100 text-zinc-700", location: "New York" },
+    { id: "#ORD-2052", customer: "Global Logistics", client: "Global Logistics", project: "Warehouse Expansion", amount: "$45,000", status: "Delivered", date: "Oct 15, 2025", initials: "GL", statusColor: "bg-gray-100 text-foreground", location: "Berlin" },
+    { id: "#ORD-2051", customer: "City Builders", client: "City Builders", project: "City Center", amount: "$120,000", status: "Order Received", date: "Jan 05, 2026", initials: "CB", statusColor: "bg-zinc-100 text-muted-foreground", location: "New York" },
     { id: "#ORD-2050", customer: "Modern Homes", client: "Modern Homes", project: "Residential A", amount: "$85,000", status: "Acknowledgement", date: "Jan 02, 2026", initials: "MH", statusColor: "bg-blue-50 text-blue-700", location: "Austin" },
     { id: "#ORD-2049", customer: "Coastal Props", client: "Coastal Props", project: "Beach House", amount: "$210,000", status: "In Production", date: "Dec 10, 2025", initials: "CP", statusColor: "bg-indigo-50 text-indigo-700", location: "London" },
     { id: "#ORD-2048", customer: "Valley Homes", client: "Valley Homes", project: "Mountain Retreat", amount: "$95,000", status: "Ready to Ship", date: "Nov 20, 2025", initials: "VH", statusColor: "bg-indigo-50 text-indigo-700", location: "Berlin" },
@@ -64,7 +64,7 @@ const recentOrders = [
 
 const recentQuotes = [
     { id: "QT-1025", customer: "Apex Tech", project: "New HQ", amount: "$1,200,000", status: "Negotiating", date: "Jan 12, 2026", validUntil: "Feb 12, 2026", probability: "High", initials: "AT", statusColor: "bg-indigo-50 text-indigo-700", location: "Austin" },
-    { id: "QT-1024", customer: "BioLife Inc", project: "Lab Expansion", amount: "$540,000", status: "Draft", date: "Jan 10, 2026", validUntil: "Draft", probability: "N/A", initials: "BL", statusColor: "bg-zinc-100 text-zinc-700", location: "Boston" },
+    { id: "QT-1024", customer: "BioLife Inc", project: "Lab Expansion", amount: "$540,000", status: "Draft", date: "Jan 10, 2026", validUntil: "Draft", probability: "N/A", initials: "BL", statusColor: "bg-zinc-100 text-muted-foreground", location: "Boston" },
     { id: "QT-1023", customer: "FinServe Corp", project: "Branch Rollout", amount: "$890,000", status: "Sent", date: "Jan 08, 2026", validUntil: "Feb 08, 2026", probability: "Medium", initials: "FS", statusColor: "bg-blue-50 text-blue-700", location: "New York" },
     { id: "QT-1022", customer: "Redwood School", project: "Classroom Refresh", amount: "$150,000", status: "Approved", date: "Dec 28, 2025", validUntil: "Jan 28, 2026", probability: "Closed", initials: "RS", statusColor: "bg-green-50 text-green-700", location: "Portland" },
 ]
@@ -366,7 +366,7 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
 
                 {/* Lifecycle Tabs Navigation */}
                 <div className="flex items-center mb-6">
-                    <div className="flex items-center gap-1 p-1 bg-zinc-100 dark:bg-card/50 rounded-xl border border-zinc-200 dark:border-zinc-800">
+                    <div className="flex items-center gap-1 p-1 bg-zinc-100 dark:bg-card/50 rounded-xl border border-border">
                         <button
                             onClick={() => setLifecycleTab('quotes')}
                             className={cn(
@@ -387,7 +387,7 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                                 lifecycleTab === 'orders'
                                     ? "bg-brand-300 dark:bg-brand-500 text-zinc-900 shadow-sm"
 
-                                    : "text-muted-foreground hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:text-zinc-900 dark:hover:text-white"
+                                    : "text-muted-foreground hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:text-foreground"
                             )}
                         >
                             <ShoppingCartIcon className="w-4 h-4" />
@@ -400,7 +400,7 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                                 lifecycleTab === 'acknowledgments'
                                     ? "bg-brand-300 dark:bg-brand-500 text-zinc-900 shadow-sm"
 
-                                    : "text-muted-foreground hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:text-zinc-900 dark:hover:text-white"
+                                    : "text-muted-foreground hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:text-foreground"
                             )}
                         >
                             <ClipboardDocumentCheckIcon className="w-4 h-4" />
@@ -423,7 +423,7 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                                 <div className="relative">
                                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 overflow-x-auto pb-4">
                                         {Object.entries(quotesSummary).map(([key, data]) => (
-                                            <div key={key} className="bg-white dark:bg-zinc-800 rounded-2xl p-6 border border-zinc-200 dark:border-zinc-700 shadow-sm hover:shadow-md transition-all group min-w-[200px]">
+                                            <div key={key} className="bg-card rounded-2xl p-6 border border-border shadow-sm hover:shadow-md transition-all group min-w-[200px]">
                                                 <div className="flex items-center justify-between">
                                                     <div>
                                                         <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">{data.label}</p>
@@ -447,7 +447,7 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                                 </div>
                                 {/* Quick Actions for Quotes */}
                                 <div className="flex items-center gap-4 mt-6 animate-in fade-in slide-in-from-top-2 duration-500">
-                                    <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Quick Actions:</span>
+                                    <span className="text-sm font-medium text-muted-foreground">Quick Actions:</span>
                                     {[
                                         { icon: <PlusIcon className="w-5 h-5" />, label: "New Quote", action: () => setIsQuoteWidgetOpen(true) },
                                         { icon: <DocumentDuplicateIcon className="w-5 h-5" />, label: "Duplicate" },
@@ -464,7 +464,7 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                         ) : (
                             /* Collapsed Quotes Metrics */
                             <>
-                                <div className="bg-white/60 dark:bg-zinc-800 backdrop-blur-md rounded-2xl p-4 border border-zinc-200 dark:border-zinc-700 shadow-sm flex flex-col xl:flex-row items-center justify-between gap-4 animate-in fade-in slide-in-from-top-4 duration-300">
+                                <div className="bg-white/60 dark:bg-zinc-800 backdrop-blur-md rounded-2xl p-4 border border-border shadow-sm flex flex-col xl:flex-row items-center justify-between gap-4 animate-in fade-in slide-in-from-top-4 duration-300">
                                     <div className="flex items-center gap-2 flex-1 min-w-0">
                                         <div className="flex items-center gap-8 overflow-x-auto w-full scrollbar-hide px-2 scroll-smooth">
                                             {Object.entries(quotesSummary).map(([key, data]) => (
@@ -485,14 +485,14 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                                     </div>
                                     <div className="w-px h-12 bg-zinc-200 dark:bg-zinc-700 hidden xl:block mx-2"></div>
                                     {/* Quick Actions Integrated - Compact */}
-                                    <div className="flex items-center gap-1 overflow-x-auto min-w-max pl-4 border-l border-zinc-200 dark:border-zinc-700 xl:border-none xl:pl-0">
+                                    <div className="flex items-center gap-1 overflow-x-auto min-w-max pl-4 border-l border-border xl:border-none xl:pl-0">
                                         {[
                                             { icon: <PlusIcon className="w-5 h-5" />, label: "New Quote", action: () => setIsQuoteWidgetOpen(true) },
                                             { icon: <DocumentDuplicateIcon className="w-5 h-5" />, label: "Duplicate" },
                                             { icon: <DocumentTextIcon className="w-5 h-5" />, label: "Export SIF", action: () => handleExportSIF('Quote') },
                                             { icon: <EnvelopeIcon className="w-5 h-5" />, label: "Send to Client" },
                                         ].map((action, i) => (
-                                            <button key={i} onClick={() => action.action && action.action()} className="p-2 rounded-lg hover:bg-brand-300 dark:hover:bg-brand-600/50 text-muted-foreground hover:text-zinc-900 dark:hover:text-white transition-colors relative group" title={action.label}>
+                                            <button key={i} onClick={() => action.action && action.action()} className="p-2 rounded-lg hover:bg-brand-300 dark:hover:bg-brand-600/50 text-muted-foreground hover:text-foreground transition-colors relative group" title={action.label}>
                                                 {action.icon}
                                             </button>
                                         ))}
@@ -502,8 +502,8 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                                         onClick={() => setShowMetrics(true)}
                                         className="flex flex-col items-center justify-center gap-1 group p-2 hover:bg-brand-300 dark:hover:bg-brand-600/50 rounded-lg transition-colors"
                                     >
-                                        <ChevronDownIcon className="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-zinc-900 dark:group-hover:text-white" />
-                                        <span className="text-[10px] font-medium text-gray-500 dark:text-gray-400 group-hover:text-zinc-900 dark:group-hover:text-white">Details</span>
+                                        <ChevronDownIcon className="w-4 h-4 text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-white" />
+                                        <span className="text-[10px] font-medium text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-white">Details</span>
                                     </button>
                                 </div>
                             </>
@@ -526,7 +526,7 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                                 <div className="relative">
                                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 overflow-x-auto pb-4">
                                         {Object.entries(acksSummary).map(([key, data]) => (
-                                            <div key={key} className="bg-white dark:bg-zinc-800 rounded-2xl p-6 border border-zinc-200 dark:border-zinc-700 shadow-sm hover:shadow-md transition-all group min-w-[200px]">
+                                            <div key={key} className="bg-card rounded-2xl p-6 border border-border shadow-sm hover:shadow-md transition-all group min-w-[200px]">
                                                 <div className="flex items-center justify-between">
                                                     <div>
                                                         <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">{data.label}</p>
@@ -550,7 +550,7 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                                 </div>
                                 {/* Quick Actions for Acks */}
                                 <div className="flex items-center gap-4 mt-6 animate-in fade-in slide-in-from-top-2 duration-500">
-                                    <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Quick Actions:</span>
+                                    <span className="text-sm font-medium text-muted-foreground">Quick Actions:</span>
                                     {[
                                         { icon: <CloudArrowUpIcon className="w-5 h-5" />, label: "Upload Acknowledgement", action: () => setIsAckModalOpen(true) },
                                         { icon: <DocumentTextIcon className="w-5 h-5" />, label: "Export Acknowledgement", action: () => handleExportSIF('Acknowledgement') },
@@ -567,7 +567,7 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                         ) : (
                             /* Collapsed Acks Metrics */
                             <>
-                                <div className="bg-white/60 dark:bg-zinc-800 backdrop-blur-md rounded-2xl p-4 border border-zinc-200 dark:border-zinc-700 shadow-sm flex flex-col xl:flex-row items-center justify-between gap-4 animate-in fade-in slide-in-from-top-4 duration-300">
+                                <div className="bg-white/60 dark:bg-zinc-800 backdrop-blur-md rounded-2xl p-4 border border-border shadow-sm flex flex-col xl:flex-row items-center justify-between gap-4 animate-in fade-in slide-in-from-top-4 duration-300">
                                     <div className="flex items-center gap-2 flex-1 min-w-0">
                                         <div className="flex items-center gap-8 overflow-x-auto w-full scrollbar-hide px-2 scroll-smooth">
                                             {Object.entries(acksSummary).map(([key, data]) => (
@@ -588,7 +588,7 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                                     </div>
                                     <div className="w-px h-12 bg-zinc-200 dark:bg-zinc-700 hidden xl:block mx-2"></div>
                                     {/* Quick Actions Integrated - Compact */}
-                                    <div className="flex items-center gap-1 overflow-x-auto min-w-max pl-4 border-l border-zinc-200 dark:border-zinc-700 xl:border-none xl:pl-0">
+                                    <div className="flex items-center gap-1 overflow-x-auto min-w-max pl-4 border-l border-border xl:border-none xl:pl-0">
                                         {[
                                             { icon: <CloudArrowUpIcon className="w-5 h-5" />, label: "Upload Acknowledgement" },
                                             { icon: <DocumentTextIcon className="w-5 h-5" />, label: "Export Acknowledgement" },
@@ -599,7 +599,7 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                                                 if (action.label === 'Upload Acknowledgement') setIsAckModalOpen(true);
                                                 if (action.label === 'Approve Orders') setIsBatchAckOpen(true);
                                                 if (action.label === 'Export Acknowledgement') handleExportSIF('Acknowledgement');
-                                            }} className="p-2 rounded-lg hover:bg-brand-300 dark:hover:bg-brand-600/50 text-muted-foreground hover:text-zinc-900 dark:hover:text-white transition-colors relative group" title={action.label}>
+                                            }} className="p-2 rounded-lg hover:bg-brand-300 dark:hover:bg-brand-600/50 text-muted-foreground hover:text-foreground transition-colors relative group" title={action.label}>
                                                 {action.icon}
                                             </button>
                                         ))}
@@ -609,8 +609,8 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                                         onClick={() => setShowMetrics(true)}
                                         className="flex flex-col items-center justify-center gap-1 group p-2 hover:bg-brand-300 dark:hover:bg-brand-600/50 rounded-lg transition-colors"
                                     >
-                                        <ChevronDownIcon className="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-zinc-900 dark:group-hover:text-white" />
-                                        <span className="text-[10px] font-medium text-gray-500 dark:text-gray-400 group-hover:text-zinc-900 dark:group-hover:text-white">Details</span>
+                                        <ChevronDownIcon className="w-4 h-4 text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-white" />
+                                        <span className="text-[10px] font-medium text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-white">Details</span>
                                     </button>
                                 </div>
                             </>
@@ -636,7 +636,7 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                                         ref={expandedScrollRef}
                                     >
                                         {Object.entries(ordersSummary).map(([key, data]) => (
-                                            <div key={key} className="bg-white dark:bg-zinc-800 rounded-2xl p-6 border border-zinc-200 dark:border-zinc-700 shadow-sm hover:shadow-md transition-all group min-w-[200px]">
+                                            <div key={key} className="bg-card rounded-2xl p-6 border border-border shadow-sm hover:shadow-md transition-all group min-w-[200px]">
                                                 <div className="flex items-center justify-between">
                                                     <div>
                                                         <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">{data.label}</p>
@@ -660,7 +660,7 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                                 </div>
                                 {/* Quick Actions below grid when expanded */}
                                 <div className="flex items-center gap-4 mt-6 animate-in fade-in slide-in-from-top-2 duration-500">
-                                    <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Quick Actions:</span>
+                                    <span className="text-sm font-medium text-muted-foreground">Quick Actions:</span>
                                     {[
                                         { icon: <PlusIcon className="w-5 h-5" />, label: "New Order" },
                                         { icon: <DocumentDuplicateIcon className="w-5 h-5" />, label: "Duplicate" },
@@ -675,13 +675,13 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                                 </div>
                             </>
                         ) : (
-                            <div className="bg-white/60 dark:bg-zinc-800 backdrop-blur-md rounded-2xl p-4 border border-zinc-200 dark:border-zinc-700 shadow-sm flex flex-col xl:flex-row items-center justify-between gap-4 animate-in fade-in slide-in-from-top-4 duration-300">
+                            <div className="bg-white/60 dark:bg-zinc-800 backdrop-blur-md rounded-2xl p-4 border border-border shadow-sm flex flex-col xl:flex-row items-center justify-between gap-4 animate-in fade-in slide-in-from-top-4 duration-300">
                                 {/* Collapsed Ticker View - Carousel */}
                                 <div className="flex items-center gap-2 flex-1 min-w-0">
                                     {/* Left Scroll Button */}
                                     <button
                                         onClick={() => scroll(scrollContainerRef, 'left')}
-                                        className="p-1.5 rounded-full hover:bg-brand-300 dark:hover:bg-brand-600/50 text-muted-foreground hover:text-zinc-900 dark:hover:text-white transition-colors shrink-0"
+                                        className="p-1.5 rounded-full hover:bg-brand-300 dark:hover:bg-brand-600/50 text-muted-foreground hover:text-foreground transition-colors shrink-0"
                                     >
                                         <ChevronLeftIcon className="w-4 h-4" />
                                     </button>
@@ -719,7 +719,7 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                                     {/* Right Scroll Button */}
                                     <button
                                         onClick={() => scroll(scrollContainerRef, 'right')}
-                                        className="p-1.5 rounded-full hover:bg-brand-300 dark:hover:bg-brand-600/50 text-muted-foreground hover:text-zinc-900 dark:hover:text-white transition-colors shrink-0"
+                                        className="p-1.5 rounded-full hover:bg-brand-300 dark:hover:bg-brand-600/50 text-muted-foreground hover:text-foreground transition-colors shrink-0"
                                     >
                                         <ChevronRightIcon className="w-4 h-4" />
                                     </button>
@@ -728,7 +728,7 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                                 <div className="w-px h-12 bg-zinc-200 dark:bg-zinc-700 hidden xl:block mx-2"></div>
 
                                 {/* Quick Actions Integrated - Compact */}
-                                <div className="flex items-center gap-1 overflow-x-auto min-w-max pl-4 border-l border-zinc-200 dark:border-zinc-700 xl:border-none xl:pl-0">
+                                <div className="flex items-center gap-1 overflow-x-auto min-w-max pl-4 border-l border-border xl:border-none xl:pl-0">
                                     {[
                                         { icon: <DocumentPlusIcon className="w-5 h-5" />, label: "New Quote", color: "text-blue-500" },
                                         { icon: <CubeIcon className="w-5 h-5" />, label: "Check Stock", color: "text-amber-500" },
@@ -740,14 +740,14 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                                             onClick={() => {
                                                 if (action.label === 'New Quote') setIsQuoteWidgetOpen(true);
                                             }}
-                                            className="p-2 rounded-lg hover:bg-brand-300 dark:hover:bg-brand-600/50 text-muted-foreground hover:text-zinc-900 dark:hover:text-white transition-colors relative group"
+                                            className="p-2 rounded-lg hover:bg-brand-300 dark:hover:bg-brand-600/50 text-muted-foreground hover:text-foreground transition-colors relative group"
                                             title={action.label}
                                         >
                                             {action.icon}
                                         </button>
                                     ))}
                                     <div className="w-px h-6 bg-zinc-200 dark:bg-zinc-700 mx-1"></div>
-                                    <button onClick={() => handleExportSIF('Order')} className="p-2 rounded-lg hover:bg-brand-300 dark:hover:bg-brand-600/50 text-muted-foreground hover:text-zinc-900 dark:hover:text-white transition-colors relative group" title="Export Order">
+                                    <button onClick={() => handleExportSIF('Order')} className="p-2 rounded-lg hover:bg-brand-300 dark:hover:bg-brand-600/50 text-muted-foreground hover:text-foreground transition-colors relative group" title="Export Order">
                                         <DocumentTextIcon className="w-5 h-5" />
                                     </button>
                                 </div>
@@ -757,10 +757,10 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                                     onClick={() => setShowMetrics(true)}
                                     className="flex flex-col items-center justify-center gap-1 group p-2 hover:bg-brand-300 dark:hover:bg-brand-600/50 rounded-lg transition-colors"
                                 >
-                                    <div className="text-gray-500 dark:text-gray-400 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">
+                                    <div className="text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">
                                         <ChevronDownIcon className="w-4 h-4" />
                                     </div>
-                                    <span className="text-[10px] font-medium text-gray-500 dark:text-gray-400 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">Details</span>
+                                    <span className="text-[10px] font-medium text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">Details</span>
                                 </button>
                             </div>
                         ))}
@@ -801,7 +801,7 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                                                         "px-3 py-1.5 text-sm font-medium rounded-md transition-all flex items-center gap-2 outline-none whitespace-nowrap",
                                                         activeTab === tab.id
                                                             ? "bg-primary text-primary-foreground shadow-sm"
-                                                            : "text-muted-foreground hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:text-zinc-900 dark:hover:text-white"
+                                                            : "text-muted-foreground hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:text-foreground"
                                                     )}
                                                 >
                                                     {tab.id === 'metrics' && <ChartBarIcon className="w-4 h-4" />}
@@ -956,7 +956,7 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                             </Transition>
 
                             {/* Main Content Area */}
-                            <div className="p-6 bg-zinc-50/50 dark:bg-black/20 min-h-[500px]">
+                            <div className="p-6 bg-muted/50 dark:bg-black/20 min-h-[500px]">
                                 {/* Metrics View special handling */}
                                 {activeTab === 'metrics' ? (
                                     <div className="space-y-8">
@@ -1182,7 +1182,7 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                                                                 <div className="p-4">
                                                                     <div className="flex items-center justify-between mb-3">
                                                                         <div className="flex items-center gap-3">
-                                                                            <div className="h-8 w-8 rounded-full bg-gradient-to-br from-indigo-500 to-indigo-700 text-white flex items-center justify-center text-xs font-bold shadow-sm ring-2 ring-white dark:ring-zinc-900">
+                                                                            <div className="h-8 w-8 rounded-full bg-gradient-to-br from-indigo-500 to-indigo-700 text-white flex items-center justify-center text-xs font-bold shadow-sm ring-2 ring-background">
                                                                                 {order.initials}
                                                                             </div>
                                                                             <div className="space-y-0.5">
@@ -1230,7 +1230,7 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                                                                             <div className="flex items-center gap-1">
                                                                                 <button
                                                                                     onClick={(e) => { e.stopPropagation(); toggleExpand(order.id); }}
-                                                                                    className="text-xs font-bold text-zinc-800 bg-primary hover:bg-primary/90 px-3 py-1.5 rounded-md transition-shadow shadow-sm"
+                                                                                    className="text-xs font-bold text-primary-foreground bg-primary hover:bg-primary/90 px-3 py-1.5 rounded-md transition-shadow shadow-sm"
                                                                                 >
                                                                                     {expandedIds.has(order.id) ? 'Close' : 'Details'}
                                                                                 </button>
@@ -1252,23 +1252,23 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                                                                         <div className="p-5 space-y-5">
                                                                             <div className="grid grid-cols-2 gap-x-4 gap-y-4">
                                                                                 <div className="space-y-1.5">
-                                                                                    <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-bold">{lifecycleTab === 'acknowledgments' ? 'PO Number' : 'Project'}</p>
-                                                                                    <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-200 truncate">{lifecycleTab === 'acknowledgments' ? (order as any).relatedPo : (order as any).project}</p>
+                                                                                    <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">{lifecycleTab === 'acknowledgments' ? 'PO Number' : 'Project'}</p>
+                                                                                    <p className="text-sm font-semibold text-foreground truncate">{lifecycleTab === 'acknowledgments' ? (order as any).relatedPo : (order as any).project}</p>
                                                                                 </div>
                                                                                 <div className="space-y-1.5">
-                                                                                    <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-bold">Location</p>
-                                                                                    <div className="flex items-center gap-1.5 text-sm font-semibold text-zinc-900 dark:text-zinc-200">
-                                                                                        <MapPinIcon className="h-4 w-4 text-zinc-400" />
+                                                                                    <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">Location</p>
+                                                                                    <div className="flex items-center gap-1.5 text-sm font-semibold text-foreground">
+                                                                                        <MapPinIcon className="h-4 w-4 text-muted-foreground" />
                                                                                         <span className="truncate">{order.location}</span>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div className="space-y-1.5">
-                                                                                    <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-bold">{lifecycleTab === 'quotes' ? 'Valid Until' : lifecycleTab === 'acknowledgments' ? 'Exp. Ship' : 'Date Placed'}</p>
-                                                                                    <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-200 font-mono">{lifecycleTab === 'quotes' ? (order as any).validUntil : lifecycleTab === 'acknowledgments' ? (order as any).expShipDate : order.date}</p>
+                                                                                    <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">{lifecycleTab === 'quotes' ? 'Valid Until' : lifecycleTab === 'acknowledgments' ? 'Exp. Ship' : 'Date Placed'}</p>
+                                                                                    <p className="text-sm font-semibold text-foreground font-mono">{lifecycleTab === 'quotes' ? (order as any).validUntil : lifecycleTab === 'acknowledgments' ? (order as any).expShipDate : order.date}</p>
                                                                                 </div>
                                                                                 <div className="space-y-1.5">
-                                                                                    <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-bold">Items</p>
-                                                                                    <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-200">12 Units</p>
+                                                                                    <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">Items</p>
+                                                                                    <p className="text-sm font-semibold text-foreground">12 Units</p>
                                                                                 </div>
                                                                             </div>
 
@@ -1382,7 +1382,7 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                                 <DialogPanel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-card p-6 text-left align-middle shadow-xl transition-all border border-border">
                                     <Dialog.Title
                                         as="h3"
-                                        className="text-lg font-medium leading-6 text-zinc-900 dark:text-white flex justify-between items-center mb-6"
+                                        className="text-lg font-medium leading-6 text-foreground flex justify-between items-center mb-6"
                                     >
                                         <span>
                                             {lifecycleTab === 'quotes' ? 'Quote Analysis' :
@@ -1394,7 +1394,7 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                                             className="rounded-full p-1 hover:bg-accent transition-colors"
                                         >
                                             <span className="sr-only">Close</span>
-                                            <svg className="h-5 w-5 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <svg className="h-5 w-5 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                                             </svg>
                                         </button>
@@ -1404,7 +1404,7 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                                         /* Quote Details View */
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                             <div>
-                                                <h4 className="text-sm font-semibold text-zinc-900 dark:text-white mb-4 uppercase tracking-wider">Margin Analysis</h4>
+                                                <h4 className="text-sm font-semibold text-foreground mb-4 uppercase tracking-wider">Margin Analysis</h4>
                                                 <div className="space-y-4">
                                                     <div className="flex justify-between items-center p-3 bg-muted/50 rounded-lg">
                                                         <span className="text-sm text-muted-foreground">Total Cost</span>
@@ -1445,7 +1445,7 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                                             </div>
 
                                             <div className="grid grid-cols-2 gap-4 text-sm">
-                                                <div className="p-4 border border-zinc-200 dark:border-zinc-700 rounded-lg">
+                                                <div className="p-4 border border-border rounded-lg">
                                                     <span className="block text-xs uppercase text-muted-foreground mb-1">Your PO</span>
                                                     <div className="font-semibold text-lg">$12,500.00</div>
                                                     <div className="text-xs text-muted-foreground mt-2">Unit Price: $250.00</div>
@@ -1470,17 +1470,17 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                             {/* Left Col: Timeline */}
                                             <div>
-                                                <h4 className="text-sm font-semibold text-zinc-900 dark:text-white mb-4 uppercase tracking-wider">Shipment Progress</h4>
-                                                <div className="space-y-6 relative pl-2 border-l border-zinc-200 dark:border-zinc-800 ml-2">
+                                                <h4 className="text-sm font-semibold text-foreground mb-4 uppercase tracking-wider">Shipment Progress</h4>
+                                                <div className="space-y-6 relative pl-2 border-l border-border ml-2">
                                                     {trackingSteps.map((step, idx) => (
                                                         <div key={idx} className="relative pl-6">
                                                             <div className={cn(
-                                                                "absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full ring-4 ring-white dark:ring-zinc-900",
+                                                                "absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full ring-4 ring-background",
                                                                 step.completed ? "bg-primary" : "bg-zinc-300 dark:bg-zinc-700",
                                                                 step.alert && "bg-red-500 dark:bg-red-500"
                                                             )} />
-                                                            <p className="text-sm font-medium text-zinc-900 dark:text-white">{step.status}</p>
-                                                            <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">{step.date} · {step.location}</p>
+                                                            <p className="text-sm font-medium text-foreground">{step.status}</p>
+                                                            <p className="text-xs text-muted-foreground mt-0.5">{step.date} · {step.location}</p>
                                                         </div>
                                                     ))}
                                                 </div>
@@ -1488,19 +1488,19 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
 
                                             {/* Right Col: Georefence & Actions */}
                                             <div className="flex flex-col h-full">
-                                                <h4 className="text-sm font-semibold text-zinc-900 dark:text-white mb-4 uppercase tracking-wider">Delivery Location</h4>
+                                                <h4 className="text-sm font-semibold text-foreground mb-4 uppercase tracking-wider">Delivery Location</h4>
 
                                                 {/* Map Placeholder */}
                                                 <div className="bg-muted rounded-lg h-40 w-full mb-4 flex items-center justify-center border border-border">
                                                     <div className="text-center">
-                                                        <MapPinIcon className="h-8 w-8 text-zinc-400 mx-auto mb-2" />
-                                                        <span className="text-xs text-zinc-500 dark:text-zinc-400 block">Map Preview Unavailable</span>
+                                                        <MapPinIcon className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
+                                                        <span className="text-xs text-muted-foreground block">Map Preview Unavailable</span>
                                                     </div>
                                                 </div>
 
                                                 <div className="bg-muted/30 p-3 rounded-lg border border-border mb-6">
-                                                    <p className="text-xs font-medium text-zinc-900 dark:text-white">Distribution Center NY-05</p>
-                                                    <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">45 Industrial Park Dr, Brooklyn, NY 11201</p>
+                                                    <p className="text-xs font-medium text-foreground">Distribution Center NY-05</p>
+                                                    <p className="text-xs text-muted-foreground mt-1">45 Industrial Park Dr, Brooklyn, NY 11201</p>
                                                 </div>
 
                                                 <div className="mt-auto pt-6 border-t border-zinc-100 dark:border-zinc-800">
@@ -1541,10 +1541,10 @@ export default function Transactions({ onLogout, onNavigateToDetail, onNavigateT
                             )}
                         </div>
                         <div className="flex-1">
-                            <h4 className="text-sm font-semibold text-zinc-900 dark:text-white">{toastMessage.title}</h4>
-                            <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">{toastMessage.description}</p>
+                            <h4 className="text-sm font-semibold text-foreground">{toastMessage.title}</h4>
+                            <p className="text-sm text-muted-foreground mt-1">{toastMessage.description}</p>
                         </div>
-                        <button onClick={() => setShowToast(false)} className="text-zinc-400 hover:text-zinc-500 dark:hover:text-zinc-300 transition-colors">
+                        <button onClick={() => setShowToast(false)} className="text-muted-foreground hover:text-muted-foreground dark:hover:text-zinc-300 transition-colors">
                             <span className="sr-only">Close</span>
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

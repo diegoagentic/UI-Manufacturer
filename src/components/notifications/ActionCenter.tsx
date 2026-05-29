@@ -77,10 +77,10 @@ export default function ActionCenter() {
             icon: Squares2X2Icon,
             colorTheme: {
                 activeBg: 'bg-gray-200 dark:bg-white/10',
-                activeText: 'text-zinc-900 dark:text-white',
+                activeText: 'text-foreground',
                 activeBorder: 'border-gray-300 dark:border-white/10',
-                badgeBg: 'bg-zinc-500/20 dark:bg-white/20',
-                badgeText: 'text-zinc-900 dark:text-white'
+                badgeBg: 'bg-muted0/20 dark:bg-white/20',
+                badgeText: 'text-foreground'
             },
             filter: () => true
         },
@@ -214,15 +214,15 @@ export default function ActionCenter() {
 
     // Flow 1 tabs for step 1.10 — single tab since only 1 notification
     const flow1Tabs: NotificationTab[] = [
-        { id: 'all', label: 'All', count: FLOW1_NOTIFICATIONS.length, icon: Squares2X2Icon, colorTheme: { activeBg: 'bg-gray-200 dark:bg-white/10', activeText: 'text-zinc-900 dark:text-white', activeBorder: 'border-gray-300 dark:border-white/10', badgeBg: 'bg-zinc-500/20 dark:bg-white/20', badgeText: 'text-zinc-900 dark:text-white' }, filter: () => true },
+        { id: 'all', label: 'All', count: FLOW1_NOTIFICATIONS.length, icon: Squares2X2Icon, colorTheme: { activeBg: 'bg-gray-200 dark:bg-white/10', activeText: 'text-foreground', activeBorder: 'border-gray-300 dark:border-white/10', badgeBg: 'bg-muted0/20 dark:bg-white/20', badgeText: 'text-foreground' }, filter: () => true },
         { id: 'quotes', label: 'Quotes & POs', count: FLOW1_NOTIFICATIONS.length, icon: DocumentTextIcon, colorTheme: { activeBg: 'bg-blue-500/15', activeText: 'text-blue-500', activeBorder: 'border-blue-500/20', badgeBg: 'bg-blue-500/20', badgeText: 'text-blue-500' }, filter: (n) => n.type === 'po_created' || n.type === 'quote_update' },
     ];
 
     // Flow 2 tabs for step 2.6
     const flow2Tabs: NotificationTab[] = [
-        { id: 'all', label: 'All', count: FLOW2_NOTIFICATIONS.length, icon: Squares2X2Icon, colorTheme: { activeBg: 'bg-gray-200 dark:bg-white/10', activeText: 'text-zinc-900 dark:text-white', activeBorder: 'border-gray-300 dark:border-white/10', badgeBg: 'bg-zinc-500/20 dark:bg-white/20', badgeText: 'text-zinc-900 dark:text-white' }, filter: () => true },
+        { id: 'all', label: 'All', count: FLOW2_NOTIFICATIONS.length, icon: Squares2X2Icon, colorTheme: { activeBg: 'bg-gray-200 dark:bg-white/10', activeText: 'text-foreground', activeBorder: 'border-gray-300 dark:border-white/10', badgeBg: 'bg-muted0/20 dark:bg-white/20', badgeText: 'text-foreground' }, filter: () => true },
         { id: 'acks', label: 'Acknowledgements', count: FLOW2_NOTIFICATIONS.filter(n => n.type === 'ack_received').length, icon: DocumentTextIcon, colorTheme: { activeBg: 'bg-blue-500/15', activeText: 'text-blue-500', activeBorder: 'border-blue-500/20', badgeBg: 'bg-blue-500/20', badgeText: 'text-blue-500' }, filter: (n) => n.type === 'ack_received' },
-        { id: 'system', label: 'System', count: FLOW2_NOTIFICATIONS.filter(n => n.type === 'system').length, icon: SparklesIcon, colorTheme: { activeBg: 'bg-emerald-500/15', activeText: 'text-emerald-500', activeBorder: 'border-emerald-500/20', badgeBg: 'bg-emerald-500/20', badgeText: 'text-emerald-500' }, filter: (n) => n.type === 'system' },
+        { id: 'system', label: 'System', count: FLOW2_NOTIFICATIONS.filter(n => n.type === 'system').length, icon: SparklesIcon, colorTheme: { activeBg: 'bg-success/15', activeText: 'text-success', activeBorder: 'border-emerald-500/20', badgeBg: 'bg-success/20', badgeText: 'text-success' }, filter: (n) => n.type === 'system' },
     ];
 
     const isStepAutoOpen = isStep19 || isStep27;
@@ -234,14 +234,14 @@ export default function ActionCenter() {
                 <>
                     <PopoverButton className={clsx(
                         "relative p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors outline-none",
-                        (open || isStepAutoOpen) ? "bg-black/5 dark:bg-white/10 text-gray-900 dark:text-white" : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                        (open || isStepAutoOpen) ? "bg-black/5 dark:bg-white/10 text-foreground" : "text-muted-foreground hover:text-foreground dark:hover:text-white"
                     )}>
                         <BellIcon className="w-5 h-5" />
                         {isStepAutoOpen && (
                             <span className="absolute inset-0 rounded-full ring-2 ring-green-500 animate-pulse" />
                         )}
                         {totalCount > 0 && (
-                            <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-red-400 dark:bg-red-500 ring-2 ring-white dark:ring-zinc-900" />
+                            <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-red-400 dark:bg-red-500 ring-2 ring-background" />
                         )}
                     </PopoverButton>
 
@@ -265,12 +265,12 @@ export default function ActionCenter() {
                                         {/* Header */}
                                         <div className="px-5 pt-5 pb-3 shrink-0">
                                             <div className="flex items-center justify-between mb-4">
-                                                <h3 className="text-lg font-bold text-gray-900 dark:text-white">Action Center</h3>
+                                                <h3 className="text-lg font-bold text-foreground">Action Center</h3>
                                                 <div className="flex items-center gap-2">
-                                                    <button className="p-1 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-gray-500 dark:text-gray-400 transition-colors">
+                                                    <button className="p-1 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-muted-foreground transition-colors">
                                                         <MagnifyingGlassIcon className="w-5 h-5" />
                                                     </button>
-                                                    <button className="p-1 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-gray-500 dark:text-gray-400 transition-colors">
+                                                    <button className="p-1 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-muted-foreground transition-colors">
                                                         <XMarkIcon className="w-5 h-5" />
                                                     </button>
                                                 </div>
@@ -300,8 +300,8 @@ export default function ActionCenter() {
                                                     />
                                                 ))
                                             ) : (
-                                                <div className="flex flex-col items-center justify-center py-12 text-center text-gray-500 dark:text-gray-400">
-                                                    <BellIcon className="w-12 h-12 mb-3 text-gray-300 dark:text-gray-600" />
+                                                <div className="flex flex-col items-center justify-center py-12 text-center text-muted-foreground">
+                                                    <BellIcon className="w-12 h-12 mb-3 text-gray-300 dark:text-muted-foreground" />
                                                     <p className="text-sm font-medium">No updates found</p>
                                                     <p className="text-xs mt-1">You're all caught up!</p>
                                                 </div>
@@ -309,8 +309,8 @@ export default function ActionCenter() {
                                         </div>
 
                                         {/* Footer */}
-                                        <div className="px-5 py-3 border-t border-gray-100 dark:border-white/5 bg-gray-50/50 dark:bg-black/20 backdrop-blur-md flex items-center justify-between shrink-0">
-                                            <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
+                                        <div className="px-5 py-3 border-t border-border bg-gray-50/50 dark:bg-black/20 backdrop-blur-md flex items-center justify-between shrink-0">
+                                            <p className="text-xs font-medium text-muted-foreground">
                                                 {filteredNotifications.length} actions
                                             </p>
                                             <p className="text-xs font-bold text-red-500 flex items-center gap-1.5">
@@ -336,14 +336,14 @@ export default function ActionCenter() {
                     <div className="px-5 pt-5 pb-3 shrink-0">
                         <div className="flex items-center justify-between mb-4">
                             <div className="flex items-center gap-3">
-                                <h3 className="text-lg font-bold text-gray-900 dark:text-white">Action Center</h3>
+                                <h3 className="text-lg font-bold text-foreground">Action Center</h3>
                                 <span className="text-[10px] px-2 py-0.5 rounded-full bg-green-100 dark:bg-green-500/20 text-green-700 dark:text-green-400 font-bold">Flow 1</span>
                             </div>
                             <div className="flex items-center gap-2">
-                                <button className="p-1 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-gray-500 dark:text-gray-400 transition-colors">
+                                <button className="p-1 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-muted-foreground transition-colors">
                                     <MagnifyingGlassIcon className="w-5 h-5" />
                                 </button>
-                                <button className="p-1 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-gray-500 dark:text-gray-400 transition-colors">
+                                <button className="p-1 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-muted-foreground transition-colors">
                                     <XMarkIcon className="w-5 h-5" />
                                 </button>
                             </div>
@@ -366,8 +366,8 @@ export default function ActionCenter() {
                     </div>
 
                     {/* Footer */}
-                    <div className="px-5 py-3 border-t border-gray-100 dark:border-white/5 bg-gray-50/50 dark:bg-black/20 backdrop-blur-md flex items-center justify-between shrink-0">
-                        <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
+                    <div className="px-5 py-3 border-t border-border bg-gray-50/50 dark:bg-black/20 backdrop-blur-md flex items-center justify-between shrink-0">
+                        <p className="text-xs font-medium text-muted-foreground">
                             1 action
                         </p>
                         <p className="text-xs font-bold text-green-500 flex items-center gap-1.5">
@@ -387,14 +387,14 @@ export default function ActionCenter() {
                     <div className="px-5 pt-5 pb-3 shrink-0">
                         <div className="flex items-center justify-between mb-4">
                             <div className="flex items-center gap-3">
-                                <h3 className="text-lg font-bold text-gray-900 dark:text-white">Action Center</h3>
+                                <h3 className="text-lg font-bold text-foreground">Action Center</h3>
                                 <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-400 font-bold">Flow 2</span>
                             </div>
                             <div className="flex items-center gap-2">
-                                <button className="p-1 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-gray-500 dark:text-gray-400 transition-colors">
+                                <button className="p-1 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-muted-foreground transition-colors">
                                     <MagnifyingGlassIcon className="w-5 h-5" />
                                 </button>
-                                <button className="p-1 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-gray-500 dark:text-gray-400 transition-colors">
+                                <button className="p-1 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-muted-foreground transition-colors">
                                     <XMarkIcon className="w-5 h-5" />
                                 </button>
                             </div>
@@ -427,8 +427,8 @@ export default function ActionCenter() {
                     </div>
 
                     {/* Footer */}
-                    <div className="px-5 py-3 border-t border-gray-100 dark:border-white/5 bg-gray-50/50 dark:bg-black/20 backdrop-blur-md flex items-center justify-between shrink-0">
-                        <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
+                    <div className="px-5 py-3 border-t border-border bg-gray-50/50 dark:bg-black/20 backdrop-blur-md flex items-center justify-between shrink-0">
+                        <p className="text-xs font-medium text-muted-foreground">
                             {notifDelivered27.length} actions
                         </p>
                         <p className="text-xs font-bold text-red-500 flex items-center gap-1.5">

@@ -34,11 +34,11 @@ export function CategoryDonutChart({ period = 'Month' }: { period?: DashMetricsP
     const data = dataByPeriod[period];
 
     return (
-        <div className="h-[400px] w-full bg-white dark:bg-zinc-800 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col">
+        <div className="h-[400px] w-full bg-card rounded-xl p-4 border border-border shadow-sm flex flex-col">
             <div className="flex items-center justify-between mb-2">
                 <div>
-                    <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">Top Categories</h3>
-                    <p className="text-sm text-zinc-500 dark:text-zinc-400">Revenue distribution by category</p>
+                    <h3 className="text-lg font-semibold text-foreground">Top Categories</h3>
+                    <p className="text-sm text-muted-foreground">Revenue distribution by category</p>
                 </div>
             </div>
             <div className="flex-1 w-full min-h-0">
@@ -72,7 +72,7 @@ export function CategoryDonutChart({ period = 'Month' }: { period?: DashMetricsP
                             height={36}
                             iconType="circle"
                             wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }}
-                            formatter={(value) => <span className="text-zinc-600 dark:text-zinc-300">{value}</span>}
+                            formatter={(value) => <span className="text-muted-foreground dark:text-zinc-300">{value}</span>}
                         />
                     </PieChart>
                 </ResponsiveContainer>

@@ -56,7 +56,7 @@ const commStatusColors: Record<string, string> = {
 }
 
 const issueStatusColors: Record<string, string> = {
-  'Reported': 'bg-zinc-100 text-zinc-700 dark:bg-zinc-500/15 dark:text-zinc-300',
+  'Reported': 'bg-zinc-100 text-muted-foreground dark:bg-muted0/15 dark:text-zinc-300',
   'AI Validated': 'bg-brand-50 text-brand-700 dark:bg-brand-500/15 dark:text-brand-300',
   'Verified': 'bg-blue-50 text-blue-700 dark:bg-blue-500/15 dark:text-blue-300',
   'In Repair': 'bg-amber-50 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300',
@@ -68,7 +68,7 @@ const issueStatusColors: Record<string, string> = {
 const priorityColors: Record<string, string> = {
   high: 'bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-300',
   medium: 'bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300',
-  low: 'bg-zinc-100 text-zinc-600 dark:bg-zinc-500/20 dark:text-zinc-300',
+  low: 'bg-zinc-100 text-muted-foreground dark:bg-muted0/20 dark:text-zinc-300',
 }
 
 export default function ServiceCenter({ onLogout, onNavigateToDetail, onNavigateToWorkspace, onNavigate }: ServiceCenterProps) {
@@ -117,7 +117,7 @@ export default function ServiceCenter({ onLogout, onNavigateToDetail, onNavigate
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-1 bg-white/60 dark:bg-zinc-800/50 p-1 rounded-lg w-fit overflow-x-auto max-w-full border border-zinc-200 dark:border-zinc-800">
+        <div className="flex gap-1 bg-white/60 dark:bg-zinc-800/50 p-1 rounded-lg w-fit overflow-x-auto max-w-full border border-border">
           {[
             { id: 'communications' as const, label: 'Communications', count: communications.length, icon: EnvelopeIcon },
             { id: 'issues' as const, label: 'Issues', count: issues.length, icon: ExclamationTriangleIcon },
@@ -130,7 +130,7 @@ export default function ServiceCenter({ onLogout, onNavigateToDetail, onNavigate
                 "flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md transition-all whitespace-nowrap",
                 activeTab === tab.id
                   ? "bg-white dark:bg-zinc-700 text-brand-600 dark:text-brand-400 shadow-sm border border-border"
-                  : "text-muted-foreground hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:text-zinc-900 dark:hover:text-white border border-transparent",
+                  : "text-muted-foreground hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:text-foreground border border-transparent",
                 highlightedTab === tab.id && "ring-4 ring-brand-500 shadow-[0_0_30px_rgba(var(--brand-500),0.6)] animate-pulse"
               )}
             >
@@ -155,10 +155,10 @@ export default function ServiceCenter({ onLogout, onNavigateToDetail, onNavigate
 
           {/* ==================== COMMUNICATIONS TAB ==================== */}
           {activeTab === 'communications' && (
-            <div className="bg-white dark:bg-zinc-800 rounded-xl border border-border overflow-hidden">
+            <div className="bg-card rounded-xl border border-border overflow-hidden">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-border bg-zinc-50/50 dark:bg-zinc-900/30">
+                  <tr className="border-b border-border bg-muted/50 dark:bg-zinc-900/30">
                     <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase">ID</th>
                     <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase">Subject</th>
                     <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase">Recipient</th>
@@ -169,7 +169,7 @@ export default function ServiceCenter({ onLogout, onNavigateToDetail, onNavigate
                 </thead>
                 <tbody className="divide-y divide-border">
                   {communications.map(comm => (
-                    <tr key={comm.id} className="hover:bg-zinc-50/50 dark:hover:bg-zinc-900/30 cursor-pointer transition-colors">
+                    <tr key={comm.id} className="hover:bg-muted/50 dark:hover:bg-zinc-900/30 cursor-pointer transition-colors">
                       <td className="px-4 py-3 font-medium text-foreground">{comm.id}</td>
                       <td className="px-4 py-3 text-foreground">{comm.subject}</td>
                       <td className="px-4 py-3 text-muted-foreground">{comm.recipient}</td>
@@ -191,10 +191,10 @@ export default function ServiceCenter({ onLogout, onNavigateToDetail, onNavigate
           {activeTab === 'issues' && (
             <div className="space-y-6">
               {/* Issue List */}
-              <div className="bg-white dark:bg-zinc-800 rounded-xl border border-border overflow-hidden">
+              <div className="bg-card rounded-xl border border-border overflow-hidden">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="border-b border-border bg-zinc-50/50 dark:bg-zinc-900/30">
+                    <tr className="border-b border-border bg-muted/50 dark:bg-zinc-900/30">
                       <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase">ID</th>
                       <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase">Issue</th>
                       <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase">Reporter</th>
@@ -206,7 +206,7 @@ export default function ServiceCenter({ onLogout, onNavigateToDetail, onNavigate
                   </thead>
                   <tbody className="divide-y divide-border">
                     {issues.map(issue => (
-                      <tr key={issue.id} className="hover:bg-zinc-50/50 dark:hover:bg-zinc-900/30 cursor-pointer transition-colors">
+                      <tr key={issue.id} className="hover:bg-muted/50 dark:hover:bg-zinc-900/30 cursor-pointer transition-colors">
                         <td className="px-4 py-3 font-medium text-foreground">{issue.id}</td>
                         <td className="px-4 py-3 text-foreground">{issue.title}</td>
                         <td className="px-4 py-3 text-muted-foreground">{issue.reporter}</td>
@@ -237,7 +237,7 @@ export default function ServiceCenter({ onLogout, onNavigateToDetail, onNavigate
           {activeTab === 'settings' && (
             <div className="space-y-6">
               {/* Channel Configuration */}
-              <div className="bg-white dark:bg-zinc-800 rounded-xl border border-border">
+              <div className="bg-card rounded-xl border border-border">
                 <div className="px-5 py-4 border-b border-border">
                   <h2 className="text-lg font-semibold text-foreground">Channel Configuration</h2>
                   <p className="text-sm text-muted-foreground">Configure how you receive and send documents per supplier.</p>
@@ -266,7 +266,7 @@ export default function ServiceCenter({ onLogout, onNavigateToDetail, onNavigate
               </div>
 
               {/* Comparison Rules */}
-              <div className="bg-white dark:bg-zinc-800 rounded-xl border border-border">
+              <div className="bg-card rounded-xl border border-border">
                 <div className="px-5 py-4 border-b border-border">
                   <h2 className="text-lg font-semibold text-foreground">Comparison & Auto-Accept Rules</h2>
                   <p className="text-sm text-muted-foreground">Define thresholds for automatic acceptance vs. manual review.</p>
@@ -292,7 +292,7 @@ export default function ServiceCenter({ onLogout, onNavigateToDetail, onNavigate
               </div>
 
               {/* Notification Preferences */}
-              <div className="bg-white dark:bg-zinc-800 rounded-xl border border-border">
+              <div className="bg-card rounded-xl border border-border">
                 <div className="px-5 py-4 border-b border-border">
                   <h2 className="text-lg font-semibold text-foreground">Notification Preferences</h2>
                 </div>

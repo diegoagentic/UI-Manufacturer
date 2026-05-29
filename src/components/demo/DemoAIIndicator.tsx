@@ -266,12 +266,12 @@ export default function DemoAIIndicator() {
                                 {isAuto ? (completed ? 'Complete' : 'Strata AI') : 'Action Required'}
                             </span>
                             {isAuto && behavior.duration && (
-                                <span className="text-[10px] text-zinc-400 dark:text-zinc-500 tabular-nums font-medium">
+                                <span className="text-[10px] text-muted-foreground dark:text-muted-foreground tabular-nums font-medium">
                                     {completed ? '100%' : `${Math.round(progress)}%`}
                                 </span>
                             )}
                         </div>
-                        <p key={messageIndex} className="text-[11px] text-zinc-600 dark:text-zinc-300 truncate animate-in fade-in slide-in-from-bottom-1 duration-300">
+                        <p key={messageIndex} className="text-[11px] text-muted-foreground dark:text-zinc-300 truncate animate-in fade-in slide-in-from-bottom-1 duration-300">
                             {currentMessage}
                         </p>
                     </div>

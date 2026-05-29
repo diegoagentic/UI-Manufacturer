@@ -116,7 +116,7 @@ export default function QuoteDetail({ onBack, onLogout, onNavigateToWorkspace, o
             {/* Page Header (moved from original header, adjusted for floating nav) */}
             <div className="pt-24 px-6 pb-4 flex items-center justify-between border-b border-border bg-transparent transition-colors duration-200">
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <button onClick={onBack} className="p-1 hover:bg-primary hover:text-zinc-900 dark:hover:text-zinc-900 rounded-md transition-colors">
+                    <button onClick={onBack} className="p-1 hover:bg-primary hover:text-primary-foreground dark:hover:text-primary-foreground rounded-md transition-colors">
                         <ChevronRightIcon className="h-4 w-4 rotate-180" />
                     </button>
                     <Breadcrumbs
@@ -128,10 +128,10 @@ export default function QuoteDetail({ onBack, onLogout, onNavigateToWorkspace, o
                     />
                 </div>
                 <div className="flex items-center gap-3">
-                    <button className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-foreground bg-background border border-input rounded-md hover:bg-primary hover:text-zinc-900 group transition-colors">
+                    <button className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-foreground bg-background border border-input rounded-md hover:bg-primary hover:text-primary-foreground group transition-colors">
                         <FunnelIcon className="h-4 w-4 text-muted-foreground group-hover:text-zinc-900" /> Filter
                     </button>
-                    <button className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-foreground bg-background border border-input rounded-md hover:bg-primary hover:text-zinc-900 group transition-colors">
+                    <button className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-foreground bg-background border border-input rounded-md hover:bg-primary hover:text-primary-foreground group transition-colors">
                         <ArrowDownTrayIcon className="h-4 w-4 text-muted-foreground group-hover:text-zinc-900" /> Export
                     </button>
                     <button className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-primary-foreground bg-primary rounded-md hover:opacity-90">
@@ -161,7 +161,7 @@ export default function QuoteDetail({ onBack, onLogout, onNavigateToWorkspace, o
                                 <input
                                     type="number"
                                     placeholder="0.00"
-                                    className="pl-7 pr-4 py-2.5 w-full sm:w-32 text-sm font-bold bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 transition-shadow"
+                                    className="pl-7 pr-4 py-2.5 w-full sm:w-32 text-sm font-bold bg-card border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 transition-shadow"
                                 />
                             </div>
                             <button
@@ -194,7 +194,7 @@ export default function QuoteDetail({ onBack, onLogout, onNavigateToWorkspace, o
                     <>
                         <div className="bg-card p-6 rounded-2xl shadow-sm border border-zinc-200 dark:border-white/10 ring-1 ring-black/5 dark:ring-0 transition-all duration-300">
                             <div className="flex justify-end mb-4">
-                                <button onClick={() => setIsSummaryExpanded(false)} className="flex items-center gap-1.5 text-xs font-medium text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-900 transition-colors bg-zinc-100 dark:bg-card hover:bg-primary dark:hover:bg-primary px-2.5 py-1.5 rounded-lg">
+                                <button onClick={() => setIsSummaryExpanded(false)} className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-zinc-900 dark:text-muted-foreground dark:hover:text-primary-foreground transition-colors bg-zinc-100 dark:bg-card hover:bg-primary dark:hover:bg-primary px-2.5 py-1.5 rounded-lg">
                                     Hide Details <ChevronUpIcon className="w-3.5 h-3.5" />
                                 </button>
                             </div>
@@ -206,16 +206,16 @@ export default function QuoteDetail({ onBack, onLogout, onNavigateToWorkspace, o
                                     { label: 'VALID UNTIL', value: 'Feb 12' },
                                     { label: 'STATUS', value: 'Approved', color: 'text-brand-600 dark:text-brand-400' },
                                 ].map((stat, i) => (
-                                    <div key={i} className="bg-zinc-50 dark:bg-card/50 p-4 rounded-xl border border-zinc-100 dark:border-white/5">
-                                        <p className="text-[10px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mb-1">{stat.label}</p>
-                                        <p className={cn("text-2xl font-bold tracking-tight", stat.color || "text-zinc-900 dark:text-white")}>{stat.value}</p>
+                                    <div key={i} className="bg-muted dark:bg-card/50 p-4 rounded-xl border border-border">
+                                        <p className="text-[10px] font-bold text-muted-foreground dark:text-muted-foreground uppercase tracking-wider mb-1">{stat.label}</p>
+                                        <p className={cn("text-2xl font-bold tracking-tight", stat.color || "text-foreground")}>{stat.value}</p>
                                     </div>
                                 ))}
                             </div>
 
                             {/* Integrated Stepper - Matched to Dashboard */}
                             <div className="mt-8 pt-6 border-t border-zinc-100 dark:border-white/10 animate-in fade-in slide-in-from-top-4 duration-500">
-                                <h4 className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-4 ml-1">Workflow Progress</h4>
+                                <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4 ml-1">Workflow Progress</h4>
                                 <div className="relative pb-2">
                                     <div className="absolute top-3 left-0 w-full h-0.5 bg-zinc-200 dark:bg-zinc-700" />
                                     <div className="relative z-10 flex justify-between w-full max-w-4xl mx-auto px-4">
@@ -232,7 +232,7 @@ export default function QuoteDetail({ onBack, onLogout, onNavigateToWorkspace, o
                                             // Dashboard uses index logic (i <= 1), here we use status.
                                             // Dashboard classes: h-6 w-6 rounded-full flex items-center justify-center
                                             // Active/Completed: bg-primary text-primary-foreground
-                                            // Pending: bg-gray-200 dark:bg-zinc-700 text-gray-400
+                                            // Pending: bg-gray-200 dark:bg-zinc-700 text-muted-foreground
 
                                             // However, for correct visual flow in this context:
                                             // Completed: Primary Background, Check Icon
@@ -245,7 +245,7 @@ export default function QuoteDetail({ onBack, onLogout, onNavigateToWorkspace, o
                                                         "h-6 w-6 rounded-full flex items-center justify-center transition-all duration-300",
                                                         isCompleted || isCurrent
                                                             ? 'bg-primary text-primary-foreground'
-                                                            : 'bg-zinc-200 dark:bg-zinc-700 text-zinc-400'
+                                                            : 'bg-zinc-200 dark:bg-zinc-700 text-muted-foreground'
                                                     )}>
                                                         {isCompleted ? <CheckIcon className="w-4 h-4" /> :
                                                             isCurrent ? <div className="w-2 h-2 rounded-full bg-primary-foreground" /> :
@@ -253,11 +253,11 @@ export default function QuoteDetail({ onBack, onLogout, onNavigateToWorkspace, o
                                                     </div>
                                                     <span className={cn(
                                                         "mt-2 text-xs font-medium transition-colors duration-300",
-                                                        isCompleted || isCurrent ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 dark:text-zinc-500'
+                                                        isCompleted || isCurrent ? 'text-foreground' : 'text-muted-foreground dark:text-muted-foreground'
                                                     )}>
                                                         {step.name.split(' ')[0]}
                                                     </span>
-                                                    <p className="text-[10px] text-zinc-400 dark:text-zinc-600 mt-0.5">{step.name.split(' ').slice(1).join(' ')}</p>
+                                                    <p className="text-[10px] text-muted-foreground dark:text-muted-foreground mt-0.5">{step.name.split(' ').slice(1).join(' ')}</p>
                                                 </div>
                                             )
                                         })}
@@ -273,12 +273,12 @@ export default function QuoteDetail({ onBack, onLogout, onNavigateToWorkspace, o
                                 { label: 'Quote Value', value: '$43,750' },
                                 { label: 'Margin', value: '35.4%', color: 'text-green-600 dark:text-green-400' },
                                 { label: 'Probability', value: 'High', color: 'text-brand-600 dark:text-brand-400' },
-                                { label: 'Status', value: 'Approved', color: 'text-zinc-600 dark:text-zinc-400' },
+                                { label: 'Status', value: 'Approved', color: 'text-muted-foreground' },
                             ].map((stat, i) => (
                                 <Fragment key={i}>
                                     <div className="flex items-center gap-2 whitespace-nowrap">
-                                        <span className="text-[10px] font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">{stat.label}:</span>
-                                        <span className={cn("text-lg font-bold leading-none mt-1", stat.color || "text-zinc-900 dark:text-white")}>{stat.value}</span>
+                                        <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">{stat.label}:</span>
+                                        <span className={cn("text-lg font-bold leading-none mt-1", stat.color || "text-foreground")}>{stat.value}</span>
                                     </div>
                                     {i < 3 && <div className="w-px h-8 bg-zinc-200 dark:bg-zinc-700 hidden sm:block"></div>}
                                 </Fragment>
@@ -289,8 +289,8 @@ export default function QuoteDetail({ onBack, onLogout, onNavigateToWorkspace, o
                             {/* Current Phase Indicator */}
                             <div className="flex items-center gap-3 hidden md:flex">
                                 <div className="flex flex-col items-end">
-                                    <span className="text-[10px] font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Current Phase</span>
-                                    <span className="text-sm font-bold text-zinc-900 dark:text-white">Negotiating</span>
+                                    <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">Current Phase</span>
+                                    <span className="text-sm font-bold text-foreground">Negotiating</span>
                                 </div>
                                 <div className="relative flex items-center justify-center w-8 h-8 rounded-full border-2 border-zinc-900 dark:border-white bg-card">
                                     <div className="w-2.5 h-2.5 rounded-full bg-foreground" />
@@ -303,10 +303,10 @@ export default function QuoteDetail({ onBack, onLogout, onNavigateToWorkspace, o
                                 onClick={() => setIsSummaryExpanded(true)}
                                 className="flex flex-col items-center justify-center gap-1 group p-2 hover:bg-primary dark:hover:bg-primary rounded-lg transition-colors"
                             >
-                                <div className="text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-900 transition-colors">
+                                <div className="text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-zinc-900 transition-colors">
                                     <ChevronDownIcon className="w-4 h-4" />
                                 </div>
-                                <span className="text-[10px] font-medium text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-900 transition-colors">Show Details</span>
+                                <span className="text-[10px] font-medium text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-zinc-900 transition-colors">Show Details</span>
                             </button>
                         </div>
                     </div>
@@ -530,7 +530,7 @@ export default function QuoteDetail({ onBack, onLogout, onNavigateToWorkspace, o
                                                 </button>
                                                 <button onClick={() => setIsAiDiagnosisOpen(true)} className="relative p-1 text-indigo-600 hover:text-zinc-900 rounded hover:bg-primary transition-colors">
                                                     <SparklesIcon className="h-4 w-4" />
-                                                    <span className="absolute top-1 right-1 block h-1.5 w-1.5 rounded-full bg-indigo-500 ring-2 ring-white dark:ring-zinc-900" />
+                                                    <span className="absolute top-1 right-1 block h-1.5 w-1.5 rounded-full bg-indigo-500 ring-2 ring-background" />
                                                 </button>
                                                 <div className="w-px h-4 bg-border mx-1 self-center" />
                                                 <button className="p-1 text-muted-foreground hover:text-zinc-900 rounded hover:bg-primary transition-colors">
@@ -565,7 +565,7 @@ export default function QuoteDetail({ onBack, onLogout, onNavigateToWorkspace, o
 
                                                     {sections.aiSuggestions && (
                                                         selectedItem.aiStatus === 'info' ? (
-                                                            <div className="bg-zinc-50 dark:bg-card/40 border border-zinc-200 dark:border-zinc-700 rounded-lg p-4">
+                                                            <div className="bg-muted dark:bg-card/40 border border-border rounded-lg p-4">
                                                                 <h4 className="text-sm font-bold text-foreground mb-2">Optimization Opportunity</h4>
                                                                 <div className="space-y-2">
                                                                     <div className="p-2 bg-background border border-border rounded cursor-pointer hover:border-primary transition-colors">
@@ -604,7 +604,7 @@ export default function QuoteDetail({ onBack, onLogout, onNavigateToWorkspace, o
                                                                 </div>
                                                             </div>
                                                         ) : (
-                                                            <div className="bg-zinc-50 dark:bg-card/40 border border-zinc-200 dark:border-zinc-700 rounded-lg p-3">
+                                                            <div className="bg-muted dark:bg-card/40 border border-border rounded-lg p-3">
                                                                 <div className="flex gap-3">
                                                                     <ExclamationTriangleIcon className="h-5 w-5 text-amber-500 flex-shrink-0" />
                                                                     <div className="w-full">
@@ -717,7 +717,7 @@ export default function QuoteDetail({ onBack, onLogout, onNavigateToWorkspace, o
                                                     />
                                                 </button>
                                                 {sections.productOverview && (
-                                                    <div className="space-y-4 animate-in fade-in slide-in-from-top-1 duration-200 bg-zinc-50 dark:bg-card border border-border rounded-lg p-4">
+                                                    <div className="space-y-4 animate-in fade-in slide-in-from-top-1 duration-200 bg-muted dark:bg-card border border-border rounded-lg p-4">
                                                         <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
                                                             <CubeIcon className="h-12 w-12 text-muted-foreground/50" />
                                                         </div>
@@ -757,7 +757,7 @@ export default function QuoteDetail({ onBack, onLogout, onNavigateToWorkspace, o
                                                     />
                                                 </button>
                                                 {sections.lifecycle && (
-                                                    <div className="pl-4 border-l border-border ml-2 space-y-4 animate-in fade-in slide-in-from-top-1 duration-200 bg-zinc-50 dark:bg-card border-r border-y border-border rounded-r-lg p-4">
+                                                    <div className="pl-4 border-l border-border ml-2 space-y-4 animate-in fade-in slide-in-from-top-1 duration-200 bg-muted dark:bg-card border-r border-y border-border rounded-r-lg p-4">
                                                         {['Material Sourced', 'Manufacturing', 'Quality Control'].map((step, i) => (
                                                             <div key={i} className="relative pb-2 last:pb-0">
                                                                 <div className="absolute -left-[21px] top-1 h-2 w-2 rounded-full bg-primary" />
@@ -969,7 +969,7 @@ export default function QuoteDetail({ onBack, onLogout, onNavigateToWorkspace, o
                                                     </div>
                                                     <div>
                                                         <p className="text-xs font-medium text-zinc-900 dark:text-primary">AI Assistant is processing the new quote...</p>
-                                                        <p className="text-[10px] text-zinc-700 dark:text-primary/80 mt-1">Estimated completion: 30s</p>
+                                                        <p className="text-[10px] text-muted-foreground dark:text-primary/80 mt-1">Estimated completion: 30s</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1039,17 +1039,17 @@ export default function QuoteDetail({ onBack, onLogout, onNavigateToWorkspace, o
 
                                         <div className="flex justify-between mb-8">
                                             <div>
-                                                <div className="text-xs font-bold text-zinc-500 mb-1 uppercase">VENDOR</div>
+                                                <div className="text-xs font-bold text-muted-foreground mb-1 uppercase">VENDOR</div>
                                                 <div className="font-bold">Strata Inc.</div>
                                                 <div className="text-sm">123 Innovation Dr., Tech City</div>
                                             </div>
                                             <div className="text-right space-y-1">
                                                 <div className="flex justify-between w-48">
-                                                    <span className="text-sm font-bold text-zinc-500">PO #:</span>
+                                                    <span className="text-sm font-bold text-muted-foreground">PO #:</span>
                                                     <span className="text-sm font-bold">PO-1029</span>
                                                 </div>
                                                 <div className="flex justify-between w-48">
-                                                    <span className="text-sm font-bold text-zinc-500">DATE:</span>
+                                                    <span className="text-sm font-bold text-muted-foreground">DATE:</span>
                                                     <span className="text-sm">Oct 24, 2024</span>
                                                 </div>
                                             </div>
@@ -1065,7 +1065,7 @@ export default function QuoteDetail({ onBack, onLogout, onNavigateToWorkspace, o
                                             <div className="flex p-2 border-b border-zinc-100">
                                                 <div className="flex-grow-[2]">
                                                     <div className="font-bold text-sm">{selectedItem.name}</div>
-                                                    <div className="text-xs text-zinc-500">{selectedItem.id}</div>
+                                                    <div className="text-xs text-muted-foreground">{selectedItem.id}</div>
                                                 </div>
                                                 <div className="flex-1 text-right text-sm">125</div>
                                                 <div className="flex-1 text-right text-sm">$350.00</div>
@@ -1076,7 +1076,7 @@ export default function QuoteDetail({ onBack, onLogout, onNavigateToWorkspace, o
                                         <div className="flex justify-end">
                                             <div className="w-64">
                                                 <div className="flex justify-between mb-2">
-                                                    <span className="text-sm text-zinc-500">Subtotal:</span>
+                                                    <span className="text-sm text-muted-foreground">Subtotal:</span>
                                                     <span className="text-sm font-bold">$43,750.00</span>
                                                 </div>
                                                 <div className="flex justify-between items-center mt-2 pt-2 border-t border-zinc-100">

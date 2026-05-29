@@ -30,7 +30,7 @@ export default function WarrantyClaimArtifact({ data }: { data: any }) {
                         setStreamOpen(false);
                         navigate('/mac');
                     }}
-                    className="mt-2 w-full py-2 bg-white dark:bg-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-700 text-foreground border border-zinc-200 dark:border-zinc-700 rounded-lg text-sm font-semibold transition-colors shadow-sm text-center"
+                    className="mt-2 w-full py-2 bg-card hover:bg-muted dark:hover:bg-zinc-700 text-foreground border border-border rounded-lg text-sm font-semibold transition-colors shadow-sm text-center"
                 >
                     View in Service Center
                 </button>
@@ -39,7 +39,7 @@ export default function WarrantyClaimArtifact({ data }: { data: any }) {
     }
 
     return (
-        <div className="bg-white dark:bg-zinc-800 rounded-xl border border-zinc-200 dark:border-zinc-800 shadow-sm overflow-hidden">
+        <div className="bg-card rounded-xl border border-border shadow-sm overflow-hidden">
             {/* Header */}
             <div className="bg-green-50 dark:bg-green-900/20 px-4 py-3 border-b border-green-100 dark:border-green-800 flex items-center gap-2">
                 <ShieldCheckIcon className="w-4 h-4 text-green-600 dark:text-green-500" />
@@ -57,17 +57,17 @@ export default function WarrantyClaimArtifact({ data }: { data: any }) {
                     </span>
                 </div>
 
-                <div className="bg-zinc-50 dark:bg-zinc-800/50 p-3 rounded-lg border border-zinc-100 dark:border-zinc-700 text-xs space-y-2">
+                <div className="bg-muted dark:bg-zinc-800/50 p-3 rounded-lg border border-zinc-100 dark:border-zinc-700 text-xs space-y-2">
                     <div className="flex justify-between">
-                        <span className="text-zinc-500">Policy</span>
+                        <span className="text-muted-foreground">Policy</span>
                         <span className="font-medium text-foreground">{data.policy}</span>
                     </div>
                     <div className="flex justify-between">
-                        <span className="text-zinc-500">Coverage Type</span>
+                        <span className="text-muted-foreground">Coverage Type</span>
                         <span className="font-medium text-foreground">{data.coverage}</span>
                     </div>
                     <div className="flex justify-between">
-                        <span className="text-zinc-500">Deductible</span>
+                        <span className="text-muted-foreground">Deductible</span>
                         <span className="font-medium text-green-600 dark:text-green-400">$0.00</span>
                     </div>
                 </div>

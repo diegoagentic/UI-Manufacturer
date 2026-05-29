@@ -9,9 +9,9 @@ export default function PricingConfigurationArtifact({ data, onConfirm }: { data
     const totalValue = data?.totalValue || 134250;
 
     return (
-        <div className="bg-white dark:bg-zinc-800 rounded-2xl border border-zinc-200 dark:border-zinc-700 w-[800px] overflow-hidden animate-in fade-in zoom-in duration-300">
+        <div className="bg-card rounded-2xl border border-border w-[800px] overflow-hidden animate-in fade-in zoom-in duration-300">
             {/* Header */}
-            <div className="bg-zinc-50 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-700 p-6 flex justify-between items-center">
+            <div className="bg-muted border-b border-border p-6 flex justify-between items-center">
                 <div>
                     <h2 className="text-xl font-bold font-brand text-foreground">Pricing Configuration</h2>
                     <p className="text-sm text-muted-foreground">Apply warranties and discount rules before final review.</p>
@@ -71,7 +71,7 @@ export default function PricingConfigurationArtifact({ data, onConfirm }: { data
             </div>
 
             {/* Footer */}
-            <div className="p-4 bg-zinc-50 dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-700 flex justify-end">
+            <div className="p-4 bg-muted border-t border-border flex justify-end">
                 <button
                     onClick={() => {
                         if (onConfirm) {

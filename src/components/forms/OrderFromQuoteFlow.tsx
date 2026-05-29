@@ -168,7 +168,7 @@ export default function OrderFromQuoteFlow({ onOrderCreate, onEditDetails, onCan
                                     </thead>
                                     <tbody className="divide-y divide-border">
                                         {MOCK_QUOTES.map((quote) => (
-                                            <tr key={quote.id} className="group hover:bg-zinc-50 dark:hover:bg-zinc-800/30 transition-colors">
+                                            <tr key={quote.id} className="group hover:bg-muted dark:hover:bg-zinc-800/30 transition-colors">
                                                 <div className="px-6 py-4">
                                                     <div className="font-medium text-foreground">{quote.id}</div>
                                                     <div className="text-xs text-muted-foreground mt-0.5">{quote.date}</div>
@@ -263,8 +263,8 @@ export default function OrderFromQuoteFlow({ onOrderCreate, onEditDetails, onCan
                             </div>
 
                             {/* Items Table */}
-                            <div className="bg-white dark:bg-zinc-800 rounded-xl border border-border shadow-sm overflow-hidden mb-8">
-                                <div className="px-6 py-4 border-b border-border flex justify-between items-center bg-zinc-50/50 dark:bg-zinc-800/20">
+                            <div className="bg-card rounded-xl border border-border shadow-sm overflow-hidden mb-8">
+                                <div className="px-6 py-4 border-b border-border flex justify-between items-center bg-muted/50 dark:bg-zinc-800/20">
                                     <h3 className="font-semibold text-foreground flex items-center gap-2">
                                         <DocumentTextIcon className="w-5 h-5 text-muted-foreground" />
                                         Order Items
@@ -274,7 +274,7 @@ export default function OrderFromQuoteFlow({ onOrderCreate, onEditDetails, onCan
                                     </span>
                                     '</div>
                                 <table className="w-full text-sm text-left">
-                                    <thead className="bg-zinc-50 dark:bg-zinc-800/50 text-xs text-muted-foreground font-semibold border-b border-border">
+                                    <thead className="bg-muted dark:bg-zinc-800/50 text-xs text-muted-foreground font-semibold border-b border-border">
                                         <tr>
                                             <th className="px-6 py-3 font-medium">Description</th>
                                             <th className="px-6 py-3 font-medium text-center">Qty</th>
@@ -284,7 +284,7 @@ export default function OrderFromQuoteFlow({ onOrderCreate, onEditDetails, onCan
                                     </thead>
                                     <tbody className="divide-y divide-border">
                                         {selectedQuote.items.map((item) => (
-                                            <tr key={item.id} className="hover:bg-zinc-50 dark:hover:bg-zinc-800/30">
+                                            <tr key={item.id} className="hover:bg-muted dark:hover:bg-zinc-800/30">
                                                 <td className="px-6 py-3 font-medium text-foreground">{item.description}</td>
                                                 <td className="px-6 py-3 text-center text-muted-foreground">{item.qty}</td>
                                                 <td className="px-6 py-3 text-right text-muted-foreground">${item.unitPrice.toFixed(2)}</td>
@@ -292,7 +292,7 @@ export default function OrderFromQuoteFlow({ onOrderCreate, onEditDetails, onCan
                                             </tr>
                                         ))}
                                     </tbody>
-                                    <tfoot className="bg-zinc-50/50 dark:bg-zinc-800/20 font-semibold text-foreground border-t border-border">
+                                    <tfoot className="bg-muted/50 dark:bg-zinc-800/20 font-semibold text-foreground border-t border-border">
                                         <tr>
                                             <td colSpan={3} className="px-6 py-3 text-right text-muted-foreground">Total</td>
                                             <td className="px-6 py-3 text-right">{selectedQuote.formattedValue}</td>
@@ -305,7 +305,7 @@ export default function OrderFromQuoteFlow({ onOrderCreate, onEditDetails, onCan
                             <div className="flex items-center justify-end gap-3">
                                 <button
                                     onClick={() => setStep('editing')}
-                                    className="px-4 py-2.5 rounded-xl border border-border text-foreground hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors font-medium text-sm flex items-center gap-2"
+                                    className="px-4 py-2.5 rounded-xl border border-border text-foreground hover:bg-muted dark:hover:bg-zinc-800 transition-colors font-medium text-sm flex items-center gap-2"
                                 >
                                     <PencilSquareIcon className="w-4 h-4" />
                                     Review & Adapt Details

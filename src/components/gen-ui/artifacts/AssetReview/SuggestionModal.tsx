@@ -52,7 +52,7 @@ export default function SuggestionModal({ isOpen, onClose, asset, onAccept, onRe
 
     return (
         <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-            <div className="bg-white dark:bg-zinc-800 rounded-xl shadow-2xl w-full max-w-4xl border border-zinc-200 dark:border-zinc-800 animate-in zoom-in-95 duration-200 overflow-hidden flex flex-col max-h-[90vh]">
+            <div className="bg-card rounded-xl shadow-2xl w-full max-w-4xl border border-border animate-in zoom-in-95 duration-200 overflow-hidden flex flex-col max-h-[90vh]">
                 {/* Header */}
                 <div className="flex justify-between items-start p-6 border-b border-zinc-100 dark:border-zinc-800 shrink-0">
                     <div>
@@ -69,7 +69,7 @@ export default function SuggestionModal({ isOpen, onClose, asset, onAccept, onRe
                     <div className="flex items-center gap-4">
                         <button
                             onClick={onAccept}
-                            className="px-4 py-2 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-700 rounded-lg text-sm font-medium transition-colors"
+                            className="px-4 py-2 bg-card border border-border hover:bg-muted dark:hover:bg-zinc-700 rounded-lg text-sm font-medium transition-colors"
                         >
                             Apply Best Option
                         </button>
@@ -80,10 +80,10 @@ export default function SuggestionModal({ isOpen, onClose, asset, onAccept, onRe
                 </div>
 
                 {/* Grid Content */}
-                <div className="p-6 overflow-y-auto bg-zinc-50/50 dark:bg-zinc-800/50 scrollbar-micro">
+                <div className="p-6 overflow-y-auto bg-muted/50 dark:bg-zinc-800/50 scrollbar-micro">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {options.map((opt) => (
-                            <div key={opt.id} className="bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between h-full">
+                            <div key={opt.id} className="bg-card border border-border rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between h-full">
                                 <div>
                                     <div className="flex justify-between items-start mb-4">
                                         <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide ${opt.badge.color}`}>
@@ -97,7 +97,7 @@ export default function SuggestionModal({ isOpen, onClose, asset, onAccept, onRe
                                     </div>
 
                                     <div className="flex justify-center mb-4">
-                                        <div className="w-16 h-16 bg-zinc-100 dark:bg-zinc-800 rounded-lg flex items-center justify-center text-zinc-400">
+                                        <div className="w-16 h-16 bg-muted rounded-lg flex items-center justify-center text-muted-foreground">
                                             {/* Placeholder Item Icon */}
                                             <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
@@ -117,7 +117,7 @@ export default function SuggestionModal({ isOpen, onClose, asset, onAccept, onRe
 
                                     <button
                                         onClick={onAccept}
-                                        className="w-full py-2 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:border-blue-500 hover:text-blue-600 dark:hover:border-blue-500 dark:hover:text-blue-400 rounded-lg text-sm font-medium transition-all"
+                                        className="w-full py-2 bg-card border border-border hover:border-blue-500 hover:text-blue-600 dark:hover:border-blue-500 dark:hover:text-blue-400 rounded-lg text-sm font-medium transition-all"
                                     >
                                         Select
                                     </button>
@@ -128,10 +128,10 @@ export default function SuggestionModal({ isOpen, onClose, asset, onAccept, onRe
                 </div>
 
                 {/* Footer */}
-                <div className="p-4 border-t border-zinc-100 dark:border-zinc-800 bg-white dark:bg-zinc-800 shrink-0 flex justify-center">
+                <div className="p-4 border-t border-zinc-100 dark:border-zinc-800 bg-card shrink-0 flex justify-center">
                     <button
                         onClick={onClose}
-                        className="w-full max-w-sm py-2.5 text-sm font-bold text-foreground hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors"
+                        className="w-full max-w-sm py-2.5 text-sm font-bold text-foreground hover:bg-muted rounded-lg transition-colors"
                     >
                         Close
                     </button>

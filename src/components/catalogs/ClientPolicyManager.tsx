@@ -115,10 +115,10 @@ export default function ClientPolicyManager() {
             <div className="flex-1 space-y-6">
 
                 {/* Client Selector (Header Context) */}
-                <div className="bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm">
+                <div className="bg-card border border-border rounded-2xl p-6 shadow-sm">
                     <label className="block text-sm font-medium text-muted-foreground mb-2">Configure Policy For</label>
                     <div className="flex items-center gap-4">
-                        <div className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-full text-zinc-900 dark:text-zinc-100">
+                        <div className="p-3 bg-muted rounded-full text-foreground">
                             <UsersIcon className="w-6 h-6" />
                         </div>
                         <select
@@ -134,18 +134,18 @@ export default function ClientPolicyManager() {
                 </div>
 
                 {/* Product List Simulation */}
-                <div className="bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm flex-1">
+                <div className="bg-card border border-border rounded-2xl p-6 shadow-sm flex-1">
                     <div className="flex items-center justify-between mb-6">
                         <h3 className="font-semibold text-foreground flex items-center gap-2">
-                            <ListBulletIcon className="w-5 h-5 text-zinc-900 dark:text-zinc-100" />
+                            <ListBulletIcon className="w-5 h-5 text-foreground" />
                             Reference Basket
                         </h3>
-                        <span className="text-xs text-muted-foreground bg-zinc-100 dark:bg-zinc-800 px-2 py-1 rounded">Simulation Only</span>
+                        <span className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded">Simulation Only</span>
                     </div>
 
                     <div className="space-y-4">
                         {MOCK_PRODUCTS.map((prod, idx) => (
-                            <div key={idx} className={`flex items-center justify-between p-3 rounded-lg border ${prod.active ? 'border-zinc-100 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-800/20' : 'border-dashed border-zinc-200 dark:border-zinc-700 opacity-60'}`}>
+                            <div key={idx} className={`flex items-center justify-between p-3 rounded-lg border ${prod.active ? 'border-zinc-100 dark:border-zinc-800 bg-muted/50 dark:bg-zinc-800/20' : 'border-dashed border-border opacity-60'}`}>
                                 <div className="flex items-center gap-3">
                                     <div className="w-10 h-10 bg-zinc-200 dark:bg-zinc-700 rounded-md" /> { /* Placeholder Image */}
                                     <div>
@@ -165,7 +165,7 @@ export default function ClientPolicyManager() {
 
             {/* Right Col: Interactive Rules Engine */}
             <div className="w-full lg:max-w-md space-y-6">
-                <div className="bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden shadow-lg shadow-zinc-200/50 dark:shadow-black/20 sticky top-6">
+                <div className="bg-card border border-border rounded-2xl overflow-hidden shadow-lg shadow-zinc-200/50 dark:shadow-black/20 sticky top-6">
 
                     {/* Header Results */}
                     <div className="bg-green-50 dark:bg-green-900/10 p-6 border-b border-green-100 dark:border-green-900/20">
@@ -300,7 +300,7 @@ export default function ClientPolicyManager() {
                     </div>
 
                     {/* Footer / Warranty Actions */}
-                    <div className="p-4 bg-zinc-50 dark:bg-zinc-800/50 border-t border-zinc-100 dark:border-zinc-800 text-xs text-center text-muted-foreground flex items-center justify-center gap-2">
+                    <div className="p-4 bg-muted dark:bg-zinc-800/50 border-t border-zinc-100 dark:border-zinc-800 text-xs text-center text-muted-foreground flex items-center justify-center gap-2">
                         <ShieldCheckIcon className="w-4 h-4" />
                         Standard Warranty Applied (12 Years)
                     </div>

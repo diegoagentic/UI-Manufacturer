@@ -28,7 +28,7 @@ export default function DashboardMetricsGrid({ selectedClient }: DashboardMetric
                     </p>
                 </div>
                 {/* Period Selector */}
-                <div className="flex items-center gap-1 bg-zinc-100 dark:bg-zinc-800/50 rounded-lg p-0.5 border border-zinc-200 dark:border-zinc-700/50">
+                <div className="flex items-center gap-1 bg-muted/50 rounded-lg p-0.5 border border-border/50">
                     {(['Day', 'Week', 'Month', 'Quarter'] as DashMetricsPeriod[]).map((p) => (
                         <button
                             key={p}

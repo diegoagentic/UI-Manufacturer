@@ -213,7 +213,7 @@ function SmartQuoteHubContent({ onNavigate, demoPhase = 'IDLE', onUploadStart, o
                     </div>
                     <button
                         onClick={() => { setMode('selection'); setReviewData(null); }}
-                        className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground px-2.5 py-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors border border-transparent hover:border-border"
+                        className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground px-2.5 py-1.5 rounded-lg hover:bg-muted transition-colors border border-transparent hover:border-border"
                     >
                         <DocumentPlusIcon className="w-3.5 h-3.5" />
                         New Quote

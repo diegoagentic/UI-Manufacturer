@@ -50,11 +50,11 @@ export default function MappingField({ field }: { field: MappingFieldProps }) {
     };
 
     return (
-        <div className={`bg-white dark:bg-zinc-800 border ${isMatched ? 'border-green-200 dark:border-green-900' : 'border-zinc-200 dark:border-zinc-800'} rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow`}>
+        <div className={`bg-card border ${isMatched ? 'border-green-200 dark:border-green-900' : 'border-border'} rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow`}>
             {/* Header / Summary */}
             <div
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center justify-between p-3 cursor-pointer bg-zinc-50/50 dark:bg-zinc-800/30 hover:bg-zinc-100 dark:hover:bg-zinc-800/50 transition-colors"
+                className="flex items-center justify-between p-3 cursor-pointer bg-muted/50 dark:bg-zinc-800/30 hover:bg-muted/50 transition-colors"
             >
                 <div className="flex items-center gap-3">
                     <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${isMatched ? 'bg-green-100 dark:bg-green-900/30 text-green-600' : 'bg-amber-100 dark:bg-amber-900/30 text-amber-600'}`}>
@@ -66,7 +66,7 @@ export default function MappingField({ field }: { field: MappingFieldProps }) {
                             {!isMatched && <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300">Review Needed</span>}
                         </h4>
                         <p className="text-xs text-muted-foreground flex items-center gap-1.5 mt-0.5">
-                            <span className="font-mono bg-zinc-100 dark:bg-zinc-800 px-1.5 rounded">{field.originalField}</span>
+                            <span className="font-mono bg-muted px-1.5 rounded">{field.originalField}</span>
                             <span>•</span>
                             <span className={getConfidenceColor(field.confidence)}>{field.confidence}% Match</span>
                         </p>
@@ -80,20 +80,20 @@ export default function MappingField({ field }: { field: MappingFieldProps }) {
                             </div>
                         </div>
                     )}
-                    <ChevronDownIcon className={`w-4 h-4 text-zinc-400 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+                    <ChevronDownIcon className={`w-4 h-4 text-muted-foreground transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
                 </div>
             </div>
 
             {/* Expanded Content */}
             {isOpen && (
-                <div className="p-3 border-t border-zinc-100 dark:border-zinc-800 bg-white dark:bg-zinc-800 animate-in slide-in-from-top-2 duration-200">
+                <div className="p-3 border-t border-zinc-100 dark:border-zinc-800 bg-card animate-in slide-in-from-top-2 duration-200">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {/* Column 1: Source Data */}
                         <div className="flex flex-col gap-1">
                             <div className="flex items-center gap-2 text-xs font-semibold text-muted-foreground mb-1">
                                 <Bars2Icon className="w-4 h-4" /> Source Data
                             </div>
-                            <div className="font-mono text-sm text-foreground bg-zinc-50 dark:bg-zinc-800/50 p-2.5 rounded-lg border border-zinc-100 dark:border-zinc-800">
+                            <div className="font-mono text-sm text-foreground bg-muted dark:bg-zinc-800/50 p-2.5 rounded-lg border border-zinc-100 dark:border-zinc-800">
                                 {field.description || "Sample data not available"}
                             </div>
                         </div>
@@ -111,7 +111,7 @@ export default function MappingField({ field }: { field: MappingFieldProps }) {
                                                 <div className="font-medium text-sm text-indigo-900 dark:text-indigo-200">{field.suggestions[0].value}</div>
                                                 <div className="text-[10px] text-indigo-700 dark:text-indigo-400 mt-0.5">{field.suggestions[0].description}</div>
                                             </div>
-                                            <span className="text-[10px] font-bold bg-white dark:bg-zinc-800 px-1.5 py-0.5 rounded text-indigo-600 shadow-sm float-right">
+                                            <span className="text-[10px] font-bold bg-card px-1.5 py-0.5 rounded text-indigo-600 shadow-sm float-right">
                                                 {field.suggestions[0].confidence}%
                                             </span>
                                         </div>
@@ -128,7 +128,7 @@ export default function MappingField({ field }: { field: MappingFieldProps }) {
                                 <div className="relative">
                                     <select
                                         onChange={(e) => setSelectedValue(e.target.value)}
-                                        className="w-full appearance-none bg-zinc-50 dark:bg-zinc-800 border-none text-xs rounded-lg py-1.5 pl-2 pr-6 text-muted-foreground focus:ring-1 focus:ring-primary cursor-pointer hover:bg-zinc-100 transition-colors"
+                                        className="w-full appearance-none bg-muted dark:bg-zinc-800 border-none text-xs rounded-lg py-1.5 pl-2 pr-6 text-muted-foreground focus:ring-1 focus:ring-primary cursor-pointer hover:bg-zinc-100 transition-colors"
                                         value={selectedValue}
                                     >
                                         <option disabled>Alternative options...</option>
@@ -136,7 +136,7 @@ export default function MappingField({ field }: { field: MappingFieldProps }) {
                                             <option key={idx} value={sugg.value}>{sugg.value} ({sugg.confidence}%)</option>
                                         ))}
                                     </select>
-                                    <ChevronDownIcon className="absolute right-2 top-2 w-3 h-3 text-zinc-400 pointer-events-none" />
+                                    <ChevronDownIcon className="absolute right-2 top-2 w-3 h-3 text-muted-foreground pointer-events-none" />
                                 </div>
                             )}
                         </div>

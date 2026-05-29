@@ -211,7 +211,7 @@ export default function InventoryMovements() {
             case 'Scheduled': return 'bg-indigo-100 text-indigo-700 border-indigo-200 dark:bg-indigo-900/30 dark:text-indigo-400 dark:border-indigo-700/50';
             case 'In-Progress': return 'bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-700/50';
             case 'Completed': return 'bg-green-100 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-400 dark:border-green-700/50';
-            default: return 'bg-zinc-100 text-zinc-700 border-zinc-200';
+            default: return 'bg-zinc-100 text-muted-foreground border-zinc-200';
         }
     };
 
@@ -220,7 +220,7 @@ export default function InventoryMovements() {
             case 'High': return 'bg-red-50 text-red-600 border-red-100 dark:bg-red-900/20 dark:text-red-400 dark:border-red-800/30';
             case 'Medium': return 'bg-amber-50 text-amber-600 border-amber-100 dark:bg-amber-900/20 dark:text-amber-400 dark:border-amber-800/30';
             case 'Low': return 'bg-green-50 text-green-600 border-green-100 dark:bg-green-900/20 dark:text-green-400 dark:border-green-800/30';
-            default: return 'bg-zinc-50 text-zinc-600';
+            default: return 'bg-muted text-muted-foreground';
         }
     };
 
@@ -279,14 +279,14 @@ export default function InventoryMovements() {
                                         <div className="space-y-1">
                                             <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">From</p>
                                             <div className="flex items-center gap-2 text-sm text-foreground">
-                                                <MapPinIcon className="w-4 h-4 text-zinc-400" />
+                                                <MapPinIcon className="w-4 h-4 text-muted-foreground" />
                                                 <span className="font-medium">{move.fromLocation}</span>
                                             </div>
                                         </div>
                                         <div className="space-y-1">
                                             <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">To</p>
                                             <div className="flex items-center gap-2 text-sm text-foreground">
-                                                <ArrowRightIcon className="w-4 h-4 text-zinc-400" />
+                                                <ArrowRightIcon className="w-4 h-4 text-muted-foreground" />
                                                 <span className="font-medium">{move.toLocation}</span>
                                             </div>
                                         </div>

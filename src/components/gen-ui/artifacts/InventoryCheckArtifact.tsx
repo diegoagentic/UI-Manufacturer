@@ -11,7 +11,7 @@ export default function InventoryCheckArtifact({ data }: { data: any }) {
     ];
 
     return (
-        <div className="bg-white dark:bg-zinc-800 rounded-xl border border-zinc-200 dark:border-zinc-800 shadow-sm overflow-hidden">
+        <div className="bg-card rounded-xl border border-border shadow-sm overflow-hidden">
             {/* Header */}
             <div className="bg-blue-50 dark:bg-blue-900/20 px-4 py-3 border-b border-blue-100 dark:border-blue-800 flex items-center gap-2">
                 <GlobeAltIcon className="w-4 h-4 text-blue-600 dark:text-blue-500" />
@@ -21,7 +21,7 @@ export default function InventoryCheckArtifact({ data }: { data: any }) {
             <div className="p-4 space-y-4">
                 <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-700 pb-3">
                     <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-zinc-100 dark:bg-zinc-800 rounded-lg flex items-center justify-center text-lg">
+                        <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center text-lg">
                             🪑
                         </div>
                         <div>
@@ -31,14 +31,14 @@ export default function InventoryCheckArtifact({ data }: { data: any }) {
                     </div>
                     <div className="text-right">
                         <div className="text-lg font-bold text-green-600 dark:text-green-400">247 Total</div>
-                        <div className="text-xs text-zinc-500">Global Available</div>
+                        <div className="text-xs text-muted-foreground">Global Available</div>
                     </div>
                 </div>
 
                 {/* Warehouse List */}
                 <div className="space-y-2">
                     {warehouses.map((wh) => (
-                        <div key={wh.id} className="bg-zinc-50 dark:bg-zinc-800/50 rounded-lg p-3 flex items-start justify-between border border-zinc-100 dark:border-zinc-700">
+                        <div key={wh.id} className="bg-muted dark:bg-zinc-800/50 rounded-lg p-3 flex items-start justify-between border border-zinc-100 dark:border-zinc-700">
                             <div>
                                 <p className="text-sm font-semibold text-foreground flex items-center gap-1.5">
                                     {wh.name}
@@ -49,7 +49,7 @@ export default function InventoryCheckArtifact({ data }: { data: any }) {
                             </div>
                             <div className="text-right">
                                 <span className="text-sm font-bold text-foreground">{wh.available}</span>
-                                <p className="text-[10px] text-zinc-500 uppercase tracking-wide">Units</p>
+                                <p className="text-[10px] text-muted-foreground uppercase tracking-wide">Units</p>
                             </div>
                         </div>
                     ))}

@@ -56,7 +56,7 @@ export default function AISuggestionPanel({ originalAsset, suggestion, onAccept,
                         </button>
                         <button
                             onClick={onReject}
-                            className="flex-1 flex items-center justify-center gap-1.5 py-1.5 bg-white dark:bg-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 text-xs font-medium rounded-lg transition-colors"
+                            className="flex-1 flex items-center justify-center gap-1.5 py-1.5 bg-card hover:bg-muted dark:hover:bg-zinc-700 text-muted-foreground dark:text-zinc-300 border border-border text-xs font-medium rounded-lg transition-colors"
                         >
                             <XCircleIcon className="w-3.5 h-3.5" />
                             Dismiss

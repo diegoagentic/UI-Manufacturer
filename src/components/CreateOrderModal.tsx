@@ -59,9 +59,9 @@ const creationOptions = [
         icon: PencilSquareIcon,
         actionLabel: 'Start Manual Creation',
         estimatedTime: '10-15 minutes',
-        color: 'text-zinc-600',
+        color: 'text-muted-foreground',
         bgColor: 'bg-zinc-100',
-        darkColor: 'dark:text-zinc-400',
+        darkColor: 'dark:text-muted-foreground',
         darkBgColor: 'dark:bg-zinc-800'
     }
 ]
@@ -226,7 +226,7 @@ export default function CreateOrderModal({ isOpen, onClose }: CreateOrderModalPr
                             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         >
-                            <Dialog.Panel className={`relative transform overflow-hidden rounded-2xl bg-white dark:bg-zinc-950 text-left shadow-2xl transition-all border border-border w-full ${getModalSize()}`}>
+                            <Dialog.Panel className={`relative transform overflow-hidden rounded-2xl bg-background text-left shadow-2xl transition-all border border-border w-full ${getModalSize()}`}>
                                 {/* Close Button logic - Hide in sub-flows that have their own navigation */}
                                 {step === 'selection' && (
                                     <div className="absolute right-6 top-6 z-10">
@@ -263,7 +263,7 @@ export default function CreateOrderModal({ isOpen, onClose }: CreateOrderModalPr
                                                             <option.icon className="h-6 w-6" />
                                                         </div>
                                                         <div className="flex justify-end">
-                                                            <span className="text-[10px] font-medium px-2 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-500 border border-zinc-200 dark:border-zinc-700">
+                                                            <span className="text-[10px] font-medium px-2 py-1 rounded-full bg-muted text-muted-foreground border border-border">
                                                                 {option.estimatedTime}
                                                             </span>
                                                         </div>
@@ -287,7 +287,7 @@ export default function CreateOrderModal({ isOpen, onClose }: CreateOrderModalPr
                                         <div className="flex items-center gap-4 mb-6">
                                             <button
                                                 onClick={() => setStep('selection')}
-                                                className="p-2 -ml-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                                                className="p-2 -ml-2 rounded-lg hover:bg-muted transition-colors"
                                             >
                                                 <ArrowRightIcon className="h-5 w-5 rotate-180 text-muted-foreground" />
                                             </button>
@@ -316,7 +316,7 @@ export default function CreateOrderModal({ isOpen, onClose }: CreateOrderModalPr
                                                             <div>
                                                                 <h4 className="font-semibold text-foreground">{template.name}</h4>
                                                                 <div className="flex items-center gap-3 text-xs text-muted-foreground mt-0.5">
-                                                                    <span className="bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded-full">{template.category}</span>
+                                                                    <span className="bg-muted px-2 py-0.5 rounded-full">{template.category}</span>
                                                                     <span>{template.itemsSummary} Items</span>
                                                                     <span>•</span>
                                                                     <span>Last used {template.lastUsed}</span>

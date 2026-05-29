@@ -152,7 +152,7 @@ export default function RelocateAssetModal({ isOpen, onClose, selectedCount, onC
                     <button
                         onClick={handleSubmit} // Trigger form submit via button click
                         disabled={!targetLocation || !moveDate}
-                        className="px-4 py-2 text-sm font-medium text-zinc-900 bg-primary hover:bg-primary/90 rounded-lg shadow-sm shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-2"
+                        className="px-4 py-2 text-sm font-medium text-primary-foreground bg-primary hover:bg-primary/90 rounded-lg shadow-sm shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-2"
                     >
                         <TruckIcon className="w-4 h-4" />
                         Create Movement

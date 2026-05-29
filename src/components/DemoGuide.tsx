@@ -59,8 +59,8 @@ export default function DemoGuide({ isOpen, onClose, onNavigate }: DemoGuideProp
             title: "Gen UI Scenarios",
             description: "Explore generative UI workflows using conversational prompts and pre-built scenarios.",
             icon: SparklesIcon,
-            color: "text-purple-500",
-            bg: "bg-purple-50 dark:bg-purple-500/10",
+            color: "text-ai",
+            bg: "bg-purple-50 dark:bg-ai/10",
             action: () => {
                 onNavigate('dashboard');
                 onClose();

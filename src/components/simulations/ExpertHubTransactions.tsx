@@ -63,11 +63,11 @@ const rfqTrackingSteps = [
 ]
 
 const recentOrders = [
-    { id: "#ORD-2055", customer: "AutoManfacture Co.", client: "AutoManfacture Co.", project: "Office Renovation", amount: "$385,000", status: "Order Received", date: "Dec 20, 2025", initials: "AC", statusColor: "bg-zinc-100 text-zinc-700", location: "New York" },
+    { id: "#ORD-2055", customer: "AutoManfacture Co.", client: "AutoManfacture Co.", project: "Office Renovation", amount: "$385,000", status: "Order Received", date: "Dec 20, 2025", initials: "AC", statusColor: "bg-zinc-100 text-muted-foreground", location: "New York" },
     { id: "#ORD-2054", customer: "TechDealer Solutions", client: "TechDealer Solutions", project: "HQ Upgrade", amount: "$62,500", status: "In Production", date: "Nov 15, 2025", initials: "TS", statusColor: "bg-brand-50 text-brand-700 ring-brand-600/20", location: "London" },
     { id: "#ORD-2053", customer: "Urban Living Inc.", client: "Urban Living Inc.", project: "Lobby Refresh", amount: "$112,000", status: "Ready to Ship", date: "Oct 30, 2025", initials: "UL", statusColor: "bg-green-50 text-green-700 ring-green-600/20", location: "Austin" },
-    { id: "#ORD-2052", customer: "Global Logistics", client: "Global Logistics", project: "Warehouse Expansion", amount: "$45,000", status: "Delivered", date: "Oct 15, 2025", initials: "GL", statusColor: "bg-gray-100 text-gray-700", location: "Berlin" },
-    { id: "#ORD-2051", customer: "City Builders", client: "City Builders", project: "City Center", amount: "$120,000", status: "Order Received", date: "Jan 05, 2026", initials: "CB", statusColor: "bg-zinc-100 text-zinc-700", location: "New York" },
+    { id: "#ORD-2052", customer: "Global Logistics", client: "Global Logistics", project: "Warehouse Expansion", amount: "$45,000", status: "Delivered", date: "Oct 15, 2025", initials: "GL", statusColor: "bg-gray-100 text-foreground", location: "Berlin" },
+    { id: "#ORD-2051", customer: "City Builders", client: "City Builders", project: "City Center", amount: "$120,000", status: "Order Received", date: "Jan 05, 2026", initials: "CB", statusColor: "bg-zinc-100 text-muted-foreground", location: "New York" },
     { id: "#ORD-2050", customer: "Modern Homes", client: "Modern Homes", project: "Residential A", amount: "$85,000", status: "Acknowledgement", date: "Jan 02, 2026", initials: "MH", statusColor: "bg-blue-50 text-blue-700", location: "Austin" },
     { id: "#ORD-2049", customer: "Coastal Props", client: "Coastal Props", project: "Beach House", amount: "$210,000", status: "In Production", date: "Dec 10, 2025", initials: "CP", statusColor: "bg-indigo-50 text-indigo-700", location: "London" },
     { id: "#ORD-2048", customer: "Valley Homes", client: "Valley Homes", project: "Mountain Retreat", amount: "$95,000", status: "Ready to Ship", date: "Nov 20, 2025", initials: "VH", statusColor: "bg-indigo-50 text-indigo-700", location: "Berlin" },
@@ -76,7 +76,7 @@ const recentOrders = [
 
 const recentQuotes = [
     { id: "QT-1025", customer: "Apex Furniture", project: "New HQ RFQ", amount: "Pending Approval", status: "Draft", date: "Just now", validUntil: "N/A", probability: "High", initials: "AF", statusColor: "bg-red-50 text-red-700", location: "Austin" },
-    { id: "QT-1024", customer: "BioLife Inc", project: "Lab Expansion", amount: "$540,000", status: "Draft", date: "Jan 10, 2026", validUntil: "Draft", probability: "N/A", initials: "BL", statusColor: "bg-zinc-100 text-zinc-700", location: "Boston" },
+    { id: "QT-1024", customer: "BioLife Inc", project: "Lab Expansion", amount: "$540,000", status: "Draft", date: "Jan 10, 2026", validUntil: "Draft", probability: "N/A", initials: "BL", statusColor: "bg-zinc-100 text-muted-foreground", location: "Boston" },
     { id: "QT-1023", customer: "FinServe Corp", project: "Branch Rollout", amount: "$890,000", status: "Sent", date: "Jan 08, 2026", validUntil: "Feb 08, 2026", probability: "Medium", initials: "FS", statusColor: "bg-blue-50 text-blue-700", location: "New York" },
     { id: "QT-1022", customer: "Redwood School", project: "Classroom Refresh", amount: "$150,000", status: "Approved", date: "Dec 28, 2025", validUntil: "Jan 28, 2026", probability: "Closed", initials: "RS", statusColor: "bg-green-50 text-green-700", location: "Portland" },
 ]
@@ -622,7 +622,7 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                 </div>
 
                 <div className="flex items-center mb-6">
-                    <div className="flex items-center gap-1 p-1 bg-zinc-100 dark:bg-card/50 rounded-xl border border-zinc-200 dark:border-zinc-800">
+                    <div className="flex items-center gap-1 p-1 bg-zinc-100 dark:bg-card/50 rounded-xl border border-border">
                         <button
                             onClick={() => setLifecycleTab('quotes')}
                             className={cn(
@@ -641,7 +641,7 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                 "flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all",
                                 lifecycleTab === 'orders'
                                     ? "bg-brand-300 dark:bg-brand-500 text-zinc-900 shadow-sm"
-                                    : "text-muted-foreground hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:text-zinc-900 dark:hover:text-white"
+                                    : "text-muted-foreground hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:text-foreground"
                             )}
                         >
                             <ShoppingCartIcon className="w-4 h-4" />
@@ -653,7 +653,7 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                 "flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all",
                                 lifecycleTab === 'acknowledgments'
                                     ? "bg-brand-300 dark:bg-brand-500 text-zinc-900 shadow-sm"
-                                    : "text-muted-foreground hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:text-zinc-900 dark:hover:text-white"
+                                    : "text-muted-foreground hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:text-foreground"
                             )}
                         >
                             <ClipboardDocumentCheckIcon className="w-4 h-4" />
@@ -674,7 +674,7 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                 <div className="relative">
                                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 overflow-x-auto pb-4">
                                         {Object.entries(quotesSummary).map(([key, data]) => (
-                                            <div key={key} className="bg-white dark:bg-zinc-800 rounded-2xl p-6 border border-zinc-200 dark:border-zinc-700 shadow-sm hover:shadow-md transition-all group min-w-[200px]">
+                                            <div key={key} className="bg-card rounded-2xl p-6 border border-border shadow-sm hover:shadow-md transition-all group min-w-[200px]">
                                                 <div className="flex items-center justify-between">
                                                     <div>
                                                         <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">{data.label}</p>
@@ -697,7 +697,7 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-4 mt-6 animate-in fade-in slide-in-from-top-2 duration-500">
-                                    <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Quick Actions:</span>
+                                    <span className="text-sm font-medium text-muted-foreground">Quick Actions:</span>
                                     {[
                                         { icon: <PlusIcon className="w-5 h-5" />, label: "New Quote" },
                                         { icon: <DocumentDuplicateIcon className="w-5 h-5" />, label: "Duplicate" },
@@ -712,7 +712,7 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                 </div>
                             </>
                         ) : (
-                            <div className="bg-white/60 dark:bg-zinc-800 backdrop-blur-md rounded-2xl p-4 border border-zinc-200 dark:border-zinc-700 shadow-sm flex flex-col xl:flex-row items-center justify-between gap-4 animate-in fade-in slide-in-from-top-4 duration-300">
+                            <div className="bg-white/60 dark:bg-zinc-800 backdrop-blur-md rounded-2xl p-4 border border-border shadow-sm flex flex-col xl:flex-row items-center justify-between gap-4 animate-in fade-in slide-in-from-top-4 duration-300">
                                 <div className="flex items-center gap-2 flex-1 min-w-0">
                                     <div className="flex items-center gap-8 overflow-x-auto w-full scrollbar-hide px-2 scroll-smooth">
                                         {Object.entries(quotesSummary).map(([key, data]) => (
@@ -732,14 +732,14 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                     </div>
                                 </div>
                                 <div className="w-px h-12 bg-zinc-200 dark:bg-zinc-700 hidden xl:block mx-2"></div>
-                                <div className="flex items-center gap-1 overflow-x-auto min-w-max pl-4 border-l border-zinc-200 dark:border-zinc-700 xl:border-none xl:pl-0">
+                                <div className="flex items-center gap-1 overflow-x-auto min-w-max pl-4 border-l border-border xl:border-none xl:pl-0">
                                     {[
                                         { icon: <PlusIcon className="w-5 h-5" />, label: "New Quote" },
                                         { icon: <DocumentDuplicateIcon className="w-5 h-5" />, label: "Duplicate" },
                                         { icon: <DocumentTextIcon className="w-5 h-5" />, label: "Export SIF", action: () => handleExportSIF('Quote') },
                                         { icon: <EnvelopeIcon className="w-5 h-5" />, label: "Send to Client" },
                                     ].map((action, i) => (
-                                        <button key={i} onClick={() => action.action && action.action()} className="p-2 rounded-lg hover:bg-brand-300 dark:hover:bg-brand-600/50 text-muted-foreground hover:text-zinc-900 dark:hover:text-white transition-colors relative group" title={action.label}>
+                                        <button key={i} onClick={() => action.action && action.action()} className="p-2 rounded-lg hover:bg-brand-300 dark:hover:bg-brand-600/50 text-muted-foreground hover:text-foreground transition-colors relative group" title={action.label}>
                                             {action.icon}
                                         </button>
                                     ))}
@@ -749,8 +749,8 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                     onClick={() => setShowMetrics(true)}
                                     className="flex flex-col items-center justify-center gap-1 group p-2 hover:bg-brand-300 dark:hover:bg-brand-600/50 rounded-lg transition-colors"
                                 >
-                                    <ChevronDownIcon className="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-zinc-900 dark:group-hover:text-white" />
-                                    <span className="text-[10px] font-medium text-gray-500 dark:text-gray-400 group-hover:text-zinc-900 dark:group-hover:text-white">Details</span>
+                                    <ChevronDownIcon className="w-4 h-4 text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-white" />
+                                    <span className="text-[10px] font-medium text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-white">Details</span>
                                 </button>
                             </div>
                         ))}
@@ -770,7 +770,7 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                 <div className="relative">
                                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 overflow-x-auto pb-4">
                                         {Object.entries(acksSummary).map(([key, data]) => (
-                                            <div key={key} className="bg-white dark:bg-zinc-800 rounded-2xl p-6 border border-zinc-200 dark:border-zinc-700 shadow-sm hover:shadow-md transition-all group min-w-[200px]">
+                                            <div key={key} className="bg-card rounded-2xl p-6 border border-border shadow-sm hover:shadow-md transition-all group min-w-[200px]">
                                                 <div className="flex items-center justify-between">
                                                     <div>
                                                         <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">{data.label}</p>
@@ -793,7 +793,7 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-4 mt-6 animate-in fade-in slide-in-from-top-2 duration-500">
-                                    <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Quick Actions:</span>
+                                    <span className="text-sm font-medium text-muted-foreground">Quick Actions:</span>
                                     {[
                                         { icon: <CloudArrowUpIcon className="w-5 h-5" />, label: "Upload Acknowledgement", action: () => setIsAckModalOpen(true) },
                                         { icon: <DocumentTextIcon className="w-5 h-5" />, label: "Export Acknowledgement", action: () => handleExportSIF('Acknowledgement') },
@@ -808,7 +808,7 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                 </div>
                             </>
                         ) : (
-                            <div className="bg-white/60 dark:bg-zinc-800 backdrop-blur-md rounded-2xl p-4 border border-zinc-200 dark:border-zinc-700 shadow-sm flex flex-col xl:flex-row items-center justify-between gap-4 animate-in fade-in slide-in-from-top-4 duration-300">
+                            <div className="bg-white/60 dark:bg-zinc-800 backdrop-blur-md rounded-2xl p-4 border border-border shadow-sm flex flex-col xl:flex-row items-center justify-between gap-4 animate-in fade-in slide-in-from-top-4 duration-300">
                                 <div className="flex items-center gap-2 flex-1 min-w-0">
                                     <div className="flex items-center gap-8 overflow-x-auto w-full scrollbar-hide px-2 scroll-smooth">
                                         {Object.entries(acksSummary).map(([key, data]) => (
@@ -828,7 +828,7 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                     </div>
                                 </div>
                                 <div className="w-px h-12 bg-zinc-200 dark:bg-zinc-700 hidden xl:block mx-2"></div>
-                                <div className="flex items-center gap-1 overflow-x-auto min-w-max pl-4 border-l border-zinc-200 dark:border-zinc-700 xl:border-none xl:pl-0">
+                                <div className="flex items-center gap-1 overflow-x-auto min-w-max pl-4 border-l border-border xl:border-none xl:pl-0">
                                     {[
                                         { icon: <CloudArrowUpIcon className="w-5 h-5" />, label: "Upload Acknowledgement" },
                                         { icon: <DocumentTextIcon className="w-5 h-5" />, label: "Export Acknowledgement" },
@@ -839,7 +839,7 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                             if (action.label === 'Upload Acknowledgement') setIsAckModalOpen(true);
                                             if (action.label === 'Approve Orders') setIsBatchAckOpen(true);
                                             if (action.label === 'Export Acknowledgement') handleExportSIF('Acknowledgement');
-                                        }} className="p-2 rounded-lg hover:bg-brand-300 dark:hover:bg-brand-600/50 text-muted-foreground hover:text-zinc-900 dark:hover:text-white transition-colors relative group" title={action.label}>
+                                        }} className="p-2 rounded-lg hover:bg-brand-300 dark:hover:bg-brand-600/50 text-muted-foreground hover:text-foreground transition-colors relative group" title={action.label}>
                                             {action.icon}
                                         </button>
                                     ))}
@@ -849,8 +849,8 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                     onClick={() => setShowMetrics(true)}
                                     className="flex flex-col items-center justify-center gap-1 group p-2 hover:bg-brand-300 dark:hover:bg-brand-600/50 rounded-lg transition-colors"
                                 >
-                                    <ChevronDownIcon className="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-zinc-900 dark:group-hover:text-white" />
-                                    <span className="text-[10px] font-medium text-gray-500 dark:text-gray-400 group-hover:text-zinc-900 dark:group-hover:text-white">Details</span>
+                                    <ChevronDownIcon className="w-4 h-4 text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-white" />
+                                    <span className="text-[10px] font-medium text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-white">Details</span>
                                 </button>
                             </div>
                         ))}
@@ -873,7 +873,7 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                         ref={expandedScrollRef}
                                     >
                                         {Object.entries(ordersSummary).map(([key, data]) => (
-                                            <div key={key} className="bg-white dark:bg-zinc-800 rounded-2xl p-6 border border-zinc-200 dark:border-zinc-700 shadow-sm hover:shadow-md transition-all group min-w-[200px]">
+                                            <div key={key} className="bg-card rounded-2xl p-6 border border-border shadow-sm hover:shadow-md transition-all group min-w-[200px]">
                                                 <div className="flex items-center justify-between">
                                                     <div>
                                                         <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">{data.label}</p>
@@ -896,7 +896,7 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-4 mt-6 animate-in fade-in slide-in-from-top-2 duration-500">
-                                    <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Quick Actions:</span>
+                                    <span className="text-sm font-medium text-muted-foreground">Quick Actions:</span>
                                     {[
                                         { icon: <PlusIcon className="w-5 h-5" />, label: "New Order" },
                                         { icon: <DocumentDuplicateIcon className="w-5 h-5" />, label: "Duplicate" },
@@ -911,11 +911,11 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                 </div>
                             </>
                         ) : (
-                            <div className="bg-white/60 dark:bg-zinc-800 backdrop-blur-md rounded-2xl p-4 border border-zinc-200 dark:border-zinc-700 shadow-sm flex flex-col xl:flex-row items-center justify-between gap-4 animate-in fade-in slide-in-from-top-4 duration-300">
+                            <div className="bg-white/60 dark:bg-zinc-800 backdrop-blur-md rounded-2xl p-4 border border-border shadow-sm flex flex-col xl:flex-row items-center justify-between gap-4 animate-in fade-in slide-in-from-top-4 duration-300">
                                 <div className="flex items-center gap-2 flex-1 min-w-0">
                                     <button
                                         onClick={() => scroll(scrollContainerRef, 'left')}
-                                        className="p-1.5 rounded-full hover:bg-brand-300 dark:hover:bg-brand-600/50 text-muted-foreground hover:text-zinc-900 dark:hover:text-white transition-colors shrink-0"
+                                        className="p-1.5 rounded-full hover:bg-brand-300 dark:hover:bg-brand-600/50 text-muted-foreground hover:text-foreground transition-colors shrink-0"
                                     >
                                         <ChevronLeftIcon className="w-4 h-4" />
                                     </button>
@@ -948,7 +948,7 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
 
                                     <button
                                         onClick={() => scroll(scrollContainerRef, 'right')}
-                                        className="p-1.5 rounded-full hover:bg-brand-300 dark:hover:bg-brand-600/50 text-muted-foreground hover:text-zinc-900 dark:hover:text-white transition-colors shrink-0"
+                                        className="p-1.5 rounded-full hover:bg-brand-300 dark:hover:bg-brand-600/50 text-muted-foreground hover:text-foreground transition-colors shrink-0"
                                     >
                                         <ChevronRightIcon className="w-4 h-4" />
                                     </button>
@@ -956,7 +956,7 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
 
                                 <div className="w-px h-12 bg-zinc-200 dark:bg-zinc-700 hidden xl:block mx-2"></div>
 
-                                <div className="flex items-center gap-1 overflow-x-auto min-w-max pl-4 border-l border-zinc-200 dark:border-zinc-700 xl:border-none xl:pl-0">
+                                <div className="flex items-center gap-1 overflow-x-auto min-w-max pl-4 border-l border-border xl:border-none xl:pl-0">
                                     {[
                                         { icon: <DocumentPlusIcon className="w-5 h-5" />, label: "New Quote", color: "text-blue-500" },
                                         { icon: <CubeIcon className="w-5 h-5" />, label: "Check Stock", color: "text-amber-500" },
@@ -968,14 +968,14 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                             onClick={() => {
                                                 if (action.label === 'New Quote') setIsQuoteWidgetOpen(true);
                                             }}
-                                            className="p-2 rounded-lg hover:bg-brand-300 dark:hover:bg-brand-600/50 text-muted-foreground hover:text-zinc-900 dark:hover:text-white transition-colors relative group"
+                                            className="p-2 rounded-lg hover:bg-brand-300 dark:hover:bg-brand-600/50 text-muted-foreground hover:text-foreground transition-colors relative group"
                                             title={action.label}
                                         >
                                             {action.icon}
                                         </button>
                                     ))}
                                     <div className="w-px h-6 bg-zinc-200 dark:bg-zinc-700 mx-1"></div>
-                                    <button onClick={() => handleExportSIF('Order')} className="p-2 rounded-lg hover:bg-brand-300 dark:hover:bg-brand-600/50 text-muted-foreground hover:text-zinc-900 dark:hover:text-white transition-colors relative group" title="Export Order">
+                                    <button onClick={() => handleExportSIF('Order')} className="p-2 rounded-lg hover:bg-brand-300 dark:hover:bg-brand-600/50 text-muted-foreground hover:text-foreground transition-colors relative group" title="Export Order">
                                         <DocumentTextIcon className="w-5 h-5" />
                                     </button>
                                 </div>
@@ -985,16 +985,16 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                     onClick={() => setShowMetrics(true)}
                                     className="flex flex-col items-center justify-center gap-1 group p-2 hover:bg-brand-300 dark:hover:bg-brand-600/50 rounded-lg transition-colors"
                                 >
-                                    <div className="text-gray-500 dark:text-gray-400 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">
+                                    <div className="text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">
                                         <ChevronDownIcon className="w-4 h-4" />
                                     </div>
-                                    <span className="text-[10px] font-medium text-gray-500 dark:text-gray-400 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">Details</span>
+                                    <span className="text-[10px] font-medium text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">Details</span>
                                 </button>
                             </div>
                         ))}
                     </>
                 )}
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 py-4 border-b border-zinc-200 dark:border-zinc-800">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 py-4 border-b border-border">
                     <div className="flex flex-wrap items-center gap-2">
                         <button
                             onClick={() => setActiveTab('active')}
@@ -1002,7 +1002,7 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                 "px-4 py-2 text-sm font-medium rounded-lg transition-all",
                                 activeTab === 'active'
                                     ? "bg-brand-50 dark:bg-brand-500/10 text-brand-700 dark:text-brand-400 ring-1 ring-inset ring-brand-600/20"
-                                    : "text-muted-foreground hover:bg-zinc-50 dark:hover:bg-zinc-800"
+                                    : "text-muted-foreground hover:bg-muted dark:hover:bg-zinc-800"
                             )}
                         >
                             Active {lifecycleTab === 'orders' ? 'Orders' : lifecycleTab === 'quotes' ? 'Quotes' : 'Pending'} ({counts.active})
@@ -1013,7 +1013,7 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                 "px-4 py-2 text-sm font-medium rounded-lg transition-all",
                                 activeTab === 'completed'
                                     ? "bg-brand-50 dark:bg-brand-500/10 text-brand-700 dark:text-brand-400 ring-1 ring-inset ring-brand-600/20"
-                                    : "text-muted-foreground hover:bg-zinc-50 dark:hover:bg-zinc-800"
+                                    : "text-muted-foreground hover:bg-muted dark:hover:bg-zinc-800"
                             )}
                         >
                             History ({counts.completed})
@@ -1028,11 +1028,11 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Search transactions..."
-                                className="pl-10 pr-4 py-2 w-64 text-sm bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all font-medium"
+                                className="pl-10 pr-4 py-2 w-64 text-sm bg-card border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all font-medium"
                             />
                         </div>
 
-                        <div className="flex items-center gap-1 p-1 bg-zinc-100 dark:bg-zinc-800 rounded-lg border border-zinc-200 dark:border-zinc-700">
+                        <div className="flex items-center gap-1 p-1 bg-muted rounded-lg border border-border">
                             <button
                                 onClick={() => setViewMode('list')}
                                 className={cn(
@@ -1728,7 +1728,7 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                                                     onClick={(e) => { e.stopPropagation(); toggleAllInDiscountSection(section.id, !isAllEnabled); }}
                                                                     className={cn("relative inline-flex h-4 w-7 items-center rounded-full transition-colors", isAllEnabled ? 'bg-foreground' : 'bg-muted-foreground/20')}
                                                                 >
-                                                                    <span className={cn("inline-block h-3 w-3 transform rounded-full bg-white dark:bg-zinc-800 transition-transform", isAllEnabled ? 'translate-x-3.5' : 'translate-x-0.5')} />
+                                                                    <span className={cn("inline-block h-3 w-3 transform rounded-full bg-card transition-transform", isAllEnabled ? 'translate-x-3.5' : 'translate-x-0.5')} />
                                                                 </button>
                                                             </div>
 
@@ -1751,7 +1751,7 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                                                         onClick={() => toggleDiscountItem(section.id, item.id)}
                                                                         className={cn("relative inline-flex h-4.5 w-8 items-center rounded-full transition-colors shrink-0", item.enabled ? 'bg-foreground' : 'bg-muted-foreground/20')}
                                                                     >
-                                                                        <span className={cn("inline-block h-3.5 w-3.5 transform rounded-full bg-white dark:bg-zinc-800 transition-transform", item.enabled ? 'translate-x-4' : 'translate-x-0.5')} />
+                                                                        <span className={cn("inline-block h-3.5 w-3.5 transform rounded-full bg-card transition-transform", item.enabled ? 'translate-x-4' : 'translate-x-0.5')} />
                                                                     </button>
                                                                 </div>
                                                             ))}
@@ -1916,14 +1916,14 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                             )}
                                             {si === 0 && ackArrival21.AIS !== 'hidden' && (
                                                 <div className={cn(
-                                                    'p-3 rounded-xl border-2 border-purple-200 dark:border-purple-800 bg-purple-50/50 dark:bg-purple-500/5 transition-all duration-500',
+                                                    'p-3 rounded-xl border-2 border-purple-200 dark:border-purple-800 bg-purple-50/50 dark:bg-ai/5 transition-all duration-500',
                                                     ackArrival21.AIS === 'appearing' && 'opacity-70 scale-95',
                                                     ackArrival21.AIS === 'placed' && 'opacity-100 scale-100',
                                                 )}>
                                                     <div className="flex items-center gap-2 mb-1">
                                                         <span className="w-6 h-6 rounded-full bg-purple-600 text-white text-[9px] font-bold flex items-center justify-center">AI</span>
                                                         <span className="text-xs font-bold text-foreground">{ACK_AIS.id}</span>
-                                                        <span className="ml-auto px-1.5 py-0.5 rounded bg-purple-100 dark:bg-purple-500/20 text-[9px] font-bold text-purple-700 dark:text-purple-400">AIS</span>
+                                                        <span className="ml-auto px-1.5 py-0.5 rounded bg-purple-100 dark:bg-ai/20 text-[9px] font-bold text-purple-700 dark:text-purple-400">AIS</span>
                                                     </div>
                                                     <p className="text-[10px] text-muted-foreground">{ACK_AIS.lineItems} lines · {ACK_AIS.total}</p>
                                                     <p className="text-[10px] text-muted-foreground truncate">{ACK_AIS.project}</p>
@@ -2446,10 +2446,10 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                             <div className="relative shrink-0 z-10">
                                                 <DemoAvatar name={approver.name} size="md" />
                                                 {approvalStates25[i] === 'approved' && (
-                                                    <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-green-500 text-white flex items-center justify-center ring-2 ring-white dark:ring-zinc-900"><CheckIcon className="w-2.5 h-2.5" /></div>
+                                                    <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-green-500 text-white flex items-center justify-center ring-2 ring-background"><CheckIcon className="w-2.5 h-2.5" /></div>
                                                 )}
                                                 {approvalStates25[i] === 'pending' && i === approvedCount25 && (
-                                                    <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-amber-500 text-white flex items-center justify-center ring-2 ring-white dark:ring-zinc-900 animate-pulse"><ClockIcon className="w-2.5 h-2.5" /></div>
+                                                    <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-amber-500 text-white flex items-center justify-center ring-2 ring-background animate-pulse"><ClockIcon className="w-2.5 h-2.5" /></div>
                                                 )}
                                             </div>
                                             <div className="flex-1 min-w-0">
@@ -2611,16 +2611,16 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                         <div className="flex items-center justify-between mb-4">
                                             <div className="flex items-center gap-2">
                                                 <h3 className="text-[11px] font-black text-muted-foreground uppercase tracking-widest">{stage}</h3>
-                                                <span className="px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-[10px] font-bold text-muted-foreground ring-1 ring-inset ring-black/5">
+                                                <span className="px-2 py-0.5 rounded-full bg-muted text-[10px] font-bold text-muted-foreground ring-1 ring-inset ring-black/5">
                                                     {stageOrders.length + (showNewCard ? 1 : 0)}
                                                 </span>
                                             </div>
                                         </div>
-                                        <div className="flex-1 bg-zinc-100/50 dark:bg-zinc-900/50 rounded-2xl p-3 border-2 border-dashed border-zinc-200 dark:border-zinc-800 space-y-3">
+                                        <div className="flex-1 bg-zinc-100/50 dark:bg-zinc-900/50 rounded-2xl p-3 border-2 border-dashed border-border space-y-3">
                                             {/* New animated card */}
                                             {showNewCard && (
                                                 <div className={cn(
-                                                    "bg-white dark:bg-zinc-800 p-4 rounded-xl shadow-md border-2 transition-all duration-700",
+                                                    "bg-card p-4 rounded-xl shadow-md border-2 transition-all duration-700",
                                                     cardAnimationStage19 === 'appearing' ? 'border-brand-500 ring-2 ring-brand-500/20 animate-in fade-in zoom-in duration-500' :
                                                     cardAnimationStage19 === 'arrived' ? 'border-brand-500 ring-2 ring-brand-500/20' : 'border-brand-500/50 opacity-0'
                                                 )}>
@@ -2641,7 +2641,7 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                             )}
                                             {/* Existing orders */}
                                             {stageOrders.map((item) => (
-                                                <div key={item.id} className="bg-white dark:bg-zinc-800 p-4 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-700 hover:border-brand-500 hover:shadow-lg hover:shadow-brand-500/10 transition-all cursor-move">
+                                                <div key={item.id} className="bg-card p-4 rounded-xl shadow-sm border border-border hover:border-brand-500 hover:shadow-lg hover:shadow-brand-500/10 transition-all cursor-move">
                                                     <div className="flex items-center gap-2 mb-3">
                                                         <div className={cn("w-6 h-6 rounded-lg flex items-center justify-center font-bold text-[8px] ring-1 ring-inset ring-black/5 uppercase shadow-sm font-black", item.statusColor.replace('bg-', 'text-').replace('text-', 'bg-'))}>
                                                             {item.initials}
@@ -2660,7 +2660,7 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                                 </div>
                                             ))}
                                             {stageOrders.length === 0 && !showNewCard && (
-                                                <div className="h-24 flex items-center justify-center border-2 border-dashed border-zinc-200 dark:border-zinc-800 rounded-xl opacity-40">
+                                                <div className="h-24 flex items-center justify-center border-2 border-dashed border-border rounded-xl opacity-40">
                                                     <span className="text-[9px] font-black text-muted-foreground uppercase tracking-tighter">No items</span>
                                                 </div>
                                             )}
@@ -2691,7 +2691,7 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                         <div className="overflow-x-auto">
                             <table className="w-full text-left border-collapse min-w-[1000px]">
                                 <thead>
-                                    <tr className="border-b border-border/50 bg-zinc-50/50 dark:bg-zinc-800/50">
+                                    <tr className="border-b border-border/50 bg-muted/50 dark:bg-zinc-800/50">
                                         <th className="px-6 py-4 text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Transaction</th>
                                         <th className="px-6 py-4 text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Project / Entity</th>
                                         <th className="px-6 py-4 text-[10px] font-bold text-muted-foreground uppercase tracking-wider text-right">Value</th>
@@ -2863,19 +2863,19 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                     <div className="flex items-center justify-between mb-4 group/header">
                                         <div className="flex items-center gap-2">
                                             <h3 className="text-[11px] font-black text-muted-foreground uppercase tracking-widest">{stage}</h3>
-                                            <span className="px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-[10px] font-bold text-muted-foreground ring-1 ring-inset ring-black/5">{stageData.length}</span>
+                                            <span className="px-2 py-0.5 rounded-full bg-muted text-[10px] font-bold text-muted-foreground ring-1 ring-inset ring-black/5">{stageData.length}</span>
                                         </div>
                                         <button className="p-1 rounded opacity-0 group-hover/header:opacity-100 text-muted-foreground hover:text-foreground">
                                             <EllipsisHorizontalIcon className="w-4 h-4" />
                                         </button>
                                     </div>
 
-                                    <div className="flex-1 bg-zinc-100/50 dark:bg-zinc-900/50 rounded-2xl p-3 border-2 border-dashed border-zinc-200 dark:border-zinc-800 hover:border-brand-500/30 transition-colors space-y-3">
+                                    <div className="flex-1 bg-zinc-100/50 dark:bg-zinc-900/50 rounded-2xl p-3 border-2 border-dashed border-border hover:border-brand-500/30 transition-colors space-y-3">
                                         {stageData.map((item) => (
                                             <div
                                                 key={item.id}
                                                 draggable
-                                                className="bg-white dark:bg-zinc-800 p-4 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-700 hover:border-brand-500 hover:shadow-lg hover:shadow-brand-500/10 transition-all cursor-move group/card relative overflow-hidden"
+                                                className="bg-card p-4 rounded-xl shadow-sm border border-border hover:border-brand-500 hover:shadow-lg hover:shadow-brand-500/10 transition-all cursor-move group/card relative overflow-hidden"
                                                 onClick={() => {
                                                     setLifecycleTab(lifecycleTab);
                                                     toggleExpand(item.id);
@@ -2905,7 +2905,7 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                                         ))}
 
                                         {stageData.length === 0 && (
-                                            <div className="h-24 flex items-center justify-center border-2 border-dashed border-zinc-200 dark:border-zinc-800 rounded-xl opacity-40">
+                                            <div className="h-24 flex items-center justify-center border-2 border-dashed border-border rounded-xl opacity-40">
                                                 <span className="text-[9px] font-black text-muted-foreground uppercase tracking-tighter">No items</span>
                                             </div>
                                         )}
@@ -2935,7 +2935,7 @@ export default function ExpertHubTransactions({ onLogout, onNavigateToDetail, on
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <div className="pointer-events-auto bg-white dark:bg-card/90 backdrop-blur shadow-2xl rounded-2xl border-l-[6px] border border-zinc-200 dark:border-zinc-800 overflow-hidden ring-1 ring-black/5" style={{ borderColor: toastMessage.type === 'error' ? '#ef4444' : toastMessage.type === 'info' ? '#3b82f6' : '#22c55e' }}>
+                        <div className="pointer-events-auto bg-white dark:bg-card/90 backdrop-blur shadow-2xl rounded-2xl border-l-[6px] border border-border overflow-hidden ring-1 ring-black/5" style={{ borderColor: toastMessage.type === 'error' ? '#ef4444' : toastMessage.type === 'info' ? '#3b82f6' : '#22c55e' }}>
                             <div className="p-5">
                                 <div className="flex items-start">
                                     <div className="flex-shrink-0">

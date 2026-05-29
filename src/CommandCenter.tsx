@@ -416,7 +416,7 @@ const severityColors: Record<string, string> = {
   critical: 'bg-red-50 dark:bg-red-500/10 border-red-200 dark:border-red-500/20 text-red-700 dark:text-red-300',
   high: 'bg-amber-50 dark:bg-amber-500/10 border-amber-200 dark:border-amber-500/20 text-amber-700 dark:text-amber-300',
   medium: 'bg-yellow-50 dark:bg-yellow-500/10 border-yellow-200 dark:border-yellow-500/20 text-yellow-700 dark:text-yellow-300',
-  low: 'bg-zinc-50 dark:bg-zinc-500/10 border-zinc-200 dark:border-zinc-500/20 text-zinc-700 dark:text-zinc-300',
+  low: 'bg-muted dark:bg-muted0/10 border-zinc-200 dark:border-zinc-500/20 text-muted-foreground',
 }
 
 const activityTypeColors: Record<string, string> = {
@@ -498,7 +498,7 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
         </div>
 
         {/* Main Tab Navigation */}
-        <div className="flex items-center gap-1 p-1 bg-zinc-100 dark:bg-zinc-800/50 rounded-xl border border-zinc-200 dark:border-zinc-800 w-fit">
+        <div className="flex items-center gap-1 p-1 bg-muted/50 rounded-xl border border-border w-fit">
           {[
             { id: 'follow_up' as const, label: 'Follow Up', icon: HomeIcon },
             { id: 'your_tools' as const, label: 'Your Tools', icon: WrenchScrewdriverIcon },
@@ -511,7 +511,7 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
                 "flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all",
                 mainTab === tab.id
                   ? "bg-brand-300 dark:bg-brand-500 text-zinc-900 shadow-sm"
-                  : "text-muted-foreground hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:text-zinc-900 dark:hover:text-white"
+                  : "text-muted-foreground hover:bg-brand-300 dark:hover:bg-brand-600/50 hover:text-foreground"
               )}
             >
               <tab.icon className="w-4 h-4" />
@@ -528,7 +528,7 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
               {/* Urgent Actions */}
-              <div className="bg-white dark:bg-zinc-800 rounded-xl border border-border flex flex-col">
+              <div className="bg-card rounded-xl border border-border flex flex-col">
                 <div className="px-5 py-4 border-b border-border flex items-center justify-between shrink-0">
                   <div className="flex items-center gap-2">
                     <ExclamationTriangleIcon className="w-5 h-5 text-amber-500" />
@@ -549,7 +549,7 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
                              "border-zinc-400 bg-muted/30 shadow-sm")
                           : (action.severity === 'critical' ? "border-red-200 dark:border-red-500/20 bg-red-50/50 dark:bg-red-500/5 hover:border-red-300 dark:hover:border-red-500/30" :
                              action.severity === 'high' ? "border-amber-200 dark:border-amber-500/20 bg-amber-50/50 dark:bg-amber-500/5 hover:border-amber-300 dark:hover:border-amber-500/30" :
-                             "border-border bg-zinc-50/50 dark:bg-zinc-900/30 hover:border-primary/30")
+                             "border-border bg-muted/50 dark:bg-zinc-900/30 hover:border-primary/30")
                       )}
                       onClick={() => setExpandedUrgent(prev => {
                         const next = new Set(prev)
@@ -618,7 +618,7 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
               </div>
 
               {/* Recent Activity */}
-              <div className="bg-white dark:bg-zinc-800 rounded-xl border border-border flex flex-col">
+              <div className="bg-card rounded-xl border border-border flex flex-col">
                 <div className="px-5 py-4 border-b border-border flex items-center gap-2 shrink-0">
                   <ClockIcon className="w-5 h-5 text-blue-500" />
                   <h2 className="text-base font-semibold text-foreground">Recent Activity</h2>
@@ -760,7 +760,7 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
               </div>
 
               {/* AI Suggestions */}
-              <div className="bg-white dark:bg-zinc-800 rounded-xl border border-border flex flex-col">
+              <div className="bg-card rounded-xl border border-border flex flex-col">
                 <div className="px-5 py-4 border-b border-border flex items-center gap-2 shrink-0">
                   <SparklesIcon className="w-5 h-5 text-indigo-500" />
                   <h2 className="text-base font-semibold text-foreground">AI Suggestions</h2>
@@ -781,13 +781,13 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
                     >
                       <div className="flex items-start gap-3 p-3">
                         <div className="w-8 h-8 rounded-full bg-white dark:bg-zinc-700 border border-zinc-100 dark:border-zinc-600 flex items-center justify-center shrink-0 shadow-sm group-hover:scale-105 transition-transform">
-                          <suggestion.icon className="w-4 h-4 text-zinc-500" />
+                          <suggestion.icon className="w-4 h-4 text-muted-foreground" />
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="flex justify-between items-start gap-2">
                             <h4 className="text-sm font-semibold text-foreground">{suggestion.title}</h4>
                             <div className="flex items-center gap-2 shrink-0">
-                              <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700">
+                              <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-muted text-muted-foreground border border-border">
                                 {suggestion.impact}
                               </span>
                               <ChevronDownIcon className={cn("w-4 h-4 text-muted-foreground transition-transform duration-300",
@@ -852,13 +852,13 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
               </div>
 
               {/* Performance Overview */}
-              <div className="bg-white dark:bg-zinc-800 rounded-xl border border-border flex flex-col">
+              <div className="bg-card rounded-xl border border-border flex flex-col">
                 <div className="px-5 py-4 border-b border-border shrink-0">
                   <h2 className="text-base font-semibold text-foreground">Performance Overview</h2>
                 </div>
                 <div className="p-4 space-y-2.5 flex-1 overflow-y-auto">
                   {perfOverviewByPeriod['Month'].map(metric => (
-                    <div key={metric.label} className="p-3 rounded-lg border border-border bg-zinc-50/50 dark:bg-zinc-900/30">
+                    <div key={metric.label} className="p-3 rounded-lg border border-border bg-muted/50 dark:bg-zinc-900/30">
                       <div className="flex items-center justify-between mb-1.5">
                         <span className="text-sm font-medium text-foreground">{metric.label}</span>
                         <span className="text-xs text-muted-foreground">{metric.value}% (target: {metric.target})</span>
@@ -880,11 +880,11 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
           <div className="space-y-6">
 
             {/* Config Bar — matches dealer pattern */}
-            <div className="flex items-center justify-between px-4 py-3 bg-zinc-50/50 dark:bg-zinc-900/10 border border-zinc-200/50 dark:border-white/5 rounded-lg">
+            <div className="flex items-center justify-between px-4 py-3 bg-muted/50 dark:bg-zinc-900/10 border border-zinc-200/50 dark:border-white/5 rounded-lg">
               <span className="text-sm font-medium text-foreground">Tools configured for you</span>
               <button
                 onClick={() => setIsFeatureManagerOpen(true)}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-white/10 rounded-md shadow-sm text-xs font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-all"
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-card border border-zinc-200 dark:border-white/10 rounded-md shadow-sm text-xs font-medium text-muted-foreground hover:bg-muted dark:hover:bg-zinc-700 transition-all"
               >
                 <PencilSquareIcon className="w-3.5 h-3.5" />
                 Customize
@@ -914,7 +914,7 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     whileDrag={{ scale: 1.02, zIndex: 50, boxShadow: '0px 10px 20px rgba(0,0,0,0.1)' }}
-                    className="bg-white dark:bg-zinc-800 rounded-2xl border border-border overflow-hidden"
+                    className="bg-card rounded-2xl border border-border overflow-hidden"
                   >
                     {/* Widget Header with drag handle */}
                     <div className="px-5 py-3 border-b border-border flex items-center gap-3">
@@ -929,7 +929,7 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
                           <div className="flex items-center gap-2 mb-1">
                             <div className="relative flex-1">
                               <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                              <input type="text" placeholder="Search POs..." className="w-full pl-9 pr-3 py-2 text-sm bg-white dark:bg-zinc-900 border border-border rounded-lg focus:ring-1 focus:ring-primary outline-none" />
+                              <input type="text" placeholder="Search POs..." className="w-full pl-9 pr-3 py-2 text-sm bg-card border border-border rounded-lg focus:ring-1 focus:ring-primary outline-none" />
                             </div>
                           </div>
                           {[
@@ -937,7 +937,7 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
                             { id: 'PO-2026-094', supplier: 'TechDealer', items: 12, status: 'AI Processing' },
                             { id: 'PO-2026-093', supplier: 'Urban Living', items: 28, status: 'Under Review' },
                           ].map((po) => (
-                            <div key={po.id} className="flex items-center gap-3 p-3 rounded-lg border border-border bg-zinc-50/50 dark:bg-zinc-900/30 hover:border-primary/30 hover:shadow-sm cursor-pointer transition-all">
+                            <div key={po.id} className="flex items-center gap-3 p-3 rounded-lg border border-border bg-muted/50 dark:bg-zinc-900/30 hover:border-primary/30 hover:shadow-sm cursor-pointer transition-all">
                               <DocumentTextIcon className="w-5 h-5 text-muted-foreground shrink-0" />
                               <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-2">
@@ -948,7 +948,7 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
                                 <span className="text-[10px] text-muted-foreground">{po.items} items</span>
                               </div>
                               <span className={cn("text-[10px] px-2 py-0.5 rounded-full font-medium shrink-0",
-                                po.status === 'Received' ? 'bg-zinc-100 text-zinc-700 dark:bg-zinc-500/15 dark:text-zinc-300' :
+                                po.status === 'Received' ? 'bg-zinc-100 text-muted-foreground dark:bg-muted0/15 dark:text-zinc-300' :
                                 po.status === 'AI Processing' ? 'bg-brand-50 text-brand-700 dark:bg-brand-500/15 dark:text-brand-300' :
                                 'bg-amber-50 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300'
                               )}>{po.status}</span>
@@ -964,7 +964,7 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
                             { id: 'ACK-8842', vendor: 'Herman Miller', lines: 28, status: '2 corrections', statusColor: 'bg-brand-50 text-brand-700 dark:bg-brand-500/15 dark:text-brand-300' },
                             { id: 'ACK-8841', vendor: 'Knoll', lines: 8, status: 'Backorder', statusColor: 'bg-red-50 text-red-700 dark:bg-red-500/15 dark:text-red-300' },
                           ].map((ack) => (
-                            <div key={ack.id} className="flex items-center justify-between gap-3 p-3 rounded-lg border border-border bg-zinc-50/50 dark:bg-zinc-900/30 hover:border-primary/30 hover:shadow-sm cursor-pointer transition-all">
+                            <div key={ack.id} className="flex items-center justify-between gap-3 p-3 rounded-lg border border-border bg-muted/50 dark:bg-zinc-900/30 hover:border-primary/30 hover:shadow-sm cursor-pointer transition-all">
                               <div className="flex items-center gap-3 min-w-0">
                                 <ClipboardDocumentCheckIcon className="w-5 h-5 text-muted-foreground shrink-0" />
                                 <div className="min-w-0">
@@ -1014,7 +1014,7 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
                             { order: 'ORD-2054', stage: 'Assembly', progress: 40, eta: 'Feb 22', stageColor: 'bg-amber-50 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300' },
                             { order: 'ORD-2053', stage: 'QC', progress: 90, eta: 'Feb 08', stageColor: 'bg-green-50 text-green-700 dark:bg-green-500/15 dark:text-green-300' },
                           ].map((item) => (
-                            <div key={item.order} className="p-3 rounded-lg border border-border bg-zinc-50/50 dark:bg-zinc-900/30 hover:border-primary/30 hover:shadow-sm cursor-pointer transition-all">
+                            <div key={item.order} className="p-3 rounded-lg border border-border bg-muted/50 dark:bg-zinc-900/30 hover:border-primary/30 hover:shadow-sm cursor-pointer transition-all">
                               <div className="flex items-center justify-between mb-2">
                                 <div className="flex items-center gap-2">
                                   <span className="text-xs font-semibold text-foreground">{item.order}</span>
@@ -1041,7 +1041,7 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
                             { action: 'Delta engine: 2 corrections on ACK-8842', time: '12m ago', Icon: SparklesIcon, color: 'text-brand-500' },
                             { action: 'Created exception for qty mismatch', time: '15m ago', Icon: ExclamationTriangleIcon, color: 'text-amber-500' },
                           ].map((log, i) => (
-                            <div key={i} className="flex items-center gap-3 p-2.5 rounded-lg border border-border bg-zinc-50/50 dark:bg-zinc-900/30 hover:border-primary/30 hover:shadow-sm cursor-pointer transition-all">
+                            <div key={i} className="flex items-center gap-3 p-2.5 rounded-lg border border-border bg-muted/50 dark:bg-zinc-900/30 hover:border-primary/30 hover:shadow-sm cursor-pointer transition-all">
                               <log.Icon className={cn("w-4 h-4 shrink-0", log.color)} />
                               <span className="text-xs text-foreground flex-1">{log.action}</span>
                               <span className="text-[10px] text-muted-foreground whitespace-nowrap shrink-0">{log.time}</span>
@@ -1053,7 +1053,7 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
                       {!['po_inbox', 'ack_queue', 'exception_monitor', 'production_tracker', 'ai_actions_log'].includes(toolId) && (
                         <div className="bg-card rounded-2xl border border-dashed border-zinc-300 dark:border-zinc-700 p-8 flex flex-col items-center justify-center text-center">
                           <div className="w-12 h-12 rounded-full bg-muted dark:bg-zinc-700 flex items-center justify-center mb-4">
-                            <CubeIcon className="w-6 h-6 text-zinc-400" />
+                            <CubeIcon className="w-6 h-6 text-muted-foreground" />
                           </div>
                           <h3 className="text-base font-semibold text-foreground">{feature.title}</h3>
                           <p className="text-sm text-muted-foreground mt-1 max-w-md">{feature.description}</p>
@@ -1074,10 +1074,10 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
         {mainTab === 'metrics' && (
           <div className="space-y-4">
             {/* Config bar + Period Selector */}
-            <div className="flex items-center justify-between px-4 py-3 bg-zinc-50/50 dark:bg-zinc-900/10 border border-zinc-200/50 dark:border-white/5 rounded-lg">
+            <div className="flex items-center justify-between px-4 py-3 bg-muted/50 dark:bg-zinc-900/10 border border-zinc-200/50 dark:border-white/5 rounded-lg">
               <div className="flex items-center gap-3">
                 <span className="text-sm font-medium text-foreground">Metrics configured for you</span>
-                <div className="flex items-center gap-1 bg-zinc-100 dark:bg-zinc-800/50 rounded-lg p-0.5 border border-zinc-200 dark:border-zinc-700/50">
+                <div className="flex items-center gap-1 bg-muted/50 rounded-lg p-0.5 border border-border/50">
                   {(['Day', 'Week', 'Month', 'Quarter'] as CCPeriod[]).map((p) => (
                     <button
                       key={p}
@@ -1095,7 +1095,7 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
               </div>
               <button
                 onClick={() => setIsMetricsManagerOpen(true)}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-white/10 rounded-md shadow-sm text-xs font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-all"
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-card border border-zinc-200 dark:border-white/10 rounded-md shadow-sm text-xs font-medium text-muted-foreground hover:bg-muted dark:hover:bg-zinc-700 transition-all"
               >
                 <PencilSquareIcon className="w-3.5 h-3.5" />
                 Customize
@@ -1113,7 +1113,7 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
             {/* KPI Strip */}
             <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
               {kpiDataByPeriod[ccPeriod].map((kpi) => (
-                <div key={kpi.label} className="bg-white dark:bg-zinc-800 rounded-xl border border-border p-4 flex items-start gap-3">
+                <div key={kpi.label} className="bg-card rounded-xl border border-border p-4 flex items-start gap-3">
                   <div className={cn("p-2 rounded-lg", kpiColorStyles[kpi.color])}>
                     <kpi.icon className="w-5 h-5" />
                   </div>
@@ -1146,7 +1146,7 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     whileDrag={{ scale: 1.03, zIndex: 50, boxShadow: '0px 10px 20px rgba(0,0,0,0.1)' }}
-                    className="bg-white dark:bg-zinc-800 rounded-xl border border-border overflow-hidden"
+                    className="bg-card rounded-xl border border-border overflow-hidden"
                   >
                     {/* ---- PO Volume ---- */}
                     {chartId === 'po_volume' && (<>
@@ -1381,7 +1381,7 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
                             className="absolute inset-0 rounded-full"
                             style={{ background: 'conic-gradient(from -90deg, #22c55e 0deg 270deg, #f59e0b 270deg 324deg, #9ca3af 324deg 360deg)' }}
                           />
-                          <div className="absolute inset-3 rounded-full bg-white dark:bg-zinc-800" />
+                          <div className="absolute inset-3 rounded-full bg-card" />
                           <div className="absolute inset-0 flex items-center justify-center">
                             <div className="text-center">
                               <p className="text-sm font-bold text-foreground">$847K</p>
@@ -1405,7 +1405,7 @@ export default function CommandCenter({ onLogout, onNavigateToDetail, onNavigate
                             </div>
                           </div>
                           <div className="flex items-center gap-2">
-                            <div className="w-2.5 h-2.5 rounded-sm bg-zinc-400 dark:bg-zinc-500" />
+                            <div className="w-2.5 h-2.5 rounded-sm bg-zinc-400 dark:bg-muted0" />
                             <div>
                               <p className="text-[10px] font-medium text-foreground">$85K</p>
                               <p className="text-[8px] text-muted-foreground">Pending</p>

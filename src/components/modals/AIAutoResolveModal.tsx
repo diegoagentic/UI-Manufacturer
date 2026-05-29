@@ -78,8 +78,8 @@ export default function AIAutoResolveModal({ isOpen, onClose, onApply }: AIAutoR
                 {/* Header */}
                 <div className="px-6 py-4 border-b border-border flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center">
-                      <SparklesIcon className="w-5 h-5 text-purple-500 dark:text-purple-400" />
+                    <div className="w-10 h-10 rounded-xl bg-ai/20 border border-purple-500/30 flex items-center justify-center">
+                      <SparklesIcon className="w-5 h-5 text-ai dark:text-purple-400" />
                     </div>
                     <div>
                       <Dialog.Title className="text-sm font-bold text-foreground">AI Auto-Resolution</Dialog.Title>
@@ -121,7 +121,7 @@ export default function AIAutoResolveModal({ isOpen, onClose, onApply }: AIAutoR
                           <div className="mt-0.5">
                             {status === 'resolved' && <CheckCircleIcon className="w-5 h-5 text-green-500" />}
                             {status === 'processing' && <ArrowPathIcon className="w-5 h-5 text-indigo-500 animate-spin" />}
-                            {status === 'pending' && <div className="w-5 h-5 rounded-full border-2 border-zinc-300 dark:border-zinc-600" />}
+                            {status === 'pending' && <div className="w-5 h-5 rounded-full border-2 border-border" />}
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 mb-0.5">

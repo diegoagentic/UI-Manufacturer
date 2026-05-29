@@ -31,10 +31,10 @@ const salesData = [
 ]
 
 const recentOrders = [
-    { id: "#ORD-2055", customer: "AutoManfacture Co.", client: "AutoManfacture Co.", project: "Office Renovation", amount: "$385,000", status: "Pending Review", date: "Dec 20, 2025", initials: "AC", statusColor: "bg-zinc-100 text-zinc-700" },
+    { id: "#ORD-2055", customer: "AutoManfacture Co.", client: "AutoManfacture Co.", project: "Office Renovation", amount: "$385,000", status: "Pending Review", date: "Dec 20, 2025", initials: "AC", statusColor: "bg-zinc-100 text-muted-foreground" },
     { id: "#ORD-2054", customer: "TechDealer Solutions", client: "TechDealer Solutions", project: "HQ Upgrade", amount: "$62,500", status: "In Production", date: "Nov 15, 2025", initials: "TS", statusColor: "bg-brand-50 text-brand-700 ring-brand-600/20" },
     { id: "#ORD-2053", customer: "Urban Living Inc.", client: "Urban Living Inc.", project: "Lobby Refresh", amount: "$112,000", status: "Shipped", date: "Oct 30, 2025", initials: "UL", statusColor: "bg-green-50 text-green-700 ring-green-600/20" },
-    { id: "#ORD-2052", customer: "Global Logistics", client: "Global Logistics", project: "Warehouse Expansion", amount: "$45,000", status: "Delivered", date: "Oct 15, 2025", initials: "GL", statusColor: "bg-gray-100 text-gray-700" },
+    { id: "#ORD-2052", customer: "Global Logistics", client: "Global Logistics", project: "Warehouse Expansion", amount: "$45,000", status: "Delivered", date: "Oct 15, 2025", initials: "GL", statusColor: "bg-gray-100 text-foreground" },
 ]
 
 // Color Mapping for Status Icons
@@ -273,7 +273,7 @@ export default function Pricing({ onLogout, onNavigateToDetail, onNavigateToWork
                         </div>
                         {/* Quick Actions below grid when expanded */}
                         <div className="flex items-center gap-4 mt-6 animate-in fade-in slide-in-from-top-2 duration-500">
-                            <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Quick Actions:</span>
+                            <span className="text-sm font-medium text-muted-foreground">Quick Actions:</span>
                             {[
                                 { icon: <PlusIcon className="w-5 h-5" />, label: "New Order" },
                                 { icon: <DocumentDuplicateIcon className="w-5 h-5" />, label: "Duplicate" },
@@ -291,25 +291,25 @@ export default function Pricing({ onLogout, onNavigateToDetail, onNavigateToWork
                     <div className="bg-card/60 backdrop-blur-md rounded-2xl p-4 border border-border shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4 animate-in fade-in slide-in-from-top-4 duration-300">
                         <div className="flex items-center gap-6 overflow-x-auto w-full scrollbar-minimal">
                             <div className="flex items-center gap-2 whitespace-nowrap">
-                                <span className="text-sm text-gray-500 dark:text-gray-400">Inventory:</span>
-                                <span className="text-lg font-semibold text-gray-900 dark:text-white">$1.2M</span>
+                                <span className="text-sm text-muted-foreground">Inventory:</span>
+                                <span className="text-lg font-semibold text-foreground">$1.2M</span>
                                 <span className="text-xs text-green-500 font-medium bg-green-50 dark:bg-green-900/20 px-1.5 py-0.5 rounded-md self-center">+0.2%</span>
                             </div>
                             <div className="w-px h-8 bg-border hidden sm:block"></div>
                             <div className="flex items-center gap-2 whitespace-nowrap">
-                                <span className="text-sm text-gray-500 dark:text-gray-400">Efficiency:</span>
-                                <span className="text-lg font-semibold text-gray-900 dark:text-white">88%</span>
+                                <span className="text-sm text-muted-foreground">Efficiency:</span>
+                                <span className="text-lg font-semibold text-foreground">88%</span>
                                 <span className="text-xs text-green-500 font-medium bg-green-50 dark:bg-green-900/20 px-1.5 py-0.5 rounded-md self-center">+3.5%</span>
                             </div>
                             <div className="w-px h-8 bg-border hidden sm:block"></div>
                             <div className="flex items-center gap-2 whitespace-nowrap">
-                                <span className="text-sm text-gray-500 dark:text-gray-400">Pending:</span>
-                                <span className="text-lg font-semibold text-gray-900 dark:text-white">142</span>
+                                <span className="text-sm text-muted-foreground">Pending:</span>
+                                <span className="text-lg font-semibold text-foreground">142</span>
                             </div>
                             <div className="w-px h-8 bg-border hidden sm:block"></div>
                             <div className="flex items-center gap-2 whitespace-nowrap">
-                                <span className="text-sm text-gray-500 dark:text-gray-400">Low Stock:</span>
-                                <span className="text-lg font-semibold text-gray-900 dark:text-white">15</span>
+                                <span className="text-sm text-muted-foreground">Low Stock:</span>
+                                <span className="text-lg font-semibold text-foreground">15</span>
                                 <span className="text-xs text-red-500 font-medium bg-red-50 dark:bg-red-900/20 px-1.5 py-0.5 rounded-md self-center">Alert</span>
                             </div>
                         </div>
@@ -323,10 +323,10 @@ export default function Pricing({ onLogout, onNavigateToDetail, onNavigateToWork
                                 { icon: <EnvelopeIcon className="w-4 h-4" />, label: "Email" },
                             ].map((action, i) => (
                                 <button key={i} className="flex flex-col items-center justify-center gap-1 group p-2 hover:bg-primary dark:hover:bg-primary rounded-lg transition-colors">
-                                    <div className="text-gray-500 dark:text-gray-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-900 transition-colors">
+                                    <div className="text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-zinc-900 transition-colors">
                                         {action.icon}
                                     </div>
-                                    <span className="text-[10px] font-medium text-gray-500 dark:text-gray-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-900 transition-colors">{action.label}</span>
+                                    <span className="text-[10px] font-medium text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-zinc-900 transition-colors">{action.label}</span>
                                 </button>
                             ))}
                         </div>
@@ -335,10 +335,10 @@ export default function Pricing({ onLogout, onNavigateToDetail, onNavigateToWork
                             onClick={() => setShowMetrics(true)}
                             className="flex flex-col items-center justify-center gap-1 group p-2 hover:bg-primary dark:hover:bg-primary rounded-lg transition-colors"
                         >
-                            <div className="text-gray-500 dark:text-gray-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-900 transition-colors">
+                            <div className="text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-zinc-900 transition-colors">
                                 <ChevronDownIcon className="w-4 h-4" />
                             </div>
-                            <span className="text-[10px] font-medium text-gray-500 dark:text-gray-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-900 transition-colors">Details</span>
+                            <span className="text-[10px] font-medium text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-zinc-900 transition-colors">Details</span>
                         </button>
                     </div>
                 )}
@@ -602,10 +602,10 @@ export default function Pricing({ onLogout, onNavigateToDetail, onNavigateToWork
                                                                         <div className="flex items-start gap-4">
                                                                             <div className="flex-1 space-y-4">
                                                                                 <div className="flex items-center gap-3">
-                                                                                    <div className="h-10 w-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center"><UserIcon className="w-6 h-6 text-gray-500" /></div>
+                                                                                    <div className="h-10 w-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center"><UserIcon className="w-6 h-6 text-muted-foreground" /></div>
                                                                                     <div>
-                                                                                        <p className="text-sm font-medium text-gray-900 dark:text-white">Sarah Johnson</p>
-                                                                                        <p className="text-xs text-gray-500">Project Manager</p>
+                                                                                        <p className="text-sm font-medium text-foreground">Sarah Johnson</p>
+                                                                                        <p className="text-xs text-muted-foreground">Project Manager</p>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div className="h-px bg-border w-full"></div>
@@ -614,7 +614,7 @@ export default function Pricing({ onLogout, onNavigateToDetail, onNavigateToWork
                                                                                     <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gray-200 dark:bg-gray-700 -translate-y-1/2"></div>
                                                                                     <div className="relative flex justify-between">
                                                                                         {['Placed', 'Mfg', 'Qual', 'Ship'].map((step, i) => (
-                                                                                            <div key={i} className={`flex flex-col items-center gap-2 ${i < 2 ? 'text-zinc-900 dark:text-white' : 'text-gray-400'}`}>
+                                                                                            <div key={i} className={`flex flex-col items-center gap-2 ${i < 2 ? 'text-foreground' : 'text-muted-foreground'}`}>
                                                                                                 <div className={`w-3 h-3 rounded-full ${i < 2 ? 'bg-primary ring-4 ring-brand-100 dark:ring-brand-900/30' : 'bg-gray-300 dark:bg-gray-600'}`}></div>
                                                                                                 <span className="text-xs font-medium">{step}</span>
                                                                                             </div>
@@ -624,12 +624,12 @@ export default function Pricing({ onLogout, onNavigateToDetail, onNavigateToWork
                                                                             </div>
                                                                             <div className="w-64">
                                                                                 <div className="p-3 bg-card rounded-xl border border-gray-200 dark:border-white/10 shadow-sm">
-                                                                                    <p className="text-xs font-medium text-gray-500 uppercase">Alert</p>
+                                                                                    <p className="text-xs font-medium text-muted-foreground uppercase">Alert</p>
                                                                                     <div className="mt-2 flex items-start gap-2">
                                                                                         <ExclamationTriangleIcon className="h-5 w-5 text-amber-500 flex-shrink-0" />
                                                                                         <div>
                                                                                             <p className="text-sm font-medium text-amber-700 dark:text-amber-400">Customs Delay</p>
-                                                                                            <p className="text-xs text-gray-500 mt-1">Shipment held at port. ETA +24h.</p>
+                                                                                            <p className="text-xs text-muted-foreground mt-1">Shipment held at port. ETA +24h.</p>
                                                                                             <button onClick={() => setTrackingOrder(order)} className="mt-2 text-xs font-medium text-zinc-900 dark:text-primary decoration-primary underline-offset-2 hover:underline">Track Shipment</button>
                                                                                         </div>
                                                                                     </div>
@@ -650,7 +650,7 @@ export default function Pricing({ onLogout, onNavigateToDetail, onNavigateToWork
                                         {filteredOrders.map((order) => (
                                             <div
                                                 key={order.id}
-                                                className={`group relative bg-card rounded-2xl border ${expandedIds.has(order.id) ? 'border-zinc-300 dark:border-zinc-600 ring-1 ring-zinc-300 dark:ring-zinc-600' : 'border-gray-200 dark:border-white/10'} shadow-sm hover:shadow-md transition-all cursor-pointer overflow-hidden flex flex-col`}
+                                                className={`group relative bg-card rounded-2xl border ${expandedIds.has(order.id) ? 'border-border ring-1 ring-border' : 'border-gray-200 dark:border-white/10'} shadow-sm hover:shadow-md transition-all cursor-pointer overflow-hidden flex flex-col`}
                                                 onClick={() => toggleExpand(order.id)}
                                             >
                                                 <div className="p-5">
@@ -660,19 +660,19 @@ export default function Pricing({ onLogout, onNavigateToDetail, onNavigateToWork
                                                                 {order.initials}
                                                             </div>
                                                             <div>
-                                                                <h4 className="text-sm font-bold text-gray-900 dark:text-white">{order.customer}</h4>
-                                                                <p className="text-xs text-gray-500">{order.id}</p>
+                                                                <h4 className="text-sm font-bold text-foreground">{order.customer}</h4>
+                                                                <p className="text-xs text-muted-foreground">{order.id}</p>
                                                             </div>
                                                         </div>
                                                         <div className="flex items-center gap-1">
-                                                            <button onClick={(e) => { e.stopPropagation(); onNavigateToDetail(); }} className="p-1 rounded-full hover:bg-primary hover:text-zinc-900 dark:hover:bg-primary text-gray-400 hover:text-zinc-900 dark:hover:text-zinc-900 transition-colors">
+                                                            <button onClick={(e) => { e.stopPropagation(); onNavigateToDetail(); }} className="p-1 rounded-full hover:bg-primary hover:text-primary-foreground dark:hover:bg-primary text-muted-foreground hover:text-zinc-900 dark:hover:text-primary-foreground transition-colors">
                                                                 <DocumentTextIcon className="h-5 w-5" />
                                                             </button>
-                                                            <button onClick={(e) => e.stopPropagation()} className="p-1 rounded-full hover:bg-primary hover:text-zinc-900 dark:hover:bg-primary text-gray-400 hover:text-zinc-900 dark:hover:text-zinc-900 transition-colors">
+                                                            <button onClick={(e) => e.stopPropagation()} className="p-1 rounded-full hover:bg-primary hover:text-primary-foreground dark:hover:bg-primary text-muted-foreground hover:text-zinc-900 dark:hover:text-primary-foreground transition-colors">
                                                                 <PencilSquareIcon className="h-5 w-5" />
                                                             </button>
                                                             <Menu as="div" className="relative inline-block text-left">
-                                                                <MenuButton onClick={(e) => e.stopPropagation()} className="p-1 rounded-full hover:bg-primary hover:text-zinc-900 dark:hover:bg-primary text-gray-400 dark:hover:text-zinc-900">
+                                                                <MenuButton onClick={(e) => e.stopPropagation()} className="p-1 rounded-full hover:bg-primary hover:text-primary-foreground dark:hover:bg-primary text-muted-foreground dark:hover:text-primary-foreground">
                                                                     <EllipsisHorizontalIcon className="h-5 w-5" />
                                                                 </MenuButton>
                                                                 <Transition
@@ -701,13 +701,13 @@ export default function Pricing({ onLogout, onNavigateToDetail, onNavigateToWork
                                                     </div>
 
                                                     <div className="space-y-3">
-                                                        <div className="flex justify-between items-center py-2 border-b border-gray-100 dark:border-white/5">
-                                                            <span className="text-xs text-gray-500">Amount</span>
-                                                            <span className="text-sm font-semibold text-gray-900 dark:text-white">{order.amount}</span>
+                                                        <div className="flex justify-between items-center py-2 border-b border-border">
+                                                            <span className="text-xs text-muted-foreground">Amount</span>
+                                                            <span className="text-sm font-semibold text-foreground">{order.amount}</span>
                                                         </div>
-                                                        <div className="flex justify-between items-center py-2 border-b border-gray-100 dark:border-white/5">
-                                                            <span className="text-xs text-gray-500">Date</span>
-                                                            <span className="text-sm text-gray-700 dark:text-gray-300">{order.date}</span>
+                                                        <div className="flex justify-between items-center py-2 border-b border-border">
+                                                            <span className="text-xs text-muted-foreground">Date</span>
+                                                            <span className="text-sm text-muted-foreground">{order.date}</span>
                                                         </div>
                                                         <div className="flex justify-between items-center pt-2">
                                                             <span className={cn("inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ring-1 ring-inset", order.statusColor)}>
@@ -718,16 +718,16 @@ export default function Pricing({ onLogout, onNavigateToDetail, onNavigateToWork
                                                 </div>
 
                                                 {expandedIds.has(order.id) && (
-                                                    <div className="mt-4 pt-4 px-5 border-t border-gray-100 dark:border-white/5">
+                                                    <div className="mt-4 pt-4 px-5 border-t border-border">
                                                         <div className="flex flex-col md:flex-row gap-8">
                                                             <div className="flex-1 space-y-6">
                                                                 <div className="flex items-center gap-3">
-                                                                    <div className="h-8 w-8 rounded-full bg-gray-100 dark:bg-card flex items-center justify-center text-gray-500">
+                                                                    <div className="h-8 w-8 rounded-full bg-gray-100 dark:bg-card flex items-center justify-center text-muted-foreground">
                                                                         <UserIcon className="h-4 w-4" />
                                                                     </div>
                                                                     <div>
-                                                                        <p className="text-sm font-bold text-gray-900 dark:text-white">Sarah Johnson</p>
-                                                                        <p className="text-xs text-gray-500">Project Manager</p>
+                                                                        <p className="text-sm font-bold text-foreground">Sarah Johnson</p>
+                                                                        <p className="text-xs text-muted-foreground">Project Manager</p>
                                                                     </div>
                                                                 </div>
 
@@ -736,10 +736,10 @@ export default function Pricing({ onLogout, onNavigateToDetail, onNavigateToWork
                                                                     <div className="relative z-10 flex justify-between">
                                                                         {['Placed', 'Mfg', 'Qual', 'Ship'].map((step, i) => (
                                                                             <div key={i} className="flex flex-col items-center bg-card px-1">
-                                                                                <div className={`h-6 w-6 rounded-full flex items-center justify-center ${i <= 1 ? 'bg-primary text-primary-foreground' : 'bg-gray-200 dark:bg-zinc-700 text-gray-400'}`}>
+                                                                                <div className={`h-6 w-6 rounded-full flex items-center justify-center ${i <= 1 ? 'bg-primary text-primary-foreground' : 'bg-gray-200 dark:bg-zinc-700 text-muted-foreground'}`}>
                                                                                     {i < 1 ? <CheckIcon className="h-4 w-4" /> : <div className={`h-2 w-2 rounded-full ${i <= 1 ? 'bg-primary-foreground' : 'bg-white/50'}`} />}
                                                                                 </div>
-                                                                                <span className={`mt-2 text-xs font-medium ${i <= 1 ? 'text-zinc-900 dark:text-zinc-100' : 'text-gray-500'}`}>{step}</span>
+                                                                                <span className={`mt-2 text-xs font-medium ${i <= 1 ? 'text-foreground' : 'text-muted-foreground'}`}>{step}</span>
                                                                             </div>
                                                                         ))}
                                                                     </div>

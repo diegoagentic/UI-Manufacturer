@@ -97,7 +97,7 @@ export default function DemoAvatar({ name, size = 'md', className }: DemoAvatarP
             'rounded-xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 dark:from-emerald-400/25 dark:to-teal-400/25 flex items-center justify-center shrink-0 ring-1 ring-emerald-500/30 dark:ring-emerald-400/30 animate-ai-glow',
             className,
         )}>
-            <SparklesIcon className={clsx(iconSizes[size], 'text-emerald-500 dark:text-emerald-400')} />
+            <SparklesIcon className={clsx(iconSizes[size], 'text-success dark:text-success')} />
         </div>
     );
 }
@@ -110,7 +110,7 @@ export function AIAgentAvatar({ className }: { className?: string }) {
             'w-6 h-6 rounded-lg bg-gradient-to-br from-emerald-500/20 to-teal-500/20 dark:from-emerald-400/25 dark:to-teal-400/25 flex items-center justify-center shrink-0 ring-1 ring-emerald-500/30 dark:ring-emerald-400/30 animate-ai-glow',
             className,
         )}>
-            <SparklesIcon className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" />
+            <SparklesIcon className="w-3.5 h-3.5 text-success dark:text-success" />
         </div>
     );
 }

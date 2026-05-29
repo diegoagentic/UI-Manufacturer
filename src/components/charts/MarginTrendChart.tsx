@@ -39,11 +39,11 @@ export function MarginTrendChart({ period = 'Month' }: { period?: DashMetricsPer
     const data = dataByPeriod[period];
 
     return (
-        <div className="h-[300px] w-full bg-white dark:bg-zinc-800 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col">
+        <div className="h-[300px] w-full bg-card rounded-xl p-4 border border-border shadow-sm flex flex-col">
             <div className="flex items-center justify-between mb-4">
                 <div>
-                    <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">Margin Trends</h3>
-                    <p className="text-sm text-zinc-500 dark:text-zinc-400">Revenue vs Profit Margin (%)</p>
+                    <h3 className="text-lg font-semibold text-foreground">Margin Trends</h3>
+                    <p className="text-sm text-muted-foreground">Revenue vs Profit Margin (%)</p>
                 </div>
             </div>
             <div className="flex-1 w-full min-h-0">

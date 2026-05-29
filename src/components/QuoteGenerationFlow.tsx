@@ -90,7 +90,7 @@ export default function QuoteGenerationFlow({ onNavigate, onComplete }: QuoteGen
 
     if (phase === 'ORDERED') {
         return (
-            <div className="h-full flex flex-col items-center justify-center p-8 bg-card rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm animate-in fade-in zoom-in duration-500">
+            <div className="h-full flex flex-col items-center justify-center p-8 bg-card rounded-2xl border border-border shadow-sm animate-in fade-in zoom-in duration-500">
                 <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mb-6 animate-bounce">
                     <SparklesIcon className="w-12 h-12 text-primary" />
                 </div>
@@ -104,7 +104,7 @@ export default function QuoteGenerationFlow({ onNavigate, onComplete }: QuoteGen
                             setPhase('IDLE');
                             if (onComplete) onComplete();
                         }}
-                        className="px-6 py-2 bg-zinc-100 dark:bg-zinc-800 text-foreground font-medium rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
+                        className="px-6 py-2 bg-muted text-foreground font-medium rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
                     >
                         Start Over
                     </button>

@@ -18,11 +18,11 @@ export default function WidgetCard({ title, description, icon: Icon, action, chi
             <div className="p-6 border-b border-border flex items-center justify-between">
                 <div className="flex items-center gap-3">
                     {/* Consistent Drag Handle */}
-                    <Bars3Icon className="w-5 h-5 text-zinc-400 hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400 cursor-grab active:cursor-grabbing" />
+                    <Bars3Icon className="w-5 h-5 text-muted-foreground hover:text-muted-foreground dark:text-muted-foreground dark:hover:text-muted-foreground cursor-grab active:cursor-grabbing" />
 
                     <div>
                         <div className="flex items-center gap-2 mb-0.5">
-                            {Icon && <Icon className="w-5 h-5 text-zinc-500 dark:text-zinc-400" />}
+                            {Icon && <Icon className="w-5 h-5 text-muted-foreground" />}
                             <h3 className="text-lg font-brand font-semibold text-foreground">{title}</h3>
                         </div>
                         {description && (

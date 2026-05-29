@@ -335,7 +335,7 @@ export default function Navbar({
                     {false && onOpenDemoGuide && (
                         <button
                             onClick={onOpenDemoGuide}
-                            className="flex p-2 rounded-full bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-400 hover:bg-purple-200 dark:hover:bg-purple-500/30 transition-colors animate-pulse ring-2 ring-purple-500/60 ring-offset-2 ring-offset-background shadow-sm"
+                            className="flex p-2 rounded-full bg-purple-100 dark:bg-ai/20 text-purple-700 dark:text-purple-400 hover:bg-purple-200 dark:hover:bg-ai/30 transition-colors animate-pulse ring-2 ring-purple-500/60 ring-offset-2 ring-offset-background shadow-sm"
                             title="Demo Guide"
                         >
                             <PlayCircleIcon className="w-5 h-5" />

@@ -196,7 +196,7 @@ export default function MACRequests() {
                                         <button
                                             onClick={() => handleAction(req.id, 'punchlist')}
                                             title="Convert to Punch List"
-                                            className="p-2 text-purple-600 hover:bg-purple-50 dark:hover:bg-purple-900/20 rounded-full transition-colors"
+                                            className="p-2 text-ai hover:bg-purple-50 dark:hover:bg-purple-900/20 rounded-full transition-colors"
                                         >
                                             <ExclamationTriangleIcon className="w-5 h-5" />
                                         </button>

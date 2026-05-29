@@ -206,11 +206,11 @@ export default function Login() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                 </svg>
             ) : (
-                <svg className="w-3 h-3 text-zinc-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-3 h-3 text-muted-foreground shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
                 </svg>
             )}
-            <span className={met ? 'text-green-400' : 'text-zinc-500'}>{label}</span>
+            <span className={met ? 'text-green-400' : 'text-muted-foreground'}>{label}</span>
         </li>
     )
 
@@ -245,7 +245,7 @@ export default function Login() {
                             <h3 className="text-xl font-bold text-white">
                                 {mfaPhase === 'welcome' ? 'Welcome!' : mfaPhase === 'success' ? 'Verification Complete' : 'Multi-Factor Authentication'}
                             </h3>
-                            <p className="text-sm text-zinc-400 mt-1">
+                            <p className="text-sm text-muted-foreground mt-1">
                                 {mfaPhase === 'welcome' && ''}
                                 {mfaPhase === 'phone' && 'Verify your identity with a one-time code sent to your phone.'}
                                 {mfaPhase === 'sending' && 'Sending verification code...'}
@@ -271,7 +271,7 @@ export default function Login() {
                                     </button>
                                     <button
                                         onClick={handleMfaSkip}
-                                        className="w-full text-sm text-zinc-400 hover:text-white underline underline-offset-2 transition-colors"
+                                        className="w-full text-sm text-muted-foreground hover:text-white underline underline-offset-2 transition-colors"
                                     >
                                         Skip MFA for now
                                     </button>
@@ -289,7 +289,7 @@ export default function Login() {
                                             readOnly
                                             className="w-full bg-white/10 border border-white/20 text-white rounded-lg h-12 px-4 outline-none cursor-default"
                                         />
-                                        <p className="text-xs text-zinc-500 mt-1.5">A verification code will be sent via SMS to this number.</p>
+                                        <p className="text-xs text-muted-foreground mt-1.5">A verification code will be sent via SMS to this number.</p>
                                     </div>
                                     <button
                                         onClick={handleMfaSendCode}
@@ -440,9 +440,9 @@ export default function Login() {
                                                 onChange={(e) => handleEmailChange(e.target.value)}
                                                 onBlur={handleEmailBlur}
                                                 placeholder="you@company.com"
-                                                className="w-full bg-white/10 border border-white/20 text-white focus:border-white/40 focus:ring-0 rounded-lg h-12 px-4 pl-10 placeholder:text-zinc-500 outline-none transition-colors"
+                                                className="w-full bg-white/10 border border-white/20 text-white focus:border-white/40 focus:ring-0 rounded-lg h-12 px-4 pl-10 placeholder:text-muted-foreground outline-none transition-colors"
                                             />
-                                            <EnvelopeIcon className="w-5 h-5 text-zinc-400 absolute left-3 top-3.5" />
+                                            <EnvelopeIcon className="w-5 h-5 text-muted-foreground absolute left-3 top-3.5" />
                                         </div>
                                     </div>
 
@@ -517,7 +517,7 @@ export default function Login() {
                                                     value={fullName}
                                                     onChange={(e) => setFullName(e.target.value)}
                                                     placeholder="John Doe"
-                                                    className="w-full bg-white/10 border border-white/20 text-white focus:border-white/40 focus:ring-0 rounded-lg h-12 px-4 placeholder:text-zinc-500 outline-none transition-colors"
+                                                    className="w-full bg-white/10 border border-white/20 text-white focus:border-white/40 focus:ring-0 rounded-lg h-12 px-4 placeholder:text-muted-foreground outline-none transition-colors"
                                                 />
                                             </div>
                                         )}
@@ -534,11 +534,11 @@ export default function Login() {
                                                 onChange={(e) => handleEmailChange(e.target.value)}
                                                 onBlur={handleEmailBlur}
                                                 placeholder="you@company.com"
-                                                className={`w-full bg-white/10 border text-white focus:border-white/40 focus:ring-0 rounded-lg h-12 px-4 placeholder:text-zinc-500 outline-none transition-colors ${
+                                                className={`w-full bg-white/10 border text-white focus:border-white/40 focus:ring-0 rounded-lg h-12 px-4 placeholder:text-muted-foreground outline-none transition-colors ${
                                                     domainError ? 'border-red-500/50' : 'border-white/20'
                                                 }`}
                                             />
-                                            <p className="text-xs text-zinc-500 mt-1">
+                                            <p className="text-xs text-muted-foreground mt-1">
                                                 Access restricted to @agenticdream.com and @goavanto.com
                                             </p>
                                         </div>
@@ -552,7 +552,7 @@ export default function Login() {
                                                     value={password}
                                                     onChange={(e) => handlePasswordChange(e.target.value)}
                                                     placeholder="Enter your password"
-                                                    className="w-full bg-white/10 border border-white/20 text-white focus:border-white/40 focus:ring-0 rounded-lg h-12 px-4 pr-10 placeholder:text-zinc-500 outline-none transition-colors"
+                                                    className="w-full bg-white/10 border border-white/20 text-white focus:border-white/40 focus:ring-0 rounded-lg h-12 px-4 pr-10 placeholder:text-muted-foreground outline-none transition-colors"
                                                 />
                                                 <button
                                                     type="button"

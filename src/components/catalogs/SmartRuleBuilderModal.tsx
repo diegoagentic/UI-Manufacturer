@@ -168,7 +168,7 @@ export default function SmartRuleBuilderModal({ isOpen, onClose, onSaveRule, cur
                                     A.I. Rule Builder
                                 </Dialog.Title>
                                 {step !== 'analyzing' && (
-                                    <button onClick={onClose} className="p-1.5 rounded-full hover:bg-muted text-zinc-500 transition-colors">
+                                    <button onClick={onClose} className="p-1.5 rounded-full hover:bg-muted text-muted-foreground transition-colors">
                                         <XMarkIcon className="w-5 h-5" />
                                     </button>
                                 )}
@@ -242,7 +242,7 @@ export default function SmartRuleBuilderModal({ isOpen, onClose, onSaveRule, cur
                                                             -{formatCurrency(forecastedDiscount)}
                                                         </div>
                                                     </div>
-                                                    <div className={cn("px-2 py-1 rounded text-xs font-semibold", willApply ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400" : "bg-zinc-200 text-zinc-600 dark:bg-zinc-700 dark:text-zinc-400")}>
+                                                    <div className={cn("px-2 py-1 rounded text-xs font-semibold", willApply ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400" : "bg-zinc-200 text-muted-foreground dark:bg-zinc-700 dark:text-muted-foreground")}>
                                                         {willApply ? 'Condition Met' : 'Condition Not Met'}
                                                     </div>
                                                 </div>

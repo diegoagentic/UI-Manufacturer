@@ -269,8 +269,8 @@ export default function MACPunchList() {
         <div className="flex flex-col lg:flex-row gap-6">
             {/* Left Column: Punch List Items */}
             <div className="w-full lg:w-1/3 space-y-4">
-                <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 shadow-sm">
-                    <h3 className="font-bold text-lg text-zinc-900 dark:text-white mb-4">Active Punch List</h3>
+                <div className="bg-card border border-border rounded-xl p-4 shadow-sm">
+                    <h3 className="font-bold text-lg text-foreground mb-4">Active Punch List</h3>
 
                     {[
                         { id: 'item-1', priority: 'High', priorityColor: 'red', title: 'Damaged Upholstery on Delivery', product: '2x Conference Room Chairs (Azure)', time: '2 hours ago', evidence: [{ icon: CameraIcon, text: '2 Photos' }, { icon: Bars4Icon, text: 'Barcode Scanned' }] },
@@ -280,17 +280,17 @@ export default function MACPunchList() {
                         <div
                             key={item.id}
                             onClick={() => setSelectedItem(item.id)}
-                            className={`${idx > 0 ? 'mt-3' : ''} p-3 rounded-lg border cursor-pointer transition-all ${selectedItem === item.id ? 'border-brand-500 bg-brand-50 dark:bg-brand-900/10' : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 hover:border-brand-300'}`}
+                            className={`${idx > 0 ? 'mt-3' : ''} p-3 rounded-lg border cursor-pointer transition-all ${selectedItem === item.id ? 'border-brand-500 bg-brand-50 dark:bg-brand-900/10' : 'bg-muted dark:bg-zinc-800 border-border hover:border-brand-300'}`}
                         >
                             <div className="flex items-start justify-between mb-2">
                                 <span className={`inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs font-semibold bg-${item.priorityColor}-100 text-${item.priorityColor}-700 dark:bg-${item.priorityColor}-900/30 dark:text-${item.priorityColor}-400`}>
                                     <ExclamationTriangleIcon className="w-3.5 h-3.5" /> {item.priority} Priority
                                 </span>
-                                <span className="text-xs text-zinc-500">{item.time}</span>
+                                <span className="text-xs text-muted-foreground">{item.time}</span>
                             </div>
-                            <h4 className="font-bold text-zinc-900 dark:text-white text-sm">{item.title}</h4>
-                            <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-1">{item.product}</p>
-                            <div className="flex items-center gap-3 mt-3 text-xs font-medium text-zinc-500">
+                            <h4 className="font-bold text-foreground text-sm">{item.title}</h4>
+                            <p className="text-xs text-muted-foreground mt-1">{item.product}</p>
+                            <div className="flex items-center gap-3 mt-3 text-xs font-medium text-muted-foreground">
                                 {item.evidence.map((ev, i) => (
                                     <span key={i} className="flex items-center gap-1"><ev.icon className="w-4 h-4" /> {ev.text}</span>
                                 ))}
@@ -304,7 +304,7 @@ export default function MACPunchList() {
             <div className="w-full lg:w-2/3">
                 {/* ═══ STEP 3.1: Request Intake & AI Validation ═══ */}
                 {currentStep?.id === '3.1' && (
-                    <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl shadow-sm overflow-hidden flex flex-col">
+                    <div className="bg-card border border-border rounded-xl shadow-sm overflow-hidden flex flex-col">
                         {/* AI Context Header */}
                         <div className="px-4 py-3 bg-indigo-50 dark:bg-indigo-500/10 border-b border-indigo-200 dark:border-indigo-500/20 flex items-center gap-2">
                             <AIAgentAvatar />
@@ -335,7 +335,7 @@ export default function MACPunchList() {
                                                 <PaperClipIcon className="w-4 h-4 text-muted-foreground shrink-0" />
                                                 <span className="text-muted-foreground font-medium">3 attachments:</span>
                                                 {['damage-photo-1.jpg', 'damage-photo-2.jpg', 'product-label.jpg'].map((f, i) => (
-                                                    <span key={i} className="px-2 py-0.5 bg-zinc-100 dark:bg-zinc-800 rounded text-[10px] font-medium text-foreground">{f}</span>
+                                                    <span key={i} className="px-2 py-0.5 bg-muted rounded text-[10px] font-medium text-foreground">{f}</span>
                                                 ))}
                                             </div>
                                         </div>
@@ -350,7 +350,7 @@ export default function MACPunchList() {
                                             </p>
                                             {EXTRACTION_FIELDS.map((field, i) => (
                                                 i < extractedCount && (
-                                                    <div key={i} className="flex items-center gap-3 px-3 py-2 rounded-lg bg-zinc-50 dark:bg-zinc-800/50 border border-border animate-in fade-in slide-in-from-left-4 duration-300">
+                                                    <div key={i} className="flex items-center gap-3 px-3 py-2 rounded-lg bg-muted dark:bg-zinc-800/50 border border-border animate-in fade-in slide-in-from-left-4 duration-300">
                                                         {field.status === 'ok' ? <CheckCircleIcon className="w-4 h-4 text-green-500 shrink-0" /> : field.status === 'warning' ? <ExclamationTriangleIcon className="w-4 h-4 text-amber-500 shrink-0" /> : <XMarkIcon className="w-4 h-4 text-red-500 shrink-0" />}
                                                         <span className="text-xs font-medium text-muted-foreground w-36 shrink-0">{field.label}</span>
                                                         <span className={`text-xs font-semibold ${field.status === 'ok' ? 'text-foreground' : field.status === 'warning' ? 'text-amber-600 dark:text-amber-400' : 'text-red-600 dark:text-red-400'}`}>{field.value}</span>
@@ -398,7 +398,7 @@ export default function MACPunchList() {
                                                 { label: 'Requester', value: 'Site Supervisor — Floor 2' },
                                                 { label: 'Order Ref', value: 'ORD-2055, Line 3' },
                                             ].map((item, i) => (
-                                                <div key={i} className="bg-zinc-50 dark:bg-zinc-800 rounded-lg p-2.5">
+                                                <div key={i} className="bg-muted dark:bg-zinc-800 rounded-lg p-2.5">
                                                     <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-0.5">{item.label}</p>
                                                     <p className="text-xs font-bold text-foreground">{item.value}</p>
                                                 </div>
@@ -472,7 +472,7 @@ export default function MACPunchList() {
                                                                 {/* QR Scanning Animation */}
                                                                 {qrScanning && (
                                                                     <div className="mt-3 animate-in fade-in duration-300">
-                                                                        <div className="relative w-full max-w-[280px] aspect-square rounded-lg overflow-hidden border-2 border-indigo-300 dark:border-indigo-500/40 bg-zinc-100 dark:bg-zinc-800">
+                                                                        <div className="relative w-full max-w-[280px] aspect-square rounded-lg overflow-hidden border-2 border-indigo-300 dark:border-indigo-500/40 bg-muted">
                                                                             <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=300&h=300&fit=crop" alt="Furniture label with QR code" className="w-full h-full object-cover" />
                                                                             {/* Scanning overlay */}
                                                                             <div className="absolute inset-0 bg-indigo-500/10">
@@ -514,7 +514,7 @@ export default function MACPunchList() {
                                                                 {/* Upload Label Animation */}
                                                                 {uploadingLabel && (
                                                                     <div className="mt-3 animate-in fade-in duration-300">
-                                                                        <div className="relative w-full max-w-[280px] h-[180px] rounded-lg overflow-hidden border-2 border-blue-300 dark:border-blue-500/40 bg-zinc-100 dark:bg-zinc-800">
+                                                                        <div className="relative w-full max-w-[280px] h-[180px] rounded-lg overflow-hidden border-2 border-blue-300 dark:border-blue-500/40 bg-muted">
                                                                             <img src="https://images.unsplash.com/photo-1580480055273-228ff5388ef8?w=300&h=200&fit=crop" alt="Furniture product label" className="w-full h-full object-cover opacity-60" />
                                                                             <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/30 backdrop-blur-[1px]">
                                                                                 <ArrowUpTrayIcon className="w-8 h-8 text-white mb-2 animate-bounce" />
@@ -687,7 +687,7 @@ export default function MACPunchList() {
 
                 {/* ═══ STEP 3.2: Labor Quote Requested — show completed validation from 3.1 ═══ */}
                 {currentStep?.id === '3.2' && (
-                    <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl shadow-sm overflow-hidden flex flex-col">
+                    <div className="bg-card border border-border rounded-xl shadow-sm overflow-hidden flex flex-col">
                         {/* AI Context Header */}
                         <div className="px-4 py-3 bg-green-50 dark:bg-green-500/10 border-b border-green-200 dark:border-green-500/20 flex items-center gap-2">
                             <CheckCircleIcon className="w-5 h-5 text-green-600 dark:text-green-400" />
@@ -711,7 +711,7 @@ export default function MACPunchList() {
                                         { label: 'Requester', value: 'Site Supervisor — Floor 2' },
                                         { label: 'Order Ref', value: 'ORD-2055, Line 3' },
                                     ].map((item, i) => (
-                                        <div key={i} className="bg-zinc-50 dark:bg-zinc-800 rounded-lg p-2.5">
+                                        <div key={i} className="bg-muted dark:bg-zinc-800 rounded-lg p-2.5">
                                             <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-0.5">{item.label}</p>
                                             <p className="text-xs font-bold text-foreground">{item.value}</p>
                                         </div>
@@ -772,7 +772,7 @@ export default function MACPunchList() {
 
                 {/* ═══ STEP 3.3: Labor Reimbursement Review ═══ */}
                 {currentStep?.id === '3.3' && (
-                    <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl shadow-sm overflow-hidden flex flex-col">
+                    <div className="bg-card border border-border rounded-xl shadow-sm overflow-hidden flex flex-col">
                         {/* AI Context Header */}
                         <div className="px-4 py-3 bg-indigo-50 dark:bg-indigo-500/10 border-b border-indigo-200 dark:border-indigo-500/20 flex items-center gap-2">
                             <AIAgentAvatar />
@@ -794,11 +794,11 @@ export default function MACPunchList() {
                                     <ConfidenceScoreBadge score={87} label="Validation" size="sm" />
                                 </div>
                                 <div className="grid grid-cols-2 gap-3">
-                                    <div className="bg-zinc-50 dark:bg-zinc-800 rounded-lg p-2.5">
+                                    <div className="bg-muted dark:bg-zinc-800 rounded-lg p-2.5">
                                         <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-0.5">Installer</p>
                                         <p className="text-xs font-bold text-foreground">ProInstall LLC</p>
                                     </div>
-                                    <div className="bg-zinc-50 dark:bg-zinc-800 rounded-lg p-2.5">
+                                    <div className="bg-muted dark:bg-zinc-800 rounded-lg p-2.5">
                                         <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-0.5">Certification</p>
                                         <p className="text-xs font-bold text-green-600 dark:text-green-400">Verified — Since 2019</p>
                                     </div>
@@ -809,14 +809,14 @@ export default function MACPunchList() {
                             <div className="p-4 bg-card border border-border rounded-xl">
                                 <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-3">Quote Breakdown</p>
                                 <div className="space-y-2">
-                                    <div className="flex items-center justify-between p-3 bg-zinc-50 dark:bg-zinc-800 rounded-lg">
+                                    <div className="flex items-center justify-between p-3 bg-muted dark:bg-zinc-800 rounded-lg">
                                         <div>
                                             <p className="text-sm font-semibold text-foreground">Repair</p>
                                             <p className="text-xs text-muted-foreground">6 hrs @ $85/hr</p>
                                         </div>
                                         <p className="text-sm font-bold text-foreground">$510.00</p>
                                     </div>
-                                    <div className="flex items-center justify-between p-3 bg-zinc-50 dark:bg-zinc-800 rounded-lg">
+                                    <div className="flex items-center justify-between p-3 bg-muted dark:bg-zinc-800 rounded-lg">
                                         <div>
                                             <p className="text-sm font-semibold text-foreground">Trip Charge</p>
                                             <p className="text-xs text-muted-foreground">Standard rate</p>
@@ -875,7 +875,7 @@ export default function MACPunchList() {
                                                             type="text"
                                                             value={editValues[rule.id] || ''}
                                                             onChange={(e) => setEditValues(prev => ({ ...prev, [rule.id]: e.target.value }))}
-                                                            className="w-24 px-2 py-1 text-sm border border-border rounded-md bg-white dark:bg-zinc-800 text-foreground focus:ring-1 focus:ring-brand-500 focus:outline-none"
+                                                            className="w-24 px-2 py-1 text-sm border border-border rounded-md bg-card text-foreground focus:ring-1 focus:ring-brand-500 focus:outline-none"
                                                         />
                                                         <button
                                                             onClick={() => { setValidatedRules(prev => new Set(prev).add(rule.id)); setEditingRule(null); }}
@@ -932,7 +932,7 @@ export default function MACPunchList() {
 
                 {/* ═══ STEP 3.4: Claim Submission & Tracking ═══ */}
                 {currentStep?.id === '3.4' && (
-                    <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl shadow-sm overflow-hidden flex flex-col">
+                    <div className="bg-card border border-border rounded-xl shadow-sm overflow-hidden flex flex-col">
                         {/* AI Context Header */}
                         <div className="px-4 py-3 bg-indigo-50 dark:bg-indigo-500/10 border-b border-indigo-200 dark:border-indigo-500/20 flex items-center gap-2">
                             <AIAgentAvatar />
@@ -962,15 +962,15 @@ export default function MACPunchList() {
                                 <div className="space-y-1.5">
                                     {claimLogs.map((log, i) => (
                                         <div key={i} className="flex items-start gap-2 animate-in slide-in-from-left-4 fade-in duration-300">
-                                            <span className="text-zinc-600 font-mono text-[10px] mt-0.5 select-none shrink-0">[{String(i + 1).padStart(2, '0')}]</span>
-                                            <span className={`text-[11px] font-mono ${i === claimLogs.length - 1 ? 'text-green-400 animate-pulse' : 'text-zinc-400'}`}>
+                                            <span className="text-muted-foreground font-mono text-[10px] mt-0.5 select-none shrink-0">[{String(i + 1).padStart(2, '0')}]</span>
+                                            <span className={`text-[11px] font-mono ${i === claimLogs.length - 1 ? 'text-green-400 animate-pulse' : 'text-muted-foreground'}`}>
                                                 {log}
                                             </span>
                                         </div>
                                     ))}
                                     {claimProgress < 100 && (
                                         <div className="flex items-center gap-2 pt-1">
-                                            <span className="text-zinc-600 font-mono text-[10px]">[..]</span>
+                                            <span className="text-muted-foreground font-mono text-[10px]">[..]</span>
                                             <div className="flex gap-1">
                                                 <div className="w-1.5 h-1.5 bg-brand-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
                                                 <div className="w-1.5 h-1.5 bg-brand-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
@@ -1040,7 +1040,7 @@ export default function MACPunchList() {
                                         ].map((node, i, arr) => (
                                             <React.Fragment key={i}>
                                                 <div className="flex flex-col items-center gap-1.5 flex-1">
-                                                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${node.done ? 'bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400' : node.active ? 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400 ring-2 ring-blue-500/30' : 'bg-zinc-100 text-zinc-400 dark:bg-zinc-800 dark:text-zinc-600'}`}>
+                                                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${node.done ? 'bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400' : node.active ? 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400 ring-2 ring-blue-500/30' : 'bg-zinc-100 text-muted-foreground dark:bg-zinc-800 dark:text-muted-foreground'}`}>
                                                         {node.done ? <CheckCircleIcon className="w-4 h-4" /> : node.active ? <div className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" /> : <div className="w-2 h-2 rounded-full bg-zinc-400" />}
                                                     </div>
                                                     <span className={`text-[10px] font-medium text-center ${node.done ? 'text-green-600 dark:text-green-400' : node.active ? 'text-blue-600 dark:text-blue-400' : 'text-muted-foreground'}`}>{node.label}</span>
@@ -1067,7 +1067,7 @@ export default function MACPunchList() {
 
                             {/* Dashboard integration note */}
                             {claimPhase === 'acknowledged' && (
-                                <div className="flex items-center gap-2 px-3 py-2 bg-zinc-50 dark:bg-zinc-800 rounded-lg border border-border animate-in fade-in duration-300">
+                                <div className="flex items-center gap-2 px-3 py-2 bg-muted dark:bg-zinc-800 rounded-lg border border-border animate-in fade-in duration-300">
                                     <CubeIcon className="w-4 h-4 text-muted-foreground shrink-0" />
                                     <span className="text-xs text-muted-foreground">Claim visible on Warranty dashboard. Sales rep, PM, and facilities coordinator have been notified via digest.</span>
                                 </div>
@@ -1078,7 +1078,7 @@ export default function MACPunchList() {
                                 <div className="flex justify-end gap-3 pt-2 animate-in fade-in duration-300">
                                     <button
                                         onClick={() => setShowReviewModal(true)}
-                                        className="px-5 py-2.5 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-foreground text-xs font-bold rounded-lg transition-colors shadow-sm flex items-center gap-2 border border-border"
+                                        className="px-5 py-2.5 bg-muted hover:bg-zinc-200 dark:hover:bg-zinc-700 text-foreground text-xs font-bold rounded-lg transition-colors shadow-sm flex items-center gap-2 border border-border"
                                     >
                                         <EyeIcon className="w-4 h-4" />
                                         Review Changes
@@ -1096,14 +1096,14 @@ export default function MACPunchList() {
                             {/* Review Changes Modal */}
                             {showReviewModal && (
                                 <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm animate-in fade-in duration-200" onClick={() => setShowReviewModal(false)}>
-                                    <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-2xl shadow-2xl w-full max-w-lg max-h-[80vh] overflow-y-auto scrollbar-micro mx-4 animate-in zoom-in-95 slide-in-from-bottom-4 duration-300" onClick={(e) => e.stopPropagation()}>
+                                    <div className="bg-card border border-border rounded-2xl shadow-2xl w-full max-w-lg max-h-[80vh] overflow-y-auto scrollbar-micro mx-4 animate-in zoom-in-95 slide-in-from-bottom-4 duration-300" onClick={(e) => e.stopPropagation()}>
                                         {/* Modal Header */}
-                                        <div className="px-5 py-4 border-b border-border flex items-center justify-between sticky top-0 bg-white dark:bg-zinc-900 rounded-t-2xl z-10">
+                                        <div className="px-5 py-4 border-b border-border flex items-center justify-between sticky top-0 bg-card rounded-t-2xl z-10">
                                             <div>
                                                 <h3 className="text-sm font-bold text-foreground">Expert Submission Review</h3>
                                                 <p className="text-[11px] text-muted-foreground mt-0.5">REQ-PL-2026-047 — CLM-2026-114</p>
                                             </div>
-                                            <button onClick={() => setShowReviewModal(false)} className="p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors">
+                                            <button onClick={() => setShowReviewModal(false)} className="p-1.5 rounded-lg hover:bg-muted transition-colors">
                                                 <XMarkIcon className="w-5 h-5 text-muted-foreground" />
                                             </button>
                                         </div>
@@ -1116,7 +1116,7 @@ export default function MACPunchList() {
                                                     {VALIDATION_ITEMS.map((item) => {
                                                         const resolved = resolvedItems.has(item.id);
                                                         return (
-                                                            <div key={item.id} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-50 dark:bg-zinc-800/50">
+                                                            <div key={item.id} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-muted dark:bg-zinc-800/50">
                                                                 {resolved || item.status === 'present'
                                                                     ? <CheckCircleIcon className="w-4 h-4 text-green-500 shrink-0" />
                                                                     : item.status === 'needs_clarification'
@@ -1136,7 +1136,7 @@ export default function MACPunchList() {
                                             {/* Section 2: Labor Decision */}
                                             <div>
                                                 <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-2">Labor Decision</p>
-                                                <div className="p-3 bg-zinc-50 dark:bg-zinc-800/50 rounded-lg space-y-2">
+                                                <div className="p-3 bg-muted dark:bg-zinc-800/50 rounded-lg space-y-2">
                                                     <div className="flex items-center justify-between">
                                                         <span className="text-xs text-muted-foreground">Installer</span>
                                                         <span className="text-xs font-bold text-foreground">ProInstall LLC (Certified)</span>
@@ -1163,7 +1163,7 @@ export default function MACPunchList() {
                                             {/* Section 3: Claim Package */}
                                             <div>
                                                 <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-2">Claim Package</p>
-                                                <div className="p-3 bg-zinc-50 dark:bg-zinc-800/50 rounded-lg space-y-2">
+                                                <div className="p-3 bg-muted dark:bg-zinc-800/50 rounded-lg space-y-2">
                                                     <div className="flex items-center justify-between">
                                                         <span className="text-xs text-muted-foreground">Claim ID</span>
                                                         <span className="text-xs font-bold text-foreground">CLM-2026-114</span>
@@ -1203,7 +1203,7 @@ export default function MACPunchList() {
                                                     value={dealerMessage}
                                                     onChange={(e) => setDealerMessage(e.target.value)}
                                                     placeholder="Describe what additional information or evidence you need from the dealer..."
-                                                    className="w-full px-3 py-2 text-xs border border-border rounded-lg bg-white dark:bg-zinc-900 text-foreground placeholder:text-muted-foreground focus:ring-1 focus:ring-amber-500 focus:border-amber-500 focus:outline-none resize-none"
+                                                    className="w-full px-3 py-2 text-xs border border-border rounded-lg bg-card text-foreground placeholder:text-muted-foreground focus:ring-1 focus:ring-amber-500 focus:border-amber-500 focus:outline-none resize-none"
                                                     rows={3}
                                                 />
                                                 <div className="flex items-center justify-between">
@@ -1269,7 +1269,7 @@ export default function MACPunchList() {
                                         )}
 
                                         {/* Modal Footer */}
-                                        <div className="px-5 py-3 border-t border-border flex justify-between sticky bottom-0 bg-white dark:bg-zinc-900 rounded-b-2xl">
+                                        <div className="px-5 py-3 border-t border-border flex justify-between sticky bottom-0 bg-card rounded-b-2xl">
                                             {!showDealerRequest && !dealerRequestSent && (
                                                 <button
                                                     onClick={() => setShowDealerRequest(true)}
@@ -1296,10 +1296,10 @@ export default function MACPunchList() {
 
                 {/* Default: No step active — show empty state */}
                 {!['3.1', '3.2', '3.3', '3.4'].includes(currentStep?.id) && (
-                    <div className="h-full flex flex-col items-center justify-center text-center p-8 bg-zinc-50/50 dark:bg-zinc-900/20 border border-zinc-200 dark:border-zinc-800 border-dashed rounded-xl min-h-[400px]">
-                        <ExclamationTriangleIcon className="w-12 h-12 text-zinc-300 dark:text-zinc-700 mb-4" />
-                        <h4 className="text-lg font-medium text-zinc-900 dark:text-white">Select a Punch List Item</h4>
-                        <p className="text-sm text-zinc-500 max-w-sm mt-2">Choose an item from the left to view installer reports, photos, and AI-suggested warranty actions.</p>
+                    <div className="h-full flex flex-col items-center justify-center text-center p-8 bg-muted/50 dark:bg-zinc-900/20 border border-border border-dashed rounded-xl min-h-[400px]">
+                        <ExclamationTriangleIcon className="w-12 h-12 text-zinc-300 dark:text-muted-foreground mb-4" />
+                        <h4 className="text-lg font-medium text-foreground">Select a Punch List Item</h4>
+                        <p className="text-sm text-muted-foreground max-w-sm mt-2">Choose an item from the left to view installer reports, photos, and AI-suggested warranty actions.</p>
                     </div>
                 )}
             </div>

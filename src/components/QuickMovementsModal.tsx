@@ -414,7 +414,7 @@ export default function QuickMovementsModal({ isOpen, onClose }: QuickMovementsM
                                             onClick={onClose}
                                             className="p-2 hover:bg-accent rounded-full transition-colors"
                                         >
-                                            <XMarkIcon className="w-6 h-6 text-zinc-500" />
+                                            <XMarkIcon className="w-6 h-6 text-muted-foreground" />
                                         </button>
                                     </div>
                                 </div>
@@ -462,7 +462,7 @@ export default function QuickMovementsModal({ isOpen, onClose }: QuickMovementsM
                                                             </p>
 
                                                             {selectedAssetIds.length === 0 ? (
-                                                                <p className="text-[10px] text-zinc-500 italic">Select items from the list below first.</p>
+                                                                <p className="text-[10px] text-muted-foreground italic">Select items from the list below first.</p>
                                                             ) : (
                                                                 <div className="space-y-2">
                                                                     <select

@@ -39,7 +39,7 @@ export default function InstallationSchedulerWidget() {
             description="Upcoming team deployments."
             icon={CalendarIcon}
             action={
-                <button className="text-xs font-medium text-zinc-900 dark:text-white hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-zinc-400 rounded">
+                <button className="text-xs font-medium text-foreground hover:text-muted-foreground dark:hover:text-zinc-300 transition-colors flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-zinc-400 rounded">
                     View Calendar
                     <ChevronRightIcon className="w-3 h-3" />
                 </button>
@@ -74,14 +74,14 @@ export default function InstallationSchedulerWidget() {
                             </div>
 
                             <div className="mt-1 flex flex-col gap-0.5">
-                                <div className="flex items-center gap-1.5 text-xs text-zinc-600 dark:text-zinc-400">
-                                    <UserGroupIcon className="w-3.5 h-3.5 text-zinc-400" />
+                                <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                                    <UserGroupIcon className="w-3.5 h-3.5 text-muted-foreground" />
                                     <span>{item.team}</span>
-                                    <span className="text-zinc-300 dark:text-zinc-600">•</span>
+                                    <span className="text-zinc-300 dark:text-muted-foreground">•</span>
                                     <span>{item.time}</span>
                                 </div>
-                                <div className="flex items-center gap-1.5 text-xs text-zinc-500 dark:text-zinc-500">
-                                    <MapPinIcon className="w-3.5 h-3.5 text-zinc-400" />
+                                <div className="flex items-center gap-1.5 text-xs text-muted-foreground dark:text-muted-foreground">
+                                    <MapPinIcon className="w-3.5 h-3.5 text-muted-foreground" />
                                     <span className="truncate">{item.location}</span>
                                 </div>
                             </div>

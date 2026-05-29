@@ -145,12 +145,12 @@ export default function DiscountStructureWidget({ subtotal, onApply }: DiscountS
     const formatCurrency = (val: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(val);
 
     return (
-        <div className="w-full bg-white dark:bg-zinc-800 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 flex flex-col h-full max-h-[800px]">
+        <div className="w-full bg-card rounded-xl shadow-sm border border-border flex flex-col h-full max-h-[800px]">
 
             {/* Header */}
             <div className="p-6 border-b border-zinc-100 dark:border-zinc-800 shrink-0">
                 <div className="flex items-center gap-3">
-                    <div className="p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg">
+                    <div className="p-2 bg-muted rounded-lg">
                         <CalculatorIcon className="w-6 h-6 text-foreground" />
                     </div>
                     <div>
@@ -208,7 +208,7 @@ export default function DiscountStructureWidget({ subtotal, onApply }: DiscountS
                         const theme = colorMap[section.color];
 
                         return (
-                            <div key={section.id} className={`border rounded-xl transition-all duration-300 ${section.expanded ? `${theme.bg} ${theme.border}` : 'bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-800'}`}>
+                            <div key={section.id} className={`border rounded-xl transition-all duration-300 ${section.expanded ? `${theme.bg} ${theme.border}` : 'bg-card border-border'}`}>
                                 {/* Section Header */}
                                 <button
                                     onClick={() => toggleSection(section.id)}
@@ -217,7 +217,7 @@ export default function DiscountStructureWidget({ subtotal, onApply }: DiscountS
                                     <div className="flex items-center gap-3">
                                         <section.icon className={`w-5 h-5 ${section.expanded ? theme.text : 'text-muted-foreground'}`} />
                                         <span className={`font-semibold ${section.expanded ? theme.text : 'text-foreground'}`}>{section.title}</span>
-                                        <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${section.expanded ? `${theme.badge} ${theme.text}` : 'bg-zinc-100 dark:bg-zinc-800 text-muted-foreground'}`}>
+                                        <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${section.expanded ? `${theme.badge} ${theme.text}` : 'bg-muted text-muted-foreground'}`}>
                                             {activeInSection}/{section.items.length}
                                         </span>
                                     </div>
@@ -235,17 +235,17 @@ export default function DiscountStructureWidget({ subtotal, onApply }: DiscountS
                                                 onClick={(e) => { e.stopPropagation(); toggleAllInSection(section.id, !isAllEnabled); }}
                                                 className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${isAllEnabled ? 'bg-zinc-900 dark:bg-white' : 'bg-zinc-200 dark:bg-zinc-700'}`}
                                             >
-                                                <span className={`inline-block h-3.5 w-3.5 transform rounded-full bg-white dark:bg-zinc-800 transition-transform ${isAllEnabled ? 'translate-x-4.5' : 'translate-x-1'}`} />
+                                                <span className={`inline-block h-3.5 w-3.5 transform rounded-full bg-card transition-transform ${isAllEnabled ? 'translate-x-4.5' : 'translate-x-1'}`} />
                                             </button>
                                         </div>
 
                                         <div className="space-y-3">
                                             {section.items.map(item => (
-                                                <div key={item.id} className="bg-white dark:bg-zinc-800 p-4 rounded-xl border border-zinc-100 dark:border-zinc-800 shadow-sm flex items-center justify-between hover:shadow-md transition-all">
+                                                <div key={item.id} className="bg-card p-4 rounded-xl border border-zinc-100 dark:border-zinc-800 shadow-sm flex items-center justify-between hover:shadow-md transition-all">
                                                     <div className="flex flex-col">
                                                         <div className="flex items-center gap-2 mb-1">
                                                             <span className="font-bold text-foreground">{item.label}</span>
-                                                            <span className="px-1.5 py-0.5 bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 text-[10px] font-bold rounded uppercase tracking-wider border border-zinc-200 dark:border-zinc-700">
+                                                            <span className="px-1.5 py-0.5 bg-muted text-muted-foreground text-[10px] font-bold rounded uppercase tracking-wider border border-border">
                                                                 {item.rate}%
                                                             </span>
                                                         </div>
@@ -263,7 +263,7 @@ export default function DiscountStructureWidget({ subtotal, onApply }: DiscountS
                                                         onClick={() => toggleItem(section.id, item.id)}
                                                         className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary ${item.enabled ? 'bg-zinc-900 dark:bg-white' : 'bg-zinc-200 dark:bg-zinc-700'}`}
                                                     >
-                                                        <span className={`inline-block h-4 w-4 transform rounded-full bg-white dark:bg-zinc-800 transition-transform ${item.enabled ? 'translate-x-6' : 'translate-x-1'}`} />
+                                                        <span className={`inline-block h-4 w-4 transform rounded-full bg-card transition-transform ${item.enabled ? 'translate-x-6' : 'translate-x-1'}`} />
                                                     </button>
                                                 </div>
                                             ))}

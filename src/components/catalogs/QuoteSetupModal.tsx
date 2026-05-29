@@ -82,9 +82,9 @@ export default function QuoteSetupModal({ isOpen, onClose, catalogName }: QuoteS
                             <div className="flex items-start justify-between mb-6">
                                 <div>
                                     <Dialog.Title className="text-xl font-medium text-white">Create Quote for {catalogName}</Dialog.Title>
-                                    <p className="text-sm text-zinc-400 mt-1">Configure initial settings and AI assistance.</p>
+                                    <p className="text-sm text-muted-foreground mt-1">Configure initial settings and AI assistance.</p>
                                 </div>
-                                <button onClick={onClose} className="text-zinc-500 hover:text-white transition-colors">
+                                <button onClick={onClose} className="text-muted-foreground hover:text-white transition-colors">
                                     <XMarkIcon className="w-6 h-6" />
                                 </button>
                             </div>
@@ -95,15 +95,15 @@ export default function QuoteSetupModal({ isOpen, onClose, catalogName }: QuoteS
                                     <span className="text-indigo-400 font-bold text-lg">A</span>
                                 </div>
                                 <div>
-                                    <div className="text-xs text-zinc-400 font-medium uppercase tracking-wider">Quoting For</div>
-                                    <div className="text-white font-medium">Acme Corp <span className="text-zinc-500 font-normal ml-2">Global Master Agreement</span></div>
+                                    <div className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Quoting For</div>
+                                    <div className="text-white font-medium">Acme Corp <span className="text-muted-foreground font-normal ml-2">Global Master Agreement</span></div>
                                 </div>
                             </div>
 
                             <div className="space-y-6">
                                 {/* Assignee Selection */}
                                 <div>
-                                    <label className="block text-sm font-medium text-zinc-400 mb-2">Assign to (Responsible)</label>
+                                    <label className="block text-sm font-medium text-muted-foreground mb-2">Assign to (Responsible)</label>
                                     <div className="flex items-center gap-3">
                                         <div className="relative flex-1">
                                             <select
@@ -114,7 +114,7 @@ export default function QuoteSetupModal({ isOpen, onClose, catalogName }: QuoteS
                                                 <option value="john">John Smith - Sales Director</option>
                                                 <option value="sarah">Sarah Connor - Account Manager</option>
                                             </select>
-                                            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-zinc-400">
+                                            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-muted-foreground">
                                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                                             </div>
                                         </div>
@@ -135,7 +135,7 @@ export default function QuoteSetupModal({ isOpen, onClose, catalogName }: QuoteS
                                                 <>
                                                     <Popover.Button className={clsx(
                                                         "flex items-center gap-1.5 text-xs font-medium px-2 py-1 rounded-lg transition-colors outline-none",
-                                                        open || activeRules.length > 0 ? "bg-blue-500/20 text-blue-300 border border-blue-500/30" : "bg-zinc-800 text-zinc-400 hover:text-white border border-transparent"
+                                                        open || activeRules.length > 0 ? "bg-blue-500/20 text-blue-300 border border-blue-500/30" : "bg-zinc-800 text-muted-foreground hover:text-white border border-transparent"
                                                     )}>
                                                         <ScaleIcon className="w-3.5 h-3.5" />
                                                         Business Rules
@@ -154,7 +154,7 @@ export default function QuoteSetupModal({ isOpen, onClose, catalogName }: QuoteS
                                                         <Popover.Panel className="absolute right-0 bottom-8 z-50 w-72 origin-bottom-right rounded-xl bg-zinc-800 border border-zinc-700 shadow-xl p-4 ring-1 ring-black/5">
                                                             <div className="mb-3 flex items-center justify-between">
                                                                 <h4 className="text-sm font-medium text-white">Project Rules</h4>
-                                                                <span className="text-xs text-zinc-500 px-1.5 py-0.5 bg-zinc-900 rounded">Global</span>
+                                                                <span className="text-xs text-muted-foreground px-1.5 py-0.5 bg-zinc-900 rounded">Global</span>
                                                             </div>
                                                             <div className="space-y-3">
                                                                 {AVAILABLE_RULES.map((rule) => {
@@ -163,12 +163,12 @@ export default function QuoteSetupModal({ isOpen, onClose, catalogName }: QuoteS
                                                                     return (
                                                                         <div key={rule.id} className="flex items-start justify-between gap-3 group">
                                                                             <div className="flex items-start gap-2.5">
-                                                                                <div className={clsx("mt-0.5 p-1 rounded-md", active ? "bg-blue-500/20 text-blue-400" : "bg-zinc-700/50 text-zinc-500")}>
+                                                                                <div className={clsx("mt-0.5 p-1 rounded-md", active ? "bg-blue-500/20 text-blue-400" : "bg-zinc-700/50 text-muted-foreground")}>
                                                                                     <Icon className="w-3.5 h-3.5" />
                                                                                 </div>
                                                                                 <div>
-                                                                                    <div className={clsx("text-xs font-medium transition-colors", active ? "text-zinc-200" : "text-zinc-500")}>{rule.name}</div>
-                                                                                    <div className="text-[10px] text-zinc-500">{rule.desc}</div>
+                                                                                    <div className={clsx("text-xs font-medium transition-colors", active ? "text-zinc-200" : "text-muted-foreground")}>{rule.name}</div>
+                                                                                    <div className="text-[10px] text-muted-foreground">{rule.desc}</div>
                                                                                 </div>
                                                                             </div>
                                                                             <button
@@ -247,14 +247,14 @@ export default function QuoteSetupModal({ isOpen, onClose, catalogName }: QuoteS
                                     </div>
                                     <div className="grid grid-cols-2 gap-4">
                                         <div className="bg-zinc-800/50 p-3 rounded-lg border border-zinc-700/50 text-center">
-                                            <div className="flex items-center justify-center gap-1.5 text-zinc-400 text-xs mb-1">
+                                            <div className="flex items-center justify-center gap-1.5 text-muted-foreground text-xs mb-1">
                                                 <ClockIcon className="w-3.5 h-3.5" />
                                                 Est. Lead Time
                                             </div>
                                             <div className="text-xl font-semibold text-white">{leadTime}</div>
                                         </div>
                                         <div className="bg-zinc-800/50 p-3 rounded-lg border border-zinc-700/50 text-center">
-                                            <div className="flex items-center justify-center gap-1.5 text-zinc-400 text-xs mb-1">
+                                            <div className="flex items-center justify-center gap-1.5 text-muted-foreground text-xs mb-1">
                                                 <CurrencyDollarIcon className="w-3.5 h-3.5" />
                                                 Proj. Margin
                                             </div>
@@ -265,7 +265,7 @@ export default function QuoteSetupModal({ isOpen, onClose, catalogName }: QuoteS
                             </div>
 
                             <div className="mt-8 flex justify-end gap-3 z-0">
-                                <button onClick={onClose} className="px-4 py-2 text-sm text-zinc-400 hover:text-white transition-colors">
+                                <button onClick={onClose} className="px-4 py-2 text-sm text-muted-foreground hover:text-white transition-colors">
                                     Cancel
                                 </button>
                                 <button

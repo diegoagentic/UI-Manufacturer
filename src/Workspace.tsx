@@ -50,7 +50,7 @@ const DiscrepancyResolutionFlow = () => {
                     <ExclamationTriangleIcon className="w-5 h-5" />
                     Found 3 discrepancies in recent shipments.
                 </div>
-                <ul className="list-disc pl-5 text-sm space-y-1 text-gray-600 dark:text-gray-300">
+                <ul className="list-disc pl-5 text-sm space-y-1 text-muted-foreground dark:text-gray-300">
                     <li>Order #ORD-2054: Weight mismatch (Logs: 50kg vs Gateway: 48kg)</li>
                     <li>Order #ORD-2051: Timestamp sync error</li>
                     <li>Order #ORD-2048: Missing carrier update</li>
@@ -73,22 +73,22 @@ const DiscrepancyResolutionFlow = () => {
     if (status === 'requesting') {
         return (
             <div className="flex flex-col gap-3 animate-in fade-in slide-in-from-bottom-2">
-                <p className="text-sm font-medium text-gray-900 dark:text-white">Describe required changes:</p>
+                <p className="text-sm font-medium text-foreground">Describe required changes:</p>
                 <textarea
-                    className="w-full text-sm p-3 rounded-lg border border-gray-200 dark:border-white/10 bg-card text-gray-900 dark:text-white focus:ring-2 ring-primary outline-none transition-all placeholder:text-gray-400"
+                    className="w-full text-sm p-3 rounded-lg border border-gray-200 dark:border-white/10 bg-card text-foreground focus:ring-2 ring-primary outline-none transition-all placeholder:text-muted-foreground"
                     rows={3}
                     placeholder="E.g., Update weight for ORD-2054 to 48kg..."
                     value={requestText}
                     onChange={(e) => setRequestText(e.target.value)}
                 />
                 <div className="flex justify-between items-center">
-                    <button className="flex items-center gap-1 text-xs text-gray-500 hover:text-primary transition-colors">
+                    <button className="flex items-center gap-1 text-xs text-muted-foreground hover:text-primary transition-colors">
                         <PaperClipIcon className="w-4 h-4" /> Attach File
                     </button>
                     <div className="flex gap-2">
                         <button
                             onClick={() => setStatus('initial')}
-                            className="px-3 py-1.5 text-xs text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
+                            className="px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground dark:text-muted-foreground dark:hover:text-white transition-colors"
                         >
                             Cancel
                         </button>
@@ -128,8 +128,8 @@ const DiscrepancyResolutionFlow = () => {
                             <DocumentChartBarIcon className="w-6 h-6" />
                         </div>
                         <div>
-                            <p className="font-medium text-sm text-gray-900 dark:text-white">PO_Revised_Final.pdf</p>
-                            <p className="text-xs text-gray-500">Updated just now</p>
+                            <p className="font-medium text-sm text-foreground">PO_Revised_Final.pdf</p>
+                            <p className="text-xs text-muted-foreground">Updated just now</p>
                         </div>
                     </div>
                     <button className="text-xs font-medium text-zinc-900 dark:text-primary hover:underline">Download</button>
@@ -170,7 +170,7 @@ const PendingOrders = () => {
     return (
         <div className="flex flex-col gap-2 w-full max-w-md">
             <div className="flex justify-between mb-1">
-                <span className="text-sm font-semibold text-gray-500">Pending Review ({activeOrders.length})</span>
+                <span className="text-sm font-semibold text-muted-foreground">Pending Review ({activeOrders.length})</span>
             </div>
             {activeOrders.map(order => (
                 <div key={order.id} className="border border-border rounded-lg bg-card overflow-hidden shadow-sm">
@@ -179,21 +179,21 @@ const PendingOrders = () => {
                         className="w-full flex items-center justify-between p-3 hover:bg-accent transition-colors"
                     >
                         <div className="flex items-center gap-3">
-                            <span className={`px-2 py-0.5 rounded text-[10px] uppercase font-bold ${order.status === 'urgent' ? 'bg-red-100 text-red-700' : 'bg-gray-100 text-gray-700'
+                            <span className={`px-2 py-0.5 rounded text-[10px] uppercase font-bold ${order.status === 'urgent' ? 'bg-red-100 text-red-700' : 'bg-gray-100 text-foreground'
                                 }`}>
                                 {order.status}
                             </span>
                             <div className="text-left">
-                                <div className="text-sm font-medium text-gray-900">{order.id} - {order.client}</div>
-                                <div className="text-xs text-gray-500">{order.amount}</div>
+                                <div className="text-sm font-medium text-foreground">{order.id} - {order.client}</div>
+                                <div className="text-xs text-muted-foreground">{order.amount}</div>
                             </div>
                         </div>
-                        {expanded === order.id ? <ChevronUpIcon className="h-4 w-4 text-gray-400" /> : <ChevronDownIcon className="h-4 w-4 text-gray-400" />}
+                        {expanded === order.id ? <ChevronUpIcon className="h-4 w-4 text-muted-foreground" /> : <ChevronDownIcon className="h-4 w-4 text-muted-foreground" />}
                     </button>
 
                     {expanded === order.id && (
                         <div className="p-3 bg-gray-50 border-t border-gray-200">
-                            <p className="text-sm text-gray-700 mb-3">{order.details}</p>
+                            <p className="text-sm text-foreground mb-3">{order.details}</p>
                             <div className="flex gap-2 justify-end">
                                 <button
                                     className="flex items-center gap-1 px-2 py-1 text-xs border border-red-200 text-red-600 rounded hover:bg-red-50"
@@ -405,7 +405,7 @@ export default function Workspace({ onBack, onLogout, onNavigateToWorkspace, onN
                             <DocumentChartBarIcon className="w-5 h-5" />
                             Analysis Complete. Found 3 orders under $1M.
                         </div>
-                        <ul className="list-disc pl-5 text-sm space-y-1 text-gray-600 dark:text-gray-300">
+                        <ul className="list-disc pl-5 text-sm space-y-1 text-muted-foreground dark:text-gray-300">
                             <li>Order #ORD-2054: $850k - <span className="text-amber-500 font-medium">Missing Logistics Provider</span></li>
                             <li>Order #ORD-2051: $420k - In Transit</li>
                             <li>Order #ORD-2048: $120k - Delivered</li>
@@ -450,8 +450,8 @@ export default function Workspace({ onBack, onLogout, onNavigateToWorkspace, onN
                                     <DocumentChartBarIcon className="w-6 h-6" />
                                 </div>
                                 <div>
-                                    <p className="font-medium text-sm text-gray-900 dark:text-white">Reconciliation_Report.pdf</p>
-                                    <p className="text-xs text-gray-500">1.2 MB • Generated just now</p>
+                                    <p className="font-medium text-sm text-foreground">Reconciliation_Report.pdf</p>
+                                    <p className="text-xs text-muted-foreground">1.2 MB • Generated just now</p>
                                 </div>
                             </div>
                             <button className="text-xs font-medium text-zinc-900 dark:text-primary hover:underline">Download</button>
@@ -499,13 +499,13 @@ export default function Workspace({ onBack, onLogout, onNavigateToWorkspace, onN
     }
 
     return (
-        <div className="h-screen bg-gray-50 dark:bg-black font-sans text-gray-900 dark:text-white flex flex-col overflow-hidden relative">
+        <div className="h-screen bg-gray-50 dark:bg-black font-sans text-foreground flex flex-col overflow-hidden relative">
             <Dialog open={isLogsOpen} onClose={() => setIsLogsOpen(false)} className="relative z-50">
                 <div className="fixed inset-0 bg-black/30 backdrop-blur-sm" aria-hidden="true" />
                 <div className="fixed inset-0 flex items-center justify-center p-4">
                     <Dialog.Panel className="w-full max-w-lg rounded-2xl bg-card p-6 shadow-xl border border-border">
-                        <Dialog.Title className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2 mb-4">
-                            <CommandLineIcon className="w-5 h-5 text-gray-500" />
+                        <Dialog.Title className="text-lg font-bold text-foreground flex items-center gap-2 mb-4">
+                            <CommandLineIcon className="w-5 h-5 text-muted-foreground" />
                             System Logs
                         </Dialog.Title>
                         <div className="h-[300px] overflow-y-auto space-y-3 pr-2">
@@ -517,8 +517,8 @@ export default function Workspace({ onBack, onLogout, onNavigateToWorkspace, onN
                                                 log.type === 'error' ? 'bg-red-500' : 'bg-blue-500'}`}
                                     />
                                     <div className="flex-1">
-                                        <p className="text-gray-700 dark:text-gray-200 font-mono text-xs">{log.text}</p>
-                                        <p className="text-[10px] text-gray-400 mt-0.5">{log.time}</p>
+                                        <p className="text-foreground dark:text-gray-200 font-mono text-xs">{log.text}</p>
+                                        <p className="text-[10px] text-muted-foreground mt-0.5">{log.time}</p>
                                     </div>
                                 </div>
                             ))}
@@ -558,37 +558,37 @@ export default function Workspace({ onBack, onLogout, onNavigateToWorkspace, onN
                     <div className="flex items-center gap-6">
                         {/* Frequent Actions */}
                         <div className="flex items-center gap-2">
-                            <span className="text-xs font-medium text-gray-500 hidden lg:inline mr-2">Frequent Actions:</span>
+                            <span className="text-xs font-medium text-muted-foreground hidden lg:inline mr-2">Frequent Actions:</span>
                             <div className="flex items-center gap-1">
                                 <button
                                     onClick={() => handleSendMessage("Analyze orders for TechDealer Solutions with discrepancies")}
                                     className="flex flex-col items-center justify-center gap-1 group p-2 hover:bg-primary dark:hover:bg-primary rounded-lg transition-colors w-16"
                                     title="Analyze Discrepancies"
                                 >
-                                    <div className="text-gray-500 dark:text-gray-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-900 transition-colors">
+                                    <div className="text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-zinc-900 transition-colors">
                                         <ExclamationTriangleIcon className="w-4 h-4" />
                                     </div>
-                                    <span className="text-[10px] font-medium text-gray-500 dark:text-gray-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-900 transition-colors">Analyze</span>
+                                    <span className="text-[10px] font-medium text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-zinc-900 transition-colors">Analyze</span>
                                 </button>
                                 <button
                                     onClick={() => handleSendMessage("Summarize recent activity")}
                                     className="flex flex-col items-center justify-center gap-1 group p-2 hover:bg-primary dark:hover:bg-primary rounded-lg transition-colors w-16"
                                     title="Summarize Activity"
                                 >
-                                    <div className="text-gray-500 dark:text-gray-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-900 transition-colors">
+                                    <div className="text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-zinc-900 transition-colors">
                                         <SparklesIcon className="w-4 h-4" />
                                     </div>
-                                    <span className="text-[10px] font-medium text-gray-500 dark:text-gray-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-900 transition-colors">Summarize</span>
+                                    <span className="text-[10px] font-medium text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-zinc-900 transition-colors">Summarize</span>
                                 </button>
                                 <button
                                     onClick={() => handleSendMessage("Check inventory levels")}
                                     className="flex flex-col items-center justify-center gap-1 group p-2 hover:bg-primary dark:hover:bg-primary rounded-lg transition-colors w-16"
                                     title="Check Inventory"
                                 >
-                                    <div className="text-gray-500 dark:text-gray-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-900 transition-colors">
+                                    <div className="text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-zinc-900 transition-colors">
                                         <ArchiveBoxIcon className="w-4 h-4" />
                                     </div>
-                                    <span className="text-[10px] font-medium text-gray-500 dark:text-gray-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-900 transition-colors">Inventory</span>
+                                    <span className="text-[10px] font-medium text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-zinc-900 transition-colors">Inventory</span>
                                 </button>
                             </div>
                         </div>
@@ -623,20 +623,20 @@ export default function Workspace({ onBack, onLogout, onNavigateToWorkspace, onN
                                 className="flex flex-col items-center justify-center gap-1 group p-2 hover:bg-primary dark:hover:bg-primary rounded-lg transition-colors w-16"
                                 title="System Logs"
                             >
-                                <div className="text-gray-500 dark:text-gray-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-900 transition-colors">
+                                <div className="text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-zinc-900 transition-colors">
                                     <CommandLineIcon className="w-4 h-4" />
                                 </div>
-                                <span className="text-[10px] font-medium text-gray-500 dark:text-gray-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-900 transition-colors">Logs</span>
+                                <span className="text-[10px] font-medium text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-zinc-900 transition-colors">Logs</span>
                             </button>
                             <button
                                 onClick={() => setShowActivity(!showActivity)}
                                 className={`flex flex-col items-center justify-center gap-1 group p-2 rounded-lg transition-colors w-16 ${showActivity ? 'bg-primary/10' : 'hover:bg-primary dark:hover:bg-primary'}`}
                                 title="Toggle Recent Activity"
                             >
-                                <div className={`transition-colors ${showActivity ? 'text-zinc-900 dark:text-primary' : 'text-gray-500 dark:text-gray-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-900'}`}>
+                                <div className={`transition-colors ${showActivity ? 'text-zinc-900 dark:text-primary' : 'text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-zinc-900'}`}>
                                     <ClockIcon className="w-4 h-4" />
                                 </div>
-                                <span className={`text-[10px] font-medium transition-colors ${showActivity ? 'text-zinc-900 dark:text-primary' : 'text-gray-500 dark:text-gray-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-900'}`}>Activity</span>
+                                <span className={`text-[10px] font-medium transition-colors ${showActivity ? 'text-zinc-900 dark:text-primary' : 'text-muted-foreground group-hover:text-zinc-900 dark:group-hover:text-zinc-900'}`}>Activity</span>
                             </button>
                         </div>
                     </div>
@@ -646,7 +646,7 @@ export default function Workspace({ onBack, onLogout, onNavigateToWorkspace, onN
                     {/* Activity Sidebar (Left) */}
                     <div className={`${showActivity ? 'w-[280px] border-r' : 'w-0 border-r-0'} hidden md:flex flex-col border-border bg-background/50 backdrop-blur-xl transition-all duration-300 overflow-hidden`}>
                         <div className="p-4 border-b border-gray-200 dark:border-white/10 min-w-[280px]">
-                            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-2">
+                            <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
                                 <ClockIcon className="w-3.5 h-3.5" /> Recent Activity
                             </h3>
                         </div>
@@ -663,10 +663,10 @@ export default function Workspace({ onBack, onLogout, onNavigateToWorkspace, onN
                                             <div className={`p-1.5 rounded-md ${iconColorClass} transition-colors`}>
                                                 <activity.icon className="w-4 h-4" />
                                             </div>
-                                            <span className="text-[10px] uppercase font-bold text-gray-400 tracking-wider">{activity.app}</span>
+                                            <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-wider">{activity.app}</span>
                                         </div>
-                                        <p className="text-sm font-medium leading-tight text-gray-700 dark:text-gray-200">{activity.text}</p>
-                                        <p className="text-[10px] text-gray-400 mt-1.5 font-mono">{activity.time}</p>
+                                        <p className="text-sm font-medium leading-tight text-foreground dark:text-gray-200">{activity.text}</p>
+                                        <p className="text-[10px] text-muted-foreground mt-1.5 font-mono">{activity.time}</p>
                                     </div>
                                 )
                             })}
@@ -733,7 +733,7 @@ export default function Workspace({ onBack, onLogout, onNavigateToWorkspace, onN
                             <div className="max-w-4xl mx-auto relative group">
                                 <div className="absolute inset-0 bg-primary/10 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
                                 <div className="relative flex items-center gap-2 bg-card p-2 pr-2 rounded-full border border-border shadow-sm transition-all focus-within:ring-2 ring-primary/20 focus-within:border-primary">
-                                    <div className="pl-3 text-gray-400">
+                                    <div className="pl-3 text-muted-foreground">
                                         <SparklesIcon className="w-5 h-5" />
                                     </div>
                                     <input
@@ -742,14 +742,14 @@ export default function Workspace({ onBack, onLogout, onNavigateToWorkspace, onN
                                         onChange={(e) => setInputValue(e.target.value)}
                                         onKeyDown={(e) => e.key === 'Enter' && handleSendMessage(inputValue)}
                                         placeholder="Ask copilot..."
-                                        className="flex-1 bg-transparent border-none outline-none text-sm text-gray-900 dark:text-white placeholder-gray-400 h-10"
+                                        className="flex-1 bg-transparent border-none outline-none text-sm text-foreground placeholder-gray-400 h-10"
                                     />
                                     <button
                                         onClick={() => handleSendMessage(inputValue)}
                                         disabled={!inputValue.trim()}
                                         className={`p-2 rounded-full transition-all duration-200 ${inputValue.trim()
                                             ? 'bg-primary text-primary-foreground shadow-md transform scale-100'
-                                            : 'bg-gray-100 dark:bg-white/10 text-gray-400 scale-95'
+                                            : 'bg-gray-100 dark:bg-white/10 text-muted-foreground scale-95'
                                             }`}
                                     >
                                         <PaperAirplaneIcon className="w-5 h-5" />
