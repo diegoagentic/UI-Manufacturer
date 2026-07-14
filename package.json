@@ -5,14 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run build:lib --prefix packages/strata-ds && vite build",
+    "build": "node scripts/scan-security.mjs && npm run build:lib --prefix packages/strata-ds && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "sync:tokens": "node scripts/sync-tokens.mjs",
     "promote": "node scripts/promote-component.mjs",
     "audit:tokens": "node scripts/audit-design-tokens.mjs",
     "fix:tokens": "node scripts/fix-design-tokens.mjs",
-    "fix:tokens:dry": "node scripts/fix-design-tokens.mjs --dry-run"
+    "fix:tokens:dry": "node scripts/fix-design-tokens.mjs --dry-run",
+    "scan:security": "node scripts/scan-security.mjs"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.9",
